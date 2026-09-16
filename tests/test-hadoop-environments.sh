@@ -129,6 +129,15 @@ assert_operational_scripts() {
   assert_contains "$scripts_dir/smoke-test.sh" 'exec -T --user hadoop namenode'
   assert_contains "$scripts_dir/smoke-test.sh" 'hdfs_report='
   assert_contains "$scripts_dir/smoke-test.sh" 'yarn_nodes='
+  if [[ "$version_dir" == 'hadoop3' ]]; then
+    assert_file "$scripts_dir/run-job.sh"
+    [[ -x "$scripts_dir/run-job.sh" ]] || fail 'hadoop3/scripts/run-job.sh no es ejecutable'
+    assert_contains "$scripts_dir/run-job.sh" '--source'
+    assert_contains "$scripts_dir/run-job.sh" '--main'
+    assert_contains "$scripts_dir/run-job.sh" '--input'
+    assert_contains "$scripts_dir/run-job.sh" '--output'
+    assert_contains "$scripts_dir/run-job.sh" 'hadoop classpath'
+  fi
 }
 
 assert_documentation() {
@@ -145,6 +154,9 @@ assert_documentation() {
   assert_contains "$readme" 'http://localhost:9870'
   assert_contains "$readme" 'http://localhost:8088'
   assert_contains "$readme" 'No ejecutes ambas versiones simultáneamente'
+  assert_contains "$readme" './hadoop3/scripts/run-job.sh'
+  assert_contains "$readme" '--main SalesCountry.SalesCountryDriver'
+  assert_contains "$readme" 'modo interactivo solicita la carpeta'
 }
 
 assert_compose_contract hadoop2 apache/hadoop:2.10.2 50070

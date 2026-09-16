@@ -156,6 +156,36 @@ hdfs dfs -cat /laboratorio/salida/part-r-00000
 
 El trabajo aparecerá en la interfaz de YARN y posteriormente en JobHistory.
 
+## Ejecutar ejercicios Java con un solo comando
+
+El ejecutor de Hadoop 3 inicia el entorno cuando sea necesario, compila todos
+los `.java` de una carpeta, genera el JAR, carga la entrada en HDFS, elimina la
+salida anterior y muestra el resultado:
+
+```bash
+./hadoop3/scripts/run-job.sh
+```
+
+El modo interactivo solicita la carpeta con los archivos `.java`, la clase
+principal, el archivo o carpeta de entrada y el nombre de salida. También puedes
+proporcionar todos o algunos de esos valores como argumentos:
+
+```bash
+./hadoop3/scripts/run-job.sh \
+  --source Ventas \
+  --main SalesCountry.SalesCountryDriver \
+  --input Ventas/SalesJan2009.csv \
+  --output ventas
+```
+
+`--output ventas` reserva `/labs/ventas/input` y `/labs/ventas/output` en HDFS.
+Usa otro nombre para conservar los resultados de otro ejercicio. La entrada
+puede ser un archivo o una carpeta que contenga archivos directamente.
+
+Si un ejercicio necesita dos trabajos MapReduce, el `Driver` debe ejecutarlos
+en orden y usar una ruta intermedia derivada de su argumento de salida. El
+ejecutor sigue recibiendo una sola clase principal y un solo comando.
+
 ## Ver estado y logs
 
 Desde el directorio de la versión activa:
