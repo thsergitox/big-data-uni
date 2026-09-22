@@ -1,7 +1,7 @@
 name: hadoop3-lab
 
 x-hadoop-service: &hadoop-service
-  restart: unless-stopped
+  restart: "no"
   networks:
     - hadoop
   volumes:

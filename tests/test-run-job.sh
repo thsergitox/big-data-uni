@@ -32,6 +32,12 @@ fi
 if [[ "$*" == *"hdfs dfs -cat"* ]]; then
   printf 'Lima\tVisa\t2\n'
 fi
+
+if [[ "$*" == *"cp namenode:"* ]]; then
+  destination="${@: -1}"
+  mkdir -p "$(dirname "$destination")"
+  printf 'Lima\tVisa\t2\n' >"$destination"
+fi
 EOF
   chmod +x "$bin_dir/docker"
 }
@@ -48,6 +54,7 @@ test_runs_a_java_job_with_one_command() {
   create_fake_docker "$temp_dir/bin"
 
   PATH="$temp_dir/bin:$PATH" DOCKER_CALLS="$temp_dir/docker-calls" \
+    HADOOP_RESULTS_DIR="$temp_dir/results" \
     "$RUNNER" \
       --source "$temp_dir/source" \
       --main example.ExampleDriver \
@@ -63,6 +70,9 @@ test_runs_a_java_job_with_one_command() {
   assert_contains "$temp_dir/docker-calls" '/labs/examen/input'
   assert_contains "$temp_dir/docker-calls" '/labs/examen/output'
   assert_contains "$temp_dir/docker-calls" 'hdfs dfs -cat'
+  assert_contains "$temp_dir/docker-calls" 'hdfs dfs -getmerge'
+  [[ -f "$temp_dir/results/examen/resultado.txt" ]] || \
+    fail 'no se exportó resultado.txt al host'
 }
 
 test_prompts_for_missing_values() {
@@ -84,6 +94,7 @@ test_prompts_for_missing_values() {
       "$temp_dir/input.csv" \
       'interactivo' |
       env PATH="$temp_dir/bin:$PATH" DOCKER_CALLS="$temp_dir/docker-calls" \
+        HADOOP_RESULTS_DIR="$temp_dir/results" \
         "$RUNNER"
   )"
 
@@ -97,6 +108,8 @@ test_prompts_for_missing_values() {
     fail 'no se solicitó el nombre de salida'
   assert_contains "$temp_dir/docker-calls" 'example.ExampleDriver'
   assert_contains "$temp_dir/docker-calls" '/labs/interactivo/output'
+  [[ -f "$temp_dir/results/interactivo/resultado.txt" ]] || \
+    fail 'el modo interactivo no exportó resultado.txt al host'
 }
 
 test_runs_a_java_job_with_one_command

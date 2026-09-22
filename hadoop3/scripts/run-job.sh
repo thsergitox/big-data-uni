@@ -3,8 +3,10 @@ set -Eeuo pipefail
 
 readonly SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 readonly PROJECT_DIR="$(cd "$SCRIPT_DIR/.." && pwd)"
+readonly REPOSITORY_DIR="$(cd "$PROJECT_DIR/.." && pwd)"
 readonly COMPOSE_FILE="$PROJECT_DIR/compose.yaml"
 readonly -a COMPOSE=(docker compose --project-directory "$PROJECT_DIR" -f "$COMPOSE_FILE")
+readonly RESULTS_DIR="${HADOOP_RESULTS_DIR:-$REPOSITORY_DIR/resultados}"
 
 SOURCE_DIR=''
 MAIN_CLASS=''
@@ -186,6 +188,20 @@ run_job() {
     hdfs dfs -cat "$hdfs_output/part-*"
 }
 
+export_result() {
+  local hdfs_output="/labs/$OUTPUT_NAME/output"
+  local remote_result="$REMOTE_ROOT/resultado.txt"
+  local local_output_dir="$RESULTS_DIR/$OUTPUT_NAME"
+  local local_result="$local_output_dir/resultado.txt"
+
+  "${COMPOSE[@]}" exec -T --user hadoop namenode \
+    hdfs dfs -getmerge "$hdfs_output/part-*" "$remote_result"
+  mkdir -p "$local_output_dir"
+  "${COMPOSE[@]}" cp "namenode:$remote_result" "$local_result"
+
+  printf '\nResultado guardado en:\n%s\n' "$local_result"
+}
+
 cleanup_remote_workspace() {
   [[ -n "$REMOTE_ROOT" ]] || return 0
   "${COMPOSE[@]}" exec -T namenode rm -rf "$REMOTE_ROOT" >/dev/null 2>&1 || true
@@ -203,6 +219,7 @@ main() {
   compile_job
   upload_input
   run_job
+  export_result
 }
 
 main "$@"

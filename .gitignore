@@ -4,7 +4,9 @@
 # Archivos temporales generados al inspeccionar documentos.
 tmp/
 
+# Resultados locales exportados desde HDFS por el ejecutor de ejercicios.
+resultados/
+
 # Archivos habituales del sistema y editores.
 .DS_Store
 *~
-

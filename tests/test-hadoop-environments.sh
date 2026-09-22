@@ -142,6 +142,7 @@ assert_operational_scripts() {
 
 assert_documentation() {
   local readme="$ROOT_DIR/README.md"
+  local gitignore="$ROOT_DIR/.gitignore"
 
   assert_file "$readme"
   assert_contains "$readme" 'Hadoop 2.10.2'
@@ -157,6 +158,8 @@ assert_documentation() {
   assert_contains "$readme" './hadoop3/scripts/run-job.sh'
   assert_contains "$readme" '--main SalesCountry.SalesCountryDriver'
   assert_contains "$readme" 'modo interactivo solicita la carpeta'
+  assert_contains "$readme" 'resultados/ventas/resultado.txt'
+  assert_contains "$gitignore" 'resultados/'
 }
 
 assert_compose_contract hadoop2 apache/hadoop:2.10.2 50070

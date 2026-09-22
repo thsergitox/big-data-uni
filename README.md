@@ -180,7 +180,13 @@ proporcionar todos o algunos de esos valores como argumentos:
 
 `--output ventas` reserva `/labs/ventas/input` y `/labs/ventas/output` en HDFS.
 Usa otro nombre para conservar los resultados de otro ejercicio. La entrada
-puede ser un archivo o una carpeta que contenga archivos directamente.
+puede ser un archivo o una carpeta que contenga archivos directamente. Al
+terminar, el ejecutor combina los archivos `part-*` y también guarda una copia
+legible en el host:
+
+```text
+resultados/ventas/resultado.txt
+```
 
 Si un ejercicio necesita dos trabajos MapReduce, el `Driver` debe ejecutarlos
 en orden y usar una ruta intermedia derivada de su argumento de salida. El
