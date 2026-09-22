@@ -5,6 +5,7 @@ from pathlib import Path
 
 
 FIXTURE = Path(__file__).parent / "fixtures" / "overall-small.csv"
+STATISTICS_FIXTURE = Path(__file__).parent / "fixtures" / "statistics-search-small.csv"
 
 
 def read_rows():
@@ -80,6 +81,51 @@ def query05_reference():
     ]
 
 
+def statistics_rows():
+    with STATISTICS_FIXTURE.open(encoding="utf-8", newline="") as source:
+        return list(csv.DictReader(source, delimiter=";"))
+
+
+def query06_reference():
+    values = [
+        float(row["PORCENTAJE_TNOH"])
+        for row in statistics_rows()
+        if row["ID_CLASE"] == "TT" and row["ID_CATEGORIA"] == "TT"
+    ]
+    mean = sum(values) / len(values)
+    variance = sum((value - mean) ** 2 for value in values) / len(values)
+    return (
+        f"TNOH\tcount={len(values)}\tmean={mean:.4f}\tmedian=20.0000"
+        f"\tstddev={variance ** 0.5:.10f}"
+    )
+
+
+def query07_reference():
+    with STATISTICS_FIXTURE.open(encoding="utf-8") as source:
+        return [line.rstrip("\n") for line in source if "HOTEL" in line]
+
+
+def query08_reference():
+    values = defaultdict(list)
+    for row in statistics_rows():
+        if row["ID_CLASE"] == "TT" and row["ID_CATEGORIA"] == "TT":
+            values[(row["ANIO"], row["DEPARTAMENTO"])].append(
+                float(row["PORCENTAJE_TNOH"])
+            )
+    means = {
+        key: sum(items) / len(items)
+        for key, items in values.items()
+    }
+    by_year = defaultdict(list)
+    for (year, department), mean in means.items():
+        by_year[year].append((mean, department))
+    return [
+        f"{year}\tmin={min(items)[1]}:{min(items)[0]:.4f}"
+        f"\tmax={max(items)[1]}:{max(items)[0]:.4f}"
+        for year, items in sorted(by_year.items())
+    ]
+
+
 class ReferenceResultsTest(unittest.TestCase):
     def test_query01(self):
         self.assertEqual(
@@ -124,6 +170,22 @@ class ReferenceResultsTest(unittest.TestCase):
                 "02\tarrivals=200\tovernight_stays=300",
             ],
             query05_reference(),
+        )
+
+    def test_query06(self):
+        self.assertEqual(
+            "TNOH\tcount=3\tmean=20.0000\tmedian=20.0000\tstddev=8.1649658093",
+            query06_reference(),
+        )
+
+    def test_query07(self):
+        self.assertEqual(1, len(query07_reference()))
+        self.assertIn(";HOTEL BOUTIQUE;", query07_reference()[0])
+
+    def test_query08(self):
+        self.assertEqual(
+            ["2019\tmin=LIMA:10.0000\tmax=AREQUIPA:30.0000"],
+            query08_reference(),
         )
 
 
