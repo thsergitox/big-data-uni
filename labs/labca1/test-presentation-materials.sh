@@ -32,4 +32,16 @@ grep -Fq '**Arbués:**' "$SCRIPT"
 grep -Fq '**Sergio:**' "$SCRIPT"
 grep -Fq '9 min 35 s' "$SCRIPT"
 
+for rationale in \
+  '¿Por qué se tomó esta decisión?' \
+  '¿Por qué Gaussian Naive Bayes?' \
+  '¿Por qué regresión logística?' \
+  '¿Por qué regresión lineal?' \
+  '¿Por qué ridge?'; do
+  grep -Fq "$rationale" "$SCRIPT" || {
+    echo "Falta justificar en el guion: $rationale" >&2
+    exit 1
+  }
+done
+
 echo "Tutorial y guion de exposición verificados"

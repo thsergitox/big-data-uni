@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.29 (TeX Live 2026/Arch Linux) (preloaded format=pdflatex 2026.9.22)  22 SEP 2026 16:33
+This is pdfTeX, Version 3.141592653-2.6-1.40.29 (TeX Live 2026/Arch Linux) (preloaded format=pdflatex 2026.9.22)  22 SEP 2026 16:56
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -542,7 +542,7 @@ File: ../images/docker-stats.png Graphic file (type png)
 <use ../images/docker-stats.png>
 Package pdftex.def Info: ../images/docker-stats.png  used on input line 571.
 (pdftex.def)             Requested size: 451.40144pt x 253.90817pt.
- [10 <../images/namenode-overview.png> <../images/resourcemanager-applications.png> <../images/nodemanager-resources.png> <../images/jobhistory-query.png>] [11 <../images/docker-stats.png>] (./Template.bbl [12{/usr/share/texmf-dist/fonts/enc/dvips/cm-super/cm-super-ts1.enc}]) [13] (./Template.aux
+ [10 <../images/namenode-overview.png> <../images/resourcemanager-applications.png> <../images/nodemanager-resources.png> <../images/jobhistory-query.png>] [11 <../images/docker-stats.png>] (./Template.bbl [12]) [13{/usr/share/texmf-dist/fonts/enc/dvips/cm-super/cm-super-ts1.enc}] (./Template.aux
 LaTeX Info: Redefining \. on input line 11.
 LaTeX Info: Redefining \% on input line 11.
 LaTeX Info: Redefining \. on input line 12.
@@ -556,15 +556,15 @@ Package rerunfilecheck Info: File `Template.out' has not changed.
 (rerunfilecheck)             Checksum: 6E134E5A311700AAD70D25438CBFB60F;14795.
  ) 
 Here is how much of TeX's memory you used:
- 15787 strings out of 469453
- 243143 string characters out of 5469037
+ 15796 strings out of 469453
+ 243280 string characters out of 5469037
  765082 words of memory out of 5000000
- 44089 multiletter control sequences out of 15000+600000
+ 44098 multiletter control sequences out of 15000+600000
  644188 words of font info for 85 fonts, out of 8000000 for 9000
  40 hyphenation exceptions out of 8191
  75i,9n,79p,620b,1128s stack positions out of 10000i,1000n,20000p,200000b,200000s
 </usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi9.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmr6.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmr7.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/share/texmf-dist/fonts/type1/public/cm-super/sfbx0900.pfb></usr/share/texmf-dist/fonts/type1/public/cm-super/sfbx1000.pfb></usr/share/texmf-dist/fonts/type1/public/cm-super/sfbx1200.pfb></usr/share/texmf-dist/fonts/type1/public/cm-super/sfbx1440.pfb></usr/share/texmf-dist/fonts/type1/public/cm-super/sfrm0900.pfb></usr/share/texmf-dist/fonts/type1/public/cm-super/sfrm1000.pfb></usr/share/texmf-dist/fonts/type1/public/cm-super/sfrm1200.pfb></usr/share/texmf-dist/fonts/type1/public/cm-super/sfrm1728.pfb></usr/share/texmf-dist/fonts/type1/public/cm-super/sfti1000.pfb></usr/share/texmf-dist/fonts/type1/public/cm-super/sftt0800.pfb></usr/share/texmf-dist/fonts/type1/public/cm-super/sftt1000.pfb>
-Output written on Template.pdf (13 pages, 1644831 bytes).
+Output written on Template.pdf (13 pages, 1644809 bytes).
 PDF statistics:
  604 PDF objects out of 1000 (max. 8388607)
  543 compressed objects within 6 object streams

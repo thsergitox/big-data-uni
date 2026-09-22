@@ -54,6 +54,43 @@
   \note{Arbués: 55 s. Explicar que el dataset sí se ha usado, pero no se encontró un trabajo con Hadoop o aprendizaje automático aplicado directamente a este CSV.}
 \end{frame}
 
+\begin{frame}{Columnas del dataset}
+\scriptsize
+\begin{columns}[T,onlytextwidth]
+\column{0.49\textwidth}
+\textbf{Identificación y dimensiones}
+\begin{itemize}
+  \item \texttt{FECHA_CORTE}: fecha de actualización.
+  \item \texttt{ANIO}, \texttt{MES}: periodo observado.
+  \item \texttt{ID_CLASE}, \texttt{CLASE}: tipo de establecimiento.
+  \item \texttt{ID_CATEGORIA}, \texttt{CATEGORIA}: categoría.
+  \item \texttt{DEPARTAMENTO}, \texttt{ID_UBIGEO}: ubicación.
+\end{itemize}
+\textbf{Capacidad}
+\begin{itemize}
+  \item \texttt{NUMERO_ESTABLECIMIENTOS}: locales reportados.
+  \item \texttt{NUMERO_HABITACIONES}: habitaciones disponibles.
+  \item \texttt{NUMERO_PLAZAS_CAMA}: camas ofertadas.
+\end{itemize}
+\column{0.49\textwidth}
+\textbf{Indicadores}
+\begin{itemize}
+  \item \texttt{PORCENTAJE_TNOH}: ocupación neta de habitaciones.
+  \item \texttt{PORCENTAJE_TNOC}: ocupación neta de camas.
+  \item \texttt{PROMEDIO_PERMANENCIA}: días promedio de estadía.
+  \item \texttt{PROMEDIO_PERMANENCIA_NAC/EXT}: estadía nacional o extranjera.
+\end{itemize}
+\textbf{Movimientos y empleo}
+\begin{itemize}
+  \item \texttt{TOTAL_ARRIBOS}, \texttt{..._NAC}, \texttt{..._EXT}: llegadas.
+  \item \texttt{TOTAL_PERNOCT}, \texttt{..._NAC}, \texttt{..._EXT}: noches.
+  \item \texttt{TOTAL_EMPLEO}: personas empleadas reportadas.
+\end{itemize}
+\vfill
+\textbf{Siglas:} TNOH es ocupación neta de habitaciones; TNOC, de camas. TT/TT significa total de clase y total de categoría, usado para evitar doble conteo.
+\end{columns}
+\end{frame}
+
 % 3. Arbués presenta el contenido y las reglas de limpieza.
 \begin{frame}{Dataset consolidado}
   \begin{columns}[T,onlytextwidth]
@@ -80,130 +117,149 @@
   \note{Arbués: 55 s. Aclarar que 2025 contiene solo enero a junio y que la consolidación permitió usar una sola entrada para las catorce consultas.}
 \end{frame}
 
-% 4. Arbués conecta la revisión bibliográfica con el diseño técnico.
-\begin{frame}{Cómo la investigación guio las decisiones}
-  \begin{tabularx}{\textwidth}{@{}p{0.29\textwidth}X@{}}
-    \toprule
-    Hallazgo & Decisión tomada \\
-    \midrule
-    Estudios limitados a una región & Comparar los 25 departamentos y varios periodos en Q01--Q10. \\
-    cambio de esquema en 2024 & Normalizar nombres, orden y cantidad de columnas antes de cargar HDFS. \\
-    Filas consolidadas mezcladas & Aplicar TT/TT para evitar doble conteo en agregaciones nacionales. \\
-    Predominio de regresiones clásicas & Comparar clasificación y regresión en Q11--Q14. \\
-    Datos mensuales ordenados & Usar división temporal: entrenar con 2019--2023 y evaluar años posteriores. \\
-    \bottomrule
-  \end{tabularx}
-  \note{Arbués: 70 s. Esta es la conexión central: cada hallazgo terminó convertido en una regla del pipeline o en un grupo de consultas.}
+\section{Consultas MapReduce}
+
+\begin{frame}{Q01 — arribos por origen}
+\small
+\textbf{Ítem 1: consulta con dos o más campos.}
+\begin{itemize}
+  \item \textbf{Pregunta:} ¿cómo evolucionaron los arribos nacionales y extranjeros por año?
+  \item \textbf{Campos:} año, arribos nacionales y arribos extranjeros.
+  \item \textbf{Resultado:} nacionales: 54,9 millones en 2019 y 34,6 millones en 2020.
+\end{itemize}
 \end{frame}
 
-\section{Hadoop y consultas}
-
-% 5. Sergio explica solo la arquitectura usada en el laboratorio.
-\begin{frame}{Arquitectura Hadoop usada}
-  \begin{itemize}
-    \item Hadoop 3.5.0 se ejecutó en un solo nodo levantado con Docker Compose.
-    \item HDFS guardó la entrada y las salidas; YARN ejecutó y registró los JAR de MapReduce.
-  \end{itemize}
-  \begin{columns}[T,onlytextwidth]
-    \column{0.48\textwidth}
-      \includegraphics[width=\linewidth,height=0.36\textheight,keepaspectratio]{namenode-overview.png}
-
-      {\tiny Entrada y bloques observados en NameNode.}
-    \column{0.48\textwidth}
-      \includegraphics[width=\linewidth,height=0.36\textheight,keepaspectratio]{resourcemanager-applications.png}
-
-      {\tiny Aplicaciones finalizadas en ResourceManager.}
-  \end{columns}
-  \note{Sergio: 55 s. Contar cómo se levantó el entorno con Docker Compose, se subió el CSV a HDFS y se ejecutaron los JAR. Aclarar que el nodo único prueba el flujo, no la escalabilidad horizontal.}
+\begin{frame}{Q02 — ocupación por departamento}
+\small
+\textbf{Ítem 1: consulta con dos o más campos.}
+\begin{itemize}
+  \item \textbf{Pregunta:} ¿cuál fue la TNOH promedio de cada departamento por año?
+  \item TNOH significa ocupación neta de habitaciones.
+  \item \textbf{Resultado:} Callao llegó a 41,5950 en 2024; Loreto, a 12,9917.
+\end{itemize}
 \end{frame}
 
-% 6. Sergio agrupa las consultas descriptivas base.
-\begin{frame}{Consultas descriptivas: Q01--Q05}
-  \small
-  \textbf{Q01--Q05: ítem 1 de la práctica, cinco consultas con dos o más campos.}
-  \vspace{0.35em}
-
-  \begin{tabularx}{\textwidth}{@{}lp{0.43\textwidth}X@{}}
-    \toprule
-    Consulta & Pregunta & Resultado destacado \\
-    \midrule
-    Q01 & Arribos nacionales y extranjeros por año & En 2020 ambos grupos cayeron con fuerza. \\
-    Q02 & TNOH promedio por departamento y año & Se observaron diferencias territoriales persistentes. \\
-    Q03 & TNOH y TNOC por clase & Se comparó la ocupación de hoteles, resorts y otras clases. \\
-    Q04 & Empleo por cada cien habitaciones & Se relacionó personal reportado y capacidad por departamento. \\
-    Q05 & Arribos y pernoctaciones por mes & Se revisó la estacionalidad de la demanda. \\
-    \bottomrule
-  \end{tabularx}
-  \vfill
-  \textbf{Ejemplo:} los arribos nacionales pasaron de 54,9 millones en 2019 a 34,6 millones en 2020.
-  \note{Sergio: 65 s. No leer toda la tabla. Explicar que este grupo responde preguntas nacionales, territoriales y estacionales, y dar el ejemplo de la caída de 2020.}
+\begin{frame}{Q03 — ocupación por clase}
+\small
+\textbf{Ítem 1: consulta con dos o más campos.}
+\begin{itemize}
+  \item \textbf{Pregunta:} ¿cómo cambian TNOH y TNOC según la clase?
+  \item TNOC significa ocupación neta de camas.
+  \item \textbf{Resultado:} en 2024, Resort obtuvo TNOH 46,7742 y TNOC 48,2812.
+\end{itemize}
 \end{frame}
 
-% 7. Sergio cubre estadística, búsqueda, extremos y jobs encadenados.
-\begin{frame}{Estadística y consultas encadenadas: Q06--Q10}
-  \small
-  \textbf{Q06: ítem 2 \quad Q07: ítem 3 \quad Q08: ítem 4 \quad Q09--Q10: ítem 5}
-  \vspace{0.35em}
-
-  \begin{tabularx}{\textwidth}{@{}lp{0.44\textwidth}X@{}}
-    \toprule
-    Consulta & Tipo & Resultado destacado \\
-    \midrule
-    Q06 & Media, mediana y desviación de TNOH & Media 21,74; mediana 21,34. \\
-    Q07 & Búsqueda de subtexto & Filtrado configurable por departamento. \\
-    Q08 & Máximo y mínimo anual & Identificó extremos departamentales. \\
-    Q09 & Dos jobs: cambio 2019--2024 & Apurímac: $-18,73$ pp; Ucayali: $+5,04$ pp. \\
-    Q10 & Dos jobs: participación extranjera en Cusco & 63,37\% antes de 2020 y 58,35\% en recuperación. \\
-    \bottomrule
-  \end{tabularx}
-  \note{Sergio: 75 s. Destacar que Q09 y Q10 encadenan dos jobs: el primero resume cada periodo y el segundo compara esas salidas.}
+\begin{frame}{Q04 — empleo por capacidad}
+\small
+\textbf{Ítem 1: consulta con dos o más campos.}
+\begin{itemize}
+  \item \textbf{Pregunta:} ¿cuántos empleos se reportan por cada 100 habitaciones?
+  \item \textbf{Campos:} año, departamento, empleo y habitaciones.
+  \item \textbf{Resultado:} Lima obtuvo 54,3562 empleos por cada 100 habitaciones en 2024.
+\end{itemize}
 \end{frame}
 
-\section{Modelos y cierre}
-
-% 8. Sergio presenta la comparación de clasificación.
-\begin{frame}{Clasificación de ocupabilidad: Q11--Q12}
-  \textbf{Q11--Q12: ítem 6 de la práctica, dos modelos de clasificación.}
-  \vspace{0.55em}
-
-  \begin{columns}[T,onlytextwidth]
-    \column{0.55\textwidth}
-      \begin{tabular}{@{}lrr@{}}
-        \toprule
-        Modelo & F1 2024 & F1 2025-I \\
-        \midrule
-        Q11 Naive Bayes & 0,4403 & 0,4675 \\
-        Q12 Logística & \textbf{0,7931} & \textbf{0,6939} \\
-        \bottomrule
-      \end{tabular}
-    \column{0.41\textwidth}
-      \begin{block}{Lectura}
-        La regresión logística logró un mejor equilibrio entre precisión y recall en ambos periodos.
-      \end{block}
-  \end{columns}
-  \vspace{0.7em}
-  La etiqueta separó ocupabilidad alta y baja usando la mediana de TNOH del entrenamiento.
-  \note{Sergio: 55 s. Explicar la etiqueta y comparar el F1. Evitar detallar las fórmulas de ambos modelos.}
+\begin{frame}{Q05 — estacionalidad mensual}
+\small
+\textbf{Ítem 1: consulta con dos o más campos.}
+\begin{itemize}
+  \item \textbf{Pregunta:} ¿qué meses concentran más arribos y pernoctaciones?
+  \item \textbf{Campos:} mes, arribos y pernoctaciones.
+  \item \textbf{Resultado:} enero y febrero tuvieron los mayores acumulados.
+\end{itemize}
 \end{frame}
 
-% 9. Arbués presenta la comparación de regresión.
-\begin{frame}{Predicción de TNOH: Q13--Q14}
-  \textbf{Q13--Q14: ítem 7 de la práctica, dos modelos de regresión.}
-  \vspace{0.55em}
 
-  \begin{tabular}{@{}lrrrr@{}}
-    \toprule
-    & \multicolumn{2}{c}{2024} & \multicolumn{2}{c}{2025-I} \\
-    \cmidrule(lr){2-3}\cmidrule(l){4-5}
-    Modelo & RMSE & $R^2$ & RMSE & $R^2$ \\
-    \midrule
-    Q13 Lineal & 4,0920 & 0,6435 & 3,9273 & 0,6622 \\
-    Q14 Ridge & \textbf{4,0726} & \textbf{0,6469} & \textbf{3,8796} & \textbf{0,6703} \\
-    \bottomrule
-  \end{tabular}
-  \vspace{1em}
-  Ridge redujo un poco el error, pero la mejora fue pequeña. Los dos modelos conservaron la misma división temporal y las mismas variables.
-  \note{Arbués: 55 s. Explicar que ridge regulariza los coeficientes y que la diferencia existe, pero no se debe exagerar porque es pequeña.}
+\section{Estadística y comparación}
+
+\begin{frame}{Q06 — estadística de TNOH}
+\small
+\textbf{Ítem 2: promedio, mediana y desviación.}
+\begin{itemize}
+  \item \textbf{Pregunta:} ¿cuál es el nivel central y la dispersión de la ocupación?
+  \item \textbf{Resultado:} 1\,950 valores; media 21,7433; mediana 21,3400; desviación 7,0679.
+  \item La mediana divide la mitad inferior y superior de los valores.
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Q07 — búsqueda de texto}
+\small
+\textbf{Ítem 3: búsqueda de subtexto.}
+\begin{itemize}
+  \item \textbf{Pregunta:} ¿qué registros contienen la palabra hotel?
+  \item \textbf{Campos:} clase, categoría y departamento.
+  \item \textbf{Resultado:} 11\,525 coincidencias con el registro completo.
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Q08 — valores extremos}
+\small
+\textbf{Ítem 4: mayor y menor valor agrupado.}
+\begin{itemize}
+  \item \textbf{Pregunta:} ¿qué departamento tuvo la menor y mayor TNOH media por año?
+  \item \textbf{Resultado 2024:} Loreto fue el mínimo (12,9917) y Callao el máximo (41,5950).
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Q09 — cambio entre 2019 y 2024}
+\small
+\textbf{Ítem 5: dos MapReduce enlazados.}
+\begin{itemize}
+  \item Job 1 calcula la TNOH promedio por año y departamento.
+  \item Job 2 une 2019 con 2024 y calcula la diferencia.
+  \item \textbf{Resultado:} Apurímac tuvo la mayor caída: -18,7325 puntos porcentuales.
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Q10 — participación extranjera en Cusco}
+\small
+\textbf{Ítem 5: dos MapReduce enlazados.}
+\begin{itemize}
+  \item \textbf{Pregunta:} ¿cómo cambió la proporción de arribos extranjeros?
+  \item \textbf{Resultado:} 63,3747\% antes de la pandemia; 20,5234\% durante el impacto; 58,3507\% en recuperación.
+\end{itemize}
+\end{frame}
+
+\section{Modelos}
+
+\begin{frame}{Q11 — Gaussian Naive Bayes}
+\small
+\textbf{Ítem 6: modelo de clasificación.}
+\begin{itemize}
+  \item \textbf{Pregunta:} ¿la ocupación mensual es alta o baja?
+  \item Alta significa TNOH mayor o igual a la mediana del entrenamiento.
+  \item \textbf{F1:} 0,4403 en 2024 y 0,4675 en 2025-I.
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Q12 — regresión logística}
+\small
+\textbf{Ítem 6: modelo de clasificación.}
+\begin{itemize}
+  \item Se respondió la misma pregunta con las mismas variables.
+  \item \textbf{F1:} 0,7931 en 2024 y 0,6939 en 2025-I.
+  \item Fue el clasificador más equilibrado.
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Q13 — regresión lineal}
+\small
+\textbf{Ítem 7: modelo de regresión.}
+\begin{itemize}
+  \item \textbf{Pregunta:} ¿qué TNOH se predice usando los demás indicadores?
+  \item Entrenamiento: 2019--2023; evaluación: 2024 y 2025-I.
+  \item \textbf{Resultado 2024:} MAE 3,1922; RMSE 4,0920; R cuadrado 0,6435.
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Q14 — regresión ridge}
+\small
+\textbf{Ítem 7: modelo de regresión.}
+\begin{itemize}
+  \item \textbf{Pregunta:} ¿la regularización mejora la predicción de TNOH?
+  \item \textbf{Resultado 2025-I:} MAE 3,0133; RMSE 3,8796; R cuadrado 0,6703.
+  \item La mejora frente al modelo lineal fue pequeña.
+\end{itemize}
 \end{frame}
 
 % 10. Ambos cierran con lo demostrado y los límites.

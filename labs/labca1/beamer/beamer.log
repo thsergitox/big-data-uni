@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.29 (TeX Live 2026/Arch Linux) (preloaded format=pdflatex 2026.9.22)  22 SEP 2026 16:45
+This is pdfTeX, Version 3.141592653-2.6-1.40.29 (TeX Live 2026/Arch Linux) (preloaded format=pdflatex 2026.9.22)  22 SEP 2026 18:44
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -600,12 +600,7 @@ Package: array 2025/09/25 v2.6n Tabular extension package (FMi)
 ) (/usr/share/texmf-dist/tex/latex/beamer/beamerthemeMadrid.sty (/usr/share/texmf-dist/tex/latex/beamer/beamercolorthemewhale.sty) (/usr/share/texmf-dist/tex/latex/beamer/beamercolorthemeorchid.sty) (/usr/share/texmf-dist/tex/latex/beamer/beamerinnerthemerounded.sty) (/usr/share/texmf-dist/tex/latex/beamer/beamerouterthemeinfolines.sty)) (/usr/share/texmf-dist/tex/latex/l3backend/l3backend-pdftex.def
 File: l3backend-pdftex.def 2025-10-09 L3 backend support: PDF output (pdfTeX)
 \l__color_backend_stack_int=\count366
-) (./beamer.aux
-LaTeX Info: Redefining \. on input line 11.
-LaTeX Info: Redefining \% on input line 11.
-Package babel Info: 'spanish' activates 'spanish' shorthands.
-(babel)             Reported on input line 11.
-)
+) (./beamer.aux)
 \openout1 = `beamer.aux'.
 
 LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 22.
@@ -681,7 +676,6 @@ Package epstopdf-base Info: Redefining graphics rule for `.eps' on input line 48
 File: epstopdf-sys.cfg 2010/07/13 v1.3 Configuration of (r)epstopdf for TeX Live
 ))
 Package hyperref Info: Link coloring OFF on input line 22.
- (./beamer.out) (./beamer.out)
 \@outlinefile=\write5
 \openout5 = `beamer.out'.
 
@@ -742,74 +736,2520 @@ Dictionary: translator-theorem-dictionary, Language: English
 )
 LaTeX Info: Redefining \. on input line 22.
 LaTeX Info: Redefining \% on input line 22.
+Package babel Info: 'spanish' activates 'spanish' shorthands.
+(babel)             Reported on input line 22.
  (./beamer.nav) [1
 
-{/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map}{/usr/share/texmf-dist/fonts/enc/dvips/cm-super/cm-super-t1.enc}] (./beamer.toc
-LaTeX Info: Redefining \. on input line 1.
-LaTeX Info: Redefining \% on input line 1.
-) [2
+{/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map}{/usr/share/texmf-dist/fonts/enc/dvips/cm-super/cm-super-t1.enc}]
+No file beamer.toc.
+[2
 
 ] [3
 
 ]
-LaTeX Font Info:    Trying to load font information for U+msa on input line 81.
- (/usr/share/texmf-dist/tex/latex/amsfonts/umsa.fd
+/home/sergi/Documents/semesters/nine/bigdata/labs/labca1/beamer/beamer.tex:92: Missing $ inserted.
+<inserted text> 
+                $
+l.92 \end{frame}
+                
+I've inserted a begin-math/end-math symbol since I think
+you left one out. Proceed, with fingers crossed.
+
+LaTeX Font Info:    Trying to load font information for U+msa on input line 92.
+(/usr/share/texmf-dist/tex/latex/amsfonts/umsa.fd
 File: umsa.fd 2013/01/14 v3.01 AMS symbols A
 )
-LaTeX Font Info:    Trying to load font information for U+msb on input line 81.
+LaTeX Font Info:    Trying to load font information for U+msb on input line 92.
  (/usr/share/texmf-dist/tex/latex/amsfonts/umsb.fd
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
-) [4
+)
+/home/sergi/Documents/semesters/nine/bigdata/labs/labca1/beamer/beamer.tex:92: Extra }, or forgotten $.
+<recently read> \egroup 
+                        
+l.92 \end{frame}
+                
+I've deleted a group-closing symbol because it seems to be
+spurious, as in `$x}$'. But perhaps the } is legitimate and
+you forgot something else, as in `\hbox{$x}'. In such cases
+the way to recover is to insert both the forgotten and the
+deleted material, e.g., by typing `I$}'.
 
-]
-Underfull \hbox (badness 1158) in paragraph at lines 97--97
-[]|\T1/cmss/m/n/10.95 Estudios li-mi-ta-dos a
+
+LaTeX Warning: Command \' invalid in math mode on input line 92.
+
+
+/home/sergi/Documents/semesters/nine/bigdata/labs/labca1/beamer/beamer.tex:92: LaTeX Error: Command \item invalid in math mode.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.92 \end{frame}
+                
+Try typing  <return>  to proceed.
+If that doesn't work, type  X <return>  to quit.
+
+/home/sergi/Documents/semesters/nine/bigdata/labs/labca1/beamer/beamer.tex:92: Missing $ inserted.
+<inserted text> 
+                $
+l.92 \end{frame}
+                
+I've inserted a begin-math/end-math symbol since I think
+you left one out. Proceed, with fingers crossed.
+
+Missing character: There is no ó in font cmss8!
+/home/sergi/Documents/semesters/nine/bigdata/labs/labca1/beamer/beamer.tex:92: Missing $ inserted.
+<inserted text> 
+                $
+l.92 \end{frame}
+                
+I've inserted a begin-math/end-math symbol since I think
+you left one out. Proceed, with fingers crossed.
+
+/home/sergi/Documents/semesters/nine/bigdata/labs/labca1/beamer/beamer.tex:92: Extra }, or forgotten $.
+<recently read> \egroup 
+                        
+l.92 \end{frame}
+                
+I've deleted a group-closing symbol because it seems to be
+spurious, as in `$x}$'. But perhaps the } is legitimate and
+you forgot something else, as in `\hbox{$x}'. In such cases
+the way to recover is to insert both the forgotten and the
+deleted material, e.g., by typing `I$}'.
+
+
+/home/sergi/Documents/semesters/nine/bigdata/labs/labca1/beamer/beamer.tex:92: LaTeX Error: Command \item invalid in math mode.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.92 \end{frame}
+                
+Try typing  <return>  to proceed.
+If that doesn't work, type  X <return>  to quit.
+
+/home/sergi/Documents/semesters/nine/bigdata/labs/labca1/beamer/beamer.tex:92: Missing $ inserted.
+<inserted text> 
+                $
+l.92 \end{frame}
+                
+I've inserted a begin-math/end-math symbol since I think
+you left one out. Proceed, with fingers crossed.
+
+/home/sergi/Documents/semesters/nine/bigdata/labs/labca1/beamer/beamer.tex:92: Missing $ inserted.
+<inserted text> 
+                $
+l.92 \end{frame}
+                
+I've inserted a begin-math/end-math symbol since I think
+you left one out. Proceed, with fingers crossed.
+
+/home/sergi/Documents/semesters/nine/bigdata/labs/labca1/beamer/beamer.tex:92: Extra }, or forgotten $.
+<recently read> \egroup 
+                        
+l.92 \end{frame}
+                
+I've deleted a group-closing symbol because it seems to be
+spurious, as in `$x}$'. But perhaps the } is legitimate and
+you forgot something else, as in `\hbox{$x}'. In such cases
+the way to recover is to insert both the forgotten and the
+deleted material, e.g., by typing `I$}'.
+
+
+LaTeX Warning: Command \' invalid in math mode on input line 92.
+
+
+/home/sergi/Documents/semesters/nine/bigdata/labs/labca1/beamer/beamer.tex:92: LaTeX Error: Command \item invalid in math mode.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.92 \end{frame}
+                
+Try typing  <return>  to proceed.
+If that doesn't work, type  X <return>  to quit.
+
+/home/sergi/Documents/semesters/nine/bigdata/labs/labca1/beamer/beamer.tex:92: Missing $ inserted.
+<inserted text> 
+                $
+l.92 \end{frame}
+                
+I've inserted a begin-math/end-math symbol since I think
+you left one out. Proceed, with fingers crossed.
+
+Missing character: There is no í in font cmss8!
+/home/sergi/Documents/semesters/nine/bigdata/labs/labca1/beamer/beamer.tex:92: Missing $ inserted.
+<inserted text> 
+                $
+l.92 \end{frame}
+                
+I've inserted a begin-math/end-math symbol since I think
+you left one out. Proceed, with fingers crossed.
+
+/home/sergi/Documents/semesters/nine/bigdata/labs/labca1/beamer/beamer.tex:92: Extra }, or forgotten $.
+<recently read> \egroup 
+                        
+l.92 \end{frame}
+                
+I've deleted a group-closing symbol because it seems to be
+spurious, as in `$x}$'. But perhaps the } is legitimate and
+you forgot something else, as in `\hbox{$x}'. In such cases
+the way to recover is to insert both the forgotten and the
+deleted material, e.g., by typing `I$}'.
+
+
+LaTeX Warning: Command \' invalid in math mode on input line 92.
+
+
+/home/sergi/Documents/semesters/nine/bigdata/labs/labca1/beamer/beamer.tex:92: LaTeX Error: Command \end{itemize} invalid in math mode.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.92 \end{frame}
+                
+Try typing  <return>  to proceed.
+If that doesn't work, type  X <return>  to quit.
+
+/home/sergi/Documents/semesters/nine/bigdata/labs/labca1/beamer/beamer.tex:92: Missing $ inserted.
+<inserted text> 
+                $
+l.92 \end{frame}
+                
+I've inserted a begin-math/end-math symbol since I think
+you left one out. Proceed, with fingers crossed.
+
+Missing character: There is no ó in font cmss8!
+/home/sergi/Documents/semesters/nine/bigdata/labs/labca1/beamer/beamer.tex:92: Missing } inserted.
+<inserted text> 
+                }
+l.92 \end{frame}
+                
+I've inserted something that you may have forgotten.
+(See the <inserted text> above.)
+With luck, this will get me unwedged. But if you
+really didn't forget anything, try typing `2' now; then
+my insertion and my current dilemma will both disappear.
+
+/home/sergi/Documents/semesters/nine/bigdata/labs/labca1/beamer/beamer.tex:92: Missing } inserted.
+<inserted text> 
+                }
+l.92 \end{frame}
+                
+I've inserted something that you may have forgotten.
+(See the <inserted text> above.)
+With luck, this will get me unwedged. But if you
+really didn't forget anything, try typing `2' now; then
+my insertion and my current dilemma will both disappear.
+
+/home/sergi/Documents/semesters/nine/bigdata/labs/labca1/beamer/beamer.tex:92: Missing } inserted.
+<inserted text> 
+                }
+l.92 \end{frame}
+                
+I've inserted something that you may have forgotten.
+(See the <inserted text> above.)
+With luck, this will get me unwedged. But if you
+really didn't forget anything, try typing `2' now; then
+my insertion and my current dilemma will both disappear.
+
+/home/sergi/Documents/semesters/nine/bigdata/labs/labca1/beamer/beamer.tex:92: Missing } inserted.
+<inserted text> 
+                }
+l.92 \end{frame}
+                
+I've inserted something that you may have forgotten.
+(See the <inserted text> above.)
+With luck, this will get me unwedged. But if you
+really didn't forget anything, try typing `2' now; then
+my insertion and my current dilemma will both disappear.
+
+/home/sergi/Documents/semesters/nine/bigdata/labs/labca1/beamer/beamer.tex:92: Missing $ inserted.
+<inserted text> 
+                $
+l.92 \end{frame}
+                
+I've inserted a begin-math/end-math symbol since I think
+you left one out. Proceed, with fingers crossed.
+
+/home/sergi/Documents/semesters/nine/bigdata/labs/labca1/beamer/beamer.tex:92: Extra }, or forgotten $.
+<recently read> \egroup 
+                        
+l.92 \end{frame}
+                
+I've deleted a group-closing symbol because it seems to be
+spurious, as in `$x}$'. But perhaps the } is legitimate and
+you forgot something else, as in `\hbox{$x}'. In such cases
+the way to recover is to insert both the forgotten and the
+deleted material, e.g., by typing `I$}'.
+
+
+/home/sergi/Documents/semesters/nine/bigdata/labs/labca1/beamer/beamer.tex:92: LaTeX Error: Command \item invalid in math mode.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.92 \end{frame}
+                
+Try typing  <return>  to proceed.
+If that doesn't work, type  X <return>  to quit.
+
+/home/sergi/Documents/semesters/nine/bigdata/labs/labca1/beamer/beamer.tex:92: Missing $ inserted.
+<inserted text> 
+                $
+l.92 \end{frame}
+                
+I've inserted a begin-math/end-math symbol since I think
+you left one out. Proceed, with fingers crossed.
+
+/home/sergi/Documents/semesters/nine/bigdata/labs/labca1/beamer/beamer.tex:92: Missing $ inserted.
+<inserted text> 
+                $
+l.92 \end{frame}
+                
+I've inserted a begin-math/end-math symbol since I think
+you left one out. Proceed, with fingers crossed.
+
+/home/sergi/Documents/semesters/nine/bigdata/labs/labca1/beamer/beamer.tex:92: Extra }, or forgotten $.
+<recently read> \egroup 
+                        
+l.92 \end{frame}
+                
+I've deleted a group-closing symbol because it seems to be
+spurious, as in `$x}$'. But perhaps the } is legitimate and
+you forgot something else, as in `\hbox{$x}'. In such cases
+the way to recover is to insert both the forgotten and the
+deleted material, e.g., by typing `I$}'.
+
+
+/home/sergi/Documents/semesters/nine/bigdata/labs/labca1/beamer/beamer.tex:92: LaTeX Error: Command \item invalid in math mode.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.92 \end{frame}
+                
+Try typing  <return>  to proceed.
+If that doesn't work, type  X <return>  to quit.
+
+/home/sergi/Documents/semesters/nine/bigdata/labs/labca1/beamer/beamer.tex:92: Missing $ inserted.
+<inserted text> 
+                $
+l.92 \end{frame}
+                
+I've inserted a begin-math/end-math symbol since I think
+you left one out. Proceed, with fingers crossed.
+
+/home/sergi/Documents/semesters/nine/bigdata/labs/labca1/beamer/beamer.tex:92: Missing $ inserted.
+<inserted text> 
+                $
+l.92 \end{frame}
+                
+I've inserted a begin-math/end-math symbol since I think
+you left one out. Proceed, with fingers crossed.
+
+/home/sergi/Documents/semesters/nine/bigdata/labs/labca1/beamer/beamer.tex:92: Extra }, or forgotten $.
+<recently read> \egroup 
+                        
+l.92 \end{frame}
+                
+I've deleted a group-closing symbol because it seems to be
+spurious, as in `$x}$'. But perhaps the } is legitimate and
+you forgot something else, as in `\hbox{$x}'. In such cases
+the way to recover is to insert both the forgotten and the
+deleted material, e.g., by typing `I$}'.
+
+
+/home/sergi/Documents/semesters/nine/bigdata/labs/labca1/beamer/beamer.tex:92: LaTeX Error: Command \end{itemize} invalid in math mode.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.92 \end{frame}
+                
+Try typing  <return>  to proceed.
+If that doesn't work, type  X <return>  to quit.
+
+/home/sergi/Documents/semesters/nine/bigdata/labs/labca1/beamer/beamer.tex:92: Missing $ inserted.
+<inserted text> 
+                $
+l.92 \end{frame}
+                
+I've inserted a begin-math/end-math symbol since I think
+you left one out. Proceed, with fingers crossed.
+
+/home/sergi/Documents/semesters/nine/bigdata/labs/labca1/beamer/beamer.tex:92: Missing } inserted.
+<inserted text> 
+                }
+l.92 \end{frame}
+                
+I've inserted something that you may have forgotten.
+(See the <inserted text> above.)
+With luck, this will get me unwedged. But if you
+really didn't forget anything, try typing `2' now; then
+my insertion and my current dilemma will both disappear.
+
+/home/sergi/Documents/semesters/nine/bigdata/labs/labca1/beamer/beamer.tex:92: Missing } inserted.
+<inserted text> 
+                }
+l.92 \end{frame}
+                
+I've inserted something that you may have forgotten.
+(See the <inserted text> above.)
+With luck, this will get me unwedged. But if you
+really didn't forget anything, try typing `2' now; then
+my insertion and my current dilemma will both disappear.
+
+/home/sergi/Documents/semesters/nine/bigdata/labs/labca1/beamer/beamer.tex:92: Missing } inserted.
+<inserted text> 
+                }
+l.92 \end{frame}
+                
+I've inserted something that you may have forgotten.
+(See the <inserted text> above.)
+With luck, this will get me unwedged. But if you
+really didn't forget anything, try typing `2' now; then
+my insertion and my current dilemma will both disappear.
+
+/home/sergi/Documents/semesters/nine/bigdata/labs/labca1/beamer/beamer.tex:92: Missing $ inserted.
+<inserted text> 
+                $
+l.92 \end{frame}
+                
+I've inserted a begin-math/end-math symbol since I think
+you left one out. Proceed, with fingers crossed.
+
+/home/sergi/Documents/semesters/nine/bigdata/labs/labca1/beamer/beamer.tex:92: Extra }, or forgotten $.
+<recently read> \egroup 
+                        
+l.92 \end{frame}
+                
+I've deleted a group-closing symbol because it seems to be
+spurious, as in `$x}$'. But perhaps the } is legitimate and
+you forgot something else, as in `\hbox{$x}'. In such cases
+the way to recover is to insert both the forgotten and the
+deleted material, e.g., by typing `I$}'.
+
+
+LaTeX Warning: Command \' invalid in math mode on input line 92.
+
+
+/home/sergi/Documents/semesters/nine/bigdata/labs/labca1/beamer/beamer.tex:92: LaTeX Error: Command \item invalid in math mode.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.92 \end{frame}
+                
+Try typing  <return>  to proceed.
+If that doesn't work, type  X <return>  to quit.
+
+/home/sergi/Documents/semesters/nine/bigdata/labs/labca1/beamer/beamer.tex:92: Missing $ inserted.
+<inserted text> 
+                $
+l.92 \end{frame}
+                
+I've inserted a begin-math/end-math symbol since I think
+you left one out. Proceed, with fingers crossed.
+
+Missing character: There is no ó in font cmss8!
+/home/sergi/Documents/semesters/nine/bigdata/labs/labca1/beamer/beamer.tex:92: Missing $ inserted.
+<inserted text> 
+                $
+l.92 \end{frame}
+                
+I've inserted a begin-math/end-math symbol since I think
+you left one out. Proceed, with fingers crossed.
+
+/home/sergi/Documents/semesters/nine/bigdata/labs/labca1/beamer/beamer.tex:92: Extra }, or forgotten $.
+<recently read> \egroup 
+                        
+l.92 \end{frame}
+                
+I've deleted a group-closing symbol because it seems to be
+spurious, as in `$x}$'. But perhaps the } is legitimate and
+you forgot something else, as in `\hbox{$x}'. In such cases
+the way to recover is to insert both the forgotten and the
+deleted material, e.g., by typing `I$}'.
+
+
+LaTeX Warning: Command \' invalid in math mode on input line 92.
+
+
+/home/sergi/Documents/semesters/nine/bigdata/labs/labca1/beamer/beamer.tex:92: LaTeX Error: Command \item invalid in math mode.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.92 \end{frame}
+                
+Try typing  <return>  to proceed.
+If that doesn't work, type  X <return>  to quit.
+
+/home/sergi/Documents/semesters/nine/bigdata/labs/labca1/beamer/beamer.tex:92: Missing $ inserted.
+<inserted text> 
+                $
+l.92 \end{frame}
+                
+I've inserted a begin-math/end-math symbol since I think
+you left one out. Proceed, with fingers crossed.
+
+Missing character: There is no ó in font cmss8!
+/home/sergi/Documents/semesters/nine/bigdata/labs/labca1/beamer/beamer.tex:92: Missing $ inserted.
+<inserted text> 
+                $
+l.92 \end{frame}
+                
+I've inserted a begin-math/end-math symbol since I think
+you left one out. Proceed, with fingers crossed.
+
+/home/sergi/Documents/semesters/nine/bigdata/labs/labca1/beamer/beamer.tex:92: Extra }, or forgotten $.
+<recently read> \egroup 
+                        
+l.92 \end{frame}
+                
+I've deleted a group-closing symbol because it seems to be
+spurious, as in `$x}$'. But perhaps the } is legitimate and
+you forgot something else, as in `\hbox{$x}'. In such cases
+the way to recover is to insert both the forgotten and the
+deleted material, e.g., by typing `I$}'.
+
+
+LaTeX Warning: Command \' invalid in math mode on input line 92.
+
+
+LaTeX Warning: Command \' invalid in math mode on input line 92.
+
+
+/home/sergi/Documents/semesters/nine/bigdata/labs/labca1/beamer/beamer.tex:92: LaTeX Error: Command \item invalid in math mode.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.92 \end{frame}
+                
+Try typing  <return>  to proceed.
+If that doesn't work, type  X <return>  to quit.
+
+/home/sergi/Documents/semesters/nine/bigdata/labs/labca1/beamer/beamer.tex:92: Missing $ inserted.
+<inserted text> 
+                $
+l.92 \end{frame}
+                
+I've inserted a begin-math/end-math symbol since I think
+you left one out. Proceed, with fingers crossed.
+
+Missing character: There is no í in font cmss8!
+Missing character: There is no í in font cmss8!
+/home/sergi/Documents/semesters/nine/bigdata/labs/labca1/beamer/beamer.tex:92: Missing $ inserted.
+<inserted text> 
+                $
+l.92 \end{frame}
+                
+I've inserted a begin-math/end-math symbol since I think
+you left one out. Proceed, with fingers crossed.
+
+/home/sergi/Documents/semesters/nine/bigdata/labs/labca1/beamer/beamer.tex:92: Extra }, or forgotten $.
+<recently read> \egroup 
+                        
+l.92 \end{frame}
+                
+I've deleted a group-closing symbol because it seems to be
+spurious, as in `$x}$'. But perhaps the } is legitimate and
+you forgot something else, as in `\hbox{$x}'. In such cases
+the way to recover is to insert both the forgotten and the
+deleted material, e.g., by typing `I$}'.
+
+
+LaTeX Warning: Command \' invalid in math mode on input line 92.
+
+
+/home/sergi/Documents/semesters/nine/bigdata/labs/labca1/beamer/beamer.tex:92: LaTeX Error: Command \end{itemize} invalid in math mode.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.92 \end{frame}
+                
+Try typing  <return>  to proceed.
+If that doesn't work, type  X <return>  to quit.
+
+/home/sergi/Documents/semesters/nine/bigdata/labs/labca1/beamer/beamer.tex:92: Missing $ inserted.
+<inserted text> 
+                $
+l.92 \end{frame}
+                
+I've inserted a begin-math/end-math symbol since I think
+you left one out. Proceed, with fingers crossed.
+
+Missing character: There is no í in font cmss8!
+/home/sergi/Documents/semesters/nine/bigdata/labs/labca1/beamer/beamer.tex:92: Missing } inserted.
+<inserted text> 
+                }
+l.92 \end{frame}
+                
+I've inserted something that you may have forgotten.
+(See the <inserted text> above.)
+With luck, this will get me unwedged. But if you
+really didn't forget anything, try typing `2' now; then
+my insertion and my current dilemma will both disappear.
+
+/home/sergi/Documents/semesters/nine/bigdata/labs/labca1/beamer/beamer.tex:92: Missing } inserted.
+<inserted text> 
+                }
+l.92 \end{frame}
+                
+I've inserted something that you may have forgotten.
+(See the <inserted text> above.)
+With luck, this will get me unwedged. But if you
+really didn't forget anything, try typing `2' now; then
+my insertion and my current dilemma will both disappear.
+
+/home/sergi/Documents/semesters/nine/bigdata/labs/labca1/beamer/beamer.tex:92: Missing } inserted.
+<inserted text> 
+                }
+l.92 \end{frame}
+                
+I've inserted something that you may have forgotten.
+(See the <inserted text> above.)
+With luck, this will get me unwedged. But if you
+really didn't forget anything, try typing `2' now; then
+my insertion and my current dilemma will both disappear.
+
+/home/sergi/Documents/semesters/nine/bigdata/labs/labca1/beamer/beamer.tex:92: Missing } inserted.
+<inserted text> 
+                }
+l.92 \end{frame}
+                
+I've inserted something that you may have forgotten.
+(See the <inserted text> above.)
+With luck, this will get me unwedged. But if you
+really didn't forget anything, try typing `2' now; then
+my insertion and my current dilemma will both disappear.
+
+/home/sergi/Documents/semesters/nine/bigdata/labs/labca1/beamer/beamer.tex:92: Missing $ inserted.
+<inserted text> 
+                $
+l.92 \end{frame}
+                
+I've inserted a begin-math/end-math symbol since I think
+you left one out. Proceed, with fingers crossed.
+
+/home/sergi/Documents/semesters/nine/bigdata/labs/labca1/beamer/beamer.tex:92: Extra }, or forgotten $.
+<recently read> \egroup 
+                        
+l.92 \end{frame}
+                
+I've deleted a group-closing symbol because it seems to be
+spurious, as in `$x}$'. But perhaps the } is legitimate and
+you forgot something else, as in `\hbox{$x}'. In such cases
+the way to recover is to insert both the forgotten and the
+deleted material, e.g., by typing `I$}'.
+
+/home/sergi/Documents/semesters/nine/bigdata/labs/labca1/beamer/beamer.tex:92: Missing $ inserted.
+<inserted text> 
+                $
+l.92 \end{frame}
+                
+I've inserted a begin-math/end-math symbol since I think
+you left one out. Proceed, with fingers crossed.
+
+/home/sergi/Documents/semesters/nine/bigdata/labs/labca1/beamer/beamer.tex:92: Extra }, or forgotten $.
+\textdef@ ...th {#1}\let \f@size #2\selectfont #3}
+                                                  }
+l.92 \end{frame}
+                
+I've deleted a group-closing symbol because it seems to be
+spurious, as in `$x}$'. But perhaps the } is legitimate and
+you forgot something else, as in `\hbox{$x}'. In such cases
+the way to recover is to insert both the forgotten and the
+deleted material, e.g., by typing `I$}'.
+
+/home/sergi/Documents/semesters/nine/bigdata/labs/labca1/beamer/beamer.tex:92: Extra }, or forgotten $.
+\textdef@ ...h {#1}\let \f@size #2\selectfont #3}}
+                                                  
+l.92 \end{frame}
+                
+I've deleted a group-closing symbol because it seems to be
+spurious, as in `$x}$'. But perhaps the } is legitimate and
+you forgot something else, as in `\hbox{$x}'. In such cases
+the way to recover is to insert both the forgotten and the
+deleted material, e.g., by typing `I$}'.
+
+/home/sergi/Documents/semesters/nine/bigdata/labs/labca1/beamer/beamer.tex:92: Extra }, or forgotten $.
+\beamer@orig@text@ ... \displaystyle \f@size {#1}}
+                                                  {\textdef@ \textstyle \f@s...
+l.92 \end{frame}
+                
+I've deleted a group-closing symbol because it seems to be
+spurious, as in `$x}$'. But perhaps the } is legitimate and
+you forgot something else, as in `\hbox{$x}'. In such cases
+the way to recover is to insert both the forgotten and the
+deleted material, e.g., by typing `I$}'.
+
+/home/sergi/Documents/semesters/nine/bigdata/labs/labca1/beamer/beamer.tex:92: Missing $ inserted.
+<inserted text> 
+                $
+l.92 \end{frame}
+                
+I've inserted a begin-math/end-math symbol since I think
+you left one out. Proceed, with fingers crossed.
+
+/home/sergi/Documents/semesters/nine/bigdata/labs/labca1/beamer/beamer.tex:92: Extra }, or forgotten $.
+\textdef@ ...th {#1}\let \f@size #2\selectfont #3}
+                                                  }
+l.92 \end{frame}
+                
+I've deleted a group-closing symbol because it seems to be
+spurious, as in `$x}$'. But perhaps the } is legitimate and
+you forgot something else, as in `\hbox{$x}'. In such cases
+the way to recover is to insert both the forgotten and the
+deleted material, e.g., by typing `I$}'.
+
+/home/sergi/Documents/semesters/nine/bigdata/labs/labca1/beamer/beamer.tex:92: Extra }, or forgotten $.
+\textdef@ ...h {#1}\let \f@size #2\selectfont #3}}
+                                                  
+l.92 \end{frame}
+                
+I've deleted a group-closing symbol because it seems to be
+spurious, as in `$x}$'. But perhaps the } is legitimate and
+you forgot something else, as in `\hbox{$x}'. In such cases
+the way to recover is to insert both the forgotten and the
+deleted material, e.g., by typing `I$}'.
+
+/home/sergi/Documents/semesters/nine/bigdata/labs/labca1/beamer/beamer.tex:92: Extra }, or forgotten $.
+\beamer@orig@text@ ...ize {\firstchoice@false #1}}
+                                                  {\textdef@ \textstyle \sf@...
+l.92 \end{frame}
+                
+I've deleted a group-closing symbol because it seems to be
+spurious, as in `$x}$'. But perhaps the } is legitimate and
+you forgot something else, as in `\hbox{$x}'. In such cases
+the way to recover is to insert both the forgotten and the
+deleted material, e.g., by typing `I$}'.
+
+/home/sergi/Documents/semesters/nine/bigdata/labs/labca1/beamer/beamer.tex:92: Missing $ inserted.
+<inserted text> 
+                $
+l.92 \end{frame}
+                
+I've inserted a begin-math/end-math symbol since I think
+you left one out. Proceed, with fingers crossed.
+
+/home/sergi/Documents/semesters/nine/bigdata/labs/labca1/beamer/beamer.tex:92: Extra }, or forgotten $.
+\textdef@ ...th {#1}\let \f@size #2\selectfont #3}
+                                                  }
+l.92 \end{frame}
+                
+I've deleted a group-closing symbol because it seems to be
+spurious, as in `$x}$'. But perhaps the } is legitimate and
+you forgot something else, as in `\hbox{$x}'. In such cases
+the way to recover is to insert both the forgotten and the
+deleted material, e.g., by typing `I$}'.
+
+/home/sergi/Documents/semesters/nine/bigdata/labs/labca1/beamer/beamer.tex:92: Extra }, or forgotten $.
+\textdef@ ...h {#1}\let \f@size #2\selectfont #3}}
+                                                  
+l.92 \end{frame}
+                
+I've deleted a group-closing symbol because it seems to be
+spurious, as in `$x}$'. But perhaps the } is legitimate and
+you forgot something else, as in `\hbox{$x}'. In such cases
+the way to recover is to insert both the forgotten and the
+deleted material, e.g., by typing `I$}'.
+
+/home/sergi/Documents/semesters/nine/bigdata/labs/labca1/beamer/beamer.tex:92: Extra }, or forgotten $.
+\beamer@orig@text@ ...ize {\firstchoice@false #1}}
+                                                  {\textdef@ \textstyle \ssf...
+l.92 \end{frame}
+                
+I've deleted a group-closing symbol because it seems to be
+spurious, as in `$x}$'. But perhaps the } is legitimate and
+you forgot something else, as in `\hbox{$x}'. In such cases
+the way to recover is to insert both the forgotten and the
+deleted material, e.g., by typing `I$}'.
+
+/home/sergi/Documents/semesters/nine/bigdata/labs/labca1/beamer/beamer.tex:92: Missing $ inserted.
+<inserted text> 
+                $
+l.92 \end{frame}
+                
+I've inserted a begin-math/end-math symbol since I think
+you left one out. Proceed, with fingers crossed.
+
+/home/sergi/Documents/semesters/nine/bigdata/labs/labca1/beamer/beamer.tex:92: Extra }, or forgotten $.
+\textdef@ ...th {#1}\let \f@size #2\selectfont #3}
+                                                  }
+l.92 \end{frame}
+                
+I've deleted a group-closing symbol because it seems to be
+spurious, as in `$x}$'. But perhaps the } is legitimate and
+you forgot something else, as in `\hbox{$x}'. In such cases
+the way to recover is to insert both the forgotten and the
+deleted material, e.g., by typing `I$}'.
+
+/home/sergi/Documents/semesters/nine/bigdata/labs/labca1/beamer/beamer.tex:92: Extra }, or forgotten $.
+\textdef@ ...h {#1}\let \f@size #2\selectfont #3}}
+                                                  
+l.92 \end{frame}
+                
+I've deleted a group-closing symbol because it seems to be
+spurious, as in `$x}$'. But perhaps the } is legitimate and
+you forgot something else, as in `\hbox{$x}'. In such cases
+the way to recover is to insert both the forgotten and the
+deleted material, e.g., by typing `I$}'.
+
+/home/sergi/Documents/semesters/nine/bigdata/labs/labca1/beamer/beamer.tex:92: Extra }, or forgotten $.
+\beamer@orig@text@ ...ize {\firstchoice@false #1}}
+                                                  \check@mathfonts }
+l.92 \end{frame}
+                
+I've deleted a group-closing symbol because it seems to be
+spurious, as in `$x}$'. But perhaps the } is legitimate and
+you forgot something else, as in `\hbox{$x}'. In such cases
+the way to recover is to insert both the forgotten and the
+deleted material, e.g., by typing `I$}'.
+
+/home/sergi/Documents/semesters/nine/bigdata/labs/labca1/beamer/beamer.tex:92: Extra }, or forgotten $.
+\beamer@orig@text@ ...false #1}}\check@mathfonts }
+                                                  
+l.92 \end{frame}
+                
+I've deleted a group-closing symbol because it seems to be
+spurious, as in `$x}$'. But perhaps the } is legitimate and
+you forgot something else, as in `\hbox{$x}'. In such cases
+the way to recover is to insert both the forgotten and the
+deleted material, e.g., by typing `I$}'.
+
+/home/sergi/Documents/semesters/nine/bigdata/labs/labca1/beamer/beamer.tex:92: Extra }, or forgotten $.
+\text@ ...t in math text}}\beamer@orig@text@ {#1}}
+                                                  
+l.92 \end{frame}
+                
+I've deleted a group-closing symbol because it seems to be
+spurious, as in `$x}$'. But perhaps the } is legitimate and
+you forgot something else, as in `\hbox{$x}'. In such cases
+the way to recover is to insert both the forgotten and the
+deleted material, e.g., by typing `I$}'.
+
+/home/sergi/Documents/semesters/nine/bigdata/labs/labca1/beamer/beamer.tex:92: Missing $ inserted.
+<inserted text> 
+                $
+l.92 \end{frame}
+                
+I've inserted a begin-math/end-math symbol since I think
+you left one out. Proceed, with fingers crossed.
+
+/home/sergi/Documents/semesters/nine/bigdata/labs/labca1/beamer/beamer.tex:92: Extra }, or forgotten $.
+\textdef@ ...th {#1}\let \f@size #2\selectfont #3}
+                                                  }
+l.92 \end{frame}
+                
+I've deleted a group-closing symbol because it seems to be
+spurious, as in `$x}$'. But perhaps the } is legitimate and
+you forgot something else, as in `\hbox{$x}'. In such cases
+the way to recover is to insert both the forgotten and the
+deleted material, e.g., by typing `I$}'.
+
+/home/sergi/Documents/semesters/nine/bigdata/labs/labca1/beamer/beamer.tex:92: Extra }, or forgotten $.
+\textdef@ ...h {#1}\let \f@size #2\selectfont #3}}
+                                                  
+l.92 \end{frame}
+                
+I've deleted a group-closing symbol because it seems to be
+spurious, as in `$x}$'. But perhaps the } is legitimate and
+you forgot something else, as in `\hbox{$x}'. In such cases
+the way to recover is to insert both the forgotten and the
+deleted material, e.g., by typing `I$}'.
+
+/home/sergi/Documents/semesters/nine/bigdata/labs/labca1/beamer/beamer.tex:92: Extra }, or forgotten $.
+\beamer@orig@text@ ... \displaystyle \f@size {#1}}
+                                                  {\textdef@ \textstyle \f@s...
+l.92 \end{frame}
+                
+I've deleted a group-closing symbol because it seems to be
+spurious, as in `$x}$'. But perhaps the } is legitimate and
+you forgot something else, as in `\hbox{$x}'. In such cases
+the way to recover is to insert both the forgotten and the
+deleted material, e.g., by typing `I$}'.
+
+/home/sergi/Documents/semesters/nine/bigdata/labs/labca1/beamer/beamer.tex:92: Missing $ inserted.
+<inserted text> 
+                $
+l.92 \end{frame}
+                
+I've inserted a begin-math/end-math symbol since I think
+you left one out. Proceed, with fingers crossed.
+
+/home/sergi/Documents/semesters/nine/bigdata/labs/labca1/beamer/beamer.tex:92: Extra }, or forgotten $.
+\textdef@ ...th {#1}\let \f@size #2\selectfont #3}
+                                                  }
+l.92 \end{frame}
+                
+I've deleted a group-closing symbol because it seems to be
+spurious, as in `$x}$'. But perhaps the } is legitimate and
+you forgot something else, as in `\hbox{$x}'. In such cases
+the way to recover is to insert both the forgotten and the
+deleted material, e.g., by typing `I$}'.
+
+/home/sergi/Documents/semesters/nine/bigdata/labs/labca1/beamer/beamer.tex:92: Extra }, or forgotten $.
+\textdef@ ...h {#1}\let \f@size #2\selectfont #3}}
+                                                  
+l.92 \end{frame}
+                
+I've deleted a group-closing symbol because it seems to be
+spurious, as in `$x}$'. But perhaps the } is legitimate and
+you forgot something else, as in `\hbox{$x}'. In such cases
+the way to recover is to insert both the forgotten and the
+deleted material, e.g., by typing `I$}'.
+
+/home/sergi/Documents/semesters/nine/bigdata/labs/labca1/beamer/beamer.tex:92: Extra }, or forgotten $.
+\beamer@orig@text@ ...ize {\firstchoice@false #1}}
+                                                  {\textdef@ \textstyle \sf@...
+l.92 \end{frame}
+                
+I've deleted a group-closing symbol because it seems to be
+spurious, as in `$x}$'. But perhaps the } is legitimate and
+you forgot something else, as in `\hbox{$x}'. In such cases
+the way to recover is to insert both the forgotten and the
+deleted material, e.g., by typing `I$}'.
+
+/home/sergi/Documents/semesters/nine/bigdata/labs/labca1/beamer/beamer.tex:92: Missing $ inserted.
+<inserted text> 
+                $
+l.92 \end{frame}
+                
+I've inserted a begin-math/end-math symbol since I think
+you left one out. Proceed, with fingers crossed.
+
+/home/sergi/Documents/semesters/nine/bigdata/labs/labca1/beamer/beamer.tex:92: Extra }, or forgotten $.
+\textdef@ ...th {#1}\let \f@size #2\selectfont #3}
+                                                  }
+l.92 \end{frame}
+                
+I've deleted a group-closing symbol because it seems to be
+spurious, as in `$x}$'. But perhaps the } is legitimate and
+you forgot something else, as in `\hbox{$x}'. In such cases
+the way to recover is to insert both the forgotten and the
+deleted material, e.g., by typing `I$}'.
+
+/home/sergi/Documents/semesters/nine/bigdata/labs/labca1/beamer/beamer.tex:92: Extra }, or forgotten $.
+\textdef@ ...h {#1}\let \f@size #2\selectfont #3}}
+                                                  
+l.92 \end{frame}
+                
+I've deleted a group-closing symbol because it seems to be
+spurious, as in `$x}$'. But perhaps the } is legitimate and
+you forgot something else, as in `\hbox{$x}'. In such cases
+the way to recover is to insert both the forgotten and the
+deleted material, e.g., by typing `I$}'.
+
+/home/sergi/Documents/semesters/nine/bigdata/labs/labca1/beamer/beamer.tex:92: Extra }, or forgotten $.
+\beamer@orig@text@ ...ize {\firstchoice@false #1}}
+                                                  {\textdef@ \textstyle \ssf...
+l.92 \end{frame}
+                
+I've deleted a group-closing symbol because it seems to be
+spurious, as in `$x}$'. But perhaps the } is legitimate and
+you forgot something else, as in `\hbox{$x}'. In such cases
+the way to recover is to insert both the forgotten and the
+deleted material, e.g., by typing `I$}'.
+
+/home/sergi/Documents/semesters/nine/bigdata/labs/labca1/beamer/beamer.tex:92: Missing $ inserted.
+<inserted text> 
+                $
+l.92 \end{frame}
+                
+I've inserted a begin-math/end-math symbol since I think
+you left one out. Proceed, with fingers crossed.
+
+/home/sergi/Documents/semesters/nine/bigdata/labs/labca1/beamer/beamer.tex:92: Extra }, or forgotten $.
+\textdef@ ...th {#1}\let \f@size #2\selectfont #3}
+                                                  }
+l.92 \end{frame}
+                
+I've deleted a group-closing symbol because it seems to be
+spurious, as in `$x}$'. But perhaps the } is legitimate and
+you forgot something else, as in `\hbox{$x}'. In such cases
+the way to recover is to insert both the forgotten and the
+deleted material, e.g., by typing `I$}'.
+
+/home/sergi/Documents/semesters/nine/bigdata/labs/labca1/beamer/beamer.tex:92: Extra }, or forgotten $.
+\textdef@ ...h {#1}\let \f@size #2\selectfont #3}}
+                                                  
+l.92 \end{frame}
+                
+I've deleted a group-closing symbol because it seems to be
+spurious, as in `$x}$'. But perhaps the } is legitimate and
+you forgot something else, as in `\hbox{$x}'. In such cases
+the way to recover is to insert both the forgotten and the
+deleted material, e.g., by typing `I$}'.
+
+/home/sergi/Documents/semesters/nine/bigdata/labs/labca1/beamer/beamer.tex:92: Extra }, or forgotten $.
+\beamer@orig@text@ ...ize {\firstchoice@false #1}}
+                                                  \check@mathfonts }
+l.92 \end{frame}
+                
+I've deleted a group-closing symbol because it seems to be
+spurious, as in `$x}$'. But perhaps the } is legitimate and
+you forgot something else, as in `\hbox{$x}'. In such cases
+the way to recover is to insert both the forgotten and the
+deleted material, e.g., by typing `I$}'.
+
+/home/sergi/Documents/semesters/nine/bigdata/labs/labca1/beamer/beamer.tex:92: Extra }, or forgotten $.
+\beamer@orig@text@ ...false #1}}\check@mathfonts }
+                                                  
+l.92 \end{frame}
+                
+I've deleted a group-closing symbol because it seems to be
+spurious, as in `$x}$'. But perhaps the } is legitimate and
+you forgot something else, as in `\hbox{$x}'. In such cases
+the way to recover is to insert both the forgotten and the
+deleted material, e.g., by typing `I$}'.
+
+/home/sergi/Documents/semesters/nine/bigdata/labs/labca1/beamer/beamer.tex:92: Extra }, or forgotten $.
+\text@ ...t in math text}}\beamer@orig@text@ {#1}}
+                                                  
+l.92 \end{frame}
+                
+I've deleted a group-closing symbol because it seems to be
+spurious, as in `$x}$'. But perhaps the } is legitimate and
+you forgot something else, as in `\hbox{$x}'. In such cases
+the way to recover is to insert both the forgotten and the
+deleted material, e.g., by typing `I$}'.
+
+/home/sergi/Documents/semesters/nine/bigdata/labs/labca1/beamer/beamer.tex:92: Missing $ inserted.
+<inserted text> 
+                $
+l.92 \end{frame}
+                
+I've inserted a begin-math/end-math symbol since I think
+you left one out. Proceed, with fingers crossed.
+
+/home/sergi/Documents/semesters/nine/bigdata/labs/labca1/beamer/beamer.tex:92: Missing } inserted.
+<inserted text> 
+                }
+l.92 \end{frame}
+                
+I've inserted something that you may have forgotten.
+(See the <inserted text> above.)
+With luck, this will get me unwedged. But if you
+really didn't forget anything, try typing `2' now; then
+my insertion and my current dilemma will both disappear.
+
+/home/sergi/Documents/semesters/nine/bigdata/labs/labca1/beamer/beamer.tex:92: Missing } inserted.
+<inserted text> 
+                }
+l.92 \end{frame}
+                
+I've inserted something that you may have forgotten.
+(See the <inserted text> above.)
+With luck, this will get me unwedged. But if you
+really didn't forget anything, try typing `2' now; then
+my insertion and my current dilemma will both disappear.
+
+/home/sergi/Documents/semesters/nine/bigdata/labs/labca1/beamer/beamer.tex:92: Missing $ inserted.
+<inserted text> 
+                $
+l.92 \end{frame}
+                
+I've inserted a begin-math/end-math symbol since I think
+you left one out. Proceed, with fingers crossed.
+
+/home/sergi/Documents/semesters/nine/bigdata/labs/labca1/beamer/beamer.tex:92: Missing } inserted.
+<inserted text> 
+                }
+l.92 \end{frame}
+                
+I've inserted something that you may have forgotten.
+(See the <inserted text> above.)
+With luck, this will get me unwedged. But if you
+really didn't forget anything, try typing `2' now; then
+my insertion and my current dilemma will both disappear.
+
+/home/sergi/Documents/semesters/nine/bigdata/labs/labca1/beamer/beamer.tex:92: Missing } inserted.
+<inserted text> 
+                }
+l.92 \end{frame}
+                
+I've inserted something that you may have forgotten.
+(See the <inserted text> above.)
+With luck, this will get me unwedged. But if you
+really didn't forget anything, try typing `2' now; then
+my insertion and my current dilemma will both disappear.
+
+/home/sergi/Documents/semesters/nine/bigdata/labs/labca1/beamer/beamer.tex:92: Missing } inserted.
+<inserted text> 
+                }
+l.92 \end{frame}
+                
+I've inserted something that you may have forgotten.
+(See the <inserted text> above.)
+With luck, this will get me unwedged. But if you
+really didn't forget anything, try typing `2' now; then
+my insertion and my current dilemma will both disappear.
+
+/home/sergi/Documents/semesters/nine/bigdata/labs/labca1/beamer/beamer.tex:92: Missing $ inserted.
+<inserted text> 
+                $
+l.92 \end{frame}
+                
+I've inserted a begin-math/end-math symbol since I think
+you left one out. Proceed, with fingers crossed.
+
+/home/sergi/Documents/semesters/nine/bigdata/labs/labca1/beamer/beamer.tex:92: Missing } inserted.
+<inserted text> 
+                }
+l.92 \end{frame}
+                
+I've inserted something that you may have forgotten.
+(See the <inserted text> above.)
+With luck, this will get me unwedged. But if you
+really didn't forget anything, try typing `2' now; then
+my insertion and my current dilemma will both disappear.
+
+/home/sergi/Documents/semesters/nine/bigdata/labs/labca1/beamer/beamer.tex:92: Missing } inserted.
+<inserted text> 
+                }
+l.92 \end{frame}
+                
+I've inserted something that you may have forgotten.
+(See the <inserted text> above.)
+With luck, this will get me unwedged. But if you
+really didn't forget anything, try typing `2' now; then
+my insertion and my current dilemma will both disappear.
+
+/home/sergi/Documents/semesters/nine/bigdata/labs/labca1/beamer/beamer.tex:92: Missing } inserted.
+<inserted text> 
+                }
+l.92 \end{frame}
+                
+I've inserted something that you may have forgotten.
+(See the <inserted text> above.)
+With luck, this will get me unwedged. But if you
+really didn't forget anything, try typing `2' now; then
+my insertion and my current dilemma will both disappear.
+
+/home/sergi/Documents/semesters/nine/bigdata/labs/labca1/beamer/beamer.tex:92: Missing $ inserted.
+<inserted text> 
+                $
+l.92 \end{frame}
+                
+I've inserted a begin-math/end-math symbol since I think
+you left one out. Proceed, with fingers crossed.
+
+/home/sergi/Documents/semesters/nine/bigdata/labs/labca1/beamer/beamer.tex:92: Missing } inserted.
+<inserted text> 
+                }
+l.92 \end{frame}
+                
+I've inserted something that you may have forgotten.
+(See the <inserted text> above.)
+With luck, this will get me unwedged. But if you
+really didn't forget anything, try typing `2' now; then
+my insertion and my current dilemma will both disappear.
+
+/home/sergi/Documents/semesters/nine/bigdata/labs/labca1/beamer/beamer.tex:92: Missing } inserted.
+<inserted text> 
+                }
+l.92 \end{frame}
+                
+I've inserted something that you may have forgotten.
+(See the <inserted text> above.)
+With luck, this will get me unwedged. But if you
+really didn't forget anything, try typing `2' now; then
+my insertion and my current dilemma will both disappear.
+
+/home/sergi/Documents/semesters/nine/bigdata/labs/labca1/beamer/beamer.tex:92: Missing } inserted.
+<inserted text> 
+                }
+l.92 \end{frame}
+                
+I've inserted something that you may have forgotten.
+(See the <inserted text> above.)
+With luck, this will get me unwedged. But if you
+really didn't forget anything, try typing `2' now; then
+my insertion and my current dilemma will both disappear.
+
+/home/sergi/Documents/semesters/nine/bigdata/labs/labca1/beamer/beamer.tex:92: Missing $ inserted.
+<inserted text> 
+                $
+l.92 \end{frame}
+                
+I've inserted a begin-math/end-math symbol since I think
+you left one out. Proceed, with fingers crossed.
+
+/home/sergi/Documents/semesters/nine/bigdata/labs/labca1/beamer/beamer.tex:92: Missing } inserted.
+<inserted text> 
+                }
+l.92 \end{frame}
+                
+I've inserted something that you may have forgotten.
+(See the <inserted text> above.)
+With luck, this will get me unwedged. But if you
+really didn't forget anything, try typing `2' now; then
+my insertion and my current dilemma will both disappear.
+
+/home/sergi/Documents/semesters/nine/bigdata/labs/labca1/beamer/beamer.tex:92: Missing { inserted.
+<to be read again> 
+                   $
+l.92 \end{frame}
+                
+A left brace was mandatory here, so I've put one in.
+You might want to delete and/or insert some corrections
+so that I will find a matching right brace soon.
+(If you're confused by all this, try typing `I}' now.)
+
+/home/sergi/Documents/semesters/nine/bigdata/labs/labca1/beamer/beamer.tex:92: Missing } inserted.
+<inserted text> 
+                }
+l.92 \end{frame}
+                
+I've inserted something that you may have forgotten.
+(See the <inserted text> above.)
+With luck, this will get me unwedged. But if you
+really didn't forget anything, try typing `2' now; then
+my insertion and my current dilemma will both disappear.
+
+/home/sergi/Documents/semesters/nine/bigdata/labs/labca1/beamer/beamer.tex:92: Missing { inserted.
+<to be read again> 
+                   $
+l.92 \end{frame}
+                
+A left brace was mandatory here, so I've put one in.
+You might want to delete and/or insert some corrections
+so that I will find a matching right brace soon.
+(If you're confused by all this, try typing `I}' now.)
+
+/home/sergi/Documents/semesters/nine/bigdata/labs/labca1/beamer/beamer.tex:92: Missing } inserted.
+<inserted text> 
+                }
+l.92 \end{frame}
+                
+I've inserted something that you may have forgotten.
+(See the <inserted text> above.)
+With luck, this will get me unwedged. But if you
+really didn't forget anything, try typing `2' now; then
+my insertion and my current dilemma will both disappear.
+
+/home/sergi/Documents/semesters/nine/bigdata/labs/labca1/beamer/beamer.tex:92: Missing { inserted.
+<to be read again> 
+                   $
+l.92 \end{frame}
+                
+A left brace was mandatory here, so I've put one in.
+You might want to delete and/or insert some corrections
+so that I will find a matching right brace soon.
+(If you're confused by all this, try typing `I}' now.)
+
+/home/sergi/Documents/semesters/nine/bigdata/labs/labca1/beamer/beamer.tex:92: Missing } inserted.
+<inserted text> 
+                }
+l.92 \end{frame}
+                
+I've inserted something that you may have forgotten.
+(See the <inserted text> above.)
+With luck, this will get me unwedged. But if you
+really didn't forget anything, try typing `2' now; then
+my insertion and my current dilemma will both disappear.
+
+/home/sergi/Documents/semesters/nine/bigdata/labs/labca1/beamer/beamer.tex:92: Missing } inserted.
+<inserted text> 
+                }
+l.92 \end{frame}
+                
+I've inserted something that you may have forgotten.
+(See the <inserted text> above.)
+With luck, this will get me unwedged. But if you
+really didn't forget anything, try typing `2' now; then
+my insertion and my current dilemma will both disappear.
+
+/home/sergi/Documents/semesters/nine/bigdata/labs/labca1/beamer/beamer.tex:92: Missing } inserted.
+<inserted text> 
+                }
+l.92 \end{frame}
+                
+I've inserted something that you may have forgotten.
+(See the <inserted text> above.)
+With luck, this will get me unwedged. But if you
+really didn't forget anything, try typing `2' now; then
+my insertion and my current dilemma will both disappear.
+
+/home/sergi/Documents/semesters/nine/bigdata/labs/labca1/beamer/beamer.tex:92: Missing } inserted.
+<inserted text> 
+                }
+l.92 \end{frame}
+                
+I've inserted something that you may have forgotten.
+(See the <inserted text> above.)
+With luck, this will get me unwedged. But if you
+really didn't forget anything, try typing `2' now; then
+my insertion and my current dilemma will both disappear.
+
+/home/sergi/Documents/semesters/nine/bigdata/labs/labca1/beamer/beamer.tex:92: Missing } inserted.
+<inserted text> 
+                }
+l.92 \end{frame}
+                
+I've inserted something that you may have forgotten.
+(See the <inserted text> above.)
+With luck, this will get me unwedged. But if you
+really didn't forget anything, try typing `2' now; then
+my insertion and my current dilemma will both disappear.
+
+/home/sergi/Documents/semesters/nine/bigdata/labs/labca1/beamer/beamer.tex:92: Missing $ inserted.
+<inserted text> 
+                $
+l.92 \end{frame}
+                
+I've inserted a begin-math/end-math symbol since I think
+you left one out. Proceed, with fingers crossed.
+
+/home/sergi/Documents/semesters/nine/bigdata/labs/labca1/beamer/beamer.tex:92: Missing } inserted.
+<inserted text> 
+                }
+l.92 \end{frame}
+                
+I've inserted something that you may have forgotten.
+(See the <inserted text> above.)
+With luck, this will get me unwedged. But if you
+really didn't forget anything, try typing `2' now; then
+my insertion and my current dilemma will both disappear.
+
+/home/sergi/Documents/semesters/nine/bigdata/labs/labca1/beamer/beamer.tex:92: Missing } inserted.
+<inserted text> 
+                }
+l.92 \end{frame}
+                
+I've inserted something that you may have forgotten.
+(See the <inserted text> above.)
+With luck, this will get me unwedged. But if you
+really didn't forget anything, try typing `2' now; then
+my insertion and my current dilemma will both disappear.
+
+/home/sergi/Documents/semesters/nine/bigdata/labs/labca1/beamer/beamer.tex:92: Missing } inserted.
+<inserted text> 
+                }
+l.92 \end{frame}
+                
+I've inserted something that you may have forgotten.
+(See the <inserted text> above.)
+With luck, this will get me unwedged. But if you
+really didn't forget anything, try typing `2' now; then
+my insertion and my current dilemma will both disappear.
+
+/home/sergi/Documents/semesters/nine/bigdata/labs/labca1/beamer/beamer.tex:92: Missing $ inserted.
+<inserted text> 
+                $
+l.92 \end{frame}
+                
+I've inserted a begin-math/end-math symbol since I think
+you left one out. Proceed, with fingers crossed.
+
+/home/sergi/Documents/semesters/nine/bigdata/labs/labca1/beamer/beamer.tex:92: Missing } inserted.
+<inserted text> 
+                }
+l.92 \end{frame}
+                
+I've inserted something that you may have forgotten.
+(See the <inserted text> above.)
+With luck, this will get me unwedged. But if you
+really didn't forget anything, try typing `2' now; then
+my insertion and my current dilemma will both disappear.
+
+/home/sergi/Documents/semesters/nine/bigdata/labs/labca1/beamer/beamer.tex:92: Missing } inserted.
+<inserted text> 
+                }
+l.92 \end{frame}
+                
+I've inserted something that you may have forgotten.
+(See the <inserted text> above.)
+With luck, this will get me unwedged. But if you
+really didn't forget anything, try typing `2' now; then
+my insertion and my current dilemma will both disappear.
+
+/home/sergi/Documents/semesters/nine/bigdata/labs/labca1/beamer/beamer.tex:92: Missing } inserted.
+<inserted text> 
+                }
+l.92 \end{frame}
+                
+I've inserted something that you may have forgotten.
+(See the <inserted text> above.)
+With luck, this will get me unwedged. But if you
+really didn't forget anything, try typing `2' now; then
+my insertion and my current dilemma will both disappear.
+
+/home/sergi/Documents/semesters/nine/bigdata/labs/labca1/beamer/beamer.tex:92: Missing $ inserted.
+<inserted text> 
+                $
+l.92 \end{frame}
+                
+I've inserted a begin-math/end-math symbol since I think
+you left one out. Proceed, with fingers crossed.
+
+/home/sergi/Documents/semesters/nine/bigdata/labs/labca1/beamer/beamer.tex:92: Missing } inserted.
+<inserted text> 
+                }
+l.92 \end{frame}
+                
+I've inserted something that you may have forgotten.
+(See the <inserted text> above.)
+With luck, this will get me unwedged. But if you
+really didn't forget anything, try typing `2' now; then
+my insertion and my current dilemma will both disappear.
+
+/home/sergi/Documents/semesters/nine/bigdata/labs/labca1/beamer/beamer.tex:92: Missing } inserted.
+<inserted text> 
+                }
+l.92 \end{frame}
+                
+I've inserted something that you may have forgotten.
+(See the <inserted text> above.)
+With luck, this will get me unwedged. But if you
+really didn't forget anything, try typing `2' now; then
+my insertion and my current dilemma will both disappear.
+
+/home/sergi/Documents/semesters/nine/bigdata/labs/labca1/beamer/beamer.tex:92: Missing } inserted.
+<inserted text> 
+                }
+l.92 \end{frame}
+                
+I've inserted something that you may have forgotten.
+(See the <inserted text> above.)
+With luck, this will get me unwedged. But if you
+really didn't forget anything, try typing `2' now; then
+my insertion and my current dilemma will both disappear.
+
+/home/sergi/Documents/semesters/nine/bigdata/labs/labca1/beamer/beamer.tex:92: Missing $ inserted.
+<inserted text> 
+                $
+l.92 \end{frame}
+                
+I've inserted a begin-math/end-math symbol since I think
+you left one out. Proceed, with fingers crossed.
+
+/home/sergi/Documents/semesters/nine/bigdata/labs/labca1/beamer/beamer.tex:92: Missing } inserted.
+<inserted text> 
+                }
+l.92 \end{frame}
+                
+I've inserted something that you may have forgotten.
+(See the <inserted text> above.)
+With luck, this will get me unwedged. But if you
+really didn't forget anything, try typing `2' now; then
+my insertion and my current dilemma will both disappear.
+
+/home/sergi/Documents/semesters/nine/bigdata/labs/labca1/beamer/beamer.tex:92: Missing { inserted.
+<to be read again> 
+                   $
+l.92 \end{frame}
+                
+A left brace was mandatory here, so I've put one in.
+You might want to delete and/or insert some corrections
+so that I will find a matching right brace soon.
+(If you're confused by all this, try typing `I}' now.)
+
+/home/sergi/Documents/semesters/nine/bigdata/labs/labca1/beamer/beamer.tex:92: Missing } inserted.
+<inserted text> 
+                }
+l.92 \end{frame}
+                
+I've inserted something that you may have forgotten.
+(See the <inserted text> above.)
+With luck, this will get me unwedged. But if you
+really didn't forget anything, try typing `2' now; then
+my insertion and my current dilemma will both disappear.
+
+/home/sergi/Documents/semesters/nine/bigdata/labs/labca1/beamer/beamer.tex:92: Missing { inserted.
+<to be read again> 
+                   $
+l.92 \end{frame}
+                
+A left brace was mandatory here, so I've put one in.
+You might want to delete and/or insert some corrections
+so that I will find a matching right brace soon.
+(If you're confused by all this, try typing `I}' now.)
+
+/home/sergi/Documents/semesters/nine/bigdata/labs/labca1/beamer/beamer.tex:92: Missing } inserted.
+<inserted text> 
+                }
+l.92 \end{frame}
+                
+I've inserted something that you may have forgotten.
+(See the <inserted text> above.)
+With luck, this will get me unwedged. But if you
+really didn't forget anything, try typing `2' now; then
+my insertion and my current dilemma will both disappear.
+
+/home/sergi/Documents/semesters/nine/bigdata/labs/labca1/beamer/beamer.tex:92: Missing { inserted.
+<to be read again> 
+                   $
+l.92 \end{frame}
+                
+A left brace was mandatory here, so I've put one in.
+You might want to delete and/or insert some corrections
+so that I will find a matching right brace soon.
+(If you're confused by all this, try typing `I}' now.)
+
+/home/sergi/Documents/semesters/nine/bigdata/labs/labca1/beamer/beamer.tex:92: Missing } inserted.
+<inserted text> 
+                }
+l.92 \end{frame}
+                
+I've inserted something that you may have forgotten.
+(See the <inserted text> above.)
+With luck, this will get me unwedged. But if you
+really didn't forget anything, try typing `2' now; then
+my insertion and my current dilemma will both disappear.
+
+/home/sergi/Documents/semesters/nine/bigdata/labs/labca1/beamer/beamer.tex:92: Missing } inserted.
+<inserted text> 
+                }
+l.92 \end{frame}
+                
+I've inserted something that you may have forgotten.
+(See the <inserted text> above.)
+With luck, this will get me unwedged. But if you
+really didn't forget anything, try typing `2' now; then
+my insertion and my current dilemma will both disappear.
+
+/home/sergi/Documents/semesters/nine/bigdata/labs/labca1/beamer/beamer.tex:92: Missing } inserted.
+<inserted text> 
+                }
+l.92 \end{frame}
+                
+I've inserted something that you may have forgotten.
+(See the <inserted text> above.)
+With luck, this will get me unwedged. But if you
+really didn't forget anything, try typing `2' now; then
+my insertion and my current dilemma will both disappear.
+
+/home/sergi/Documents/semesters/nine/bigdata/labs/labca1/beamer/beamer.tex:92: Missing $ inserted.
+<inserted text> 
+                $
+l.92 \end{frame}
+                
+I've inserted a begin-math/end-math symbol since I think
+you left one out. Proceed, with fingers crossed.
+
+/home/sergi/Documents/semesters/nine/bigdata/labs/labca1/beamer/beamer.tex:92: Extra }, or forgotten $.
+<recently read> \egroup 
+                        
+l.92 \end{frame}
+                
+I've deleted a group-closing symbol because it seems to be
+spurious, as in `$x}$'. But perhaps the } is legitimate and
+you forgot something else, as in `\hbox{$x}'. In such cases
+the way to recover is to insert both the forgotten and the
+deleted material, e.g., by typing `I$}'.
+
+/home/sergi/Documents/semesters/nine/bigdata/labs/labca1/beamer/beamer.tex:92: Missing $ inserted.
+<inserted text> 
+                $
+l.92 \end{frame}
+                
+I've inserted a begin-math/end-math symbol since I think
+you left one out. Proceed, with fingers crossed.
+
+/home/sergi/Documents/semesters/nine/bigdata/labs/labca1/beamer/beamer.tex:92: Extra }, or forgotten $.
+\textdef@ ...th {#1}\let \f@size #2\selectfont #3}
+                                                  }
+l.92 \end{frame}
+                
+I've deleted a group-closing symbol because it seems to be
+spurious, as in `$x}$'. But perhaps the } is legitimate and
+you forgot something else, as in `\hbox{$x}'. In such cases
+the way to recover is to insert both the forgotten and the
+deleted material, e.g., by typing `I$}'.
+
+/home/sergi/Documents/semesters/nine/bigdata/labs/labca1/beamer/beamer.tex:92: Extra }, or forgotten $.
+\textdef@ ...h {#1}\let \f@size #2\selectfont #3}}
+                                                  
+l.92 \end{frame}
+                
+I've deleted a group-closing symbol because it seems to be
+spurious, as in `$x}$'. But perhaps the } is legitimate and
+you forgot something else, as in `\hbox{$x}'. In such cases
+the way to recover is to insert both the forgotten and the
+deleted material, e.g., by typing `I$}'.
+
+/home/sergi/Documents/semesters/nine/bigdata/labs/labca1/beamer/beamer.tex:92: Extra }, or forgotten $.
+\beamer@orig@text@ ... \displaystyle \f@size {#1}}
+                                                  {\textdef@ \textstyle \f@s...
+l.92 \end{frame}
+                
+I've deleted a group-closing symbol because it seems to be
+spurious, as in `$x}$'. But perhaps the } is legitimate and
+you forgot something else, as in `\hbox{$x}'. In such cases
+the way to recover is to insert both the forgotten and the
+deleted material, e.g., by typing `I$}'.
+
+/home/sergi/Documents/semesters/nine/bigdata/labs/labca1/beamer/beamer.tex:92: Missing $ inserted.
+<inserted text> 
+                $
+l.92 \end{frame}
+                
+I've inserted a begin-math/end-math symbol since I think
+you left one out. Proceed, with fingers crossed.
+
+/home/sergi/Documents/semesters/nine/bigdata/labs/labca1/beamer/beamer.tex:92: Extra }, or forgotten $.
+\textdef@ ...th {#1}\let \f@size #2\selectfont #3}
+                                                  }
+l.92 \end{frame}
+                
+I've deleted a group-closing symbol because it seems to be
+spurious, as in `$x}$'. But perhaps the } is legitimate and
+you forgot something else, as in `\hbox{$x}'. In such cases
+the way to recover is to insert both the forgotten and the
+deleted material, e.g., by typing `I$}'.
+
+/home/sergi/Documents/semesters/nine/bigdata/labs/labca1/beamer/beamer.tex:92: Extra }, or forgotten $.
+\textdef@ ...h {#1}\let \f@size #2\selectfont #3}}
+                                                  
+l.92 \end{frame}
+                
+I've deleted a group-closing symbol because it seems to be
+spurious, as in `$x}$'. But perhaps the } is legitimate and
+you forgot something else, as in `\hbox{$x}'. In such cases
+the way to recover is to insert both the forgotten and the
+deleted material, e.g., by typing `I$}'.
+
+/home/sergi/Documents/semesters/nine/bigdata/labs/labca1/beamer/beamer.tex:92: Extra }, or forgotten $.
+\beamer@orig@text@ ...ize {\firstchoice@false #1}}
+                                                  {\textdef@ \textstyle \sf@...
+l.92 \end{frame}
+                
+I've deleted a group-closing symbol because it seems to be
+spurious, as in `$x}$'. But perhaps the } is legitimate and
+you forgot something else, as in `\hbox{$x}'. In such cases
+the way to recover is to insert both the forgotten and the
+deleted material, e.g., by typing `I$}'.
+
+/home/sergi/Documents/semesters/nine/bigdata/labs/labca1/beamer/beamer.tex:92: Missing $ inserted.
+<inserted text> 
+                $
+l.92 \end{frame}
+                
+I've inserted a begin-math/end-math symbol since I think
+you left one out. Proceed, with fingers crossed.
+
+/home/sergi/Documents/semesters/nine/bigdata/labs/labca1/beamer/beamer.tex:92: Extra }, or forgotten $.
+\textdef@ ...th {#1}\let \f@size #2\selectfont #3}
+                                                  }
+l.92 \end{frame}
+                
+I've deleted a group-closing symbol because it seems to be
+spurious, as in `$x}$'. But perhaps the } is legitimate and
+you forgot something else, as in `\hbox{$x}'. In such cases
+the way to recover is to insert both the forgotten and the
+deleted material, e.g., by typing `I$}'.
+
+/home/sergi/Documents/semesters/nine/bigdata/labs/labca1/beamer/beamer.tex:92: Extra }, or forgotten $.
+\textdef@ ...h {#1}\let \f@size #2\selectfont #3}}
+                                                  
+l.92 \end{frame}
+                
+I've deleted a group-closing symbol because it seems to be
+spurious, as in `$x}$'. But perhaps the } is legitimate and
+you forgot something else, as in `\hbox{$x}'. In such cases
+the way to recover is to insert both the forgotten and the
+deleted material, e.g., by typing `I$}'.
+
+/home/sergi/Documents/semesters/nine/bigdata/labs/labca1/beamer/beamer.tex:92: Extra }, or forgotten $.
+\beamer@orig@text@ ...ize {\firstchoice@false #1}}
+                                                  {\textdef@ \textstyle \ssf...
+l.92 \end{frame}
+                
+I've deleted a group-closing symbol because it seems to be
+spurious, as in `$x}$'. But perhaps the } is legitimate and
+you forgot something else, as in `\hbox{$x}'. In such cases
+the way to recover is to insert both the forgotten and the
+deleted material, e.g., by typing `I$}'.
+
+/home/sergi/Documents/semesters/nine/bigdata/labs/labca1/beamer/beamer.tex:92: Missing $ inserted.
+<inserted text> 
+                $
+l.92 \end{frame}
+                
+I've inserted a begin-math/end-math symbol since I think
+you left one out. Proceed, with fingers crossed.
+
+/home/sergi/Documents/semesters/nine/bigdata/labs/labca1/beamer/beamer.tex:92: Extra }, or forgotten $.
+\textdef@ ...th {#1}\let \f@size #2\selectfont #3}
+                                                  }
+l.92 \end{frame}
+                
+I've deleted a group-closing symbol because it seems to be
+spurious, as in `$x}$'. But perhaps the } is legitimate and
+you forgot something else, as in `\hbox{$x}'. In such cases
+the way to recover is to insert both the forgotten and the
+deleted material, e.g., by typing `I$}'.
+
+/home/sergi/Documents/semesters/nine/bigdata/labs/labca1/beamer/beamer.tex:92: Extra }, or forgotten $.
+\textdef@ ...h {#1}\let \f@size #2\selectfont #3}}
+                                                  
+l.92 \end{frame}
+                
+I've deleted a group-closing symbol because it seems to be
+spurious, as in `$x}$'. But perhaps the } is legitimate and
+you forgot something else, as in `\hbox{$x}'. In such cases
+the way to recover is to insert both the forgotten and the
+deleted material, e.g., by typing `I$}'.
+
+/home/sergi/Documents/semesters/nine/bigdata/labs/labca1/beamer/beamer.tex:92: Extra }, or forgotten $.
+\beamer@orig@text@ ...ize {\firstchoice@false #1}}
+                                                  \check@mathfonts }
+l.92 \end{frame}
+                
+I've deleted a group-closing symbol because it seems to be
+spurious, as in `$x}$'. But perhaps the } is legitimate and
+you forgot something else, as in `\hbox{$x}'. In such cases
+the way to recover is to insert both the forgotten and the
+deleted material, e.g., by typing `I$}'.
+
+/home/sergi/Documents/semesters/nine/bigdata/labs/labca1/beamer/beamer.tex:92: Extra }, or forgotten $.
+\beamer@orig@text@ ...false #1}}\check@mathfonts }
+                                                  
+l.92 \end{frame}
+                
+I've deleted a group-closing symbol because it seems to be
+spurious, as in `$x}$'. But perhaps the } is legitimate and
+you forgot something else, as in `\hbox{$x}'. In such cases
+the way to recover is to insert both the forgotten and the
+deleted material, e.g., by typing `I$}'.
+
+/home/sergi/Documents/semesters/nine/bigdata/labs/labca1/beamer/beamer.tex:92: Extra }, or forgotten $.
+\text@ ...t in math text}}\beamer@orig@text@ {#1}}
+                                                  
+l.92 \end{frame}
+                
+I've deleted a group-closing symbol because it seems to be
+spurious, as in `$x}$'. But perhaps the } is legitimate and
+you forgot something else, as in `\hbox{$x}'. In such cases
+the way to recover is to insert both the forgotten and the
+deleted material, e.g., by typing `I$}'.
+
+/home/sergi/Documents/semesters/nine/bigdata/labs/labca1/beamer/beamer.tex:92: Missing $ inserted.
+<inserted text> 
+                $
+l.92 \end{frame}
+                
+I've inserted a begin-math/end-math symbol since I think
+you left one out. Proceed, with fingers crossed.
+
+/home/sergi/Documents/semesters/nine/bigdata/labs/labca1/beamer/beamer.tex:92: Extra }, or forgotten $.
+\textdef@ ...th {#1}\let \f@size #2\selectfont #3}
+                                                  }
+l.92 \end{frame}
+                
+I've deleted a group-closing symbol because it seems to be
+spurious, as in `$x}$'. But perhaps the } is legitimate and
+you forgot something else, as in `\hbox{$x}'. In such cases
+the way to recover is to insert both the forgotten and the
+deleted material, e.g., by typing `I$}'.
+
+/home/sergi/Documents/semesters/nine/bigdata/labs/labca1/beamer/beamer.tex:92: Extra }, or forgotten $.
+\textdef@ ...h {#1}\let \f@size #2\selectfont #3}}
+                                                  
+l.92 \end{frame}
+                
+I've deleted a group-closing symbol because it seems to be
+spurious, as in `$x}$'. But perhaps the } is legitimate and
+you forgot something else, as in `\hbox{$x}'. In such cases
+the way to recover is to insert both the forgotten and the
+deleted material, e.g., by typing `I$}'.
+
+/home/sergi/Documents/semesters/nine/bigdata/labs/labca1/beamer/beamer.tex:92: Extra }, or forgotten $.
+\beamer@orig@text@ ... \displaystyle \f@size {#1}}
+                                                  {\textdef@ \textstyle \f@s...
+l.92 \end{frame}
+                
+I've deleted a group-closing symbol because it seems to be
+spurious, as in `$x}$'. But perhaps the } is legitimate and
+you forgot something else, as in `\hbox{$x}'. In such cases
+the way to recover is to insert both the forgotten and the
+deleted material, e.g., by typing `I$}'.
+
+/home/sergi/Documents/semesters/nine/bigdata/labs/labca1/beamer/beamer.tex:92: Missing $ inserted.
+<inserted text> 
+                $
+l.92 \end{frame}
+                
+I've inserted a begin-math/end-math symbol since I think
+you left one out. Proceed, with fingers crossed.
+
+/home/sergi/Documents/semesters/nine/bigdata/labs/labca1/beamer/beamer.tex:92: Extra }, or forgotten $.
+\textdef@ ...th {#1}\let \f@size #2\selectfont #3}
+                                                  }
+l.92 \end{frame}
+                
+I've deleted a group-closing symbol because it seems to be
+spurious, as in `$x}$'. But perhaps the } is legitimate and
+you forgot something else, as in `\hbox{$x}'. In such cases
+the way to recover is to insert both the forgotten and the
+deleted material, e.g., by typing `I$}'.
+
+/home/sergi/Documents/semesters/nine/bigdata/labs/labca1/beamer/beamer.tex:92: Extra }, or forgotten $.
+\textdef@ ...h {#1}\let \f@size #2\selectfont #3}}
+                                                  
+l.92 \end{frame}
+                
+I've deleted a group-closing symbol because it seems to be
+spurious, as in `$x}$'. But perhaps the } is legitimate and
+you forgot something else, as in `\hbox{$x}'. In such cases
+the way to recover is to insert both the forgotten and the
+deleted material, e.g., by typing `I$}'.
+
+/home/sergi/Documents/semesters/nine/bigdata/labs/labca1/beamer/beamer.tex:92: Extra }, or forgotten $.
+\beamer@orig@text@ ...ize {\firstchoice@false #1}}
+                                                  {\textdef@ \textstyle \sf@...
+l.92 \end{frame}
+                
+I've deleted a group-closing symbol because it seems to be
+spurious, as in `$x}$'. But perhaps the } is legitimate and
+you forgot something else, as in `\hbox{$x}'. In such cases
+the way to recover is to insert both the forgotten and the
+deleted material, e.g., by typing `I$}'.
+
+/home/sergi/Documents/semesters/nine/bigdata/labs/labca1/beamer/beamer.tex:92: Missing $ inserted.
+<inserted text> 
+                $
+l.92 \end{frame}
+                
+I've inserted a begin-math/end-math symbol since I think
+you left one out. Proceed, with fingers crossed.
+
+/home/sergi/Documents/semesters/nine/bigdata/labs/labca1/beamer/beamer.tex:92: Extra }, or forgotten $.
+\textdef@ ...th {#1}\let \f@size #2\selectfont #3}
+                                                  }
+l.92 \end{frame}
+                
+I've deleted a group-closing symbol because it seems to be
+spurious, as in `$x}$'. But perhaps the } is legitimate and
+you forgot something else, as in `\hbox{$x}'. In such cases
+the way to recover is to insert both the forgotten and the
+deleted material, e.g., by typing `I$}'.
+
+/home/sergi/Documents/semesters/nine/bigdata/labs/labca1/beamer/beamer.tex:92: Extra }, or forgotten $.
+\textdef@ ...h {#1}\let \f@size #2\selectfont #3}}
+                                                  
+l.92 \end{frame}
+                
+I've deleted a group-closing symbol because it seems to be
+spurious, as in `$x}$'. But perhaps the } is legitimate and
+you forgot something else, as in `\hbox{$x}'. In such cases
+the way to recover is to insert both the forgotten and the
+deleted material, e.g., by typing `I$}'.
+
+/home/sergi/Documents/semesters/nine/bigdata/labs/labca1/beamer/beamer.tex:92: Extra }, or forgotten $.
+\beamer@orig@text@ ...ize {\firstchoice@false #1}}
+                                                  {\textdef@ \textstyle \ssf...
+l.92 \end{frame}
+                
+I've deleted a group-closing symbol because it seems to be
+spurious, as in `$x}$'. But perhaps the } is legitimate and
+you forgot something else, as in `\hbox{$x}'. In such cases
+the way to recover is to insert both the forgotten and the
+deleted material, e.g., by typing `I$}'.
+
+/home/sergi/Documents/semesters/nine/bigdata/labs/labca1/beamer/beamer.tex:92: Missing $ inserted.
+<inserted text> 
+                $
+l.92 \end{frame}
+                
+I've inserted a begin-math/end-math symbol since I think
+you left one out. Proceed, with fingers crossed.
+
+/home/sergi/Documents/semesters/nine/bigdata/labs/labca1/beamer/beamer.tex:92: Extra }, or forgotten $.
+\textdef@ ...th {#1}\let \f@size #2\selectfont #3}
+                                                  }
+l.92 \end{frame}
+                
+I've deleted a group-closing symbol because it seems to be
+spurious, as in `$x}$'. But perhaps the } is legitimate and
+you forgot something else, as in `\hbox{$x}'. In such cases
+the way to recover is to insert both the forgotten and the
+deleted material, e.g., by typing `I$}'.
+
+/home/sergi/Documents/semesters/nine/bigdata/labs/labca1/beamer/beamer.tex:92: Extra }, or forgotten $.
+\textdef@ ...h {#1}\let \f@size #2\selectfont #3}}
+                                                  
+l.92 \end{frame}
+                
+I've deleted a group-closing symbol because it seems to be
+spurious, as in `$x}$'. But perhaps the } is legitimate and
+you forgot something else, as in `\hbox{$x}'. In such cases
+the way to recover is to insert both the forgotten and the
+deleted material, e.g., by typing `I$}'.
+
+/home/sergi/Documents/semesters/nine/bigdata/labs/labca1/beamer/beamer.tex:92: Extra }, or forgotten $.
+\beamer@orig@text@ ...ize {\firstchoice@false #1}}
+                                                  \check@mathfonts }
+l.92 \end{frame}
+                
+I've deleted a group-closing symbol because it seems to be
+spurious, as in `$x}$'. But perhaps the } is legitimate and
+you forgot something else, as in `\hbox{$x}'. In such cases
+the way to recover is to insert both the forgotten and the
+deleted material, e.g., by typing `I$}'.
+
+/home/sergi/Documents/semesters/nine/bigdata/labs/labca1/beamer/beamer.tex:92: Extra }, or forgotten $.
+\beamer@orig@text@ ...false #1}}\check@mathfonts }
+                                                  
+l.92 \end{frame}
+                
+I've deleted a group-closing symbol because it seems to be
+spurious, as in `$x}$'. But perhaps the } is legitimate and
+you forgot something else, as in `\hbox{$x}'. In such cases
+the way to recover is to insert both the forgotten and the
+deleted material, e.g., by typing `I$}'.
+
+/home/sergi/Documents/semesters/nine/bigdata/labs/labca1/beamer/beamer.tex:92: Extra }, or forgotten $.
+\text@ ...t in math text}}\beamer@orig@text@ {#1}}
+                                                  
+l.92 \end{frame}
+                
+I've deleted a group-closing symbol because it seems to be
+spurious, as in `$x}$'. But perhaps the } is legitimate and
+you forgot something else, as in `\hbox{$x}'. In such cases
+the way to recover is to insert both the forgotten and the
+deleted material, e.g., by typing `I$}'.
+
+/home/sergi/Documents/semesters/nine/bigdata/labs/labca1/beamer/beamer.tex:92: Missing $ inserted.
+<inserted text> 
+                $
+l.92 \end{frame}
+                
+I've inserted a begin-math/end-math symbol since I think
+you left one out. Proceed, with fingers crossed.
+
+/home/sergi/Documents/semesters/nine/bigdata/labs/labca1/beamer/beamer.tex:92: Missing } inserted.
+<inserted text> 
+                }
+l.92 \end{frame}
+                
+I've inserted something that you may have forgotten.
+(See the <inserted text> above.)
+With luck, this will get me unwedged. But if you
+really didn't forget anything, try typing `2' now; then
+my insertion and my current dilemma will both disappear.
+
+/home/sergi/Documents/semesters/nine/bigdata/labs/labca1/beamer/beamer.tex:92: Missing } inserted.
+<inserted text> 
+                }
+l.92 \end{frame}
+                
+I've inserted something that you may have forgotten.
+(See the <inserted text> above.)
+With luck, this will get me unwedged. But if you
+really didn't forget anything, try typing `2' now; then
+my insertion and my current dilemma will both disappear.
+
+/home/sergi/Documents/semesters/nine/bigdata/labs/labca1/beamer/beamer.tex:92: Missing $ inserted.
+<inserted text> 
+                $
+l.92 \end{frame}
+                
+I've inserted a begin-math/end-math symbol since I think
+you left one out. Proceed, with fingers crossed.
+
+/home/sergi/Documents/semesters/nine/bigdata/labs/labca1/beamer/beamer.tex:92: Missing } inserted.
+<inserted text> 
+                }
+l.92 \end{frame}
+                
+I've inserted something that you may have forgotten.
+(See the <inserted text> above.)
+With luck, this will get me unwedged. But if you
+really didn't forget anything, try typing `2' now; then
+my insertion and my current dilemma will both disappear.
+
+/home/sergi/Documents/semesters/nine/bigdata/labs/labca1/beamer/beamer.tex:92: Missing } inserted.
+<inserted text> 
+                }
+l.92 \end{frame}
+                
+I've inserted something that you may have forgotten.
+(See the <inserted text> above.)
+With luck, this will get me unwedged. But if you
+really didn't forget anything, try typing `2' now; then
+my insertion and my current dilemma will both disappear.
+
+/home/sergi/Documents/semesters/nine/bigdata/labs/labca1/beamer/beamer.tex:92: Missing } inserted.
+<inserted text> 
+                }
+l.92 \end{frame}
+                
+I've inserted something that you may have forgotten.
+(See the <inserted text> above.)
+With luck, this will get me unwedged. But if you
+really didn't forget anything, try typing `2' now; then
+my insertion and my current dilemma will both disappear.
+
+/home/sergi/Documents/semesters/nine/bigdata/labs/labca1/beamer/beamer.tex:92: Missing $ inserted.
+<inserted text> 
+                $
+l.92 \end{frame}
+                
+I've inserted a begin-math/end-math symbol since I think
+you left one out. Proceed, with fingers crossed.
+
+/home/sergi/Documents/semesters/nine/bigdata/labs/labca1/beamer/beamer.tex:92: Missing } inserted.
+<inserted text> 
+                }
+l.92 \end{frame}
+                
+I've inserted something that you may have forgotten.
+(See the <inserted text> above.)
+With luck, this will get me unwedged. But if you
+really didn't forget anything, try typing `2' now; then
+my insertion and my current dilemma will both disappear.
+
+/home/sergi/Documents/semesters/nine/bigdata/labs/labca1/beamer/beamer.tex:92: Missing } inserted.
+<inserted text> 
+                }
+l.92 \end{frame}
+                
+I've inserted something that you may have forgotten.
+(See the <inserted text> above.)
+With luck, this will get me unwedged. But if you
+really didn't forget anything, try typing `2' now; then
+my insertion and my current dilemma will both disappear.
+
+/home/sergi/Documents/semesters/nine/bigdata/labs/labca1/beamer/beamer.tex:92: Missing } inserted.
+<inserted text> 
+                }
+l.92 \end{frame}
+                
+I've inserted something that you may have forgotten.
+(See the <inserted text> above.)
+With luck, this will get me unwedged. But if you
+really didn't forget anything, try typing `2' now; then
+my insertion and my current dilemma will both disappear.
+
+/home/sergi/Documents/semesters/nine/bigdata/labs/labca1/beamer/beamer.tex:92: Missing $ inserted.
+<inserted text> 
+                $
+l.92 \end{frame}
+                
+I've inserted a begin-math/end-math symbol since I think
+you left one out. Proceed, with fingers crossed.
+
+/home/sergi/Documents/semesters/nine/bigdata/labs/labca1/beamer/beamer.tex:92: Missing } inserted.
+<inserted text> 
+                }
+l.92 \end{frame}
+                
+I've inserted something that you may have forgotten.
+(See the <inserted text> above.)
+With luck, this will get me unwedged. But if you
+really didn't forget anything, try typing `2' now; then
+my insertion and my current dilemma will both disappear.
+
+/home/sergi/Documents/semesters/nine/bigdata/labs/labca1/beamer/beamer.tex:92: Missing } inserted.
+<inserted text> 
+                }
+l.92 \end{frame}
+                
+I've inserted something that you may have forgotten.
+(See the <inserted text> above.)
+With luck, this will get me unwedged. But if you
+really didn't forget anything, try typing `2' now; then
+my insertion and my current dilemma will both disappear.
+
+/home/sergi/Documents/semesters/nine/bigdata/labs/labca1/beamer/beamer.tex:92: Missing } inserted.
+<inserted text> 
+                }
+l.92 \end{frame}
+                
+I've inserted something that you may have forgotten.
+(See the <inserted text> above.)
+With luck, this will get me unwedged. But if you
+really didn't forget anything, try typing `2' now; then
+my insertion and my current dilemma will both disappear.
+
+/home/sergi/Documents/semesters/nine/bigdata/labs/labca1/beamer/beamer.tex:92: Missing $ inserted.
+<inserted text> 
+                $
+l.92 \end{frame}
+                
+I've inserted a begin-math/end-math symbol since I think
+you left one out. Proceed, with fingers crossed.
+
+/home/sergi/Documents/semesters/nine/bigdata/labs/labca1/beamer/beamer.tex:92: Missing } inserted.
+<inserted text> 
+                }
+l.92 \end{frame}
+                
+I've inserted something that you may have forgotten.
+(See the <inserted text> above.)
+With luck, this will get me unwedged. But if you
+really didn't forget anything, try typing `2' now; then
+my insertion and my current dilemma will both disappear.
+
+/home/sergi/Documents/semesters/nine/bigdata/labs/labca1/beamer/beamer.tex:92: Missing { inserted.
+<to be read again> 
+                   $
+l.92 \end{frame}
+                
+A left brace was mandatory here, so I've put one in.
+You might want to delete and/or insert some corrections
+so that I will find a matching right brace soon.
+(If you're confused by all this, try typing `I}' now.)
+
+/home/sergi/Documents/semesters/nine/bigdata/labs/labca1/beamer/beamer.tex:92: Missing } inserted.
+<inserted text> 
+                }
+l.92 \end{frame}
+                
+I've inserted something that you may have forgotten.
+(See the <inserted text> above.)
+With luck, this will get me unwedged. But if you
+really didn't forget anything, try typing `2' now; then
+my insertion and my current dilemma will both disappear.
+
+/home/sergi/Documents/semesters/nine/bigdata/labs/labca1/beamer/beamer.tex:92: Missing { inserted.
+<to be read again> 
+                   $
+l.92 \end{frame}
+                
+A left brace was mandatory here, so I've put one in.
+You might want to delete and/or insert some corrections
+so that I will find a matching right brace soon.
+(If you're confused by all this, try typing `I}' now.)
+
+/home/sergi/Documents/semesters/nine/bigdata/labs/labca1/beamer/beamer.tex:92: Missing } inserted.
+<inserted text> 
+                }
+l.92 \end{frame}
+                
+I've inserted something that you may have forgotten.
+(See the <inserted text> above.)
+With luck, this will get me unwedged. But if you
+really didn't forget anything, try typing `2' now; then
+my insertion and my current dilemma will both disappear.
+
+/home/sergi/Documents/semesters/nine/bigdata/labs/labca1/beamer/beamer.tex:92: Missing { inserted.
+<to be read again> 
+                   $
+l.92 \end{frame}
+                
+A left brace was mandatory here, so I've put one in.
+You might want to delete and/or insert some corrections
+so that I will find a matching right brace soon.
+(If you're confused by all this, try typing `I}' now.)
+
+/home/sergi/Documents/semesters/nine/bigdata/labs/labca1/beamer/beamer.tex:92: Missing } inserted.
+<inserted text> 
+                }
+l.92 \end{frame}
+                
+I've inserted something that you may have forgotten.
+(See the <inserted text> above.)
+With luck, this will get me unwedged. But if you
+really didn't forget anything, try typing `2' now; then
+my insertion and my current dilemma will both disappear.
+
+/home/sergi/Documents/semesters/nine/bigdata/labs/labca1/beamer/beamer.tex:92: Missing } inserted.
+<inserted text> 
+                }
+l.92 \end{frame}
+                
+I've inserted something that you may have forgotten.
+(See the <inserted text> above.)
+With luck, this will get me unwedged. But if you
+really didn't forget anything, try typing `2' now; then
+my insertion and my current dilemma will both disappear.
+
+/home/sergi/Documents/semesters/nine/bigdata/labs/labca1/beamer/beamer.tex:92: Missing } inserted.
+<inserted text> 
+                }
+l.92 \end{frame}
+                
+I've inserted something that you may have forgotten.
+(See the <inserted text> above.)
+With luck, this will get me unwedged. But if you
+really didn't forget anything, try typing `2' now; then
+my insertion and my current dilemma will both disappear.
+
+/home/sergi/Documents/semesters/nine/bigdata/labs/labca1/beamer/beamer.tex:92: Missing } inserted.
+<inserted text> 
+                }
+l.92 \end{frame}
+                
+I've inserted something that you may have forgotten.
+(See the <inserted text> above.)
+With luck, this will get me unwedged. But if you
+really didn't forget anything, try typing `2' now; then
+my insertion and my current dilemma will both disappear.
+
+/home/sergi/Documents/semesters/nine/bigdata/labs/labca1/beamer/beamer.tex:92: Missing } inserted.
+<inserted text> 
+                }
+l.92 \end{frame}
+                
+I've inserted something that you may have forgotten.
+(See the <inserted text> above.)
+With luck, this will get me unwedged. But if you
+really didn't forget anything, try typing `2' now; then
+my insertion and my current dilemma will both disappear.
+
+/home/sergi/Documents/semesters/nine/bigdata/labs/labca1/beamer/beamer.tex:92: Missing $ inserted.
+<inserted text> 
+                $
+l.92 \end{frame}
+                
+I've inserted a begin-math/end-math symbol since I think
+you left one out. Proceed, with fingers crossed.
+
+/home/sergi/Documents/semesters/nine/bigdata/labs/labca1/beamer/beamer.tex:92: Missing } inserted.
+<inserted text> 
+                }
+l.92 \end{frame}
+                
+I've inserted something that you may have forgotten.
+(See the <inserted text> above.)
+With luck, this will get me unwedged. But if you
+really didn't forget anything, try typing `2' now; then
+my insertion and my current dilemma will both disappear.
+
+/home/sergi/Documents/semesters/nine/bigdata/labs/labca1/beamer/beamer.tex:92: Missing } inserted.
+<inserted text> 
+                }
+l.92 \end{frame}
+                
+I've inserted something that you may have forgotten.
+(See the <inserted text> above.)
+With luck, this will get me unwedged. But if you
+really didn't forget anything, try typing `2' now; then
+my insertion and my current dilemma will both disappear.
+
+/home/sergi/Documents/semesters/nine/bigdata/labs/labca1/beamer/beamer.tex:92: Missing } inserted.
+<inserted text> 
+                }
+l.92 \end{frame}
+                
+I've inserted something that you may have forgotten.
+(See the <inserted text> above.)
+With luck, this will get me unwedged. But if you
+really didn't forget anything, try typing `2' now; then
+my insertion and my current dilemma will both disappear.
+
+/home/sergi/Documents/semesters/nine/bigdata/labs/labca1/beamer/beamer.tex:92: Missing $ inserted.
+<inserted text> 
+                $
+l.92 \end{frame}
+                
+I've inserted a begin-math/end-math symbol since I think
+you left one out. Proceed, with fingers crossed.
+
+/home/sergi/Documents/semesters/nine/bigdata/labs/labca1/beamer/beamer.tex:92: Missing } inserted.
+<inserted text> 
+                }
+l.92 \end{frame}
+                
+I've inserted something that you may have forgotten.
+(See the <inserted text> above.)
+With luck, this will get me unwedged. But if you
+really didn't forget anything, try typing `2' now; then
+my insertion and my current dilemma will both disappear.
+
+/home/sergi/Documents/semesters/nine/bigdata/labs/labca1/beamer/beamer.tex:92: Missing } inserted.
+<inserted text> 
+                }
+l.92 \end{frame}
+                
+I've inserted something that you may have forgotten.
+(See the <inserted text> above.)
+With luck, this will get me unwedged. But if you
+really didn't forget anything, try typing `2' now; then
+my insertion and my current dilemma will both disappear.
+
+/home/sergi/Documents/semesters/nine/bigdata/labs/labca1/beamer/beamer.tex:92: Missing } inserted.
+<inserted text> 
+                }
+l.92 \end{frame}
+                
+I've inserted something that you may have forgotten.
+(See the <inserted text> above.)
+With luck, this will get me unwedged. But if you
+really didn't forget anything, try typing `2' now; then
+my insertion and my current dilemma will both disappear.
+
+/home/sergi/Documents/semesters/nine/bigdata/labs/labca1/beamer/beamer.tex:92: Missing $ inserted.
+<inserted text> 
+                $
+l.92 \end{frame}
+                
+I've inserted a begin-math/end-math symbol since I think
+you left one out. Proceed, with fingers crossed.
+
+/home/sergi/Documents/semesters/nine/bigdata/labs/labca1/beamer/beamer.tex:92: Missing } inserted.
+<inserted text> 
+                }
+l.92 \end{frame}
+                
+I've inserted something that you may have forgotten.
+(See the <inserted text> above.)
+With luck, this will get me unwedged. But if you
+really didn't forget anything, try typing `2' now; then
+my insertion and my current dilemma will both disappear.
+
+/home/sergi/Documents/semesters/nine/bigdata/labs/labca1/beamer/beamer.tex:92: Missing } inserted.
+<inserted text> 
+                }
+l.92 \end{frame}
+                
+I've inserted something that you may have forgotten.
+(See the <inserted text> above.)
+With luck, this will get me unwedged. But if you
+really didn't forget anything, try typing `2' now; then
+my insertion and my current dilemma will both disappear.
+
+/home/sergi/Documents/semesters/nine/bigdata/labs/labca1/beamer/beamer.tex:92: Missing } inserted.
+<inserted text> 
+                }
+l.92 \end{frame}
+                
+I've inserted something that you may have forgotten.
+(See the <inserted text> above.)
+With luck, this will get me unwedged. But if you
+really didn't forget anything, try typing `2' now; then
+my insertion and my current dilemma will both disappear.
+
+/home/sergi/Documents/semesters/nine/bigdata/labs/labca1/beamer/beamer.tex:92: Missing $ inserted.
+<inserted text> 
+                $
+l.92 \end{frame}
+                
+I've inserted a begin-math/end-math symbol since I think
+you left one out. Proceed, with fingers crossed.
+
+/home/sergi/Documents/semesters/nine/bigdata/labs/labca1/beamer/beamer.tex:92: Missing } inserted.
+<inserted text> 
+                }
+l.92 \end{frame}
+                
+I've inserted something that you may have forgotten.
+(See the <inserted text> above.)
+With luck, this will get me unwedged. But if you
+really didn't forget anything, try typing `2' now; then
+my insertion and my current dilemma will both disappear.
+
+/home/sergi/Documents/semesters/nine/bigdata/labs/labca1/beamer/beamer.tex:92: Missing { inserted.
+<to be read again> 
+                   $
+l.92 \end{frame}
+                
+A left brace was mandatory here, so I've put one in.
+You might want to delete and/or insert some corrections
+so that I will find a matching right brace soon.
+(If you're confused by all this, try typing `I}' now.)
+
+/home/sergi/Documents/semesters/nine/bigdata/labs/labca1/beamer/beamer.tex:92: Missing } inserted.
+<inserted text> 
+                }
+l.92 \end{frame}
+                
+I've inserted something that you may have forgotten.
+(See the <inserted text> above.)
+With luck, this will get me unwedged. But if you
+really didn't forget anything, try typing `2' now; then
+my insertion and my current dilemma will both disappear.
+
+/home/sergi/Documents/semesters/nine/bigdata/labs/labca1/beamer/beamer.tex:92: Missing { inserted.
+<to be read again> 
+                   $
+l.92 \end{frame}
+                
+A left brace was mandatory here, so I've put one in.
+You might want to delete and/or insert some corrections
+so that I will find a matching right brace soon.
+(If you're confused by all this, try typing `I}' now.)
+
+/home/sergi/Documents/semesters/nine/bigdata/labs/labca1/beamer/beamer.tex:92: Missing } inserted.
+<inserted text> 
+                }
+l.92 \end{frame}
+                
+I've inserted something that you may have forgotten.
+(See the <inserted text> above.)
+With luck, this will get me unwedged. But if you
+really didn't forget anything, try typing `2' now; then
+my insertion and my current dilemma will both disappear.
+
+/home/sergi/Documents/semesters/nine/bigdata/labs/labca1/beamer/beamer.tex:92: Missing { inserted.
+<to be read again> 
+                   $
+l.92 \end{frame}
+                
+A left brace was mandatory here, so I've put one in.
+You might want to delete and/or insert some corrections
+so that I will find a matching right brace soon.
+(If you're confused by all this, try typing `I}' now.)
+
+/home/sergi/Documents/semesters/nine/bigdata/labs/labca1/beamer/beamer.tex:92: Missing } inserted.
+<inserted text> 
+                }
+l.92 \end{frame}
+                
+I've inserted something that you may have forgotten.
+(See the <inserted text> above.)
+With luck, this will get me unwedged. But if you
+really didn't forget anything, try typing `2' now; then
+my insertion and my current dilemma will both disappear.
+
+/home/sergi/Documents/semesters/nine/bigdata/labs/labca1/beamer/beamer.tex:92: Missing } inserted.
+<inserted text> 
+                }
+l.92 \end{frame}
+                
+I've inserted something that you may have forgotten.
+(See the <inserted text> above.)
+With luck, this will get me unwedged. But if you
+really didn't forget anything, try typing `2' now; then
+my insertion and my current dilemma will both disappear.
+
+/home/sergi/Documents/semesters/nine/bigdata/labs/labca1/beamer/beamer.tex:92: Missing } inserted.
+<inserted text> 
+                }
+l.92 \end{frame}
+                
+I've inserted something that you may have forgotten.
+(See the <inserted text> above.)
+With luck, this will get me unwedged. But if you
+really didn't forget anything, try typing `2' now; then
+my insertion and my current dilemma will both disappear.
+
+/home/sergi/Documents/semesters/nine/bigdata/labs/labca1/beamer/beamer.tex:92: Missing $ inserted.
+<inserted text> 
+                $
+l.92 \end{frame}
+                
+I've inserted a begin-math/end-math symbol since I think
+you left one out. Proceed, with fingers crossed.
+
+/home/sergi/Documents/semesters/nine/bigdata/labs/labca1/beamer/beamer.tex:92: Extra }, or forgotten $.
+<recently read> \egroup 
+                        
+l.92 \end{frame}
+                
+I've deleted a group-closing symbol because it seems to be
+spurious, as in `$x}$'. But perhaps the } is legitimate and
+you forgot something else, as in `\hbox{$x}'. In such cases
+the way to recover is to insert both the forgotten and the
+deleted material, e.g., by typing `I$}'.
+
+
+/home/sergi/Documents/semesters/nine/bigdata/labs/labca1/beamer/beamer.tex:92: LaTeX Error: Command \end{itemize} invalid in math mode.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.92 \end{frame}
+                
+Try typing  <return>  to proceed.
+If that doesn't work, type  X <return>  to quit.
+
+/home/sergi/Documents/semesters/nine/bigdata/labs/labca1/beamer/beamer.tex:92: Missing $ inserted.
+<inserted text> 
+                $
+l.92 \end{frame}
+                
+I've inserted a begin-math/end-math symbol since I think
+you left one out. Proceed, with fingers crossed.
+
+/home/sergi/Documents/semesters/nine/bigdata/labs/labca1/beamer/beamer.tex:92: Missing } inserted.
+<inserted text> 
+                }
+l.92 \end{frame}
+                
+I've inserted something that you may have forgotten.
+(See the <inserted text> above.)
+With luck, this will get me unwedged. But if you
+really didn't forget anything, try typing `2' now; then
+my insertion and my current dilemma will both disappear.
+
+/home/sergi/Documents/semesters/nine/bigdata/labs/labca1/beamer/beamer.tex:92: Missing } inserted.
+<inserted text> 
+                }
+l.92 \end{frame}
+                
+I've inserted something that you may have forgotten.
+(See the <inserted text> above.)
+With luck, this will get me unwedged. But if you
+really didn't forget anything, try typing `2' now; then
+my insertion and my current dilemma will both disappear.
+
+/home/sergi/Documents/semesters/nine/bigdata/labs/labca1/beamer/beamer.tex:92: Missing } inserted.
+<inserted text> 
+                }
+l.92 \end{frame}
+                
+I've inserted something that you may have forgotten.
+(See the <inserted text> above.)
+With luck, this will get me unwedged. But if you
+really didn't forget anything, try typing `2' now; then
+my insertion and my current dilemma will both disappear.
+
+
+Overfull \vbox (19.45258pt too high) detected at line 92
  []
 
+[4
 
-Underfull \hbox (badness 10000) in paragraph at lines 97--97
-[]|\T1/cmss/m/n/10.95 Filas con-so-li-da-das
- []
+] [5
 
-[5
+] [6
 
-]
-<../images/namenode-overview.png, id=105, 1269.74374pt x 714.67pt>
-File: ../images/namenode-overview.png Graphic file (type png)
-<use ../images/namenode-overview.png>
-Package pdftex.def Info: ../images/namenode-overview.png  used on input line 118.
-(pdftex.def)             Requested size: 164.3556pt x 92.50687pt.
-<../images/resourcemanager-applications.png, id=106, 1445.4pt x 1003.75pt>
-File: ../images/resourcemanager-applications.png Graphic file (type png)
-<use ../images/resourcemanager-applications.png>
-Package pdftex.def Info: ../images/resourcemanager-applications.png  used on input line 118.
-(pdftex.def)             Requested size: 135.0207pt x 93.76437pt.
- [6
+] [7
 
- <../images/namenode-overview.png> <../images/resourcemanager-applications.png>] [7
-
-]
-Underfull \hbox (badness 1910) in paragraph at lines 160--160
-[]|\T1/cmss/m/n/10 Media, me-dia-na y des-via-ción de
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 160--160
-[]|\T1/cmss/m/n/10 Identificó ex-tre-mos de-par-ta-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 160--160
-[]|\T1/cmss/m/n/10 63,37$ $% an-tes de 2020 y
- []
-
-[8
+] [8
 
 ] [9
 
 ] [10
 
 ] [11
+
+] [12
+
+] [13
+
+] [14
+
+] [15
+
+] [16
+
+] [17
+
+] [18
+
+] [19
+
+] [20
+
+]
+Overfull \hbox (49.99971pt too wide) in paragraph at lines 317--317
+\T1/cmtt/m/n/9 indicadores-[]de-[]ocupabilidad-[]ministerio-[]de-[]comercio-[]exterior-[]y-[]turismo-[]mincetur$[]  
+ []
+
+[21
+
+ </usr/share/texmf-dist/tex/latex/beamer/beamericonarticle.pdf>] [22
+
 
 ]
 \tf@nav=\write6
@@ -829,22 +3269,32 @@ LaTeX Info: Redefining \% on input line 11.
 LaTeX2e <2025-11-01>
 L3 programming layer <2026-01-19>
  ***********
-Package rerunfilecheck Info: File `beamer.out' has not changed.
-(rerunfilecheck)             Checksum: 00583F2ED295DAE9EA7E602DA2A6CC21;417.
+
+
+LaTeX Warning: Label(s) may have changed. Rerun to get cross-references right.
+
+
+Package rerunfilecheck Warning: File `beamer.out' has changed.
+(rerunfilecheck)                Rerun to get outlines right
+(rerunfilecheck)                or use package `bookmark'.
+
+Package rerunfilecheck Info: Checksums for `beamer.out':
+(rerunfilecheck)             Before: <no file>
+(rerunfilecheck)             After:  14101B88D157BA480DD3E01EAD4E042A;646.
  ) 
 Here is how much of TeX's memory you used:
- 23624 strings out of 469453
- 447702 string characters out of 5469037
- 836161 words of memory out of 5000000
- 51784 multiletter control sequences out of 15000+600000
- 648679 words of font info for 87 fonts, out of 8000000 for 9000
+ 23687 strings out of 469453
+ 447800 string characters out of 5469037
+ 841119 words of memory out of 5000000
+ 51814 multiletter control sequences out of 15000+600000
+ 653851 words of font info for 100 fonts, out of 8000000 for 9000
  40 hyphenation exceptions out of 8191
- 101i,15n,107p,445b,873s stack positions out of 10000i,1000n,20000p,200000b,200000s
-</usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmss10.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/share/texmf-dist/fonts/type1/public/cm-super/sfsi1095.pfb></usr/share/texmf-dist/fonts/type1/public/cm-super/sfss0600.pfb></usr/share/texmf-dist/fonts/type1/public/cm-super/sfss0800.pfb></usr/share/texmf-dist/fonts/type1/public/cm-super/sfss1000.pfb></usr/share/texmf-dist/fonts/type1/public/cm-super/sfss1095.pfb></usr/share/texmf-dist/fonts/type1/public/cm-super/sfss1200.pfb></usr/share/texmf-dist/fonts/type1/public/cm-super/sfss1440.pfb></usr/share/texmf-dist/fonts/type1/public/cm-super/sfsx1000.pfb></usr/share/texmf-dist/fonts/type1/public/cm-super/sfsx1095.pfb>
-Output written on beamer.pdf (11 pages, 816629 bytes).
+ 101i,32n,107p,445b,1051s stack positions out of 10000i,1000n,20000p,200000b,200000s
+</usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi8.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmss8.pfb></usr/share/texmf-dist/fonts/type1/public/cm-super/sfsi0600.pfb></usr/share/texmf-dist/fonts/type1/public/cm-super/sfsi0800.pfb></usr/share/texmf-dist/fonts/type1/public/cm-super/sfsi0900.pfb></usr/share/texmf-dist/fonts/type1/public/cm-super/sfss0600.pfb></usr/share/texmf-dist/fonts/type1/public/cm-super/sfss0800.pfb></usr/share/texmf-dist/fonts/type1/public/cm-super/sfss0900.pfb></usr/share/texmf-dist/fonts/type1/public/cm-super/sfss1000.pfb></usr/share/texmf-dist/fonts/type1/public/cm-super/sfss1095.pfb></usr/share/texmf-dist/fonts/type1/public/cm-super/sfss1200.pfb></usr/share/texmf-dist/fonts/type1/public/cm-super/sfss1440.pfb></usr/share/texmf-dist/fonts/type1/public/cm-super/sfsx0800.pfb></usr/share/texmf-dist/fonts/type1/public/cm-super/sfsx1000.pfb></usr/share/texmf-dist/fonts/type1/public/cm-super/sfsx1095.pfb></usr/share/texmf-dist/fonts/type1/public/cm-super/sftt0800.pfb></usr/share/texmf-dist/fonts/type1/public/cm-super/sftt0900.pfb>
+Output written on beamer.pdf (22 pages, 299974 bytes).
 PDF statistics:
- 239 PDF objects out of 1000 (max. 8388607)
- 152 compressed objects within 2 object streams
- 26 named destinations out of 1000 (max. 500000)
- 245 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 338 PDF objects out of 1000 (max. 8388607)
+ 225 compressed objects within 3 object streams
+ 56 named destinations out of 1000 (max. 500000)
+ 169 words of extra memory for PDF output out of 10000 (max. 10000000)
 

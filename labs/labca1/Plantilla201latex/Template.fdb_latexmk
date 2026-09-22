@@ -1,20 +1,20 @@
 # Fdb version 4
-["bibtex Template"] 1790112807.58188 "Template.aux" "Template.bbl" "Template" 1790112808.79963 0
+["bibtex Template"] 1790114179.28624 "Template.aux" "Template.bbl" "Template" 1790114180.36186 0
   "../referencias/referencias.bib" 1790110651.10403 37222 b1dd447b57c131c1228ba8a2ecc6f6d6 ""
   "./Bibliog.bib" 1790110734.90596 623 f5e75d87ccf3f02f9fb47ed19ea4eab5 ""
-  "/usr/share/texmf-dist/bibtex/bst/base/plain.bst" 1775415801 20613 bd3fbfa9f64872b81ac57a0dd2ed855f ""
-  "Template.aux" 1790112808.68585 11289 926203b90493100fde1ae615cdad0080 "pdflatex"
+  "/usr/share/texmf-dist/bibtex/bst/base/ieeetr.bst" 1775415801 18361 1a00e58565e7f19bf2b3e1bfb82254ae ""
+  "Template.aux" 1790114180.26635 11290 8f143e0cf99352951ccd95f0a1de187f "pdflatex"
   (generated)
   "Template.bbl"
   "Template.blg"
   (rewritten before read)
-["pdflatex"] 1790112807.60098 "/home/sergi/Documents/semesters/nine/bigdata/labs/labca1/Plantilla201latex/Template.tex" "Template.pdf" "Template" 1790112808.79998 0
+["pdflatex"] 1790114179.30245 "/home/sergi/Documents/semesters/nine/bigdata/labs/labca1/Plantilla201latex/Template.tex" "Template.pdf" "Template" 1790114180.36204 0
   "../images/docker-stats.png" 1790106575.98229 238963 138e67affb2176d9072b4e5bf3099f9e ""
   "../images/jobhistory-query.png" 1790106576.056 270840 eb5046cfbd6a51a85e153da1d42879d0 ""
   "../images/namenode-overview.png" 1790106576.1361 210060 8cfc1f91e9e4c1e78007ee0717e75ea8 ""
   "../images/nodemanager-resources.png" 1790106576.20757 274025 a4b9ff0a3e4074bd61eeff26d2e944a4 ""
   "../images/resourcemanager-applications.png" 1790106576.36333 618101 d6bd1778160e7a5c5f24458a856a6df8 ""
-  "/home/sergi/Documents/semesters/nine/bigdata/labs/labca1/Plantilla201latex/Template.tex" 1790112804.73561 32919 1360f8b6c6e63d8b2ba6cd7696742dca ""
+  "/home/sergi/Documents/semesters/nine/bigdata/labs/labca1/Plantilla201latex/Template.tex" 1790114176.6688 33001 95a89e10a737bff672270987ec1703c8 ""
   "/usr/share/texmf-dist/fonts/enc/dvips/cm-super/cm-super-t1.enc" 1775415801 2971 def0b6c1f0b107b3b936def894055589 ""
   "/usr/share/texmf-dist/fonts/enc/dvips/cm-super/cm-super-ts1.enc" 1775415801 2900 1537cc8184ad1792082cd229ecc269f4 ""
   "/usr/share/texmf-dist/fonts/tfm/jknappen/ec/ecbx0900.tfm" 1775415801 3584 1a7de6c99457381c64abc1a7c545505f ""
@@ -144,11 +144,11 @@
   "/usr/share/texmf-dist/web2c/texmf.cnf" 1775415801 43569 fd570f2fa160877d211e859f687312ba ""
   "/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map" 1790110052 325717 59a65e600f662ceace641c3ea8b5d4af ""
   "/var/lib/texmf/web2c/pdftex/pdflatex.fmt" 1790110031 2349411 04d561ff45ff2936fb6bbd5c7f03c756 ""
-  "Template.aux" 1790112808.68585 11289 926203b90493100fde1ae615cdad0080 "pdflatex"
-  "Template.bbl" 1790112807.59584 4179 64117a8b02e48a5f766f7c1b786e5d5f "bibtex Template"
-  "Template.out" 1790112808.68918 14795 6e134e5a311700aad70d25438cbfb60f "pdflatex"
-  "Template.tex" 1790112804.73561 32919 1360f8b6c6e63d8b2ba6cd7696742dca ""
-  "Template.toc" 1790112808.69212 6449 3c10245064f8d27413b09fa18ebc0803 "pdflatex"
+  "Template.aux" 1790114180.26635 11290 8f143e0cf99352951ccd95f0a1de187f "pdflatex"
+  "Template.bbl" 1790114179.29863 4002 f3782edaa6e91cab3d0b6d6e0378d79a "bibtex Template"
+  "Template.out" 1790114180.26809 14795 6e134e5a311700aad70d25438cbfb60f "pdflatex"
+  "Template.tex" 1790114176.6688 33001 95a89e10a737bff672270987ec1703c8 ""
+  "Template.toc" 1790114180.27047 6449 3c10245064f8d27413b09fa18ebc0803 "pdflatex"
   (generated)
   "Template.aux"
   "Template.log"

@@ -42,6 +42,18 @@ for required in \
   }
 done
 
+for output in \
+  'national=54897127' \
+  'mean_tnoh=41.5950' \
+  'count=1950' \
+  'f1=0.793103' \
+  'rmse=3.879584'; do
+  grep -Fq "$output" "$DECK" || {
+    echo "Falta una salida real de Hadoop: $output" >&2
+    exit 1
+  }
+done
+
 test "$(grep -c '\\note{' "$DECK")" -eq 12
 grep -Fq 'Arbués:' "$DECK"
 grep -Fq 'Sergio:' "$DECK"

@@ -14,6 +14,6 @@ public class SalesMapper extends MapReduceBase implements Mapper<LongWritable, T
 
 		String valueString = value.toString();
 		String[] SingleCountryData = valueString.split(",");
-		output.collect(new Text(SingleCountryData[7]), one);
+		output.collect(new Text(SingleCountryData[]), one);
 	}
 }

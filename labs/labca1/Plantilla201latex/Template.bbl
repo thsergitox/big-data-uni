@@ -1,50 +1,34 @@
 \begin{thebibliography}{1}
 
-\bibitem{bravo_moche_ml2023}
-Jessie Bravo, Roger Alarc{\'o}n, Carlos Valdivia, and Oscar Serqu{\'e}n.
-\newblock Application of machine learning techniques to predict visitors to the tourist attractions of the moche route in peru.
-\newblock {\em Sustainability}, 15(11):8967, 2023.
-\newblock Consume CSV de la PNDA del Per\'u m\'as TripAdvisor y Google Trends; 1\,534 registros (2011--2022); cuatro algoritmos de regresi\'on.
-
-\bibitem{inei_rj037_2024}
-{Instituto Nacional de Estad\'istica e Inform\'atica}.
-\newblock Resoluci\'on jefatural n.\textdegree{} 037-2024-inei: Autorizan ejecuci\'on de la encuesta ``estad\'istica mensual de turismo 2024 para establecimientos de hospedaje''.
-\newblock Diario Oficial El Peruano, February 2024.
-
-\bibitem{mariani_baggio_bigdata2022}
-Marcello Mariani and Rodolfo Baggio.
-\newblock Big data and analytics in hospitality and tourism: a systematic literature review.
-\newblock {\em International Journal of Contemporary Hospitality Management}, 34(1):231--278, 2022.
-\newblock Taxonom\'ia de fuentes de big data en turismo: datos administrados vs. generados por usuarios.
-
 \bibitem{mincetur_ocupabilidad}
-{Ministerio de Comercio Exterior y Turismo}.
-\newblock Indicadores de ocupabilidad [conjunto de datos].
-\newblock Plataforma Nacional de Datos Abiertos (PNDA), Presidencia del Consejo de Ministros, Per\'u, 2021.
+{Ministerio de Comercio Exterior y Turismo}, ``Indicadores de ocupabilidad [conjunto de datos].'' Plataforma Nacional de Datos Abiertos (PNDA), Presidencia del Consejo de Ministros, Per\'u, 2021.
 \newblock Publicado el 31 de diciembre de 2021; \'ultima actualizaci\'on del metadato: 4 de agosto de 2026. 11 recursos CSV (2015--2025 S1), diccionario de datos, metadatos y ficha t\'ecnica. Licencia Open Data Commons Attribution (ODC-BY). Identificador CKAN: dbf6bc9c-cabe-47f7-b052-d11cfdd4d9b0. Fuente primaria: Encuesta Mensual de Turismo para Establecimientos de Hospedaje (DGIETA-MINCETUR).
 
 \bibitem{mef_ficha_tecnica_turismo2021}
-{Ministerio de Econom\'ia y Finanzas}.
-\newblock Formulaci\'on de proyectos de inversi\'on para la creaci\'on, mejoramiento, ampliaci\'on y recuperaci\'on de servicios tur\'isticos p\'ublicos: Ficha t\'ecnica simplificada.
-\newblock Technical report, Ministerio de Econom\'ia y Finanzas del Per\'u, Direcci\'on General de Inversi\'on P\'ublica, Lima, Per\'u, November 2021.
+{Ministerio de Econom\'ia y Finanzas}, ``Formulaci\'on de proyectos de inversi\'on para la creaci\'on, mejoramiento, ampliaci\'on y recuperaci\'on de servicios tur\'isticos p\'ublicos: Ficha t\'ecnica simplificada,'' tech. rep., Ministerio de Econom\'ia y Finanzas del Per\'u, Direcci\'on General de Inversi\'on P\'ublica, Lima, Per\'u, Nov. 2021.
 \newblock VENTANA EXTENDIDA 2021. Capacitaci\'on oficial del MEF que instruye el uso de los Indicadores mensuales de ocupabilidad de establecimientos de hospedaje del MINCETUR como poblaci\'on de referencia para la estimaci\'on de demanda en proyectos de inversi\'on p\'ublica tur\'istica.
 
-\bibitem{nahuincopa_rojas_demanda2022}
-Misael {\~N}ahuincopa~Huarancca and Wendy~Milinda Rojas~Romero.
-\newblock La demanda tur\'istica y la capacidad hotelera en la regi\'on huancavelica, per\'iodo 2010--2019.
-\newblock Tesis de grado, Universidad Nacional de Huancavelica, Huancavelica, Per\'u, 2022.
-\newblock Modelo lineal multivariado; la capacidad hotelera muestra un efecto limitado sobre la demanda tur\'istica y la elasticidad ingreso resulta inel\'astica.
+\bibitem{inei_rj037_2024}
+{Instituto Nacional de Estad\'istica e Inform\'atica}, ``Resoluci\'on jefatural n.\textdegree{} 037-2024-inei: Autorizan ejecuci\'on de la encuesta ``estad\'istica mensual de turismo 2024 para establecimientos de hospedaje''.'' Diario Oficial El Peruano, Feb. 2024.
 
 \bibitem{taipe_laura_desestacionalizacion2021}
-Hugo Taipe~Pari and Juan~Gustavo Laura~Huam{\'a}n.
-\newblock Desestacionalizaci\'on de la serie de tiempo llegada mensual de turistas y la oferta de hospedaje en la regi\'on huancavelica, periodo 2003--2019.
-\newblock Tesis para optar el t\'itulo profesional de economista, Universidad Nacional de Huancavelica, Huancavelica, Per\'u, 2021.
+H.~Taipe~Pari and J.~G. Laura~Huam{\'a}n, ``Desestacionalizaci\'on de la serie de tiempo llegada mensual de turistas y la oferta de hospedaje en la regi\'on huancavelica, periodo 2003--2019,'' tesis para optar el t\'itulo profesional de economista, Universidad Nacional de Huancavelica, Huancavelica, Per\'u, 2021.
 \newblock VENTANA EXTENDIDA 2021. Construye su base de datos a partir de los indicadores mensuales de ocupabilidad de establecimientos de hospedaje colectivo de la regi\'on Huancavelica (2003--2019), procesada en EViews 10. Regresi\'on lineal multivariada con variables dicot\'omicas estacionales y MCO.
 
+\bibitem{nahuincopa_rojas_demanda2022}
+M.~{\~N}ahuincopa~Huarancca and W.~M. Rojas~Romero, ``La demanda tur\'istica y la capacidad hotelera en la regi\'on huancavelica, per\'iodo 2010--2019,'' tesis de grado, Universidad Nacional de Huancavelica, Huancavelica, Per\'u, 2022.
+\newblock Modelo lineal multivariado; la capacidad hotelera muestra un efecto limitado sobre la demanda tur\'istica y la elasticidad ingreso resulta inel\'astica.
+
+\bibitem{bravo_moche_ml2023}
+J.~Bravo, R.~Alarc{\'o}n, C.~Valdivia, and O.~Serqu{\'e}n, ``Application of machine learning techniques to predict visitors to the tourist attractions of the moche route in peru,'' {\em Sustainability}, vol.~15, no.~11, p.~8967, 2023.
+\newblock Consume CSV de la PNDA del Per\'u m\'as TripAdvisor y Google Trends; 1\,534 registros (2011--2022); cuatro algoritmos de regresi\'on.
+
 \bibitem{viteri_hadoop_minisa2023}
-Alan~Percy Viteri~Gonzales and Jos{\'e}~Antonio Beltr{\'a}n~Garc{\'i}a.
-\newblock Soluci\'on de big data para el an\'alisis de los datos abiertos de minsa y cenares para el monitoreo y control de la emergencia sanitaria covid-19 bajo el ecosistema de apache hadoop y microsoft azure.
-\newblock Tesis de grado, Universidad Privada Antenor Orrego, Trujillo, Per\'u, 2023.
+A.~P. Viteri~Gonzales and J.~A. Beltr{\'a}n~Garc{\'i}a, ``Soluci\'on de big data para el an\'alisis de los datos abiertos de minsa y cenares para el monitoreo y control de la emergencia sanitaria covid-19 bajo el ecosistema de apache hadoop y microsoft azure,'' tesis de grado, Universidad Privada Antenor Orrego, Trujillo, Per\'u, 2023.
 \newblock Arquitectura Apache Hadoop + Azure sobre datos abiertos de la PNDA del Per\'u; dominio salud.
+
+\bibitem{mariani_baggio_bigdata2022}
+M.~Mariani and R.~Baggio, ``Big data and analytics in hospitality and tourism: a systematic literature review,'' {\em International Journal of Contemporary Hospitality Management}, vol.~34, no.~1, pp.~231--278, 2022.
+\newblock Taxonom\'ia de fuentes de big data en turismo: datos administrados vs. generados por usuarios.
 
 \end{thebibliography}
