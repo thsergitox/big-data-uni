@@ -72,9 +72,12 @@ regresión.
 Los indicadores de hospedaje cambian por mes, departamento y tipo de
 establecimiento. Al juntar varios años aparecen diferencias de estructura,
 valores repetidos por nivel de agregación y un volumen que ya no resulta
-cómodo para revisar fila por fila. Por eso se usó Hadoop MapReduce. El objetivo
-no fue solo obtener números, sino dejar una ejecución repetible y revisar cada
-salida con datos reales.
+cómodo para revisar fila por fila. La revisión de trabajos anteriores mostró
+que estos datos se habían usado sobre todo en estudios regionales y con métodos
+estadísticos clásicos. Por eso se usó Hadoop MapReduce para trabajar todos los
+departamentos con un flujo repetible. El objetivo no fue solo obtener números,
+sino relacionar cada decisión de procesamiento con un problema real del
+dataset y revisar cada salida con datos reales.
 
 \subsection{Objetivos del laboratorio}
 Se buscó consolidar los archivos de 2019 a 2025-I, cargar una única entrada a
@@ -127,8 +130,19 @@ quedaron ejecuciones de prueba anteriores. JobHistory confirmó que la consulta
 
 \section{Descripción del Dataset}
 \subsection{Fuente, publicación y actualización}
-% CONTENIDO A INTEGRAR POR EL COMPAÑERO. NO MODIFICAR ESTA SUBSECCIÓN.
-El dataset de Indicadores de Ocupabilidad del Ministerio de Comercio Exterior y Turismo (MINCETUR) se obtuvo de la Plataforma Nacional de Datos Abiertos \cite{mincetur_ocupabilidad}.
+El dataset de Indicadores de Ocupabilidad fue publicado por el Ministerio de
+Comercio Exterior y Turismo (MINCETUR) en la Plataforma Nacional de Datos
+Abiertos. La fuente reúne estadísticas mensuales sobre la capacidad y el uso
+de los establecimientos de hospedaje del país. El registro fue publicado en
+2021 y su metadato tuvo una actualización en agosto de 2026
+\cite{mincetur_ocupabilidad}.
+
+La fuente no se eligió de forma arbitraria. El Ministerio de Economía y
+Finanzas recomienda estos indicadores como referencia para estimar demanda en
+proyectos públicos de turismo \cite{mef_ficha_tecnica_turismo2021}. Además, la
+encuesta que los produce tiene respaldo del INEI y usa censos o muestras según
+la categoría y la zona estudiada \cite{inei_rj037_2024}. Esto permitió trabajar
+con una fuente oficial y también reconocer sus límites.
 
 \subsection{Descripción general del dataset}
 El archivo consolidado cubre desde enero de 2019 hasta junio de 2025. Contiene
@@ -153,14 +167,45 @@ Los archivos originales se leyeron como Latin-1 y se conservaron intactos. El
 script validó la cabecera, la cantidad de columnas, el rango de años y los
 campos numéricos. Para agregaciones generales se usaron solo las filas totales
 de clase y categoría, identificadas como TT/TT. Ese filtro fue necesario porque
-el dataset repite totales en distintos niveles.
+el dataset repite totales en distintos niveles. La investigación previa sobre
+la fuente permitió detectar dos riesgos antes de diseñar las consultas: el
+cambio de esquema entre 2023 y 2024 y el doble conteo producido por las filas
+consolidadas. Por eso la normalización y el filtro TT/TT quedaron como reglas
+comunes para las consultas que calculan totales nacionales.
 
 \subsection{Antecedentes e investigaciones relacionadas}
-% CONTENIDO A INTEGRAR POR EL COMPAÑERO. NO MODIFICAR ESTA SUBSECCIÓN.
 \subsubsection{Investigaciones previas sobre el dataset}
-% CONTENIDO A INTEGRAR POR EL COMPAÑERO. NO MODIFICAR ESTA SUBSUBSECCIÓN.
+Se encontraron dos investigaciones peruanas que usaron los indicadores de
+ocupabilidad como parte central del análisis. Taipe y Laura estudiaron la
+llegada mensual de turistas y la oferta de hospedaje en Huancavelica entre
+2003 y 2019 mediante regresión lineal y variables estacionales
+\cite{taipe_laura_desestacionalizacion2021}. Ñahuincopa y Rojas también
+trabajaron Huancavelica, pero analizaron la relación entre demanda turística y
+capacidad hotelera durante 2010--2019 \cite{nahuincopa_rojas_demanda2022}.
+
+Estos antecedentes mostraron que el dataset sí tenía uso académico, aunque el
+alcance estaba concentrado en una región y en métodos econométricos. Esa
+diferencia influyó en el diseño del laboratorio. Las consultas 1 a 10 se
+plantearon para comparar años, meses, departamentos y tipos de hospedaje en
+todo el país. Las consultas 11 a 14 ampliaron el análisis con dos
+clasificadores y dos regresores evaluados mediante una división temporal.
 \subsubsection{Artículos que utilizaron el dataset}
-% CONTENIDO A INTEGRAR POR EL COMPAÑERO. NO MODIFICAR ESTA SUBSUBSECCIÓN.
+No se encontró un artículo que aplicara Hadoop, MapReduce o aprendizaje
+automático directamente al CSV de ocupabilidad. Sí se encontró un trabajo que
+combinó datos abiertos de turismo peruano con Google Trends y TripAdvisor para
+comparar modelos de regresión y árboles, pero usó arribos a sitios turísticos
+en lugar de ocupabilidad hotelera \cite{bravo_moche_ml2023}.
+
+También existe un antecedente peruano que levantó una solución Hadoop sobre
+datos de la misma Plataforma Nacional de Datos Abiertos, aunque en el sector
+salud \cite{viteri_hadoop_minisa2023}. Ese trabajo sirvió como referencia para
+la parte técnica. En este laboratorio se aplicó la idea al turismo con Hadoop
+3.5.0 en un solo nodo, levantado mediante Docker Compose. El aporte se centró
+en un pipeline reproducible, en la limpieza del esquema y en catorce consultas
+sobre la desagregación nacional. La literatura también señala que los datos
+administrados por instituciones públicas se aprovechan menos que otras fuentes
+turísticas \cite{mariani_baggio_bigdata2022}, lo que reforzó el uso de una
+fuente oficial abierta.
 
 \section{Metodología}
 \subsection{Proceso de procesamiento distribuido}
@@ -173,7 +218,13 @@ modelo. Las consultas 9 y 10 encadenan dos jobs. Las demás usan un job.
 Las preguntas cubren evolución temporal, diferencias territoriales, clases de
 hospedaje, capacidad, estacionalidad, estadística descriptiva, búsqueda de
 texto, extremos, cambios entre periodos y participación extranjera. Las cuatro
-últimas consultas usan la TNOH como etiqueta o variable objetivo.
+últimas consultas usan la TNOH como etiqueta o variable objetivo. La revisión
+de antecedentes ayudó a separar las consultas en tres grupos. Primero se
+midieron patrones descriptivos comparables con los estudios regionales. Luego
+se usaron jobs encadenados para resumir cambios entre periodos. Finalmente, se
+compararon modelos sencillos con una división temporal, porque entrenar con
+años pasados y evaluar 2024 y 2025-I representa mejor el uso real que una
+división aleatoria.
 
 \subsection{Flujo de ejecución}
 El orquestador ejecuta las consultas en orden y se detiene ante el primer
@@ -590,6 +641,6 @@ Cada consulta incluye un README. Las evidencias se documentan en
 
 \vspace{20pt}\hrule\vspace{10pt}
 \bibliographystyle{plain}
-\bibliography{Bibliog}
+\bibliography{Bibliog,../referencias/referencias}
 \addcontentsline{toc}{section}{Bibliografía}
 \end{document}
