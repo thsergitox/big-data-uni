@@ -6,6 +6,7 @@ from pathlib import Path
 
 FIXTURE = Path(__file__).parent / "fixtures" / "overall-small.csv"
 STATISTICS_FIXTURE = Path(__file__).parent / "fixtures" / "statistics-search-small.csv"
+CHAINED_FIXTURE = Path(__file__).parent / "fixtures" / "chained-small.csv"
 
 
 def read_rows():
@@ -126,6 +127,51 @@ def query08_reference():
     ]
 
 
+def chained_rows():
+    with CHAINED_FIXTURE.open(encoding="utf-8", newline="") as source:
+        return list(csv.DictReader(source, delimiter=";"))
+
+
+def query09_reference():
+    values = defaultdict(list)
+    for row in chained_rows():
+        if row["ID_CLASE"] == "TT" and row["ID_CATEGORIA"] == "TT":
+            values[(row["DEPARTAMENTO"], row["ANIO"])].append(
+                float(row["PORCENTAJE_TNOH"])
+            )
+    means = {key: sum(items) / len(items) for key, items in values.items()}
+    departments = sorted({department for department, _ in means})
+    return [
+        f"{department}\t2019={means[(department, '2019')]:.4f}"
+        f"\t2024={means[(department, '2024')]:.4f}"
+        f"\tchange_pp={means[(department, '2024')] - means[(department, '2019')]:.4f}"
+        for department in departments
+    ]
+
+
+def period(year):
+    if year == 2019:
+        return "PRE_2019"
+    if year <= 2021:
+        return "IMPACT_2020_2021"
+    if year <= 2024:
+        return "RECOVERY_2022_2024"
+    return "CURRENT_2025_H1"
+
+
+def query10_reference():
+    shares = defaultdict(list)
+    for row in chained_rows():
+        arrivals = int(row["TOTAL_ARRIBOS"])
+        if row["ID_CLASE"] == "TT" and row["ID_CATEGORIA"] == "TT" and arrivals:
+            key = (row["DEPARTAMENTO"], period(int(row["ANIO"])))
+            shares[key].append(100 * int(row["TOTAL_ARRIBOS_EXT"]) / arrivals)
+    return [
+        f"{department};{label}\tmean_foreign_share={sum(items) / len(items):.4f}"
+        for (department, label), items in sorted(shares.items())
+    ]
+
+
 class ReferenceResultsTest(unittest.TestCase):
     def test_query01(self):
         self.assertEqual(
@@ -186,6 +232,27 @@ class ReferenceResultsTest(unittest.TestCase):
         self.assertEqual(
             ["2019\tmin=LIMA:10.0000\tmax=AREQUIPA:30.0000"],
             query08_reference(),
+        )
+
+    def test_query09(self):
+        self.assertEqual(
+            [
+                "CUSCO\t2019=30.0000\t2024=25.0000\tchange_pp=-5.0000",
+                "LIMA\t2019=20.0000\t2024=35.0000\tchange_pp=15.0000",
+            ],
+            query09_reference(),
+        )
+
+    def test_query10_excludes_zero_arrivals(self):
+        self.assertEqual(
+            [
+                "CUSCO;RECOVERY_2022_2024\tmean_foreign_share=10.0000",
+                "LIMA;CURRENT_2025_H1\tmean_foreign_share=50.0000",
+                "LIMA;IMPACT_2020_2021\tmean_foreign_share=20.0000",
+                "LIMA;PRE_2019\tmean_foreign_share=20.0000",
+                "LIMA;RECOVERY_2022_2024\tmean_foreign_share=35.0000",
+            ],
+            query10_reference(),
         )
 
 
