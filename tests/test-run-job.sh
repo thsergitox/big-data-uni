@@ -112,7 +112,89 @@ test_prompts_for_missing_values() {
     fail 'el modo interactivo no exportó resultado.txt al host'
 }
 
+test_defaults_results_to_invocation_directory() {
+  local temp_dir
+  temp_dir="$(mktemp -d)"
+  trap 'rm -rf "$temp_dir"' RETURN
+
+  mkdir -p "$temp_dir/bin" "$temp_dir/query01" "$temp_dir/source"
+  printf 'class Example {}\n' >"$temp_dir/source/Example.java"
+  printf 'row\n' >"$temp_dir/input.csv"
+  : >"$temp_dir/docker-calls"
+  create_fake_docker "$temp_dir/bin"
+
+  (
+    cd "$temp_dir/query01"
+    env PATH="$temp_dir/bin:$PATH" DOCKER_CALLS="$temp_dir/docker-calls" \
+      "$RUNNER" \
+        --source "$temp_dir/source" \
+        --main example.ExampleDriver \
+        --input "$temp_dir/input.csv" \
+        --output examen
+  )
+
+  [[ -f "$temp_dir/query01/resultados/examen/resultado.txt" ]] || \
+    fail 'el resultado por defecto no quedó junto a la consulta'
+}
+
+test_exports_job_jar() {
+  local temp_dir
+  temp_dir="$(mktemp -d)"
+  trap 'rm -rf "$temp_dir"' RETURN
+
+  mkdir -p "$temp_dir/bin" "$temp_dir/source"
+  printf 'class Example {}\n' >"$temp_dir/source/Example.java"
+  printf 'row\n' >"$temp_dir/input.csv"
+  : >"$temp_dir/docker-calls"
+  create_fake_docker "$temp_dir/bin"
+
+  PATH="$temp_dir/bin:$PATH" DOCKER_CALLS="$temp_dir/docker-calls" \
+    HADOOP_RESULTS_DIR="$temp_dir/results" \
+    "$RUNNER" \
+      --source "$temp_dir/source" \
+      --main example.ExampleDriver \
+      --input "$temp_dir/input.csv" \
+      --output examen
+
+  [[ -f "$temp_dir/results/examen/examen.jar" ]] || \
+    fail 'no se exportó el JAR al host'
+}
+
+test_accepts_shared_sources_and_job_arguments() {
+  local temp_dir
+  temp_dir="$(mktemp -d)"
+  trap 'rm -rf "$temp_dir"' RETURN
+
+  mkdir -p \
+    "$temp_dir/bin" \
+    "$temp_dir/source-common" \
+    "$temp_dir/source-query"
+  printf 'class Common {}\n' >"$temp_dir/source-common/Common.java"
+  printf 'class Query {}\n' >"$temp_dir/source-query/Query.java"
+  printf 'row\n' >"$temp_dir/input.csv"
+  : >"$temp_dir/docker-calls"
+  create_fake_docker "$temp_dir/bin"
+
+  PATH="$temp_dir/bin:$PATH" DOCKER_CALLS="$temp_dir/docker-calls" \
+    HADOOP_RESULTS_DIR="$temp_dir/results" \
+    "$RUNNER" \
+      --source "$temp_dir/source-common" \
+      --source "$temp_dir/source-query" \
+      --main example.ExampleDriver \
+      --input "$temp_dir/input.csv" \
+      --output examen \
+      --job-arg HOTEL
+
+  assert_contains "$temp_dir/docker-calls" "$temp_dir/source-common/."
+  assert_contains "$temp_dir/docker-calls" "$temp_dir/source-query/."
+  assert_contains "$temp_dir/docker-calls" \
+    'example.ExampleDriver /labs/examen/input /labs/examen/output HOTEL'
+}
+
 test_runs_a_java_job_with_one_command
 test_prompts_for_missing_values
+test_defaults_results_to_invocation_directory
+test_exports_job_jar
+test_accepts_shared_sources_and_job_arguments
 
 printf 'PASS: ejecutor de trabajos Hadoop\n'

@@ -3,12 +3,13 @@ set -Eeuo pipefail
 
 readonly SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 readonly PROJECT_DIR="$(cd "$SCRIPT_DIR/.." && pwd)"
-readonly REPOSITORY_DIR="$(cd "$PROJECT_DIR/.." && pwd)"
 readonly COMPOSE_FILE="$PROJECT_DIR/compose.yaml"
 readonly -a COMPOSE=(docker compose --project-directory "$PROJECT_DIR" -f "$COMPOSE_FILE")
-readonly RESULTS_DIR="${HADOOP_RESULTS_DIR:-$REPOSITORY_DIR/resultados}"
+readonly INVOCATION_DIR="$PWD"
+readonly RESULTS_DIR="${HADOOP_RESULTS_DIR:-$INVOCATION_DIR/resultados}"
 
-SOURCE_DIR=''
+SOURCE_DIRS=()
+JOB_ARGS=()
 MAIN_CLASS=''
 INPUT_PATH=''
 OUTPUT_NAME=''
@@ -17,8 +18,9 @@ REMOTE_ROOT=''
 usage() {
   cat <<'EOF'
 Uso:
-  run-job.sh --source <carpeta-java> --main <clase-principal> \
-    --input <archivo-o-carpeta> --output <nombre>
+  run-job.sh --source <carpeta-java> [--source <carpeta-java>] \
+    --main <clase-principal> --input <archivo-o-carpeta> --output <nombre> \
+    [--job-arg <valor>]
 
 Ejemplo:
   ./hadoop3/scripts/run-job.sh \
@@ -43,7 +45,12 @@ parse_arguments() {
     case "$1" in
       --source)
         (($# >= 2)) || die 'falta el valor de --source'
-        SOURCE_DIR="$2"
+        SOURCE_DIRS+=("$2")
+        shift 2
+        ;;
+      --job-arg)
+        (($# >= 2)) || die 'falta el valor de --job-arg'
+        JOB_ARGS+=("$2")
         shift 2
         ;;
       --main)
@@ -73,9 +80,11 @@ parse_arguments() {
 }
 
 prompt_for_missing_arguments() {
-  if [[ -z "$SOURCE_DIR" ]]; then
+  if ((${#SOURCE_DIRS[@]} == 0)); then
+    local source_dir
     printf 'Carpeta con los archivos .java: '
-    IFS= read -r SOURCE_DIR || die 'no se pudo leer la carpeta de fuentes'
+    IFS= read -r source_dir || die 'no se pudo leer la carpeta de fuentes'
+    SOURCE_DIRS+=("$source_dir")
   fi
   if [[ -z "$MAIN_CLASS" ]]; then
     printf 'Clase principal: '
@@ -92,16 +101,20 @@ prompt_for_missing_arguments() {
 }
 
 validate_arguments() {
-  [[ -n "$SOURCE_DIR" ]] || die 'debes indicar --source'
+  ((${#SOURCE_DIRS[@]} > 0)) || die 'debes indicar --source'
   [[ -n "$MAIN_CLASS" ]] || die 'debes indicar --main'
   [[ -n "$INPUT_PATH" ]] || die 'debes indicar --input'
   [[ -n "$OUTPUT_NAME" ]] || die 'debes indicar --output'
-  [[ -d "$SOURCE_DIR" ]] || die "no existe la carpeta de fuentes: $SOURCE_DIR"
   [[ -e "$INPUT_PATH" ]] || die "no existe la entrada: $INPUT_PATH"
   [[ "$OUTPUT_NAME" =~ ^[A-Za-z0-9._-]+$ ]] || \
     die '--output solo admite letras, números, punto, guion y guion bajo'
-  find "$SOURCE_DIR" -type f -name '*.java' -print -quit | grep -q . || \
-    die "no hay archivos .java en: $SOURCE_DIR"
+
+  local source_dir
+  for source_dir in "${SOURCE_DIRS[@]}"; do
+    [[ -d "$source_dir" ]] || die "no existe la carpeta de fuentes: $source_dir"
+    find "$source_dir" -type f -name '*.java' -print -quit | grep -q . || \
+      die "no hay archivos .java en: $source_dir"
+  done
 
   if [[ -d "$INPUT_PATH" ]]; then
     find "$INPUT_PATH" -maxdepth 1 -type f -print -quit | grep -q . || \
@@ -125,6 +138,7 @@ ensure_cluster_is_running() {
 }
 
 prepare_remote_workspace() {
+  local index
   REMOTE_ROOT="/tmp/hadoop-runner-$OUTPUT_NAME"
 
   "${COMPOSE[@]}" exec -T namenode \
@@ -134,7 +148,12 @@ prepare_remote_workspace() {
   "${COMPOSE[@]}" exec -T namenode \
     chown -R hadoop:users "$REMOTE_ROOT"
 
-  "${COMPOSE[@]}" cp "$SOURCE_DIR/." "namenode:$REMOTE_ROOT/source/"
+  for index in "${!SOURCE_DIRS[@]}"; do
+    "${COMPOSE[@]}" exec -T namenode \
+      mkdir -p "$REMOTE_ROOT/source/$index"
+    "${COMPOSE[@]}" cp \
+      "${SOURCE_DIRS[$index]}/." "namenode:$REMOTE_ROOT/source/$index/"
+  done
   if [[ -d "$INPUT_PATH" ]]; then
     "${COMPOSE[@]}" cp "$INPUT_PATH/." "namenode:$REMOTE_ROOT/input/"
   else
@@ -177,7 +196,8 @@ run_job() {
   local hdfs_output="/labs/$OUTPUT_NAME/output"
 
   "${COMPOSE[@]}" exec -T --user hadoop namenode \
-    hadoop jar "$REMOTE_ROOT/job.jar" "$MAIN_CLASS" "$hdfs_input" "$hdfs_output"
+    hadoop jar "$REMOTE_ROOT/job.jar" "$MAIN_CLASS" \
+      "$hdfs_input" "$hdfs_output" "${JOB_ARGS[@]}"
 
   "${COMPOSE[@]}" exec -T --user hadoop namenode \
     hdfs dfs -test -e "$hdfs_output/_SUCCESS" || \
@@ -193,13 +213,15 @@ export_result() {
   local remote_result="$REMOTE_ROOT/resultado.txt"
   local local_output_dir="$RESULTS_DIR/$OUTPUT_NAME"
   local local_result="$local_output_dir/resultado.txt"
+  local local_jar="$local_output_dir/$OUTPUT_NAME.jar"
 
   "${COMPOSE[@]}" exec -T --user hadoop namenode \
     hdfs dfs -getmerge "$hdfs_output/part-*" "$remote_result"
   mkdir -p "$local_output_dir"
   "${COMPOSE[@]}" cp "namenode:$remote_result" "$local_result"
+  "${COMPOSE[@]}" cp "namenode:$REMOTE_ROOT/job.jar" "$local_jar"
 
-  printf '\nResultado guardado en:\n%s\n' "$local_result"
+  printf '\nArtefactos guardados en:\n%s\n%s\n' "$local_result" "$local_jar"
 }
 
 cleanup_remote_workspace() {
@@ -215,7 +237,7 @@ main() {
   prepare_remote_workspace
   trap cleanup_remote_workspace EXIT
 
-  printf 'Compilando %s...\n' "$SOURCE_DIR"
+  printf 'Compilando %s...\n' "${SOURCE_DIRS[*]}"
   compile_job
   upload_input
   run_job
