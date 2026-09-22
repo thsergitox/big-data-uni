@@ -1,0 +1,205 @@
+\documentclass{beamer}
+
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[spanish]{babel}
+\usepackage{booktabs}
+\usepackage{graphicx}
+\usepackage{tabularx}
+
+\usetheme{Madrid}
+\usecolortheme{default}
+\setbeamertemplate{navigation symbols}{}
+\setbeameroption{hide notes}
+\graphicspath{{../images/}}
+
+\title[Indicadores de Ocupabilidad]{Análisis de los Indicadores de Ocupabilidad de MINCETUR}
+\subtitle{Hadoop MapReduce, clasificación y regresión}
+\author[Pezo y Pérez]{Sergio Sebastian Pezo Jimenez \and Arbués Enrique Pérez Villegas}
+\institute[UNI]{Universidad Nacional de Ingeniería\\CC531 Análisis en Macrodatos}
+\date{22 de septiembre de 2026}
+
+\begin{document}
+
+% 1. Ambos presentan el trabajo.
+\begin{frame}
+  \titlepage
+  \note{Ambos: 20 s. Presentar el tema y explicar que se mostrará el origen del dato, el procesamiento y los resultados principales.}
+\end{frame}
+
+\section{Datos y antecedentes}
+
+% 2. Arbués explica la fuente y el punto de partida.
+\begin{frame}{Fuente y motivo del análisis}
+  \begin{columns}[T,onlytextwidth]
+    \column{0.58\textwidth}
+      \begin{itemize}
+        \item MINCETUR publica los indicadores en la Plataforma Nacional de Datos Abiertos.
+        \item La encuesta registra capacidad y uso de hospedajes a nivel nacional y regional.
+        \item El MEF usa estos indicadores como referencia para estimar demanda turística.
+      \end{itemize}
+    \column{0.38\textwidth}
+      \begin{block}{Lo encontrado}
+        Los estudios previos se concentran en una región y usan métodos estadísticos clásicos.
+      \end{block}
+  \end{columns}
+  \vfill
+  {\tiny Fuentes: MINCETUR (2021), MEF (2021), Taipe y Laura (2021), Ñahuincopa y Rojas (2022).}
+  \note{Arbués: 55 s. Explicar que el dataset sí se ha usado, pero no se encontró un trabajo con Hadoop o aprendizaje automático aplicado directamente a este CSV.}
+\end{frame}
+
+% 3. Arbués presenta el contenido y las reglas de limpieza.
+\begin{frame}{Dataset consolidado}
+  \begin{columns}[T,onlytextwidth]
+    \column{0.46\textwidth}
+      \begin{tabular}{@{}lr@{}}
+        \toprule
+        Periodo & 2019--2025-I \\
+        Registros & 38 730 \\
+        Columnas & 24 columnas \\
+        Departamentos & 25 \\
+        Archivos originales & 7 \\
+        \bottomrule
+      \end{tabular}
+    \column{0.50\textwidth}
+      \textbf{Datos principales}
+      \begin{itemize}
+        \item establecimientos, habitaciones y plazas-cama;
+        \item TNOH, TNOC y permanencia;
+        \item arribos, pernoctaciones y empleo.
+      \end{itemize}
+  \end{columns}
+  \vspace{0.4em}
+  Se conservaron intactos los CSV originales. El archivo canónico usa UTF-8, punto decimal y una cabecera común.
+  \note{Arbués: 55 s. Aclarar que 2025 contiene solo enero a junio y que la consolidación permitió usar una sola entrada para las catorce consultas.}
+\end{frame}
+
+% 4. Arbués conecta la revisión bibliográfica con el diseño técnico.
+\begin{frame}{Cómo la investigación guio las decisiones}
+  \begin{tabularx}{\textwidth}{@{}p{0.29\textwidth}X@{}}
+    \toprule
+    Hallazgo & Decisión tomada \\
+    \midrule
+    Estudios limitados a una región & Comparar los 25 departamentos y varios periodos en Q01--Q10. \\
+    cambio de esquema en 2024 & Normalizar nombres, orden y cantidad de columnas antes de cargar HDFS. \\
+    Filas consolidadas mezcladas & Aplicar TT/TT para evitar doble conteo en agregaciones nacionales. \\
+    Predominio de regresiones clásicas & Comparar clasificación y regresión en Q11--Q14. \\
+    Datos mensuales ordenados & Usar división temporal: entrenar con 2019--2023 y evaluar años posteriores. \\
+    \bottomrule
+  \end{tabularx}
+  \note{Arbués: 70 s. Esta es la conexión central: cada hallazgo terminó convertido en una regla del pipeline o en un grupo de consultas.}
+\end{frame}
+
+\section{Hadoop y consultas}
+
+% 5. Sergio explica solo la arquitectura usada en el laboratorio.
+\begin{frame}{Arquitectura Hadoop usada}
+  \begin{columns}[T,onlytextwidth]
+    \column{0.48\textwidth}
+      \begin{itemize}
+        \item Hadoop 3.5.0 en un solo nodo.
+        \item Docker Compose levantó NameNode, DataNode, ResourceManager, NodeManager y HistoryServer.
+        \item HDFS guardó la entrada y las salidas.
+        \item YARN ejecutó y registró los jobs MapReduce.
+      \end{itemize}
+    \column{0.48\textwidth}
+      \includegraphics[width=\linewidth]{resourcemanager-applications.png}
+      \vspace{0.2em}
+
+      {\tiny Aplicaciones finalizadas en ResourceManager durante la ejecución.}
+  \end{columns}
+  \note{Sergio: 55 s. Contar cómo se levantó el entorno con Docker Compose, se subió el CSV a HDFS y se ejecutaron los JAR. Aclarar que el nodo único prueba el flujo, no la escalabilidad horizontal.}
+\end{frame}
+
+% 6. Sergio agrupa las consultas descriptivas base.
+\begin{frame}{Consultas descriptivas: Q01--Q05}
+  \small
+  \begin{tabularx}{\textwidth}{@{}lp{0.43\textwidth}X@{}}
+    \toprule
+    Consulta & Pregunta & Resultado destacado \\
+    \midrule
+    Q01 & Arribos nacionales y extranjeros por año & En 2020 ambos grupos cayeron con fuerza. \\
+    Q02 & TNOH promedio por departamento y año & Se observaron diferencias territoriales persistentes. \\
+    Q03 & TNOH y TNOC por clase & Se comparó la ocupación de hoteles, resorts y otras clases. \\
+    Q04 & Empleo por cada cien habitaciones & Se relacionó personal reportado y capacidad por departamento. \\
+    Q05 & Arribos y pernoctaciones por mes & Se revisó la estacionalidad de la demanda. \\
+    \bottomrule
+  \end{tabularx}
+  \vfill
+  \textbf{Ejemplo:} los arribos nacionales pasaron de 54,9 millones en 2019 a 34,6 millones en 2020.
+  \note{Sergio: 65 s. No leer toda la tabla. Explicar que este grupo responde preguntas nacionales, territoriales y estacionales, y dar el ejemplo de la caída de 2020.}
+\end{frame}
+
+% 7. Sergio cubre estadística, búsqueda, extremos y jobs encadenados.
+\begin{frame}{Estadística y consultas encadenadas: Q06--Q10}
+  \small
+  \begin{tabularx}{\textwidth}{@{}lp{0.44\textwidth}X@{}}
+    \toprule
+    Consulta & Tipo & Resultado destacado \\
+    \midrule
+    Q06 & Media, mediana y desviación de TNOH & Media 21,74; mediana 21,34. \\
+    Q07 & Búsqueda de subtexto & Filtrado configurable por departamento. \\
+    Q08 & Máximo y mínimo anual & Identificó extremos departamentales. \\
+    Q09 & Dos jobs: cambio 2019--2024 & Apurímac: $-18,73$ pp; Ucayali: $+5,04$ pp. \\
+    Q10 & Dos jobs: participación extranjera en Cusco & 63,37\% antes de 2020 y 58,35\% en recuperación. \\
+    \bottomrule
+  \end{tabularx}
+  \note{Sergio: 75 s. Destacar que Q09 y Q10 encadenan dos jobs: el primero resume cada periodo y el segundo compara esas salidas.}
+\end{frame}
+
+\section{Modelos y cierre}
+
+% 8. Sergio presenta la comparación de clasificación.
+\begin{frame}{Clasificación de ocupabilidad: Q11--Q12}
+  \begin{columns}[T,onlytextwidth]
+    \column{0.55\textwidth}
+      \begin{tabular}{@{}lrr@{}}
+        \toprule
+        Modelo & F1 2024 & F1 2025-I \\
+        \midrule
+        Q11 Naive Bayes & 0,4403 & 0,4675 \\
+        Q12 Logística & \textbf{0,7931} & \textbf{0,6939} \\
+        \bottomrule
+      \end{tabular}
+    \column{0.41\textwidth}
+      \begin{block}{Lectura}
+        La regresión logística logró un mejor equilibrio entre precisión y recall en ambos periodos.
+      \end{block}
+  \end{columns}
+  \vspace{0.7em}
+  La etiqueta separó ocupabilidad alta y baja usando la mediana de TNOH del entrenamiento.
+  \note{Sergio: 55 s. Explicar la etiqueta y comparar el F1. Evitar detallar las fórmulas de ambos modelos.}
+\end{frame}
+
+% 9. Arbués presenta la comparación de regresión.
+\begin{frame}{Predicción de TNOH: Q13--Q14}
+  \begin{tabular}{@{}lrrrr@{}}
+    \toprule
+    & \multicolumn{2}{c}{2024} & \multicolumn{2}{c}{2025-I} \\
+    \cmidrule(lr){2-3}\cmidrule(l){4-5}
+    Modelo & RMSE & $R^2$ & RMSE & $R^2$ \\
+    \midrule
+    Q13 Lineal & 4,0920 & 0,6435 & 3,9273 & 0,6622 \\
+    Q14 Ridge & \textbf{4,0726} & \textbf{0,6469} & \textbf{3,8796} & \textbf{0,6703} \\
+    \bottomrule
+  \end{tabular}
+  \vspace{1em}
+  Ridge redujo un poco el error, pero la mejora fue pequeña. Los dos modelos conservaron la misma división temporal y las mismas variables.
+  \note{Arbués: 55 s. Explicar que ridge regulariza los coeficientes y que la diferencia existe, pero no se debe exagerar porque es pequeña.}
+\end{frame}
+
+% 10. Ambos cierran con lo demostrado y los límites.
+\begin{frame}{Conclusiones y límites}
+  \begin{itemize}
+    \item Se logró unificar siete CSV sin modificar los originales.
+    \item Las catorce consultas dejaron salida real y un JAR reproducible.
+    \item La investigación previa ayudó a normalizar el esquema, evitar doble conteo y elegir una evaluación temporal.
+    \item La regresión logística obtuvo el mejor F1 y ridge mejoró ligeramente el RMSE.
+  \end{itemize}
+  \begin{alertblock}{Límites}
+    2025 contiene solo seis meses. El clúster tuvo un nodo y el dataset no representa macrodatos por volumen.
+  \end{alertblock}
+  \note{Ambos: 45 s. Arbués resume las decisiones de datos y Sergio cierra con resultados y límites. Dejar el tiempo restante para una pregunta.}
+\end{frame}
+
+\end{document}
