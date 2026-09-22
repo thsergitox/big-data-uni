@@ -14,6 +14,7 @@
 \theoremstyle{definition}
 \renewcommand{\thefootnote}{\fnsymbol{footnote}}
 \graphicspath{{../images/}}
+\hypersetup{hidelinks}
 \lstdefinestyle{resultado}{basicstyle=\ttfamily\scriptsize,breaklines=true,
   columns=fullflexible,frame=single,backgroundcolor=\color{gray!7},
   showstringspaces=false}
@@ -150,11 +151,9 @@ final, se obtuvieron 38 730 registros entre enero de 2019 y junio de 2025.
 
 Los archivos originales se leyeron como Latin-1 y se conservaron intactos. El
 script validó la cabecera, la cantidad de columnas, el rango de años y los
-campos numéricos. El archivo final fue
-\path{data/Indicadores_ocupabilidad_2019_2025.csv}. Para agregaciones generales
-se filtraron las filas con \texttt{ID\_CLASE=TT} e
-\texttt{ID\_CATEGORIA=TT}. Ese filtro fue necesario porque el dataset repite
-totales en distintos niveles de clase y categoría.
+campos numéricos. Para agregaciones generales se usaron solo las filas totales
+de clase y categoría, identificadas como TT/TT. Ese filtro fue necesario porque
+el dataset repite totales en distintos niveles.
 
 \subsection{Antecedentes e investigaciones relacionadas}
 % CONTENIDO A INTEGRAR POR EL COMPAÑERO. NO MODIFICAR ESTA SUBSECCIÓN.
@@ -178,10 +177,8 @@ texto, extremos, cambios entre periodos y participación extranjera. Las cuatro
 
 \subsection{Flujo de ejecución}
 El orquestador ejecuta las consultas en orden y se detiene ante el primer
-error. Cada salida quedó en
-\path{queries/queryXX/resultados/queryXX/resultado.txt}, junto al JAR. También
-se creó \path{queries/execution-summary.tsv} con clase principal, estado, ruta
-HDFS y artefactos locales.
+error. Cada salida quedó en su carpeta de resultados, junto al JAR. También se
+creó un resumen TSV con clase principal, estado, ruta HDFS y artefactos locales.
 
 \subsection{Métricas de evaluación}
 Para clasificación se usaron accuracy, precisión, recall, F1 y log loss. Para
@@ -260,8 +257,8 @@ cien habitaciones en cada departamento y año? Se usaron año, departamento,
 empleo y habitaciones.
 
 \textbf{Solución y código.} El Mapper emitió empleo y habitaciones TT/TT. El
-Reducer calculó $100\times empleo/habitaciones$. Se usaron las clases
-\texttt{EmploymentCapacity}.
+Reducer sumó ambos campos. Después calculó la razón por habitación y la
+multiplicó por 100. Se usaron las clases \texttt{EmploymentCapacity}.
 \begin{lstlisting}[style=resultado]
 2019;LIMA    employment_per_100_rooms=74.3232
 2024;LIMA    employment_per_100_rooms=54.3562
@@ -592,7 +589,6 @@ Cada consulta incluye un README. Las evidencias se documentan en
 \path{labs/labca1/images/README.md}.
 
 \vspace{20pt}\hrule\vspace{10pt}
-\nocite{*}
 \bibliographystyle{plain}
 \bibliography{Bibliog}
 \addcontentsline{toc}{section}{Bibliografía}
