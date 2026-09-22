@@ -1,0 +1,9 @@
+2026-09-22T14:41:56-05:00
+NAME                            CPU %      MEM USAGE / LIMIT     MEM %     NET I/O           BLOCK I/O         PIDS
+hadoop3-lab-nodemanager-1       1103.66%   1.193GiB / 38.58GiB   3.09%     94.3MB / 36MB     5.99MB / 27.8MB   407
+hadoop3-lab-historyserver-1     0.14%      346.9MiB / 38.58GiB   0.88%     185kB / 113kB     979kB / 1.26MB    79
+hadoop3-lab-resourcemanager-1   2.00%      475.5MiB / 38.58GiB   1.20%     2.75MB / 1.42MB   25.2MB / 24.2MB   301
+hadoop3-lab-datanode-1          0.25%      335.5MiB / 38.58GiB   0.85%     116MB / 97.8MB    2.39MB / 110MB    82
+hadoop3-lab-namenode-1          1.46%      992.1MiB / 38.58GiB   2.51%     7.95MB / 85.4MB   147MB / 46.6MB    124
+en_mancha_redis                 0.63%      17.36MiB / 38.58GiB   0.04%     176kB / 126B      8.74MB / 0B       6
+en_mancha_postgres              0.00%      40.42MiB / 38.58GiB   0.10%     176kB / 126B      24.5MB / 102kB    6
