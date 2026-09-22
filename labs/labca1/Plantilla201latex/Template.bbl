@@ -5,4 +5,10 @@ Nancy Lynch.
 \newblock {A hundred impossibility proofs for distributed computing}.
 \newblock In {\em {Proceedings of the eighth annual ACM Symposium on Principles of distributed computing (PODC '89)}}, 1989.
 
+\bibitem{mincetur_ocupabilidad}
+{Ministerio de Comercio Exterior y Turismo (MINCETUR)}.
+\newblock Indicadores de ocupabilidad.
+\newblock Plataforma Nacional de Datos Abiertos.
+\newblock Consultado el 22 de septiembre de 2026.
+
 \end{thebibliography}

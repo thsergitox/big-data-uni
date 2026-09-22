@@ -25,24 +25,36 @@
 
 \begin{document}
 
-\title{Title}
+\title{Análisis Sobre el Dataset de Indicadores de Ocupabilidad del Ministerio de Comercio Exterior y Turismo}
 \date{}
 \maketitle
 
 \begin{center}
-	Student:\\
-	\vspace{5pt}
-	{\large StudentNames StudentLastNames}\\
-	Universidad Nacional de Ingenier\'ia, Facultad de Ciencias,\\
-	e-mail: mail@uni.pe
+    Students:\\
+    \vspace{4pt}
+    \begin{minipage}[t]{0.45\textwidth}
+        \centering
+        {\large Sergio Sebastian Pezo Jimenez}\\[3pt]
+        Universidad Nacional de Ingenier\'ia,\\
+        Facultad de Ciencias\\
+        e-mail: sergio.pezo.j@uni.pe
+    \end{minipage}
+    \hfill
+    \begin{minipage}[t]{0.45\textwidth}
+        \centering
+        {\large Arbués Enrique Perez Villegas}\\[3pt]
+        Universidad Nacional de Ingenier\'ia,\\
+        Facultad de Ciencias\\
+        e-mail: arbues.perez.v@uni.pe
+    \end{minipage}
 
 \end{center}
 \vspace{5pt}
 \begin{center}
 	Curso:\\
 	\vspace{5pt}
-	{\large Codigo del Cursos y Nombre del Curso}\\
-	{\large Laboratorio 0x}\\
+	{\large CC531 Análisis en Macrodatos}\\
+	{\large Laboratorio 01}\\
 
 
 
@@ -68,22 +80,100 @@
 \hrule
 \vspace{10pt}
 
-\section{Introduction}
+\section{Introducción}
 
-\section{Theoretical Framework}
+\subsection{Contexto del problema}
+\subsection{Objetivos del laboratorio}
+\subsection{Organización del informe}
 
-\subsection{Subsection}
-If necessary...
+\section{Entorno Experimental y Despliegue de Hadoop}
 
-\section{Methodolody (or change section name according to the work)}
+\subsection{Arquitectura del entorno}
+\subsection{Configuración de la máquina virtual de nodo único}
+\subsection{Despliegue de Hadoop 3 mediante Docker Compose}
+\subsection{Servicios de Hadoop y persistencia de datos}
+\subsection{Configuración de HDFS y ejecución de MapReduce}
+\subsection{Verificación del entorno}
 
-\section{Results and Discussion}
+\section{Descripción del Dataset}
 
-\section{Conclusions}
+\subsection{Fuente, publicación y actualización}
+El dataset de Indicadores de Ocupabilidad del Ministerio de Comercio Exterior y Turismo (MINCETUR) se obtuvo de la Plataforma Nacional de Datos Abiertos \cite{mincetur_ocupabilidad}.
 
-\section{Anexo Codigo}
-\section{Anexo Documentación}
+\subsection{Descripción general del dataset}
+\subsection{Estructura, campos y tipos de datos}
+\subsection{Preprocesamiento y carga en HDFS}
 
+\subsection{Antecedentes e investigaciones relacionadas}
+\subsubsection{Investigaciones previas sobre el dataset}
+\subsubsection{Artículos que utilizaron el dataset}
+
+\section{Metodología}
+
+\subsection{Proceso de procesamiento distribuido}
+\subsection{Diseño de preguntas y consultas}
+\subsection{Flujo de ejecución}
+\subsection{Métricas de evaluación}
+
+\section{Consultas MapReduce}
+
+En cada consulta se especifican la pregunta que responde, los campos empleados, la lógica de la solución, los elementos relevantes del código, el input, el output y la interpretación del resultado.
+
+\subsection{Consultas que emplean dos o más campos}
+\subsubsection{Consulta 1}
+\subsubsection{Consulta 2}
+\subsubsection{Consulta 3}
+\subsubsection{Consulta 4}
+\subsubsection{Consulta 5}
+
+\subsection{Medidas estadísticas}
+\subsubsection{Promedio, media y desviación estándar de un campo}
+
+\subsection{Búsqueda de subtexto}
+\subsubsection{Búsqueda sobre múltiples campos de texto}
+
+\subsection{Valores máximos y mínimos}
+\subsubsection{Máximo y mínimo de campos agrupados}
+
+\subsection{Consultas con MapReduce encadenado}
+\subsubsection{Consulta encadenada 1 con campos decimales}
+\subsubsection{Consulta encadenada 2 con campos decimales}
+
+\section{Consultas mediante Modelos de Clasificación}
+
+\subsection{Consulta y modelo de clasificación 1}
+\subsection{Consulta y modelo de clasificación 2}
+\subsection{Comparación de modelos de clasificación}
+
+\section{Consultas mediante Modelos de Regresión}
+
+\subsection{Consulta y modelo de regresión 1}
+\subsection{Consulta y modelo de regresión 2}
+\subsection{Comparación de modelos de regresión}
+
+\section{Monitoreo de Recursos}
+
+\subsection{Recursos observados durante la ejecución}
+\subsection{Consumo de CPU}
+\subsection{Consumo de memoria}
+\subsection{Tiempo de ejecución}
+\subsection{Análisis del comportamiento de Hadoop}
+
+\section{Resultados y Discusión}
+
+\subsection{Resultados de las consultas MapReduce}
+\subsection{Resultados de clasificación}
+\subsection{Resultados de regresión}
+\subsection{Discusión general}
+
+\section{Conclusiones}
+
+\appendix
+
+\section{Anexo: Código fuente Java y archivos JAR}
+\section{Anexo: Inputs y outputs de las consultas}
+\section{Anexo: Docker Compose y configuración de Hadoop}
+\section{Anexo: Documentación adicional}
 
 %\begin{center}
 %{\large \bf Agradecimientos}
