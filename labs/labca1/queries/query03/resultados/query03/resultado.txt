@@ -1,0 +1,49 @@
+2019;ALBERGUE	mean_tnoh=20.6260	mean_tnoc=19.8976
+2019;APART HOTEL	mean_tnoh=27.2702	mean_tnoc=24.2735
+2019;ECOLODGE	mean_tnoh=31.3058	mean_tnoc=25.1383
+2019;HOSTAL	mean_tnoh=27.8309	mean_tnoc=23.5879
+2019;HOTEL	mean_tnoh=31.2412	mean_tnoc=26.3323
+2019;NO CLASIFICADO	mean_tnoh=26.9012	mean_tnoc=22.5088
+2019;RESORT	mean_tnoh=53.1136	mean_tnoc=45.1300
+2020;ALBERGUE	mean_tnoh=8.0373	mean_tnoc=6.5964
+2020;APART HOTEL	mean_tnoh=19.3703	mean_tnoc=15.6923
+2020;ECOLODGE	mean_tnoh=10.1889	mean_tnoc=9.0983
+2020;HOSTAL	mean_tnoh=20.0059	mean_tnoc=16.5251
+2020;HOTEL	mean_tnoh=21.1950	mean_tnoc=16.1440
+2020;NO CLASIFICADO	mean_tnoh=16.9730	mean_tnoc=14.1725
+2020;RESORT	mean_tnoh=48.4683	mean_tnoc=41.3522
+2021;ALBERGUE	mean_tnoh=16.0166	mean_tnoc=12.7957
+2021;APART HOTEL	mean_tnoh=27.6839	mean_tnoc=25.1821
+2021;ECOLODGE	mean_tnoh=4.3550	mean_tnoc=5.2842
+2021;HOSTAL	mean_tnoh=26.2591	mean_tnoc=21.7081
+2021;HOTEL	mean_tnoh=27.6439	mean_tnoc=21.9785
+2021;NO CLASIFICADO	mean_tnoh=20.0906	mean_tnoc=16.5655
+2021;RESORT	mean_tnoh=53.1746	mean_tnoc=59.6767
+2022;ALBERGUE	mean_tnoh=19.2231	mean_tnoc=16.7634
+2022;APART HOTEL	mean_tnoh=25.9975	mean_tnoc=22.7648
+2022;ECOLODGE	mean_tnoh=11.3664	mean_tnoc=11.6241
+2022;HOSTAL	mean_tnoh=27.7146	mean_tnoc=23.4768
+2022;HOTEL	mean_tnoh=31.8896	mean_tnoc=27.0270
+2022;NO CLASIFICADO	mean_tnoh=20.8672	mean_tnoc=17.4202
+2022;RESORT	mean_tnoh=46.1238	mean_tnoc=46.1375
+2023;ALBERGUE	mean_tnoh=15.9954	mean_tnoc=13.6253
+2023;APART HOTEL	mean_tnoh=29.0270	mean_tnoc=26.3446
+2023;ECOLODGE	mean_tnoh=8.2453	mean_tnoc=7.7811
+2023;HOSTAL	mean_tnoh=25.4952	mean_tnoc=21.2039
+2023;HOTEL	mean_tnoh=28.2866	mean_tnoc=23.7086
+2023;NO CLASIFICADO	mean_tnoh=19.8074	mean_tnoc=16.3381
+2023;RESORT	mean_tnoh=46.3071	mean_tnoc=45.8721
+2024;ALBERGUE	mean_tnoh=19.6898	mean_tnoc=16.8772
+2024;APART HOTEL	mean_tnoh=26.1003	mean_tnoc=23.8208
+2024;ECOLODGE	mean_tnoh=19.5867	mean_tnoc=18.8293
+2024;HOSTAL	mean_tnoh=26.1366	mean_tnoc=21.9287
+2024;HOTEL	mean_tnoh=32.4184	mean_tnoc=27.6639
+2024;NO CLASIFICADO	mean_tnoh=20.0062	mean_tnoc=16.5830
+2024;RESORT	mean_tnoh=46.7742	mean_tnoc=48.2812
+2025;ALBERGUE	mean_tnoh=18.0034	mean_tnoc=14.7795
+2025;APART HOTEL	mean_tnoh=26.3199	mean_tnoc=22.8871
+2025;ECOLODGE	mean_tnoh=20.1217	mean_tnoc=20.2467
+2025;HOSTAL	mean_tnoh=25.0701	mean_tnoc=20.7981
+2025;HOTEL	mean_tnoh=31.1419	mean_tnoc=26.0641
+2025;NO CLASIFICADO	mean_tnoh=20.1055	mean_tnoc=17.0227
+2025;RESORT	mean_tnoh=47.0592	mean_tnoc=48.3442

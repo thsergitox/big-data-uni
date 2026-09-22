@@ -1,0 +1,4 @@
+MODEL	GAUSSIAN_NAIVE_BAYES
+TRAINING	samples=1500	threshold=21.7100
+TEST_2024	samples=300	tp=35	tn=176	fp=2	fn=87	accuracy=0.703333	precision=0.945946	recall=0.286885	f1=0.440252	log_loss=0.947039
+VALIDATION_2025_H1	samples=150	tp=18	tn=91	fp=0	fn=41	accuracy=0.726667	precision=1.000000	recall=0.305085	f1=0.467532	log_loss=0.854541

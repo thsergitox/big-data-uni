@@ -1,0 +1,12 @@
+01	arrivals=33585654	overnight_stays=43787718
+02	arrivals=32795352	overnight_stays=42942772
+03	arrivals=30277950	overnight_stays=38925722
+04	arrivals=26876660	overnight_stays=36257818
+05	arrivals=27472926	overnight_stays=37704195
+06	arrivals=27049656	overnight_stays=35765252
+07	arrivals=26760124	overnight_stays=35417748
+08	arrivals=27189886	overnight_stays=35699062
+09	arrivals=26098980	overnight_stays=33472076
+10	arrivals=28442528	overnight_stays=36747136
+11	arrivals=27057838	overnight_stays=34893159
+12	arrivals=27471523	overnight_stays=34226506

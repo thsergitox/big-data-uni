@@ -1,0 +1,1 @@
+TNOH	count=1950	mean=21.7433	median=21.3400	stddev=7.0678612717
