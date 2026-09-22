@@ -14,6 +14,7 @@ public final class CommonTest {
     appliesTemporalSplit();
     protectsModelMath();
     trainsClassificationModels();
+    trainsRegressionModels();
     calculatesRegressionMetrics();
     handlesConstantRegressionTargets();
     System.out.println("PASS: common query classes");
@@ -107,6 +108,19 @@ public final class CommonTest {
     check(logistic.probabilityHigh(new double[] {1.5, 1.0}) > 0.5, "logistic high");
     check(logistic.iterations() == 200, "logistic iterations");
     checkClose(0.1, logistic.learningRate(), "logistic learning rate");
+  }
+
+  private static void trainsRegressionModels() {
+    double[][] features = {{0.0}, {1.0}, {2.0}, {3.0}};
+    double[] targets = {1.0, 3.0, 5.0, 7.0};
+
+    LinearRegressionModel linear = LinearRegressionModel.fit(features, targets, 0.0);
+    checkClose(9.0, linear.predict(new double[] {4.0}), "linear prediction");
+    checkClose(0.0, linear.lambda(), "linear lambda");
+
+    LinearRegressionModel ridge = LinearRegressionModel.fit(features, targets, 1.0);
+    check(Double.isFinite(ridge.predict(new double[] {4.0})), "ridge prediction");
+    checkClose(1.0, ridge.lambda(), "ridge lambda");
   }
 
   private static void clipsProbabilitiesForLogLoss() {
