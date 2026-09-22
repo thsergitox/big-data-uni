@@ -7,12 +7,13 @@ DECK="$ROOT/beamer/beamer.tex"
 test -f "$DECK"
 
 frame_count=$(grep -c '\\begin{frame}' "$DECK")
-test "$frame_count" -eq 10 || {
-  echo "Se esperaban 10 diapositivas y se encontraron $frame_count" >&2
+test "$frame_count" -eq 11 || {
+  echo "Se esperaban 11 diapositivas y se encontraron $frame_count" >&2
   exit 1
 }
 
 grep -Fq 'Indicadores de Ocupabilidad' "$DECK"
+grep -Fq '\tableofcontents' "$DECK"
 grep -Fq 'Sergio Sebastian Pezo Jimenez' "$DECK"
 grep -Fq 'Arbués Enrique Pérez Villegas' "$DECK"
 
@@ -39,7 +40,7 @@ for required in \
   }
 done
 
-test "$(grep -c '\\note{' "$DECK")" -eq 10
+test "$(grep -c '\\note{' "$DECK")" -eq 11
 grep -Fq 'Arbués:' "$DECK"
 grep -Fq 'Sergio:' "$DECK"
 

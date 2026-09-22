@@ -1,6 +1,6 @@
 # Guion completo de exposición
 
-Duración prevista: **9 min 10 s**. El minuto restante sirve para abrir la
+Duración prevista: **9 min 25 s**. Los 35 segundos restantes sirve para abrir la
 demostración solicitada por el docente o responder una pregunta breve.
 
 ## Diapositiva 1. Portada — 20 s
@@ -13,10 +13,22 @@ los Indicadores de Ocupabilidad publicados por MINCETUR. Se preparó un dataset
 modelos de clasificación y regresión. La exposición se concentrará en las
 decisiones del análisis y en los resultados que sí se ejecutaron.”
 
-**Transición 1:** “Para comenzar, Arbués explicará de dónde salen los datos y por
+**Transición 2:** “Para comenzar, Arbués explicará de dónde salen los datos y por
 qué se eligieron.”
 
-## Diapositiva 2. Fuente y motivo del análisis — 55 s
+## Diapositiva 2. Contenido — 15 s
+
+**Sergio:**
+
+“Este es el recorrido de la exposición. Primero veremos la fuente y la estructura
+del dataset. Después explicaremos las decisiones de limpieza y el uso práctico
+de Hadoop. Luego agruparemos las consultas según los siete ítems de la práctica
+y cerraremos con clasificación, regresión y límites.”
+
+**Transición 2:** “Con el recorrido claro, Arbués explicará de dónde salen los datos
+y por qué se eligieron.”
+
+## Diapositiva 3. Fuente y motivo del análisis — 55 s
 
 **Arbués:**
 
@@ -31,10 +43,10 @@ principalmente en tesis regionales y con métodos estadísticos clásicos. No se
 encontró un trabajo que aplicara Hadoop o aprendizaje automático directamente a
 este CSV. Esa diferencia ayudó a definir el enfoque del laboratorio.”
 
-**Transición 2:** “Con la fuente identificada, el siguiente paso fue revisar qué
+**Transición 3:** “Con la fuente identificada, el siguiente paso fue revisar qué
 contenían realmente los archivos.”
 
-## Diapositiva 3. Dataset consolidado — 55 s
+## Diapositiva 4. Dataset consolidado — 55 s
 
 **Arbués:**
 
@@ -48,10 +60,10 @@ en UTF-8, con punto decimal y una cabecera común. También se trató 2025 como
 primer semestre, porque comparar esos seis meses como si fueran un año completo
 daría una conclusión incorrecta.”
 
-**Transición 3:** “La revisión de la fuente no quedó separada del código. Cada
+**Transición 4:** “La revisión de la fuente no quedó separada del código. Cada
 hallazgo produjo una decisión concreta del pipeline.”
 
-## Diapositiva 4. Cómo la investigación guio las decisiones — 70 s
+## Diapositiva 5. Cómo la investigación guio las decisiones — 70 s
 
 **Arbués:**
 
@@ -68,10 +80,10 @@ se decidió comparar dos clasificadores y dos regresores. La evaluación se hizo
 de forma temporal: se entrenó con 2019 a 2023 y se evaluó 2024 y 2025-I. Así no
 se mezcló información futura dentro del entrenamiento.”
 
-**Transición 4:** “Estas decisiones se ejecutaron sobre un entorno Hadoop que
+**Transición 5:** “Estas decisiones se ejecutaron sobre un entorno Hadoop que
 Sergio explicará desde el punto de vista práctico.”
 
-## Diapositiva 5. Arquitectura Hadoop usada — 55 s
+## Diapositiva 6. Arquitectura Hadoop usada — 55 s
 
 **Sergio:**
 
@@ -86,10 +98,10 @@ finalizadas. Este entorno demuestra todo el flujo de ejecución, aunque no busca
 probar escalabilidad horizontal porque todos los servicios compartieron una
 máquina.”
 
-**Transición 5:** “Con el entorno listo, las consultas se organizaron según los
+**Transición 6:** “Con el entorno listo, las consultas se organizaron según los
 siete ítems pedidos en la práctica.”
 
-## Diapositiva 6. Consultas descriptivas Q01–Q05 — 65 s
+## Diapositiva 7. Consultas descriptivas Q01–Q05 — 65 s
 
 **Sergio:**
 
@@ -104,10 +116,10 @@ El resultado más claro aparece en Q01. Los arribos nacionales bajaron de 54,9
 millones en 2019 a 34,6 millones en 2020. Luego se observó recuperación, pero
 2025 no se comparó directamente porque solo contiene seis meses.”
 
-**Transición 6:** “Los siguientes cuatro ítems cubren estadísticas, texto,
+**Transición 7:** “Los siguientes cuatro ítems cubren estadísticas, texto,
 extremos y consultas MapReduce encadenadas.”
 
-## Diapositiva 7. Estadística y consultas encadenadas Q06–Q10 — 75 s
+## Diapositiva 8. Estadística y consultas encadenadas Q06–Q10 — 75 s
 
 **Sergio:**
 
@@ -123,10 +135,10 @@ comparó la ocupabilidad de 2019 y 2024: Apurímac tuvo la mayor caída y Ucayal
 la mayor subida. Q10 agrupó la participación extranjera en Cusco y mostró una
 caída durante 2020 y 2021, seguida por recuperación.”
 
-**Transición 7:** “Después de responder las preguntas descriptivas, se pasó a
+**Transición 8:** “Después de responder las preguntas descriptivas, se pasó a
 los modelos de clasificación.”
 
-## Diapositiva 8. Clasificación Q11–Q12 — 55 s
+## Diapositiva 9. Clasificación Q11–Q12 — 55 s
 
 **Sergio:**
 
@@ -139,10 +151,10 @@ observó en F1. En 2024 la logística obtuvo 0,7931 frente a 0,4403 de Naive
 Bayes. En 2025-I volvió a superar al otro modelo. Por eso se consideró el
 clasificador más equilibrado en estos datos.”
 
-**Transición 8:** “Arbués cerrará la comparación de modelos con las dos
+**Transición 9:** “Arbués cerrará la comparación de modelos con las dos
 consultas de regresión.”
 
-## Diapositiva 9. Regresión Q13–Q14 — 55 s
+## Diapositiva 10. Regresión Q13–Q14 — 55 s
 
 **Arbués:**
 
@@ -155,10 +167,10 @@ Ridge redujo el RMSE de 4,0920 a 4,0726 en 2024. Para 2025-I bajó de 3,9273 a
 por lo que no se presenta como una diferencia grande. La conclusión correcta es
 que ridge tuvo una ligera ventaja manteniendo una evaluación comparable.”
 
-**Transición 9:** “Para terminar, Sergio y yo resumiremos qué se logró y qué
+**Transición 10:** “Para terminar, Sergio y yo resumiremos qué se logró y qué
 límites deben mantenerse claros.”
 
-## Diapositiva 10. Conclusiones y límites — 45 s
+## Diapositiva 11. Conclusiones y límites — 45 s
 
 **Arbués:**
 
