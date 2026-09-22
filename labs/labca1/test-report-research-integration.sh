@@ -32,6 +32,7 @@ grep -q 'doble conteo' "$REPORT"
 grep -q 'división temporal' "$REPORT"
 grep -q 'Docker Compose' "$REPORT"
 grep -Fq '../referencias/referencias' "$REPORT"
+grep -Fq '\bibliographystyle{ieeetr}' "$REPORT"
 
 for item in $(seq 1 7); do
   grep -Fq "ítem $item de la práctica" "$REPORT" || {

@@ -1,6 +1,6 @@
 # Guion completo de exposición
 
-Duración prevista: **9 min 25 s**. Los 35 segundos restantes sirve para abrir la
+Duración prevista: **9 min 35 s**. Los 25 segundos restantes sirven para abrir la
 demostración solicitada por el docente o responder una pregunta breve.
 
 ## Diapositiva 1. Portada — 20 s
@@ -13,8 +13,8 @@ los Indicadores de Ocupabilidad publicados por MINCETUR. Se preparó un dataset
 modelos de clasificación y regresión. La exposición se concentrará en las
 decisiones del análisis y en los resultados que sí se ejecutaron.”
 
-**Transición 2:** “Para comenzar, Arbués explicará de dónde salen los datos y por
-qué se eligieron.”
+**Transición 1:** “Antes de entrar en los resultados, mostramos brevemente el
+recorrido de la exposición.”
 
 ## Diapositiva 2. Contenido — 15 s
 
@@ -184,5 +184,19 @@ conteo y la necesidad de evaluar los modelos por tiempo.”
 regresión logística obtuvo el mejor F1 y ridge mejoró ligeramente el error de
 regresión. Como límites, 2025 tiene solo seis meses y el clúster usa un nodo. El
 trabajo demuestra el pipeline y las consultas, pero no escalabilidad
-horizontal. Con esto termina la exposición y podemos ejecutar la consulta que
-indique el docente.”
+horizontal.”
+
+**Transición 11:** “Antes de terminar, dejamos las fuentes principales que
+respaldan el dataset, los antecedentes y la arquitectura utilizada.”
+
+## Diapositiva 12. Referencias — 10 s
+
+**Ambos:**
+
+“Esta última diapositiva reúne las referencias principales en formato IEEE. No
+las leeremos una por una, pero quedan visibles para que se pueda rastrear la
+fuente oficial, los antecedentes regionales y los trabajos que orientaron la
+parte de MapReduce y macrodatos.”
+
+“Con esto termina la exposición. Ahora podemos ejecutar la consulta que indique
+el docente.”
