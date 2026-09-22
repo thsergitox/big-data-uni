@@ -33,4 +33,11 @@ grep -q 'división temporal' "$REPORT"
 grep -q 'Docker Compose' "$REPORT"
 grep -Fq '../referencias/referencias' "$REPORT"
 
+for item in $(seq 1 7); do
+  grep -Fq "ítem $item de la práctica" "$REPORT" || {
+    echo "Falta relacionar el informe con el ítem $item de la práctica" >&2
+    exit 1
+  }
+done
+
 echo "Integración de investigación verificada"

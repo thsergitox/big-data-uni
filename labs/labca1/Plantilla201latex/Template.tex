@@ -244,6 +244,8 @@ archivos de código, la entrada, una salida real, una interpretación y una
 limitación. La entrada fue el CSV consolidado en todos los casos.
 
 \subsection{Consultas que emplean dos o más campos}
+Este bloque corresponde al ítem 1 de la práctica. Incluye cinco consultas que
+combinan al menos dos columnas del dataset.
 \subsubsection{Consulta 1: arribos nacionales y extranjeros}
 \textbf{Tipo y pregunta.} Agregación por año. ¿Cómo evolucionaron los arribos
 nacionales y extranjeros? Se usaron \texttt{ANIO},
@@ -337,6 +339,7 @@ acumulados, mientras septiembre tuvo el menor valor. Enero a junio incluyen
 siete años, pero julio a diciembre solo seis. La suma no está balanceada.
 
 \subsection{Medidas estadísticas}
+Esta consulta corresponde al ítem 2 de la práctica.
 \subsubsection{Consulta 6: media, mediana y desviación estándar de TNOH}
 \textbf{Tipo y pregunta.} Estadística descriptiva. ¿Cuál es la cantidad, media,
 mediana y desviación estándar poblacional de TNOH?
@@ -353,6 +356,7 @@ dataset es pequeño. Para más datos convendría un método distribuido de
 cuantiles.
 
 \subsection{Búsqueda de subtexto}
+Esta consulta corresponde al ítem 3 de la práctica.
 \subsubsection{Consulta 7: búsqueda sobre campos de texto}
 \textbf{Tipo y pregunta.} Filtro por subtexto. ¿Qué registros contienen la
 palabra hotel en clase, categoría o departamento? La búsqueda no distingue
@@ -370,6 +374,7 @@ HOTEL aparece como clase en muchos registros. La búsqueda es literal; no aplica
 sinónimos, ranking ni normalización de acentos.
 
 \subsection{Valores máximos y mínimos}
+Esta consulta corresponde al ítem 4 de la práctica.
 \subsubsection{Consulta 8: extremos de TNOH por año}
 \textbf{Tipo y pregunta.} ¿Qué departamentos tuvieron la menor y mayor TNOH
 media de cada año? Se usaron año, departamento y TNOH.
@@ -388,6 +393,8 @@ calculó la media departamental y eligió ambos extremos. Se usaron las clases
 el primer semestre.
 
 \subsection{Consultas con MapReduce encadenado}
+Este bloque corresponde al ítem 5 de la práctica. Cada consulta usa dos jobs
+MapReduce enlazados.
 \subsubsection{Consulta 9: cambio de ocupación entre 2019 y 2024}
 \textbf{Tipo y pregunta.} Dos jobs. ¿Cuántos puntos porcentuales cambió la TNOH
 media de cada departamento entre 2019 y 2024?
@@ -423,6 +430,8 @@ CUSCO;CURRENT_2025_H1     mean_foreign_share=67.4504
 ponderar por arribos; no equivale a dividir los acumulados del periodo.
 
 \section{Consultas mediante Modelos de Clasificación}
+Este bloque corresponde al ítem 6 de la práctica y compara dos modelos de
+clasificación con la misma partición temporal.
 \subsection{Consulta 11: Gaussian Naive Bayes}
 \textbf{Pregunta, campos y código.} Se clasificó la TNOH como alta o baja. Se
 usaron mes, establecimientos, habitaciones, camas, arribos por habitación,
@@ -470,6 +479,8 @@ Bayes tuvo mayor precisión, pero perdió muchos positivos. Con estos datos, la
 regresión logística dejó el mejor resultado general.
 
 \section{Consultas mediante Modelos de Regresión}
+Este bloque corresponde al ítem 7 de la práctica y compara dos modelos de
+regresión con las mismas variables y periodos de evaluación.
 \subsection{Consulta 13: regresión lineal}
 \textbf{Pregunta, campos y código.} Se estimó la TNOH con las mismas siete
 características y la misma separación temporal. El Reducer ajustó una regresión

@@ -94,19 +94,19 @@
 
 % 5. Sergio explica solo la arquitectura usada en el laboratorio.
 \begin{frame}{Arquitectura Hadoop usada}
+  \begin{itemize}
+    \item Hadoop 3.5.0 se ejecutó en un solo nodo levantado con Docker Compose.
+    \item HDFS guardó la entrada y las salidas; YARN ejecutó y registró los JAR de MapReduce.
+  \end{itemize}
   \begin{columns}[T,onlytextwidth]
     \column{0.48\textwidth}
-      \begin{itemize}
-        \item Hadoop 3.5.0 en un solo nodo.
-        \item Docker Compose levantó NameNode, DataNode, ResourceManager, NodeManager y HistoryServer.
-        \item HDFS guardó la entrada y las salidas.
-        \item YARN ejecutó y registró los jobs MapReduce.
-      \end{itemize}
-    \column{0.48\textwidth}
-      \includegraphics[width=\linewidth]{resourcemanager-applications.png}
-      \vspace{0.2em}
+      \includegraphics[width=\linewidth,height=0.36\textheight,keepaspectratio]{namenode-overview.png}
 
-      {\tiny Aplicaciones finalizadas en ResourceManager durante la ejecución.}
+      {\tiny Entrada y bloques observados en NameNode.}
+    \column{0.48\textwidth}
+      \includegraphics[width=\linewidth,height=0.36\textheight,keepaspectratio]{resourcemanager-applications.png}
+
+      {\tiny Aplicaciones finalizadas en ResourceManager.}
   \end{columns}
   \note{Sergio: 55 s. Contar cómo se levantó el entorno con Docker Compose, se subió el CSV a HDFS y se ejecutaron los JAR. Aclarar que el nodo único prueba el flujo, no la escalabilidad horizontal.}
 \end{frame}
@@ -114,6 +114,9 @@
 % 6. Sergio agrupa las consultas descriptivas base.
 \begin{frame}{Consultas descriptivas: Q01--Q05}
   \small
+  \textbf{Q01--Q05: ítem 1 de la práctica, cinco consultas con dos o más campos.}
+  \vspace{0.35em}
+
   \begin{tabularx}{\textwidth}{@{}lp{0.43\textwidth}X@{}}
     \toprule
     Consulta & Pregunta & Resultado destacado \\
@@ -133,6 +136,9 @@
 % 7. Sergio cubre estadística, búsqueda, extremos y jobs encadenados.
 \begin{frame}{Estadística y consultas encadenadas: Q06--Q10}
   \small
+  \textbf{Q06: ítem 2 \quad Q07: ítem 3 \quad Q08: ítem 4 \quad Q09--Q10: ítem 5}
+  \vspace{0.35em}
+
   \begin{tabularx}{\textwidth}{@{}lp{0.44\textwidth}X@{}}
     \toprule
     Consulta & Tipo & Resultado destacado \\
@@ -151,6 +157,9 @@
 
 % 8. Sergio presenta la comparación de clasificación.
 \begin{frame}{Clasificación de ocupabilidad: Q11--Q12}
+  \textbf{Q11--Q12: ítem 6 de la práctica, dos modelos de clasificación.}
+  \vspace{0.55em}
+
   \begin{columns}[T,onlytextwidth]
     \column{0.55\textwidth}
       \begin{tabular}{@{}lrr@{}}
@@ -173,6 +182,9 @@
 
 % 9. Arbués presenta la comparación de regresión.
 \begin{frame}{Predicción de TNOH: Q13--Q14}
+  \textbf{Q13--Q14: ítem 7 de la práctica, dos modelos de regresión.}
+  \vspace{0.55em}
+
   \begin{tabular}{@{}lrrrr@{}}
     \toprule
     & \multicolumn{2}{c}{2024} & \multicolumn{2}{c}{2025-I} \\
