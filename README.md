@@ -252,8 +252,17 @@ de al menos 4 GB de memoria libre para una experiencia estable.
 ├── docs/hadoop/       explicaciones conceptuales por tema
 ├── hadoop2/           entorno Docker de Hadoop 2.10.2
 ├── hadoop3/           entorno Docker de Hadoop 3.5.0
+├── labs/              trabajos de laboratorio del curso
 └── tests/             validaciones estáticas de ambos entornos
 ```
+
+### Laboratorios
+
+| Carpeta | Contenido |
+| --- | --- |
+| [`labs/labca1/`](labs/labca1/) | Laboratorio 1: informe en LaTeX y su plantilla |
+| [`labs/labca1/referencias/`](labs/labca1/referencias/README.md) | Investigación bibliográfica sobre el dataset de MINCETUR: metodología, fuentes, BibTeX y bullets de presentación |
+| [`labs/Ventas/`](labs/Ventas/) | Ejemplo de MapReduce en Java sobre un CSV de ventas |
 
 Los manuales originales proporcionados por el docente no se publican aquí porque
 no se cuenta con autorización para redistribuirlos. El entorno toma como punto de
