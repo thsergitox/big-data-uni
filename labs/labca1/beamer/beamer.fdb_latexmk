@@ -1,8 +1,8 @@
 # Fdb version 4
-["pdflatex"] 1790112798.24636 "/home/sergi/Documents/semesters/nine/bigdata/labs/labca1/beamer/beamer.tex" "beamer.pdf" "beamer" 1790112799.56643 0
+["pdflatex"] 1790113524.83125 "/home/sergi/Documents/semesters/nine/bigdata/labs/labca1/beamer/beamer.tex" "beamer.pdf" "beamer" 1790113525.99745 0
   "../images/namenode-overview.png" 1790106576.1361 210060 8cfc1f91e9e4c1e78007ee0717e75ea8 ""
   "../images/resourcemanager-applications.png" 1790106576.36333 618101 d6bd1778160e7a5c5f24458a856a6df8 ""
-  "/home/sergi/Documents/semesters/nine/bigdata/labs/labca1/beamer/beamer.tex" 1790112796.5924 9692 d81c632fbcc4ff76ba97f3053699d3f5 ""
+  "/home/sergi/Documents/semesters/nine/bigdata/labs/labca1/beamer/beamer.tex" 1790113523.49739 9976 d66f8024a9cb239b81766e6f909770b1 ""
   "/usr/share/texmf-dist/fonts/enc/dvips/cm-super/cm-super-t1.enc" 1775415801 2971 def0b6c1f0b107b3b936def894055589 ""
   "/usr/share/texmf-dist/fonts/tfm/jknappen/ec/ecsi0500.tfm" 1775415801 3584 cddc42a948742f3f690b828feeaf2449 ""
   "/usr/share/texmf-dist/fonts/tfm/jknappen/ec/ecsi0600.tfm" 1775415801 3584 812f7e2de5681b983f3aeaadd29c79b6 ""
@@ -218,10 +218,11 @@
   "/usr/share/texmf-dist/web2c/texmf.cnf" 1775415801 43569 fd570f2fa160877d211e859f687312ba ""
   "/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map" 1790110052 325717 59a65e600f662ceace641c3ea8b5d4af ""
   "/var/lib/texmf/web2c/pdftex/pdflatex.fmt" 1790110031 2349411 04d561ff45ff2936fb6bbd5c7f03c756 ""
-  "beamer.aux" 1790112799.48483 2803 d9904ab900435d9001972054ddd4668b "pdflatex"
-  "beamer.nav" 1790112799.48681 1612 cdb921322bef998edf98e58ce280a2fe "pdflatex"
-  "beamer.out" 1790112799.48574 417 00583f2ed295dae9ea7e602da2a6cc21 "pdflatex"
-  "beamer.tex" 1790112796.5924 9692 d81c632fbcc4ff76ba97f3053699d3f5 ""
+  "beamer.aux" 1790113525.92535 2931 ed615862d10b80dcd9057fd18b087404 "pdflatex"
+  "beamer.nav" 1790113525.92722 1704 0ce7e10b1ae1185edea21f5d2fb93190 "pdflatex"
+  "beamer.out" 1790113525.92597 417 00583f2ed295dae9ea7e602da2a6cc21 "pdflatex"
+  "beamer.tex" 1790113523.49739 9976 d66f8024a9cb239b81766e6f909770b1 ""
+  "beamer.toc" 1790113525.92722 192 ba84fe733873cded9d497074bf1f2df5 "pdflatex"
   (generated)
   "beamer.aux"
   "beamer.log"

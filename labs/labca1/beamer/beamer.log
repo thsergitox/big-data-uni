@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.29 (TeX Live 2026/Arch Linux) (preloaded format=pdflatex 2026.9.22)  22 SEP 2026 16:33
+This is pdfTeX, Version 3.141592653-2.6-1.40.29 (TeX Live 2026/Arch Linux) (preloaded format=pdflatex 2026.9.22)  22 SEP 2026 16:45
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -744,67 +744,72 @@ LaTeX Info: Redefining \. on input line 22.
 LaTeX Info: Redefining \% on input line 22.
  (./beamer.nav) [1
 
-{/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map}{/usr/share/texmf-dist/fonts/enc/dvips/cm-super/cm-super-t1.enc}] [2
+{/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map}{/usr/share/texmf-dist/fonts/enc/dvips/cm-super/cm-super-t1.enc}] (./beamer.toc
+LaTeX Info: Redefining \. on input line 1.
+LaTeX Info: Redefining \% on input line 1.
+) [2
+
+] [3
 
 ]
-LaTeX Font Info:    Trying to load font information for U+msa on input line 75.
+LaTeX Font Info:    Trying to load font information for U+msa on input line 81.
  (/usr/share/texmf-dist/tex/latex/amsfonts/umsa.fd
 File: umsa.fd 2013/01/14 v3.01 AMS symbols A
 )
-LaTeX Font Info:    Trying to load font information for U+msb on input line 75.
+LaTeX Font Info:    Trying to load font information for U+msb on input line 81.
  (/usr/share/texmf-dist/tex/latex/amsfonts/umsb.fd
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
-) [3
+) [4
 
 ]
-Underfull \hbox (badness 1158) in paragraph at lines 91--91
+Underfull \hbox (badness 1158) in paragraph at lines 97--97
 []|\T1/cmss/m/n/10.95 Estudios li-mi-ta-dos a
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 91--91
+Underfull \hbox (badness 10000) in paragraph at lines 97--97
 []|\T1/cmss/m/n/10.95 Filas con-so-li-da-das
  []
 
-[4
+[5
 
 ]
-<../images/namenode-overview.png, id=91, 1269.74374pt x 714.67pt>
+<../images/namenode-overview.png, id=105, 1269.74374pt x 714.67pt>
 File: ../images/namenode-overview.png Graphic file (type png)
 <use ../images/namenode-overview.png>
-Package pdftex.def Info: ../images/namenode-overview.png  used on input line 112.
+Package pdftex.def Info: ../images/namenode-overview.png  used on input line 118.
 (pdftex.def)             Requested size: 164.3556pt x 92.50687pt.
-<../images/resourcemanager-applications.png, id=92, 1445.4pt x 1003.75pt>
+<../images/resourcemanager-applications.png, id=106, 1445.4pt x 1003.75pt>
 File: ../images/resourcemanager-applications.png Graphic file (type png)
 <use ../images/resourcemanager-applications.png>
-Package pdftex.def Info: ../images/resourcemanager-applications.png  used on input line 112.
+Package pdftex.def Info: ../images/resourcemanager-applications.png  used on input line 118.
 (pdftex.def)             Requested size: 135.0207pt x 93.76437pt.
- [5
+ [6
 
- <../images/namenode-overview.png> <../images/resourcemanager-applications.png>] [6
+ <../images/namenode-overview.png> <../images/resourcemanager-applications.png>] [7
 
 ]
-Underfull \hbox (badness 1910) in paragraph at lines 154--154
+Underfull \hbox (badness 1910) in paragraph at lines 160--160
 []|\T1/cmss/m/n/10 Media, me-dia-na y des-via-ción de
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 154--154
+Underfull \hbox (badness 10000) in paragraph at lines 160--160
 []|\T1/cmss/m/n/10 Identificó ex-tre-mos de-par-ta-
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 154--154
+Underfull \hbox (badness 10000) in paragraph at lines 160--160
 []|\T1/cmss/m/n/10 63,37$ $% an-tes de 2020 y
  []
 
-[7
-
-] [8
+[8
 
 ] [9
 
 ] [10
+
+] [11
 
 ]
 \tf@nav=\write6
@@ -828,18 +833,18 @@ Package rerunfilecheck Info: File `beamer.out' has not changed.
 (rerunfilecheck)             Checksum: 00583F2ED295DAE9EA7E602DA2A6CC21;417.
  ) 
 Here is how much of TeX's memory you used:
- 23582 strings out of 469453
- 446622 string characters out of 5469037
+ 23624 strings out of 469453
+ 447702 string characters out of 5469037
  836161 words of memory out of 5000000
- 51746 multiletter control sequences out of 15000+600000
+ 51784 multiletter control sequences out of 15000+600000
  648679 words of font info for 87 fonts, out of 8000000 for 9000
  40 hyphenation exceptions out of 8191
- 101i,15n,107p,445b,821s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ 101i,15n,107p,445b,873s stack positions out of 10000i,1000n,20000p,200000b,200000s
 </usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmss10.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/share/texmf-dist/fonts/type1/public/cm-super/sfsi1095.pfb></usr/share/texmf-dist/fonts/type1/public/cm-super/sfss0600.pfb></usr/share/texmf-dist/fonts/type1/public/cm-super/sfss0800.pfb></usr/share/texmf-dist/fonts/type1/public/cm-super/sfss1000.pfb></usr/share/texmf-dist/fonts/type1/public/cm-super/sfss1095.pfb></usr/share/texmf-dist/fonts/type1/public/cm-super/sfss1200.pfb></usr/share/texmf-dist/fonts/type1/public/cm-super/sfss1440.pfb></usr/share/texmf-dist/fonts/type1/public/cm-super/sfsx1000.pfb></usr/share/texmf-dist/fonts/type1/public/cm-super/sfsx1095.pfb>
-Output written on beamer.pdf (10 pages, 815255 bytes).
+Output written on beamer.pdf (11 pages, 816629 bytes).
 PDF statistics:
- 226 PDF objects out of 1000 (max. 8388607)
- 142 compressed objects within 2 object streams
- 24 named destinations out of 1000 (max. 500000)
- 239 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 239 PDF objects out of 1000 (max. 8388607)
+ 152 compressed objects within 2 object streams
+ 26 named destinations out of 1000 (max. 500000)
+ 245 words of extra memory for PDF output out of 10000 (max. 10000000)
 
