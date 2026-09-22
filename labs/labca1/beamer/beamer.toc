@@ -1,1 +1,4 @@
-\beamer@sectionintoc {1}{Introduction and Context}{3}{0}{1}
+\babel@toc {spanish}{}\relax 
+\beamer@sectionintoc {1}{Datos y antecedentes}{2}{0}{1}
+\beamer@sectionintoc {2}{Hadoop y consultas}{5}{0}{2}
+\beamer@sectionintoc {3}{Modelos y cierre}{8}{0}{3}

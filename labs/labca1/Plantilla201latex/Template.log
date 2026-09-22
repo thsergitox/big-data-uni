@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.29 (TeX Live 2026/Arch Linux) (preloaded format=pdflatex 2026.5.16)  22 SEP 2026 15:40
+This is pdfTeX, Version 3.141592653-2.6-1.40.29 (TeX Live 2026/Arch Linux) (preloaded format=pdflatex 2026.9.22)  22 SEP 2026 16:33
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -511,37 +511,38 @@ LaTeX Info: Redefining \. on input line 2.
 LaTeX Info: Redefining \% on input line 2.
  [1
 
-{/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map}])
+{/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map}{/usr/share/texmf-dist/fonts/enc/dvips/cm-super/cm-super-t1.enc}])
 \tf@toc=\write4
 \openout4 = `Template.toc'.
 
  [2] [3] [4] [5] [6] [7] [8]
-<../images/namenode-overview.png, id=448, 1269.74374pt x 714.67pt>
+<../images/namenode-overview.png, id=450, 1269.74374pt x 714.67pt>
 File: ../images/namenode-overview.png Graphic file (type png)
 <use ../images/namenode-overview.png>
-Package pdftex.def Info: ../images/namenode-overview.png  used on input line 474.
+Package pdftex.def Info: ../images/namenode-overview.png  used on input line 536.
 (pdftex.def)             Requested size: 232.83147pt x 131.04504pt.
-<../images/resourcemanager-applications.png, id=449, 1445.4pt x 1003.75pt>
+<../images/resourcemanager-applications.png, id=451, 1445.4pt x 1003.75pt>
 File: ../images/resourcemanager-applications.png Graphic file (type png)
 <use ../images/resourcemanager-applications.png>
-Package pdftex.def Info: ../images/resourcemanager-applications.png  used on input line 478.
+Package pdftex.def Info: ../images/resourcemanager-applications.png  used on input line 540.
 (pdftex.def)             Requested size: 232.83147pt x 161.6754pt.
-<../images/nodemanager-resources.png, id=450, 1284.8pt x 722.7pt>
+ [9]
+<../images/nodemanager-resources.png, id=468, 1284.8pt x 722.7pt>
 File: ../images/nodemanager-resources.png Graphic file (type png)
 <use ../images/nodemanager-resources.png>
-Package pdftex.def Info: ../images/nodemanager-resources.png  used on input line 487.
+Package pdftex.def Info: ../images/nodemanager-resources.png  used on input line 549.
 (pdftex.def)             Requested size: 232.83147pt x 130.96259pt.
-<../images/jobhistory-query.png, id=451, 1284.8pt x 722.7pt>
+<../images/jobhistory-query.png, id=469, 1284.8pt x 722.7pt>
 File: ../images/jobhistory-query.png Graphic file (type png)
 <use ../images/jobhistory-query.png>
-Package pdftex.def Info: ../images/jobhistory-query.png  used on input line 491.
+Package pdftex.def Info: ../images/jobhistory-query.png  used on input line 553.
 (pdftex.def)             Requested size: 232.83147pt x 130.96259pt.
-<../images/docker-stats.png, id=452, 1284.8pt x 722.7pt>
+<../images/docker-stats.png, id=470, 1284.8pt x 722.7pt>
 File: ../images/docker-stats.png Graphic file (type png)
 <use ../images/docker-stats.png>
-Package pdftex.def Info: ../images/docker-stats.png  used on input line 509.
+Package pdftex.def Info: ../images/docker-stats.png  used on input line 571.
 (pdftex.def)             Requested size: 451.40144pt x 253.90817pt.
- [9 <../images/namenode-overview.png> <../images/resourcemanager-applications.png> <../images/nodemanager-resources.png> <../images/jobhistory-query.png>] [10 <../images/docker-stats.png>] (./Template.bbl) [11] (./Template.aux
+ [10 <../images/namenode-overview.png> <../images/resourcemanager-applications.png> <../images/nodemanager-resources.png> <../images/jobhistory-query.png>] [11 <../images/docker-stats.png>] (./Template.bbl [12{/usr/share/texmf-dist/fonts/enc/dvips/cm-super/cm-super-ts1.enc}]) [13] (./Template.aux
 LaTeX Info: Redefining \. on input line 11.
 LaTeX Info: Redefining \% on input line 11.
 LaTeX Info: Redefining \. on input line 12.
@@ -555,18 +556,18 @@ Package rerunfilecheck Info: File `Template.out' has not changed.
 (rerunfilecheck)             Checksum: 6E134E5A311700AAD70D25438CBFB60F;14795.
  ) 
 Here is how much of TeX's memory you used:
- 15758 strings out of 469453
- 242550 string characters out of 5469037
- 770750 words of memory out of 5000000
- 44073 multiletter control sequences out of 15000+600000
- 643167 words of font info for 83 fonts, out of 8000000 for 9000
+ 15787 strings out of 469453
+ 243143 string characters out of 5469037
+ 765082 words of memory out of 5000000
+ 44089 multiletter control sequences out of 15000+600000
+ 644188 words of font info for 85 fonts, out of 8000000 for 9000
  40 hyphenation exceptions out of 8191
  75i,9n,79p,620b,1128s stack positions out of 10000i,1000n,20000p,200000b,200000s
- </home/sergi/.texlive/texmf-var/fonts/pk/ljfour/jknappen/ec/ectt0800.525pk> </home/sergi/.texlive/texmf-var/fonts/pk/ljfour/jknappen/ec/ectt1000.600pk> </home/sergi/.texlive/texmf-var/fonts/pk/ljfour/jknappen/ec/ecbx1200.600pk> </home/sergi/.texlive/texmf-var/fonts/pk/ljfour/jknappen/ec/ecbx1000.600pk> </home/sergi/.texlive/texmf-var/fonts/pk/ljfour/jknappen/ec/ecbx1440.600pk> </home/sergi/.texlive/texmf-var/fonts/pk/ljfour/jknappen/ec/ecrm0900.600pk> </home/sergi/.texlive/texmf-var/fonts/pk/ljfour/jknappen/ec/ecbx0900.600pk> </home/sergi/.texlive/texmf-var/fonts/pk/ljfour/jknappen/ec/ecrm1200.600pk> </home/sergi/.texlive/texmf-var/fonts/pk/ljfour/jknappen/ec/ecrm1000.600pk> </home/sergi/.texlive/texmf-var/fonts/pk/ljfour/jknappen/ec/ecrm1728.600pk></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi9.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmr6.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmr7.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb>
-Output written on Template.pdf (11 pages, 1509170 bytes).
+</usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi9.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmr6.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmr7.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/share/texmf-dist/fonts/type1/public/cm-super/sfbx0900.pfb></usr/share/texmf-dist/fonts/type1/public/cm-super/sfbx1000.pfb></usr/share/texmf-dist/fonts/type1/public/cm-super/sfbx1200.pfb></usr/share/texmf-dist/fonts/type1/public/cm-super/sfbx1440.pfb></usr/share/texmf-dist/fonts/type1/public/cm-super/sfrm0900.pfb></usr/share/texmf-dist/fonts/type1/public/cm-super/sfrm1000.pfb></usr/share/texmf-dist/fonts/type1/public/cm-super/sfrm1200.pfb></usr/share/texmf-dist/fonts/type1/public/cm-super/sfrm1728.pfb></usr/share/texmf-dist/fonts/type1/public/cm-super/sfti1000.pfb></usr/share/texmf-dist/fonts/type1/public/cm-super/sftt0800.pfb></usr/share/texmf-dist/fonts/type1/public/cm-super/sftt1000.pfb>
+Output written on Template.pdf (13 pages, 1644831 bytes).
 PDF statistics:
- 1050 PDF objects out of 1200 (max. 8388607)
- 522 compressed objects within 6 object streams
- 143 named destinations out of 1000 (max. 500000)
+ 604 PDF objects out of 1000 (max. 8388607)
+ 543 compressed objects within 6 object streams
+ 152 named destinations out of 1000 (max. 500000)
  546 words of extra memory for PDF output out of 10000 (max. 10000000)
 
