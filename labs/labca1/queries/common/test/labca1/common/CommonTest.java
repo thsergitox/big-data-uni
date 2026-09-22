@@ -11,6 +11,9 @@ public final class CommonTest {
     createsLeakFreeFeaturesWithSafeRatios();
     calculatesClassificationMetrics();
     clipsProbabilitiesForLogLoss();
+    appliesTemporalSplit();
+    protectsModelMath();
+    trainsClassificationModels();
     calculatesRegressionMetrics();
     handlesConstantRegressionTargets();
     System.out.println("PASS: common query classes");
@@ -62,11 +65,48 @@ public final class CommonTest {
     check(metrics.falsePositives() == 1, "false positives");
     check(metrics.trueNegatives() == 1, "true negatives");
     check(metrics.falseNegatives() == 0, "false negatives");
+    check(metrics.count() == 4, "classification count");
     checkClose(0.75, metrics.accuracy(), "accuracy");
     checkClose(2.0 / 3.0, metrics.precision(), "precision");
     checkClose(1.0, metrics.recall(), "recall");
     checkClose(0.8, metrics.f1(), "f1");
-    check(Double.isFinite(metrics.logLoss()), "finite log loss");
+    double expectedLogLoss =
+        -(Math.log(0.9) + Math.log(0.2) + Math.log(0.7) + Math.log(0.9)) / 4.0;
+    checkClose(expectedLogLoss, metrics.logLoss(), "log loss");
+  }
+
+  private static void appliesTemporalSplit() {
+    check(TemporalSplit.isTraining(2019), "2019 training");
+    check(TemporalSplit.isTraining(2023), "2023 training");
+    check(!TemporalSplit.isTraining(2024), "2024 excluded from training");
+    check("TEST_2024".equals(TemporalSplit.evaluationPeriod(2024)), "2024 test");
+    check(
+        "VALIDATION_2025_H1".equals(TemporalSplit.evaluationPeriod(2025)),
+        "2025 validation");
+  }
+
+  private static void protectsModelMath() {
+    checkClose(1e-9, ModelMath.safeVariance(0.0), "variance epsilon");
+    checkClose(1.0, ModelMath.sigmoid(1000.0), "positive sigmoid overflow");
+    checkClose(0.0, ModelMath.sigmoid(-1000.0), "negative sigmoid overflow");
+    check(ModelMath.clipProbability(0.0) > 0.0, "lower probability clipping");
+    check(ModelMath.clipProbability(1.0) < 1.0, "upper probability clipping");
+  }
+
+  private static void trainsClassificationModels() {
+    double[][] features = {{-2.0, 1.0}, {-1.0, 1.0}, {1.0, 1.0}, {2.0, 1.0}};
+    boolean[] labels = {false, false, true, true};
+
+    GaussianNaiveBayesModel naiveBayes = GaussianNaiveBayesModel.fit(features, labels);
+    check(naiveBayes.probabilityHigh(new double[] {-1.5, 1.0}) < 0.5, "naive bayes low");
+    check(naiveBayes.probabilityHigh(new double[] {1.5, 1.0}) > 0.5, "naive bayes high");
+
+    LogisticRegressionModel logistic =
+        LogisticRegressionModel.fit(features, labels, 200, 0.1);
+    check(logistic.probabilityHigh(new double[] {-1.5, 1.0}) < 0.5, "logistic low");
+    check(logistic.probabilityHigh(new double[] {1.5, 1.0}) > 0.5, "logistic high");
+    check(logistic.iterations() == 200, "logistic iterations");
+    checkClose(0.1, logistic.learningRate(), "logistic learning rate");
   }
 
   private static void clipsProbabilitiesForLogLoss() {

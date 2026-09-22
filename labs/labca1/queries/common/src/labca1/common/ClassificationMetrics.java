@@ -1,8 +1,6 @@
 package labca1.common;
 
 public final class ClassificationMetrics {
-  private static final double MIN_PROBABILITY = 1e-15;
-
   private long truePositives;
   private long trueNegatives;
   private long falsePositives;
@@ -11,7 +9,7 @@ public final class ClassificationMetrics {
   private double logLossSum;
 
   public void add(boolean actualHigh, double highProbability) {
-    double probability = clip(highProbability);
+    double probability = ModelMath.clipProbability(highProbability);
     boolean predictedHigh = probability >= 0.5;
 
     if (actualHigh && predictedHigh) {
@@ -44,6 +42,10 @@ public final class ClassificationMetrics {
     return falseNegatives;
   }
 
+  public long count() {
+    return count;
+  }
+
   public double accuracy() {
     return divide(truePositives + trueNegatives, count);
   }
@@ -64,13 +66,6 @@ public final class ClassificationMetrics {
 
   public double logLoss() {
     return count == 0 ? 0.0 : logLossSum / count;
-  }
-
-  private static double clip(double probability) {
-    if (!Double.isFinite(probability)) {
-      throw new IllegalArgumentException("la probabilidad debe ser finita");
-    }
-    return Math.max(MIN_PROBABILITY, Math.min(1.0 - MIN_PROBABILITY, probability));
   }
 
   private static double divide(long numerator, long denominator) {
