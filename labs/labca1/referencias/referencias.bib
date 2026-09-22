@@ -1,0 +1,604 @@
+% =====================================================================
+% SET DE REFERENCIAS - Informe "Analisis en Macrodatos" (Big Data)
+% Dataset: MINCETUR - Indicadores de Ocupabilidad (PNDA), 2022-2025
+%
+% TIER 1 = leer y analizar (15 entradas, con analisis en el header)
+% TIER 2 = cita de contexto, lectura a nivel de abstract
+%
+% Verificacion: DOI resueltos contra api.crossref.org comparando titulo.
+% Sin DOI: URL comprobada con peticion HTTP real (200) o PDF descargado.
+% Generado: 2026-09-22
+% =====================================================================
+
+
+% #####################################################################
+% TIER 1
+% #####################################################################
+
+% [mincetur_ocupabilidad]  Seccion sugerida: Datos / Metodologia
+% Verificacion: API CKAN package_show leida en vivo (metadata_created / metadata_modified)
+% ANALISIS: Fuente oficial y autoritativa del dataset. Publicado 2021-12-31, ultima
+%   actualizacion del metadato 2026-08-04. 11 recursos CSV (2015 a 2025-S1) mas
+%   diccionario de datos, metadatos y ficha tecnica. Licencia ODC-BY. La fuente primaria
+%   es la Encuesta Mensual de Turismo para Establecimientos de Hospedaje (DGIETA-MINCETUR),
+%   operacion estadistica autorizada anualmente por Resolucion Jefatural del INEI.
+%   ADVERTENCIA: 2025 solo existe como Semestre I; el dataset no tiene el ano completo.
+% ORACION BORRADOR (EN): The dataset analysed here is the official MINCETUR "Indicadores de
+%   Ocupabilidad" release on Peru's National Open Data Platform, comprising [X] monthly
+%   records of lodging capacity and utilisation at national and regional level.
+@Misc{mincetur_ocupabilidad,
+  author       = {{Ministerio de Comercio Exterior y Turismo}},
+  title        = {Indicadores de Ocupabilidad [Conjunto de datos]},
+  howpublished = {Plataforma Nacional de Datos Abiertos (PNDA), Presidencia del Consejo de Ministros, Per\'u},
+  year         = {2021},
+  note         = {Publicado el 31 de diciembre de 2021; \'ultima actualizaci\'on del metadato: 4 de agosto de 2026. 11 recursos CSV (2015--2025 S1), diccionario de datos, metadatos y ficha t\'ecnica. Licencia Open Data Commons Attribution (ODC-BY). Identificador CKAN: dbf6bc9c-cabe-47f7-b052-d11cfdd4d9b0. Fuente primaria: Encuesta Mensual de Turismo para Establecimientos de Hospedaje (DGIETA-MINCETUR)},
+  url          = {https://www.datosabiertos.gob.pe/dataset/indicadores-de-ocupabilidad-ministerio-de-comercio-exterior-y-turismo-mincetur},
+  urldate      = {2026-09-22}
+}
+
+% [mef_ficha_tecnica_turismo2021]  Seccion sugerida: Justificacion / Datos
+% Verificacion: PDF oficial descargado y leido (mef.gob.pe)
+% ANALISIS: ES LA FUENTE MAS FUERTE PARA JUSTIFICAR EL DATASET. El Ministerio de Economia
+%   y Finanzas, en su capacitacion oficial sobre la Ficha Tecnica Simplificada para
+%   proyectos de inversion publica en servicios turisticos, INSTRUYE usar "los Indicadores
+%   mensuales de ocupabilidad de establecimientos de hospedaje de la pagina web del
+%   MINCETUR" como poblacion de referencia para estimar la demanda efectiva sin y con
+%   proyecto. Es decir: el dataset no es un insumo opcional, es una pieza exigida por la
+%   metodologia nacional de inversion publica. Eso convierte "usar estos datos" en una
+%   decision normada, no arbitraria.
+% ORACION BORRADOR (EN): Peru's Ministry of Economy and Finance mandates the use of
+%   MINCETUR's monthly lodging-occupancy indicators as the reference population for demand
+%   estimation in public tourism investment projects, which establishes [X] as a
+%   policy-grade data source rather than an optional one.
+@TechReport{mef_ficha_tecnica_turismo2021,
+  author      = {{Ministerio de Econom\'ia y Finanzas}},
+  title       = {Formulaci\'on de proyectos de inversi\'on para la creaci\'on, mejoramiento, ampliaci\'on y recuperaci\'on de servicios tur\'isticos p\'ublicos: Ficha T\'ecnica Simplificada},
+  institution = {Ministerio de Econom\'ia y Finanzas del Per\'u, Direcci\'on General de Inversi\'on P\'ublica},
+  address     = {Lima, Per\'u},
+  year        = {2021},
+  month       = nov,
+  note        = {VENTANA EXTENDIDA 2021. Capacitaci\'on oficial del MEF que instruye el uso de los Indicadores mensuales de ocupabilidad de establecimientos de hospedaje del MINCETUR como poblaci\'on de referencia para la estimaci\'on de demanda en proyectos de inversi\'on p\'ublica tur\'istica},
+  url         = {https://www.mef.gob.pe/contenidos/inv_publica/docs/capacitaciones/Capacitacion_2021_11_15.pdf},
+  urldate     = {2026-09-22}
+}
+
+% [taipe_laura_desestacionalizacion2021]  Seccion sugerida: Antecedentes
+% Verificacion: PDF completo descargado y leido (repositorio.unh.edu.pe)
+% ANALISIS: LA UNICA INVESTIGACION LOCALIZADA QUE CONSTRUYE SU BASE DE DATOS DIRECTAMENTE
+%   CON LOS INDICADORES DE OCUPABILIDAD. Textual: "se procedera a la construccion de una
+%   base datos a partir de los indicadores mensuales de ocupabilidad de establecimientos de
+%   hospedaje colectivo en la region Huancavelica; para el periodo 2003 al 2019", procesada
+%   en EViews 10. Usa la oferta de hospedaje (numero de habitaciones) como regresor de la
+%   llegada mensual de turistas, con variables dicotomicas para estimar estacionalidad y
+%   MCO para los parametros. Hallazgos: patron estacional en febrero, marzo, julio y
+%   octubre; efectos parciales de -1326, +1399, +1012 y +715 llegadas respectivamente;
+%   sin efecto autonomo significativo (la ecuacion final no incluye constante).
+% ORACION BORRADOR (EN): [X] is one of the very few studies to build its dataset directly
+%   from MINCETUR's monthly occupancy indicators, using lodging supply as a regressor for
+%   monthly tourist arrivals under a dummy-variable deseasonalisation approach.
+@MastersThesis{taipe_laura_desestacionalizacion2021,
+  author = {Taipe Pari, Hugo and Laura Huam{\'a}n, Juan Gustavo},
+  title  = {Desestacionalizaci\'on de la serie de tiempo llegada mensual de turistas y la oferta de hospedaje en la regi\'on Huancavelica, periodo 2003--2019},
+  school = {Universidad Nacional de Huancavelica},
+  year   = {2021},
+  type   = {Tesis para optar el t\'itulo profesional de Economista},
+  address = {Huancavelica, Per\'u},
+  note   = {VENTANA EXTENDIDA 2021. Construye su base de datos a partir de los indicadores mensuales de ocupabilidad de establecimientos de hospedaje colectivo de la regi\'on Huancavelica (2003--2019), procesada en EViews 10. Regresi\'on lineal multivariada con variables dicot\'omicas estacionales y MCO},
+  url    = {https://repositorio.unh.edu.pe/bitstreams/40f626d7-24d7-4b3a-a55c-e29b7f3cf001/download},
+  urldate = {2026-09-22}
+}
+
+% [nahuincopa_rojas_demanda2022]  Seccion sugerida: Antecedentes
+% Verificacion: registro ALICIA/CONCYTEC + PDF del repositorio UNH
+% ANALISIS: Tesis UNH 2022 que relaciona demanda turistica con capacidad hotelera, IPC e
+%   ingreso per capita en Huancavelica (2010--2019) mediante modelo lineal multivariado.
+%   Hallazgos citables: existe un nivel de demanda inercial no explicado por los regresores;
+%   la capacidad hotelera tiene efecto LIMITADO sobre la demanda; la elasticidad ingreso es
+%   inelastica; el nivel de precios tiene efecto significativo y directo (bien inferior).
+%   El resultado "capacidad hotelera -> efecto limitado" es exactamente el tipo de hallazgo
+%   que tu analisis puede poner a prueba con el universo completo en vez de una region.
+% ORACION BORRADOR (EN): Prior regional evidence for Peru finds only a limited effect of
+%   lodging capacity on tourism demand, a result that [X] can now test on the full national
+%   panel rather than a single region.
+@MastersThesis{nahuincopa_rojas_demanda2022,
+  author = {{\~N}ahuincopa Huarancca, Misael and Rojas Romero, Wendy Milinda},
+  title  = {La demanda tur\'istica y la capacidad hotelera en la regi\'on Huancavelica, per\'iodo 2010--2019},
+  school = {Universidad Nacional de Huancavelica},
+  year   = {2022},
+  type   = {Tesis de grado},
+  address = {Huancavelica, Per\'u},
+  note   = {Modelo lineal multivariado; la capacidad hotelera muestra un efecto limitado sobre la demanda tur\'istica y la elasticidad ingreso resulta inel\'astica},
+  url    = {https://hdl.handle.net/20.500.14597/5197},
+  urldate = {2026-09-22}
+}
+
+% [sanchez_davila_pobreza2026]  Seccion sugerida: Antecedentes / Discusion
+% Verificacion: DOI resuelto en Crossref, titulo comparado; abstract leido
+% ANALISIS: Articulo en journal indexado (Taylor & Francis) que aplica un modelo Panel
+%   Autoregressive Distributed Lag (PARDL) a 24 departamentos peruanos entre 2003 y 2022,
+%   separando turismo domestico de receptivo. Hallazgo central y contraintuitivo: el turismo
+%   DOMESTICO contribuye mas a reducir la pobreza que el receptivo, por su mayor volumen.
+%   Es el mejor ejemplo 2022-2026 de econometria de panel sobre turismo peruano a nivel
+%   subnacional, y cita a Lahura & Sabrera.
+% ORACION BORRADOR (EN): Department-level evidence for Peru shows that domestic tourism
+%   contributes more to poverty reduction than inbound tourism, motivating [X]'s
+%   disaggregation of occupancy indicators by region and origin of demand.
+@Article{sanchez_davila_pobreza2026,
+  author  = {S{\'a}nchez-D{\'a}vila, Elmer and Garc{\'i}a, Leidy Y.},
+  title   = {Does the origin of tourism matter for poverty reduction? Evidence from Peruvian's department, 2003--2022},
+  journal = {Journal of Policy Research in Tourism, Leisure and Events},
+  year    = {2026},
+  volume  = {18},
+  number  = {2},
+  pages   = {329--346},
+  doi     = {10.1080/19407963.2024.2448447},
+  note    = {Modelo PARDL sobre 24 departamentos peruanos, 2003--2022}
+}
+
+% [lahura_sabrera_kuelap2023]  Seccion sugerida: Antecedentes / Metodologia
+% Verificacion: DOI resuelto en Crossref, titulo comparado; PMC full text leido
+% ANALISIS: Articulo en Empirical Economics (Springer) que estima el efecto causal de la
+%   inversion en infraestructura sobre la demanda turistica peruana mediante control
+%   sintetico, usando sitios arqueologicos clasificados por MINCETUR como candidatos a
+%   unidad de control. Datos anuales y mensuales de MINCETUR e INEI (2008--2018).
+%   Hallazgo: las visitas a Kuelap se incrementaron aproximadamente 100% tras el paquete
+%   de inversion (teleferico + aeropuerto de Jaen). Es la mejor cita para demostrar que los
+%   datos oficiales peruanos soportan inferencia causal, no solo descriptivos.
+% ORACION BORRADOR (EN): Official Peruvian tourism statistics have already supported causal
+%   identification through synthetic control designs, establishing their suitability for
+%   [X]-style analysis beyond descriptive reporting.
+@Article{lahura_sabrera_kuelap2023,
+  author  = {Lahura, Erick and Sabrera, Rosario},
+  title   = {The effect of infrastructure investment on tourism demand: a synthetic control approach for the case of Kuelap, Peru},
+  journal = {Empirical Economics},
+  year    = {2023},
+  volume  = {65},
+  number  = {1},
+  pages   = {443--478},
+  doi     = {10.1007/s00181-022-02334-1},
+  note    = {Datos de visitantes de MINCETUR e INEI, 2008--2018}
+}
+
+% [bravo_moche_ml2023]  Seccion sugerida: Antecedentes / Metodologia
+% Verificacion: DOI resuelto en Crossref, titulo comparado; pagina MDPI renderizada y leida
+% ANALISIS: LA REFERENCIA MAS CERCANA AL CASO. Descarga los CSV de la Plataforma Nacional de
+%   Datos Abiertos del Peru (arribos mensuales por recurso turistico), los une con el Sistema
+%   de Inteligencia Turistica de MINCETUR (.xlsx), Google Trends y TripAdvisor, consolidando
+%   1 534 registros (enero 2011 - mayo 2022). Evalua regresion lineal, KNN, arbol de decision
+%   y random forest; gana regresion lineal para turistas nacionales y extranjeros.
+%   Los faltantes se normalizaron con el promedio del mes respectivo, sin borrar registros:
+%   es el mismo problema de datos faltantes que enfrentaras con el 2020 y el 2025-S1.
+% ORACION BORRADOR (EN): Prior work on Peruvian tourism already integrates official open
+%   data from the national platform with heterogeneous web sources, achieving [X] with
+%   comparable record counts and missing-value handling.
+@Article{bravo_moche_ml2023,
+  author  = {Bravo, Jessie and Alarc{\'o}n, Roger and Valdivia, Carlos and Serqu{\'e}n, Oscar},
+  title   = {Application of Machine Learning Techniques to Predict Visitors to the Tourist Attractions of the Moche Route in Peru},
+  journal = {Sustainability},
+  year    = {2023},
+  volume  = {15},
+  number  = {11},
+  pages   = {8967},
+  doi     = {10.3390/su15118967},
+  note    = {Consume CSV de la PNDA del Per\'u m\'as TripAdvisor y Google Trends; 1\,534 registros (2011--2022); cuatro algoritmos de regresi\'on}
+}
+
+% [bravo_amazonia_mlp2026]  Seccion sugerida: Antecedentes
+% Verificacion: DOI resuelto en Crossref, titulo comparado; texto completo en PMC
+% ANALISIS: Articulo 2026 que declara haber obtenido los datos de arribos de MINCETUR
+%   "freely available without copyright restrictions" y entrena perceptrones multicapa sobre
+%   dos decadas (2003--2023) para predecir flujos turisticos en la provincia de Bagua
+%   (Amazonas). Evalua dos escenarios, con y sin el ano anomalo 2020: exactamente la
+%   decision de diseno que tu informe debe documentar para la pandemia.
+% ORACION BORRADOR (EN): Recent peer-reviewed work trains neural models on two decades of
+%   MINCETUR arrival data, explicitly evaluating scenarios with and without the anomalous
+%   year 2020, as done in [X].
+@Article{bravo_amazonia_mlp2026,
+  author  = {Bravo-Jaico, Jessie and Serqu{\'e}n, Oscar and Alarc{\'o}n, Roger and Suarez-Rivadeneira, Juan Eduardo and Ruiz-Camacho, Wilfredo and Manayay, Freddy A.},
+  title   = {Artificial intelligence for biodiversity and tourism governance: predictive insights from multilayer perceptron models in Amazonia},
+  journal = {Frontiers in Artificial Intelligence},
+  year    = {2026},
+  volume  = {9},
+  pages   = {1702544},
+  doi     = {10.3389/frai.2026.1702544},
+  note    = {Datos de arribos descargados de MINCETUR (2003--2023), declarados de libre disponibilidad}
+}
+
+% [pinedo_flujos_peru2026]  Seccion sugerida: Antecedentes / Metodologia
+% Verificacion: DOI resuelto en Crossref; referencias del articulo recorridas via Semantic Scholar
+% ANALISIS: Estudio 2026 que construye una base mensual con el Sistema de Informacion
+%   Estadistica de Turismo de MINCETUR para los cinco destinos mas visitados y compara seis
+%   modelos: Seasonal Naive, SARIMA, SARIMAX, Random Forest, XGBoost y LightGBM. Hallazgo
+%   clave para tu discusion: el baseline estacional gana en MAPE (18,49% nacional y 12,06%
+%   internacional) pero el ML gana en R2 (LightGBM = 0,923). Es el argumento honesto de que
+%   "mas complejo" no siempre es "mejor error", pero si mejor explicacion.
+% ORACION BORRADOR (EN): A 2026 benchmark on Peruvian tourist flows reports that a seasonal
+%   baseline attains the lowest MAPE while gradient boosting attains the highest R2,
+%   justifying [X]'s reporting of both error and explanatory metrics.
+@Article{pinedo_flujos_peru2026,
+  author  = {Pinedo, Lloy and Solano-Lavado, Mariela-Stacy and Scattolon-Huapaya, Luciano and Fern{\'a}ndez-Trujillo, Mar{\'i}a-del-Carmen and Uma{\~n}a-Chac{\'o}n, Fabiola},
+  title   = {Forecasting tourist flows in Peru's major destinations to support sustainable management through data-driven approaches},
+  journal = {Frontiers in Sustainable Tourism},
+  year    = {2026},
+  volume  = {5},
+  pages   = {1876343},
+  doi     = {10.3389/frsut.2026.1876343},
+  note    = {Base mensual del Sistema de Informaci\'on Estad\'istica de Turismo de MINCETUR; seis modelos comparados}
+}
+
+% [ccora_ocupabilidad_panel2024]  Seccion sugerida: Antecedentes
+% Verificacion: registro ALICIA/CONCYTEC + repositorio UNH accesible (200)
+% ANALISIS: Tesis peruana 2024 que trabaja LA MISMA VARIABLE de tu dataset: la tasa de
+%   ocupabilidad hotelera desagregada en 7 categorias de hospedaje (1 a 5 estrellas,
+%   albergue y no categorizados). Panel de 924 observaciones (7 x 132 meses). El modelo de
+%   efectos aleatorios resulta el apropiado y evidencia heterogeneidad inobservable entre
+%   categorias; las variables mas significativas son el ingreso disponible (PBI) y la
+%   inflacion (IPC). Ese hallazgo justifica analizar la dimension "categoria" que tu CSV
+%   trae y que un analisis agregado desperdiciaria.
+% ORACION BORRADOR (EN): Prior panel evidence finds unobservable heterogeneity across
+%   lodging categories, which motivates [X]'s disaggregation by category rather than an
+%   aggregate national series.
+@MastersThesis{ccora_ocupabilidad_panel2024,
+  author = {Ccora Huallpa, Katerynne Jenny and Nu{\~n}ez Vargas, Te{\'o}filo},
+  title  = {Determinantes de la tasa de ocupabilidad hotelera en el Per\'u: Un an\'alisis de datos panel por categor\'ia de hospedaje para el periodo 2010--2020},
+  school = {Universidad Nacional de Huancavelica},
+  year   = {2024},
+  type   = {Tesis de grado},
+  address = {Huancavelica, Per\'u},
+  note   = {Panel de 924 observaciones (7 categor\'ias de hospedaje x 132 meses); modelo de efectos aleatorios},
+  url    = {https://hdl.handle.net/20.500.14597/9086},
+  urldate = {2026-09-22}
+}
+
+% [alvarado_ocupabilidad_rentabilidad2022]  Seccion sugerida: Antecedentes / Justificacion
+% Verificacion: registro ALICIA/CONCYTEC + LA Referencia (hdl resuelve, 200)
+% ANALISIS: Tesis de maestria 2022 con panel balanceado de 216 observaciones que conecta la
+%   tasa de ocupabilidad hotelera nacional con la rentabilidad financiera del sector. La
+%   especificacion agrupada es la adecuada y se halla efecto positivo y significativo de la
+%   ocupabilidad y de la tarifa promedio sobre la rentabilidad. Sirve para responder "y para
+%   que sirve medir esto": la ocupabilidad es predictor con significancia estadistica de
+%   resultados economicos, no un indicador decorativo.
+% ORACION BORRADOR (EN): Occupancy rates have been shown to be statistically significant
+%   predictors of hotel financial performance in Peru, which is why [X] treats them as a
+%   substantive variable rather than a descriptive statistic.
+@MastersThesis{alvarado_ocupabilidad_rentabilidad2022,
+  author = {Alvarado Anampa, Max Henrry},
+  title  = {La tasa de ocupabilidad hotelera y su efecto en la rentabilidad financiera en el Per\'u, 2016--2021},
+  school = {Universidad C\'esar Vallejo},
+  year   = {2022},
+  type   = {Tesis de maestr\'ia},
+  address = {Trujillo, Per\'u},
+  note   = {Panel balanceado de 216 observaciones; efecto positivo y significativo de la ocupabilidad sobre la rentabilidad financiera hotelera},
+  url    = {https://hdl.handle.net/20.500.12692/95715},
+  urldate = {2026-09-22}
+}
+
+% [graciano_demanda_sarima2024]  Seccion sugerida: Metodologia
+% Verificacion: cybertesis UNMSM accesible (200); PDF del repositorio leido
+% ANALISIS: Tesis UNMSM 2024 que descarga datos abiertos de MINCETUR (253 meses, enero 2002
+%   a julio 2023), imputa los 6 meses vacios de 2020 con filtro de Kalman y compara cinco
+%   modelos SARIMA bajo Box-Jenkins, seleccionando SARIMA(2,1,2)(1,1,3)12 con MAPE 10,89%.
+%   Es la cita que resuelve el problema de datos faltantes por la pandemia: imputacion
+%   explicita y documentada, no borrado de registros.
+% ORACION BORRADOR (EN): Missing pandemic-period observations were imputed via a Kalman
+%   filter rather than dropped, following [X], preserving the monthly continuity required
+%   for [X]'s time-series component.
+@MastersThesis{graciano_demanda_sarima2024,
+  author = {Graciano Alvarado, Domenico Giancarlo},
+  title  = {Modelaci\'on y proyecci\'on de la demanda de turismo en el Per\'u},
+  school = {Universidad Nacional Mayor de San Marcos},
+  year   = {2024},
+  type   = {Tesis de pregrado},
+  address = {Lima, Per\'u},
+  note   = {Datos abiertos de MINCETUR, enero 2002--julio 2023 (253 observaciones); imputaci\'on con filtro de Kalman; SARIMA(2,1,2)(1,1,3)12 con MAPE de 10,89\%},
+  url    = {https://cybertesis.unmsm.edu.pe/item/8cc2f828-7b46-4dcb-866d-3262b0a0268d},
+  urldate = {2026-09-22}
+}
+
+% [viteri_hadoop_minisa2023]  Seccion sugerida: Metodologia / Arquitectura
+% Verificacion: registro ALICIA/CONCYTEC + repositorio UPAO accesible (200)
+% ANALISIS: Precedente peruano DIRECTO de arquitectura Apache Hadoop sobre datos abiertos de
+%   la PNDA (MINSA y CENARES) para monitoreo y proyeccion de vacunas, desplegada sobre
+%   Microsoft Azure. Mismo portal de datos, misma clase de problema, dominio distinto
+%   (salud, no turismo). Cierra el argumento de que MapReduce sobre la PNDA ya se hizo en
+%   Peru; lo que falta es hacerlo sobre turismo.
+% ORACION BORRADOR (EN): A Hadoop-based architecture over Peru's national open data platform
+%   has already been demonstrated for the health sector, providing the engineering
+%   precedent that [X] transfers to tourism.
+@MastersThesis{viteri_hadoop_minisa2023,
+  author = {Viteri Gonzales, Alan Percy and Beltr{\'a}n Garc{\'i}a, Jos{\'e} Antonio},
+  title  = {Soluci\'on de big data para el an\'alisis de los datos abiertos de MINSA y CENARES para el monitoreo y control de la emergencia sanitaria covid-19 bajo el ecosistema de Apache Hadoop y Microsoft Azure},
+  school = {Universidad Privada Antenor Orrego},
+  year   = {2023},
+  type   = {Tesis de grado},
+  address = {Trujillo, Per\'u},
+  note   = {Arquitectura Apache Hadoop + Azure sobre datos abiertos de la PNDA del Per\'u; dominio salud},
+  url    = {https://hdl.handle.net/20.500.12759/10283},
+  urldate = {2026-09-22}
+}
+
+% [mariani_baggio_bigdata2022]  Seccion sugerida: Marco teorico
+% Verificacion: DOI resuelto en Crossref, titulo comparado
+% ANALISIS: Revision sistematica de referencia (Emerald, IJCHM) sobre fuentes de big data en
+%   turismo y hoteleria. Aporta la taxonomia que necesitas: distingue datos "administrados"
+%   (producidos por el Estado o por empresas) de datos "generados por usuarios" (redes,
+%   resenas). Ubica tu dataset en la primera categoria y sostiene que es la menos explotada
+%   por la investigacion.
+% ORACION BORRADOR (EN): Big data in tourism is commonly classified into user-generated and
+%   administratively collected sources; [X] draws on the latter, which the literature
+%   identifies as comparatively underexploited.
+@Article{mariani_baggio_bigdata2022,
+  author  = {Mariani, Marcello and Baggio, Rodolfo},
+  title   = {Big data and analytics in hospitality and tourism: a systematic literature review},
+  journal = {International Journal of Contemporary Hospitality Management},
+  year    = {2022},
+  volume  = {34},
+  number  = {1},
+  pages   = {231--278},
+  doi     = {10.1108/ijchm-03-2021-0301},
+  note    = {Taxonom\'ia de fuentes de big data en turismo: datos administrados vs. generados por usuarios}
+}
+
+% [adb_unwto_bigdata2021]  Seccion sugerida: Marco teorico / Justificacion
+% Verificacion: DOI resuelto en Crossref; pagina ADB renderizada y leida (curl da 403 por WAF)
+% ANALISIS: Publicacion conjunta Banco Asiatico de Desarrollo + OMT que define que es
+%   "turismo big data", como lo estan usando los gobiernos, y que habilidades exige su
+%   analisis (incluye un apendice especifico de competencias). Es la definicion
+%   institucional de referencia y el respaldo de nivel OMT a la idea de complementar las
+%   estadisticas oficiales con analitica masiva.
+% ORACION BORRADOR (EN): The ADB/UNWTO framework defines tourism big data and documents
+%   government practice in its use, providing the institutional definition adopted in [X].
+@TechReport{adb_unwto_bigdata2021,
+  author      = {{Asian Development Bank} and {World Tourism Organization}},
+  title       = {Big Data for Better Tourism Policy, Management, and Sustainable Recovery from COVID-19},
+  institution = {Asian Development Bank},
+  address     = {Manila, Filipinas},
+  year        = {2021},
+  month       = dec,
+  doi         = {10.22617/spr210438-2},
+  note        = {VENTANA EXTENDIDA 2021. Definici\'on institucional de turismo big data, usos gubernamentales y ap\'endice de habilidades requeridas}
+}
+
+
+% #####################################################################
+% TIER 2
+% #####################################################################
+
+% [mincetur_informe_hospedaje2025] Seccion: Datos | Relevancia: cifras oficiales 2025 (TNOC 37,7%, 585 mil plazas-cama, 63,1 millones de arribos), mismo universo que el dataset
+@TechReport{mincetur_informe_hospedaje2025,
+  author      = {{Ministerio de Comercio Exterior y Turismo}},
+  title       = {Per\'u: Oferta y Demanda de Establecimientos de Hospedaje -- A\~no 2025},
+  institution = {MINCETUR, Direcci\'on General de Investigaci\'on y Estudios sobre Turismo y Artesan\'ia},
+  address     = {Lima, Per\'u},
+  year        = {2026},
+  month       = may,
+  url         = {https://www.gob.pe/institucion/mincetur/informes-publicaciones/8133152-informe-peru-oferta-y-demanda-de-establecimientos-de-hospedaje-ano-2025},
+  urldate     = {2026-09-22}
+}
+
+% [mincetur_informe_hospedaje2024] Seccion: Datos | Relevancia: 28 mil establecimientos, 567 mil plazas-cama, TNOC 35,5% en 2024 (+1,8 pp vs 2023, -6,9 pp vs 2019)
+@TechReport{mincetur_informe_hospedaje2024,
+  author      = {{Ministerio de Comercio Exterior y Turismo}},
+  title       = {Per\'u: Oferta y Demanda de Establecimientos de Hospedaje -- A\~no 2024},
+  institution = {MINCETUR, Direcci\'on General de Investigaci\'on y Estudios sobre Turismo y Artesan\'ia},
+  address     = {Lima, Per\'u},
+  year        = {2025},
+  month       = jun,
+  url         = {https://www.gob.pe/institucion/mincetur/informes-publicaciones/6844713-informe-peru-oferta-y-demanda-de-establecimientos-de-hospedaje-ano-2024},
+  urldate     = {2026-09-22}
+}
+
+% [mincetur_informe_hospedaje2023] Seccion: Datos | Relevancia: 26 mil establecimientos (+5,6% vs 2022) y 53,0 millones de arribos (83,9% del prepandemia)
+@TechReport{mincetur_informe_hospedaje2023,
+  author      = {{Ministerio de Comercio Exterior y Turismo}},
+  title       = {Per\'u: Oferta y Demanda de Establecimientos de Hospedaje -- A\~no 2023},
+  institution = {MINCETUR, Direcci\'on General de Investigaci\'on y Estudios sobre Turismo y Artesan\'ia},
+  address     = {Lima, Per\'u},
+  year        = {2024},
+  month       = jun,
+  url         = {https://www.gob.pe/institucion/mincetur/informes-publicaciones/5671698-informe-peru-oferta-y-demanda-de-establecimientos-de-hospedaje-ano-2023},
+  urldate     = {2026-09-22}
+}
+
+% [inei_rj037_2024] Seccion: Datos / Validez | Relevancia: define el marco muestral de la encuesta (censo de 5,4,3 estrellas y albergues en Lima/Callao; censo total en el resto de regiones)
+@Misc{inei_rj037_2024,
+  author       = {{Instituto Nacional de Estad\'istica e Inform\'atica}},
+  title        = {Resoluci\'on Jefatural N.\textdegree{} 037-2024-INEI: Autorizan ejecuci\'on de la encuesta ``Estad\'istica Mensual de Turismo 2024 para Establecimientos de Hospedaje''},
+  howpublished = {Diario Oficial El Peruano},
+  year         = {2024},
+  month        = feb,
+  url          = {https://busquedas.elperuano.pe/dispositivo/NL/2263688-1},
+  urldate      = {2026-09-22}
+}
+
+% [inei_rj058_2023] Seccion: Datos / Validez | Relevancia: autorizacion de la operacion estadistica para 2023
+@Misc{inei_rj058_2023,
+  author       = {{Instituto Nacional de Estad\'istica e Inform\'atica}},
+  title        = {Resoluci\'on Jefatural N.\textdegree{} 058-2023-INEI: Autorizar la ejecuci\'on de la ``Estad\'istica Mensual de Turismo 2023 para Establecimientos de Hospedaje'' a nivel nacional},
+  howpublished = {Norma legal, INEI},
+  year         = {2023},
+  month        = feb,
+  url          = {https://www.gob.pe/institucion/inei/normas-legales/3926086-058-2023-inei},
+  urldate      = {2026-09-22}
+}
+
+% [inei_rj028_2025] Seccion: Datos / Validez | Relevancia: autorizacion de la operacion estadistica para 2025 (el ano que el dataset solo publica como Semestre I)
+@Misc{inei_rj028_2025,
+  author       = {{Instituto Nacional de Estad\'istica e Inform\'atica}},
+  title        = {Resoluci\'on Jefatural N.\textdegree{} 028-2025-INEI: Autorizar la ejecuci\'on de la encuesta ``Estad\'istica Mensual de Turismo 2025 para Establecimientos de Hospedaje'' a nivel nacional},
+  howpublished = {Norma legal, INEI},
+  year         = {2025},
+  month        = feb,
+  url          = {https://www.gob.pe/institucion/inei/normas-legales/6441949-028-2025-inei},
+  urldate      = {2026-09-22}
+}
+
+% [mincetur_observatorio_ocupabilidad] Seccion: Datos | Relevancia: tablero oficial del mismo conjunto, desagregable por region, categoria y periodo
+@Misc{mincetur_observatorio_ocupabilidad,
+  author       = {{Ministerio de Comercio Exterior y Turismo}},
+  title        = {Indicadores de Ocupabilidad Hotelera -- Observatorio de Datos},
+  howpublished = {Tablero interactivo, DGIETA-MINCETUR},
+  year         = {2026},
+  url          = {https://observatorio.mincetur.gob.pe/dashobservatorio/},
+  urldate      = {2026-09-22}
+}
+
+% [mincetur_compendio2024] Seccion: Datos | Relevancia: compendio oficial con arribos, pernoctaciones y capacidad ofertada; complemento historico del dataset
+@Misc{mincetur_compendio2024,
+  author       = {{Ministerio de Comercio Exterior y Turismo}},
+  title        = {Per\'u: Compendio de Cifras de Turismo, Enero 2024},
+  howpublished = {Documento estad\'istico oficial, DGIETA-MINCETUR},
+  year         = {2024},
+  url          = {https://cdn.www.gob.pe/uploads/document/file/5955340/5278963-compendio-cifras-de-turismo-enero-2024.pdf},
+  urldate      = {2026-09-22}
+}
+
+% [zavaleta_kuelap2024] Seccion: Antecedentes | Relevancia: analisis estructural del impacto economico del turismo en Kuelap con perspectiva de los prestadores (Land, MDPI indexada)
+@Article{zavaleta_kuelap2024,
+  author  = {Zavaleta Chavez Arroyo, Franklin Omar and S{\'a}nchez Pantale{\'o}n, Alex Javier and Aldea Roman, Carlos Enrique and Esparza-Huamanchumo, Rosse Marie and {\'A}lvarez-Garc{\'i}a, Jos{\'e}},
+  title   = {A Structural Analysis of the Economic Impact of Tourism and the Perspective of Tourism Providers in Ku\'elap, Peru},
+  journal = {Land},
+  year    = {2024},
+  volume  = {13},
+  number  = {1},
+  pages   = {120},
+  doi     = {10.3390/land13010120}
+}
+
+% [gutierrez_vuelos2025] Seccion: Antecedentes | Relevancia: evidencia causal de que la oferta de asientos aereos determina la llegada de turistas al Peru (Journal of Air Transport Management)
+@Article{gutierrez_vuelos2025,
+  author  = {Guti{\'e}rrez, Jes{\'u}s and Defilippi, Enzo},
+  title   = {More seats, more tourists? Evidence from Peru},
+  journal = {Journal of Air Transport Management},
+  year    = {2025},
+  volume  = {127},
+  pages   = {102796},
+  doi     = {10.1016/j.jairtraman.2025.102796}
+}
+
+% [vasquez_chachapoyas2023] Seccion: Antecedentes | Relevancia: contraste metodologico; 31 hospedajes, Fisher y V de Cramer, asociacion moderada sin significancia (techo del n pequeno)
+@MastersThesis{vasquez_chachapoyas2023,
+  author = {V{\'a}squez Cachay, Fanny Mardel{\'i}},
+  title  = {Uso de plataformas digitales en la ocupabilidad de establecimientos de hospedaje en la ciudad de Chachapoyas},
+  school = {Universidad Nacional Toribio Rodr\'iguez de Mendoza de Amazonas},
+  year   = {2023},
+  type   = {Tesis de grado},
+  address = {Chachapoyas, Per\'u},
+  url    = {https://hdl.handle.net/20.500.14077/3541},
+  urldate = {2026-09-22}
+}
+
+% [camero_ollantaytambo2024] Seccion: Antecedentes | Relevancia: cuantifica el desplome pospandemia a nivel de establecimiento (ingresos de S/ 6 125 a S/ 500 mensuales; 4 despidos promedio)
+@MastersThesis{camero_ollantaytambo2024,
+  author = {Camero Comentero, Yahaida},
+  title  = {Efecto del Covid-19 en la demanda hotelera tur\'istica en el distrito de Ollantaytambo -- Urubamba -- Cusco, 2019--2021},
+  school = {Universidad Nacional de San Antonio Abad del Cusco},
+  year   = {2024},
+  type   = {Tesis de grado},
+  address = {Cusco, Per\'u},
+  url    = {http://hdl.handle.net/20.500.12918/8440},
+  urldate = {2026-09-22}
+}
+
+% [gomez_arquitectura_bigdata2023] Seccion: Arquitectura | Relevancia: arquitectura Big Data bajo proceso KDD sobre datos abiertos peruanos, con metricas de eficiencia y calidad
+@MastersThesis{gomez_arquitectura_bigdata2023,
+  author = {Gomez Figueroa, Ivan Filim{\'o}n and Urcia Farro{\~n}ay, Luis Alberto},
+  title  = {Modelo de una arquitectura big data para mejorar el an\'alisis de datos abiertos del MINSA de casos covid-19 en el Per\'u},
+  school = {Universidad Tecnol\'ogica del Per\'u},
+  year   = {2023},
+  type   = {Tesis de grado},
+  address = {Lima, Per\'u},
+  url    = {https://hdl.handle.net/20.500.12867/8171},
+  urldate = {2026-09-22}
+}
+
+% [mendoza_bigdata_manta2024] Seccion: Marco teorico | Relevancia: contraste regional; diagnostica la escasez de datos abiertos turisticos en destinos latinoamericanos y propone modelo Big Data en 3 fases
+@Article{mendoza_bigdata_manta2024,
+  author  = {Mendoza Mendoza, Blanca Enith and Zambrano Alc{\'i}var, Jos{\'e} Luis and Jama Cornejo, Fiamma Valentina and Bravo Ter{\'a}n, Neptal{\'i} Olmedo},
+  title   = {Modelo de gesti\'on Big data tur\'istico, caso Manta, Ecuador},
+  journal = {Revista Internacional de Gesti\'on, Innovaci\'on y Sostenibilidad Tur\'istica},
+  year    = {2024},
+  volume  = {4},
+  number  = {1},
+  pages   = {31--43},
+  doi     = {10.51260/rigistur.v4i1.464}
+}
+
+% [sancho_ml_turismo2024] Seccion: Marco teorico | Relevancia: revision sistematica de ML en turismo; senala la escasez de estudios con datos oficiales de paises en desarrollo (tu cita de vacio)
+@Article{sancho_ml_turismo2024,
+  author  = {Sancho N{\'u}{\~n}ez, Jos{\'e} Carlos and G{\'o}mez-Pulido, Juan A. and Robina Ram{\'i}rez, Rafael},
+  title   = {Machine learning applied to tourism: A systematic review},
+  journal = {WIREs Data Mining and Knowledge Discovery},
+  year    = {2024},
+  volume  = {14},
+  number  = {5},
+  pages   = {e1549},
+  doi     = {10.1002/widm.1549}
+}
+
+% [ramirez_flores_bibliometria2025] Seccion: Marco teorico | Relevancia: analisis bibliometrico de tecnologias emergentes en el turismo peruano (Revista Cientifica de Sistemas e Informatica)
+@Article{ramirez_flores_bibliometria2025,
+  author  = {Ramirez-Flores, Luis Antonio},
+  title   = {Emerging technologies in the Peruvian tourism sector: a bibliometric analysis and perspectives on digital innovation},
+  journal = {Revista Cient\'ifica de Sistemas e Inform\'atica},
+  year    = {2025},
+  volume  = {5},
+  number  = {2},
+  pages   = {e929},
+  doi     = {10.51252/rcsi.v5i2.929}
+}
+
+% [nugraha_ogd_smarttourism2026] Seccion: Marco teorico | Relevancia: marco conceptual que trata los portales nacionales de datos como infraestructura analitica, no como repositorios
+@Article{nugraha_ogd_smarttourism2026,
+  author  = {Nugraha, Ucu and Murnawan and Darajat, Zakiah},
+  title   = {Open Government Data-Based Smart Tourism Analytics: A Conceptual Governance Framework},
+  journal = {Journal of Information Systems and Informatics},
+  year    = {2026},
+  volume  = {8},
+  number  = {4},
+  pages   = {4731--4757},
+  doi     = {10.63158/journalisi.v8i4.1718}
+}
+
+% [fao_unwto_mountain2023] Seccion: Justificacion | Relevancia: OMT/FAO recomiendan explicitamente mejorar las estadisticas oficiales de turismo con big data
+@TechReport{fao_unwto_mountain2023,
+  author      = {{Food and Agriculture Organization of the United Nations} and {World Tourism Organization}},
+  title       = {Understanding and Quantifying Mountain Tourism},
+  institution = {FAO / UNWTO},
+  address     = {Rome / Madrid},
+  year        = {2023},
+  doi         = {10.18111/9789284424023}
+}
+
+% [unwto_bigdata_cultural2021] Seccion: Marco teorico | Relevancia: linea base OMT sobre casos de uso y consideraciones eticas del big data en destinos. VENTANA EXTENDIDA 2021
+@Book{unwto_bigdata_cultural2021,
+  author    = {{World Tourism Organization}},
+  title     = {Big Data in Cultural Tourism -- Building Sustainability and Enhancing Competitiveness},
+  publisher = {UNWTO},
+  address   = {Madrid, Espa\~na},
+  year      = {2021},
+  doi       = {10.18111/9789284422937}
+}
+
+% [yanez_series_ml2026] Seccion: Metodologia | Relevancia: comparacion de modelos de series de tiempo y ML para demanda turistica en destinos emergentes
+@Article{yanez_series_ml2026,
+  author  = {Y{\'a}{\~n}ez, Monserrath and Inca, Cristian and Coronel, Franklin and Mena, Angel},
+  title   = {Time Series Models and Machine Learning for Predicting Tourism Demand in Emerging Destinations},
+  journal = {WSEAS Transactions on Computer Research},
+  year    = {2026},
+  volume  = {14},
+  pages   = {471},
+  doi     = {10.37394/232018.2026.14.41}
+}
+
+% [mateo_tarma2009] Seccion: Antecedentes historicos | Relevancia: ANTECEDENTE HISTORICO. Unica fuente localizada que cita el conjunto por su nombre exacto ("MINCETUR, Indicadores de ocupabilidad en Tarma y San Ramon"); uso instrumental, no analitico. PRE-2021
+@MastersThesis{mateo_tarma2009,
+  author = {Mateo Yurivilca, Alexis Luis},
+  title  = {Estudio de pre-factibilidad para la instalaci\'on de un hospedaje para turistas que experimentar\'an turismo vivencial, en la provincia de Tarma},
+  school = {Pontificia Universidad Cat\'olica del Per\'u},
+  year   = {2009},
+  type   = {Tesis para optar el t\'itulo de Ingeniero Industrial},
+  address = {Lima, Per\'u},
+  url    = {http://tesis.pucp.edu.pe/repositorio/handle/123456789/311},
+  urldate = {2026-09-22}
+}

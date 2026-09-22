@@ -1,0 +1,3 @@
+# Los CSV se descargan con herramientas/descargar_dataset.py y no se versionan:
+# son ~7 MB y MINCETUR los actualiza periódicamente.
+csv/

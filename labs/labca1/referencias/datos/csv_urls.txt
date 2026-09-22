@@ -1,0 +1,11 @@
+Indicadores de Ocupabilidad año 2015 || https://datosabiertos.mincetur.gob.pe/DGIETA/Indicadores_ocupabilidad_2015.csv
+Indicadores de Ocupabilidad año 2016 || https://datosabiertos.mincetur.gob.pe/DGIETA/Indicadores_ocupabilidad_2016.csv
+Indicadores de Ocupabilidad año 2017 || https://datosabiertos.mincetur.gob.pe/DGIETA/Indicadores_ocupabilidad_2017.csv
+Indicadores de Ocupabilidad año 2018 || https://datosabiertos.mincetur.gob.pe/DGIETA/Indicadores_ocupabilidad_2018.csv
+Indicadores de Ocupabilidad año 2019 || https://datosabiertos.mincetur.gob.pe/DGIETA/Indicadores_ocupabilidad_2019.csv
+Indicadores de Ocupabilidad año 2020 || https://datosabiertos.mincetur.gob.pe/DGIETA/Indicadores_ocupabilidad_2020.csv
+Indicadores de Ocupabilidad año 2021 || https://datosabiertos.mincetur.gob.pe/DGIETA/Indicadores_ocupabilidad_2021.csv
+Indicadores de Ocupabilidad año 2022 || https://datosabiertos.mincetur.gob.pe/DGIETA/Indicadores_ocupabilidad_2022.csv
+Indicadores de Ocupabilidad año 2023 || https://datosabiertos.mincetur.gob.pe/DGIETA/Indicadores_ocupabilidad_2023.csv
+Indicadores de Ocupabilidad año 2024 || https://datosabiertos.mincetur.gob.pe/DGIETA/Indicadores_ocupabilidad_2024.csv
+Indicadores de Ocupabilidad año 2025 (Semestre I) || https://datosabiertos.mincetur.gob.pe/DGIETA/Indicadores_ocupabilidad_2025_1er_semestre.csv
