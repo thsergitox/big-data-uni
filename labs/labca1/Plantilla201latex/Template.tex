@@ -1,198 +1,599 @@
 \documentclass[10pt,a4paper]{article}
-\usepackage[spanish,english]{babel}
+\usepackage[english,spanish]{babel}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
 \usepackage{indentfirst}
-\usepackage{anysize} % Soporte para el comando \marginsize
-%\marginsize{1.5cm}{1.5cm}{0.5cm}{1cm}
-\marginsize{2,5cm}{1,8cm}{1.5cm}{1,7cm}
-\usepackage[psamsfonts]{amssymb}
-
-\usepackage{amssymb}
-\usepackage{amsfonts}
-\usepackage{amsmath}
-\usepackage{amsthm}
-\usepackage{multicol}
-\usepackage{multirow}
-\usepackage{graphicx}
-\usepackage{hyperref}
-\usepackage{caption}
-\usepackage{subcaption}
-\usepackage{tocloft}
+\usepackage{anysize}
+\marginsize{2.5cm}{1.8cm}{1.5cm}{1.7cm}
+\usepackage{amssymb,amsfonts,amsmath,amsthm}
+\usepackage{graphicx,hyperref,caption,subcaption,tocloft}
+\usepackage{booktabs,array,float,xcolor,listings}
 \renewcommand{\cftsecleader}{\cftdotfill{\cftdotsep}}
-\renewcommand*\contentsname{Summary}
+\renewcommand*\contentsname{Contenido}
 \renewcommand{\thepage}{}
 \theoremstyle{definition}
 \renewcommand{\thefootnote}{\fnsymbol{footnote}}
+\graphicspath{{../images/}}
+\lstdefinestyle{resultado}{basicstyle=\ttfamily\scriptsize,breaklines=true,
+  columns=fullflexible,frame=single,backgroundcolor=\color{gray!7},
+  showstringspaces=false}
 
 \begin{document}
-
-\title{Análisis Sobre el Dataset de Indicadores de Ocupabilidad del Ministerio de Comercio Exterior y Turismo}
+\selectlanguage{spanish}
+\title{Análisis sobre el Dataset de Indicadores de Ocupabilidad del Ministerio de Comercio Exterior y Turismo}
 \date{}
 \maketitle
-
 \begin{center}
-    Students:\\
-    \vspace{4pt}
-    \begin{minipage}[t]{0.45\textwidth}
-        \centering
-        {\large Sergio Sebastian Pezo Jimenez}\\[3pt]
-        Universidad Nacional de Ingenier\'ia,\\
-        Facultad de Ciencias\\
-        e-mail: sergio.pezo.j@uni.pe
-    \end{minipage}
-    \hfill
-    \begin{minipage}[t]{0.45\textwidth}
-        \centering
-        {\large Arbués Enrique Perez Villegas}\\[3pt]
-        Universidad Nacional de Ingenier\'ia,\\
-        Facultad de Ciencias\\
-        e-mail: arbues.perez.v@uni.pe
-    \end{minipage}
-
+Estudiantes:\\[4pt]
+\begin{minipage}[t]{0.45\textwidth}
+\centering
+{\large Sergio Sebastian Pezo Jimenez}\\[3pt]
+Universidad Nacional de Ingenier\'ia,\\ Facultad de Ciencias\\
+e-mail: sergio.pezo.j@uni.pe
+\end{minipage}\hfill
+\begin{minipage}[t]{0.45\textwidth}
+\centering
+{\large Arbués Enrique Perez Villegas}\\[3pt]
+Universidad Nacional de Ingenier\'ia,\\ Facultad de Ciencias\\
+e-mail: arbues.perez.v@uni.pe
+\end{minipage}
 \end{center}
 \vspace{5pt}
 \begin{center}
-	Curso:\\
-	\vspace{5pt}
-	{\large CC531 Análisis en Macrodatos}\\
-	{\large Laboratorio 01}\\
-
-
-
+Curso:\\[5pt]
+{\large CC531 Análisis en Macrodatos}\\
+{\large Laboratorio 01}
 \end{center}
+
 \vspace{20pt}
 \begin{abstract}
 {\small
-\hspace*{0.5cm}
+Se trabajó con los indicadores mensuales de ocupabilidad hotelera de 2019 a
+junio de 2025. Primero se unificaron siete archivos CSV y se obtuvo una entrada
+canónica de 38 730 registros. Luego se ejecutaron catorce consultas Java sobre
+Hadoop 3: diez consultas de análisis, dos modelos de clasificación y dos
+modelos de regresión. Se logró conservar la salida y el archivo JAR de cada
+consulta. También se revisaron HDFS, YARN, JobHistory y el consumo de los
+contenedores. En clasificación, la regresión logística obtuvo mejores
+resultados generales que Gaussian Naive Bayes. En regresión, ridge tuvo una
+mejora pequeña frente al modelo lineal en la validación de 2025-I.
 
-[Abstract]\\
-
-\textbf{Keywords:} key1, key2.
+\textbf{Palabras clave:} Hadoop, MapReduce, ocupabilidad, clasificación,
+regresión.
 }
 \end{abstract}
-
-
-
 \pagenumbering{arabic}
-
 \tableofcontents
-
-\vspace{20pt}
-\hrule
-\vspace{10pt}
+\vspace{20pt}\hrule\vspace{10pt}
 
 \section{Introducción}
-
 \subsection{Contexto del problema}
+Los indicadores de hospedaje cambian por mes, departamento y tipo de
+establecimiento. Al juntar varios años aparecen diferencias de estructura,
+valores repetidos por nivel de agregación y un volumen que ya no resulta
+cómodo para revisar fila por fila. Por eso se usó Hadoop MapReduce. El objetivo
+no fue solo obtener números, sino dejar una ejecución repetible y revisar cada
+salida con datos reales.
+
 \subsection{Objetivos del laboratorio}
+Se buscó consolidar los archivos de 2019 a 2025-I, cargar una única entrada a
+HDFS y resolver catorce preguntas con Java MapReduce. También se compararon dos
+clasificadores y dos regresores usando una separación temporal. Finalmente, se
+registró el estado del clúster y el uso de recursos durante una ejecución.
+
 \subsection{Organización del informe}
+Primero se explica el entorno y la preparación del dataset. Después se muestra
+la metodología y las diez consultas de análisis. Luego se presentan los
+modelos de clasificación y regresión. Al final se revisan el monitoreo, los
+resultados principales, las limitaciones y las conclusiones.
 
 \section{Entorno Experimental y Despliegue de Hadoop}
-
 \subsection{Arquitectura del entorno}
+Se usó un clúster Hadoop 3.5.0 en Docker Compose. El despliegue tuvo un
+NameNode, un DataNode, un ResourceManager, un NodeManager y un HistoryServer.
+Todos los servicios se ejecutaron en una sola máquina. Así se logró probar HDFS
+y YARN sin presentar el entorno como un clúster de producción.
+
 \subsection{Configuración de la máquina virtual de nodo único}
+El NodeManager informó 2 GB de memoria física para contenedores y 8 vcores. El
+nodo se mantuvo saludable. Como solo hubo un nodo, los mapas y reducers
+compartieron el mismo equipo. Esto comprueba el flujo, pero no permite medir
+escalamiento horizontal.
+
 \subsection{Despliegue de Hadoop 3 mediante Docker Compose}
+Los contenedores ya estaban definidos en \path{hadoop3/compose.yaml}. Se inició
+el entorno con el script del proyecto y se hizo una prueba rápida antes de
+ejecutar las consultas. No se reconstruyeron imágenes. Se usaron los servicios
+existentes y sus volúmenes persistentes.
+
 \subsection{Servicios de Hadoop y persistencia de datos}
+HDFS guardó la entrada y las salidas. YARN administró las aplicaciones
+MapReduce. JobHistory conservó el detalle de los trabajos terminados. El
+NameNode mostró 203 bloques replicados y un DataNode activo.
+
 \subsection{Configuración de HDFS y ejecución de MapReduce}
+Se usó \path{hadoop3/scripts/run-job.sh}. El script copia el código al
+NameNode, compila las clases Java, arma el JAR, sube el CSV a HDFS y ejecuta el
+Driver. Si la salida termina con \texttt{\_SUCCESS}, exporta el resultado y el
+JAR al host. Para repetir todo se creó
+\path{labs/labca1/queries/run-all.sh}.
+
 \subsection{Verificación del entorno}
+Las catorce consultas terminaron con estado \texttt{SUCCESS}. Se observaron 33
+aplicaciones finalizadas porque las consultas 9 y 10 usan dos etapas y también
+quedaron ejecuciones de prueba anteriores. JobHistory confirmó que la consulta
+14 lanzó dos mapas y un reducer sin intentos fallidos.
 
 \section{Descripción del Dataset}
-
 \subsection{Fuente, publicación y actualización}
+% CONTENIDO A INTEGRAR POR EL COMPAÑERO. NO MODIFICAR ESTA SUBSECCIÓN.
 El dataset de Indicadores de Ocupabilidad del Ministerio de Comercio Exterior y Turismo (MINCETUR) se obtuvo de la Plataforma Nacional de Datos Abiertos \cite{mincetur_ocupabilidad}.
 
 \subsection{Descripción general del dataset}
+El archivo consolidado cubre desde enero de 2019 hasta junio de 2025. Contiene
+38 730 registros y 24 columnas. Se encontraron 25 departamentos en cada mes.
+El año 2025 se trató como primer semestre y no como un año completo.
+
 \subsection{Estructura, campos y tipos de datos}
+Los campos principales son año, mes, clase, categoría, departamento, cantidad
+de establecimientos, habitaciones, plazas-cama, TNOH, TNOC, arribos,
+pernoctaciones y empleo. Los archivos de 2019 a 2023 tenían 23 columnas. Los
+archivos recientes añadían \texttt{FECHA\_CORTE}. La cabecera final usa nombres
+sin espacios y mantiene todos los indicadores en un orden fijo.
+
 \subsection{Preprocesamiento y carga en HDFS}
+Los archivos no tenían exactamente la misma estructura. Los datos de 2019 a
+2023 usaban 23 columnas, mientras que los archivos más recientes añadían la
+fecha de corte. Por eso, se creó un archivo consolidado con 24 columnas. También
+se cambió la coma decimal por un punto y se guardó el resultado en UTF-8. Al
+final, se obtuvieron 38 730 registros entre enero de 2019 y junio de 2025.
+
+Los archivos originales se leyeron como Latin-1 y se conservaron intactos. El
+script validó la cabecera, la cantidad de columnas, el rango de años y los
+campos numéricos. El archivo final fue
+\path{data/Indicadores_ocupabilidad_2019_2025.csv}. Para agregaciones generales
+se filtraron las filas con \texttt{ID\_CLASE=TT} e
+\texttt{ID\_CATEGORIA=TT}. Ese filtro fue necesario porque el dataset repite
+totales en distintos niveles de clase y categoría.
 
 \subsection{Antecedentes e investigaciones relacionadas}
+% CONTENIDO A INTEGRAR POR EL COMPAÑERO. NO MODIFICAR ESTA SUBSECCIÓN.
 \subsubsection{Investigaciones previas sobre el dataset}
+% CONTENIDO A INTEGRAR POR EL COMPAÑERO. NO MODIFICAR ESTA SUBSUBSECCIÓN.
 \subsubsection{Artículos que utilizaron el dataset}
+% CONTENIDO A INTEGRAR POR EL COMPAÑERO. NO MODIFICAR ESTA SUBSUBSECCIÓN.
 
 \section{Metodología}
-
 \subsection{Proceso de procesamiento distribuido}
+Cada consulta lee el CSV canónico mediante un parser común. El Mapper descarta
+la cabecera y las filas que no cumplen el filtro. Después emite una clave y los
+valores necesarios. El Reducer suma, promedia, busca extremos o entrena el
+modelo. Las consultas 9 y 10 encadenan dos jobs. Las demás usan un job.
+
 \subsection{Diseño de preguntas y consultas}
+Las preguntas cubren evolución temporal, diferencias territoriales, clases de
+hospedaje, capacidad, estacionalidad, estadística descriptiva, búsqueda de
+texto, extremos, cambios entre periodos y participación extranjera. Las cuatro
+últimas consultas usan la TNOH como etiqueta o variable objetivo.
+
 \subsection{Flujo de ejecución}
+El orquestador ejecuta las consultas en orden y se detiene ante el primer
+error. Cada salida quedó en
+\path{queries/queryXX/resultados/queryXX/resultado.txt}, junto al JAR. También
+se creó \path{queries/execution-summary.tsv} con clase principal, estado, ruta
+HDFS y artefactos locales.
+
 \subsection{Métricas de evaluación}
+Para clasificación se usaron accuracy, precisión, recall, F1 y log loss. Para
+regresión se usaron MAE, RMSE y $R^2$. El entrenamiento tomó 1 500 filas TT/TT
+de 2019 a 2023. La prueba usó 300 filas de 2024 y la validación reciente usó
+150 filas de 2025-I. La mediana de TNOH del entrenamiento fue 21.71 y definió
+las clases alta y baja. La estandarización se calculó solo con entrenamiento.
 
 \section{Consultas MapReduce}
-
-En cada consulta se especifican la pregunta que responde, los campos empleados, la lógica de la solución, los elementos relevantes del código, el input, el output y la interpretación del resultado.
+En cada consulta se indican el tipo, la pregunta, los campos, la solución, los
+archivos de código, la entrada, una salida real, una interpretación y una
+limitación. La entrada fue el CSV consolidado en todos los casos.
 
 \subsection{Consultas que emplean dos o más campos}
-\subsubsection{Consulta 1}
-\subsubsection{Consulta 2}
-\subsubsection{Consulta 3}
-\subsubsection{Consulta 4}
-\subsubsection{Consulta 5}
+\subsubsection{Consulta 1: arribos nacionales y extranjeros}
+\textbf{Tipo y pregunta.} Agregación por año. ¿Cómo evolucionaron los arribos
+nacionales y extranjeros? Se usaron \texttt{ANIO},
+\texttt{TOTAL\_ARRIBOS\_NAC} y \texttt{TOTAL\_ARRIBOS\_EXT}.
+
+\textbf{Solución y código.} El Mapper filtró TT/TT y emitió el año con ambos
+totales. El Reducer sumó cada origen. Se usaron las clases
+\texttt{ArrivalsByOriginMapper}, Reducer y Driver.
+
+\textbf{Input y output.}
+\begin{lstlisting}[style=resultado]
+2019  national=54897127  foreign=8264767
+2020  national=34588588  foreign=1778619
+2024  national=50875669  foreign=6690972
+2025  national=26355966  foreign=3610473
+\end{lstlisting}
+\textbf{Interpretación y limitación.} Se observó una caída fuerte en 2020 y una
+recuperación posterior. En 2024 los arribos nacionales quedaron cerca de 2019,
+pero los extranjeros siguieron por debajo. El valor de 2025 solo incluye seis
+meses y no se puede comparar directamente con un año completo.
+
+\subsubsection{Consulta 2: TNOH por departamento y año}
+\textbf{Tipo y pregunta.} Promedio agrupado. ¿Cuál fue la TNOH media de cada
+departamento por año? Se usaron año, departamento y TNOH.
+
+\textbf{Solución y código.} El Mapper emitió la clave año--departamento y el
+Reducer calculó suma entre cantidad. Se usaron las clases
+\texttt{OccupancyByDepartmentMapper}, Reducer y Driver.
+
+\textbf{Input y output.}
+\begin{lstlisting}[style=resultado]
+2019;CALLAO  mean_tnoh=40.9142
+2020;CALLAO  mean_tnoh=25.7092
+2024;CALLAO  mean_tnoh=41.5950
+2024;LIMA    mean_tnoh=23.5750
+2024;LORETO  mean_tnoh=12.9917
+\end{lstlisting}
+\textbf{Interpretación y limitación.} Callao llegó a 41.5950 en 2024, mientras
+Loreto obtuvo 12.9917. El promedio resume meses con tamaños de oferta distintos
+y no equivale a una media ponderada por habitaciones.
+
+\subsubsection{Consulta 3: TNOH y TNOC por clase}
+\textbf{Tipo y pregunta.} Comparación por grupos. ¿Cómo cambian la TNOH y la
+TNOC según la clase? Se usaron año, clase y ambos porcentajes. Se tomó la
+categoría total y se excluyó la clase total.
+
+\textbf{Solución y código.} El Mapper agrupó año--clase y el Reducer calculó
+las dos medias. Se usaron las clases \texttt{OccupancyByClass}.
+\begin{lstlisting}[style=resultado]
+2019;HOTEL   mean_tnoh=31.2412  mean_tnoc=26.3323
+2020;HOTEL   mean_tnoh=21.1950  mean_tnoc=16.1440
+2024;HOTEL   mean_tnoh=32.4184  mean_tnoc=27.6639
+2024;RESORT  mean_tnoh=46.7742  mean_tnoc=48.2812
+\end{lstlisting}
+\textbf{Interpretación y limitación.} Resort mantuvo medias altas, mientras
+Hotel cayó en 2020 y luego se recuperó. Las clases no tienen la misma cantidad
+de establecimientos, así que la salida no compara tamaños totales.
+
+\subsubsection{Consulta 4: empleo por capacidad}
+\textbf{Tipo y pregunta.} Razón entre campos. ¿Cuántos empleos existen por cada
+cien habitaciones en cada departamento y año? Se usaron año, departamento,
+empleo y habitaciones.
+
+\textbf{Solución y código.} El Mapper emitió empleo y habitaciones TT/TT. El
+Reducer calculó $100\times empleo/habitaciones$. Se usaron las clases
+\texttt{EmploymentCapacity}.
+\begin{lstlisting}[style=resultado]
+2019;LIMA    employment_per_100_rooms=74.3232
+2024;LIMA    employment_per_100_rooms=54.3562
+2024;CALLAO  employment_per_100_rooms=28.4118
+2024;TACNA   employment_per_100_rooms=15.0163
+\end{lstlisting}
+\textbf{Interpretación y limitación.} Lima presentó más empleos por cada cien
+habitaciones que Callao y Tacna. La razón no mide calidad del empleo ni horas
+trabajadas; solo relaciona los totales informados.
+
+\subsubsection{Consulta 5: estacionalidad mensual}
+\textbf{Tipo y pregunta.} Suma por mes. ¿Qué meses concentran más arribos y
+pernoctaciones? Se usaron mes, arribos y pernoctaciones TT/TT.
+
+\textbf{Solución y código.} El Mapper agrupó por mes y el Reducer sumó ambos
+indicadores. Se usaron las clases \texttt{Seasonality}.
+\begin{lstlisting}[style=resultado]
+01  arrivals=33585654  overnight_stays=43787718
+02  arrivals=32795352  overnight_stays=42942772
+07  arrivals=26760124  overnight_stays=35417748
+09  arrivals=26098980  overnight_stays=33472076
+\end{lstlisting}
+\textbf{Interpretación y limitación.} Enero y febrero tuvieron los mayores
+acumulados, mientras septiembre tuvo el menor valor. Enero a junio incluyen
+siete años, pero julio a diciembre solo seis. La suma no está balanceada.
 
 \subsection{Medidas estadísticas}
-\subsubsection{Promedio, media y desviación estándar de un campo}
+\subsubsection{Consulta 6: media, mediana y desviación estándar de TNOH}
+\textbf{Tipo y pregunta.} Estadística descriptiva. ¿Cuál es la cantidad, media,
+mediana y desviación estándar poblacional de TNOH?
+
+\textbf{Solución y código.} El Mapper emitió cada TNOH TT/TT bajo una clave
+común. El Reducer ordenó 1 950 valores. Se usaron las clases
+\texttt{OccupancyStatistics}.
+\begin{lstlisting}[style=resultado]
+TNOH  count=1950  mean=21.7433  median=21.3400  stddev=7.0678612717
+\end{lstlisting}
+\textbf{Interpretación y limitación.} La media y mediana quedaron cerca, y la
+desviación fue 7.0679 puntos. Un reducer pudo reunir los valores porque el
+dataset es pequeño. Para más datos convendría un método distribuido de
+cuantiles.
 
 \subsection{Búsqueda de subtexto}
-\subsubsection{Búsqueda sobre múltiples campos de texto}
+\subsubsection{Consulta 7: búsqueda sobre campos de texto}
+\textbf{Tipo y pregunta.} Filtro por subtexto. ¿Qué registros contienen la
+palabra hotel en clase, categoría o departamento? La búsqueda no distingue
+mayúsculas, pero conserva los acentos.
+
+\textbf{Solución y código.} \texttt{SubstringSearchMapper.java} recibió el
+texto como argumento y revisó los tres campos. No necesitó reducer. Devolvió el
+desplazamiento y la fila canónica completa.
+\begin{lstlisting}[style=resultado]
+2424268 ;2022;06;01;HOTEL;01;1 ESTRELLA;AMAZONAS;010000;1;20;42;...
+2424367 ;2022;06;01;HOTEL;01;1 ESTRELLA;PIURA;200000;2;40;77;...
+\end{lstlisting}
+\textbf{Interpretación y limitación.} Se obtuvieron 11 525 coincidencias porque
+HOTEL aparece como clase en muchos registros. La búsqueda es literal; no aplica
+sinónimos, ranking ni normalización de acentos.
 
 \subsection{Valores máximos y mínimos}
-\subsubsection{Máximo y mínimo de campos agrupados}
+\subsubsection{Consulta 8: extremos de TNOH por año}
+\textbf{Tipo y pregunta.} ¿Qué departamentos tuvieron la menor y mayor TNOH
+media de cada año? Se usaron año, departamento y TNOH.
+
+\textbf{Solución y código.} El Mapper envió las filas TT/TT por año. El Reducer
+calculó la media departamental y eligió ambos extremos. Se usaron las clases
+\texttt{OccupancyExtremes}.
+\begin{lstlisting}[style=resultado]
+2019  min=TACNA:20.7342   max=CALLAO:40.9142
+2020  min=TACNA:9.6425    max=CALLAO:25.7092
+2024  min=LORETO:12.9917  max=CALLAO:41.5950
+2025  min=AYACUCHO:14.1217 max=CALLAO:43.9917
+\end{lstlisting}
+\textbf{Interpretación y limitación.} Callao fue el máximo en seis años; en
+2021 Piura quedó arriba. Los extremos usan promedios simples y 2025 solo cubre
+el primer semestre.
 
 \subsection{Consultas con MapReduce encadenado}
-\subsubsection{Consulta encadenada 1 con campos decimales}
-\subsubsection{Consulta encadenada 2 con campos decimales}
+\subsubsection{Consulta 9: cambio de ocupación entre 2019 y 2024}
+\textbf{Tipo y pregunta.} Dos jobs. ¿Cuántos puntos porcentuales cambió la TNOH
+media de cada departamento entre 2019 y 2024?
+
+\textbf{Solución y código.} El primer job calculó la media por año y
+departamento. El segundo unió 2019 con 2024 y restó. El Driver
+\texttt{OccupancyChangeDriver.java} coordinó ambas etapas.
+\begin{lstlisting}[style=resultado]
+LA LIBERTAD  2019=30.7350  2024=14.7108  change_pp=-16.0242
+CALLAO       2019=40.9142  2024=41.5950  change_pp=0.6808
+CUSCO        2019=26.9108  2024=28.2725  change_pp=1.3617
+UCAYALI      2019=25.1383  2024=30.1825  change_pp=5.0442
+\end{lstlisting}
+\textbf{Interpretación y limitación.} La mayor caída fue Apurímac con
+$-18.7325$ puntos y la mayor subida fue Ucayali con $5.0442$. La diferencia
+describe una asociación temporal y no prueba la causa.
+
+\subsubsection{Consulta 10: participación de arribos extranjeros}
+\textbf{Tipo y pregunta.} Dos jobs. ¿Qué porcentaje de los arribos fue
+extranjero en cada departamento y periodo?
+
+\textbf{Solución y código.} El primer job calculó el porcentaje mensual. El
+segundo promedió cuatro periodos. \texttt{ForeignShareDriver.java} coordinó las
+etapas.
+\begin{lstlisting}[style=resultado]
+CUSCO;PRE_2019            mean_foreign_share=63.3747
+CUSCO;IMPACT_2020_2021    mean_foreign_share=20.5234
+CUSCO;RECOVERY_2022_2024  mean_foreign_share=58.3507
+CUSCO;CURRENT_2025_H1     mean_foreign_share=67.4504
+\end{lstlisting}
+\textbf{Interpretación y limitación.} En Cusco se observó una caída fuerte en
+2020--2021 y recuperación posterior. Se promediaron porcentajes mensuales sin
+ponderar por arribos; no equivale a dividir los acumulados del periodo.
 
 \section{Consultas mediante Modelos de Clasificación}
+\subsection{Consulta 11: Gaussian Naive Bayes}
+\textbf{Pregunta, campos y código.} Se clasificó la TNOH como alta o baja. Se
+usaron mes, establecimientos, habitaciones, camas, arribos por habitación,
+pernoctaciones por cama y empleo por establecimiento. El Mapper preparó filas
+TT/TT y el Reducer entrenó con 2019--2023. Se usaron las clases
+\texttt{NaiveBayesClassification}.
+\begin{lstlisting}[style=resultado]
+TEST_2024 samples=300 accuracy=0.703333 precision=0.945946 recall=0.286885 f1=0.440252 log_loss=0.947039
+VALIDATION_2025_H1 samples=150 accuracy=0.726667 precision=1.000000 recall=0.305085 f1=0.467532 log_loss=0.854541
+\end{lstlisting}
+\textbf{Interpretación y limitación.} Se obtuvo precisión alta, pero recall
+bajo. El modelo dejó sin detectar muchas observaciones altas. La independencia
+condicional es una limitación para indicadores relacionados.
 
-\subsection{Consulta y modelo de clasificación 1}
-\subsection{Consulta y modelo de clasificación 2}
+\subsection{Consulta 12: regresión logística}
+\textbf{Pregunta, campos y código.} Se respondió la misma pregunta con las
+mismas siete variables, estandarizadas solo con entrenamiento. El Reducer
+entrenó 200 iteraciones con tasa 0.1. Se usaron las clases
+\texttt{LogisticClassification}.
+\begin{lstlisting}[style=resultado]
+TEST_2024 samples=300 accuracy=0.840000 precision=0.836364 recall=0.754098 f1=0.793103 log_loss=0.498765
+VALIDATION_2025_H1 samples=150 accuracy=0.800000 precision=0.871795 recall=0.576271 f1=0.693878 log_loss=0.474774
+\end{lstlisting}
+\textbf{Interpretación y limitación.} Se obtuvo un equilibrio más claro entre
+precisión y recall. El entrenamiento se centralizó en un reducer porque solo
+hubo 1 500 filas; esto no representa entrenamiento distribuido a gran escala.
+
 \subsection{Comparación de modelos de clasificación}
+\begin{table}[H]
+\centering\small
+\caption{Resultados de clasificación con salidas reales}
+\begin{tabular}{llrrrrr}
+\toprule
+Periodo & Modelo & Accuracy & Precisión & Recall & F1 & Log loss \\
+\midrule
+2024 & Naive Bayes & 0.7033 & 0.9459 & 0.2869 & 0.4403 & 0.9470 \\
+2024 & Logística & 0.8400 & 0.8364 & 0.7541 & 0.7931 & 0.4988 \\
+2025-I & Naive Bayes & 0.7267 & 1.0000 & 0.3051 & 0.4675 & 0.8545 \\
+2025-I & Logística & 0.8000 & 0.8718 & 0.5763 & 0.6939 & 0.4748 \\
+\bottomrule
+\end{tabular}
+\end{table}
+La regresión logística tuvo mayor accuracy, recall y F1, y menor log loss. Naive
+Bayes tuvo mayor precisión, pero perdió muchos positivos. Con estos datos, la
+regresión logística dejó el mejor resultado general.
 
 \section{Consultas mediante Modelos de Regresión}
+\subsection{Consulta 13: regresión lineal}
+\textbf{Pregunta, campos y código.} Se estimó la TNOH con las mismas siete
+características y la misma separación temporal. El Reducer ajustó una regresión
+sin regularización. Se usaron las clases \texttt{LinearRegression}.
+\begin{lstlisting}[style=resultado]
+TRAINING samples=1500
+TEST_2024 samples=300 mae=3.192221 rmse=4.092002 r_squared=0.643537
+VALIDATION_2025_H1 samples=150 mae=3.020832 rmse=3.927314 r_squared=0.662158
+\end{lstlisting}
+\textbf{Interpretación y limitación.} Se obtuvo un MAE cercano a tres puntos.
+El $R^2$ fue 0.6435 en 2024 y 0.6622 en 2025-I. El modelo solo representa
+relaciones lineales.
 
-\subsection{Consulta y modelo de regresión 1}
-\subsection{Consulta y modelo de regresión 2}
+\subsection{Consulta 14: regresión ridge}
+\textbf{Pregunta, campos y código.} Se estimó la misma variable con
+regularización L2, $\lambda=1$, sin regularizar el intercepto. Se usaron las
+clases \texttt{RidgeRegression}.
+\begin{lstlisting}[style=resultado]
+TRAINING samples=1500
+TEST_2024 samples=300 mae=3.194316 rmse=4.072566 r_squared=0.646915
+VALIDATION_2025_H1 samples=150 mae=3.013257 rmse=3.879584 r_squared=0.670320
+\end{lstlisting}
+\textbf{Interpretación y limitación.} Ridge redujo un poco el RMSE y mejoró el
+$R^2$. Solo se evaluó un valor de $\lambda$, así que no se puede afirmar que
+sea la mejor regularización posible.
+
 \subsection{Comparación de modelos de regresión}
+\begin{table}[H]
+\centering\small
+\caption{Resultados de regresión con salidas reales}
+\begin{tabular}{llrrr}
+\toprule
+Periodo & Modelo & MAE & RMSE & $R^2$ \\
+\midrule
+2024 & Lineal & 3.1922 & 4.0920 & 0.6435 \\
+2024 & Ridge & 3.1943 & 4.0726 & 0.6469 \\
+2025-I & Lineal & 3.0208 & 3.9273 & 0.6622 \\
+2025-I & Ridge & 3.0133 & 3.8796 & 0.6703 \\
+\bottomrule
+\end{tabular}
+\end{table}
+La diferencia fue pequeña. Ridge quedó mejor en RMSE y $R^2$. En MAE, el
+lineal fue apenas mejor en 2024 y ridge fue mejor en 2025-I.
 
 \section{Monitoreo de Recursos}
-
 \subsection{Recursos observados durante la ejecución}
+Las interfaces mostraron un NameNode activo, un NodeManager saludable y 33
+aplicaciones completadas. La Figura~\ref{fig:hadoop-servicios} reúne HDFS y
+YARN. La Figura~\ref{fig:jobhistory} muestra un job real de la consulta 14.
+\begin{figure}[H]
+\centering
+\begin{subfigure}[b]{0.49\textwidth}
+\includegraphics[width=\textwidth]{namenode-overview.png}
+\caption{NameNode activo y resumen de HDFS.}
+\end{subfigure}\hfill
+\begin{subfigure}[b]{0.49\textwidth}
+\includegraphics[width=\textwidth]{resourcemanager-applications.png}
+\caption{Aplicaciones finalizadas en YARN.}
+\end{subfigure}
+\caption{Estado de los servicios principales de Hadoop.}
+\label{fig:hadoop-servicios}
+\end{figure}
+\begin{figure}[H]
+\centering
+\begin{subfigure}[b]{0.49\textwidth}
+\includegraphics[width=\textwidth]{nodemanager-resources.png}
+\caption{Recursos y estado del NodeManager.}
+\end{subfigure}\hfill
+\begin{subfigure}[b]{0.49\textwidth}
+\includegraphics[width=\textwidth]{jobhistory-query.png}
+\caption{Consulta 14 con estado SUCCEEDED.}
+\end{subfigure}
+\caption{Recursos del nodo y detalle de una ejecución.}
+\label{fig:jobhistory}
+\end{figure}
+
 \subsection{Consumo de CPU}
+La medición se tomó el 22 de septiembre de 2026 a las 14:41:56, mientras se
+ejecutaba la consulta 13. El NodeManager registró 1103.66\% de CPU. Docker mide
+100\% por núcleo, así que el valor indica uso de varios núcleos.
+
 \subsection{Consumo de memoria}
+El NodeManager usó 1.193 GiB. El NameNode usó 992.1 MiB, el ResourceManager
+475.5 MiB, el HistoryServer 346.9 MiB y el DataNode 335.5 MiB. Es una medición
+puntual, no un promedio.
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.95\textwidth]{docker-stats.png}
+\caption{Uso de recursos durante la consulta 13.}
+\label{fig:docker-stats}
+\end{figure}
+
 \subsection{Tiempo de ejecución}
+JobHistory registró 10 segundos para el job ridge de la consulta 14: empezó a
+las 19:42:30 UTC y terminó a las 19:42:40. No incluye copia del código,
+compilación ni exportación.
+
 \subsection{Análisis del comportamiento de Hadoop}
+Los trabajos pequeños tienen un costo fijo al iniciar mapas, shuffle y reducer.
+El clúster procesó el CSV sin fallos y dejó trazas. El dataset y el único
+NodeManager prueban el flujo completo, pero no demuestran escalabilidad
+horizontal.
 
 \section{Resultados y Discusión}
-
 \subsection{Resultados de las consultas MapReduce}
+Las salidas mostraron la caída de 2020, diferencias entre departamentos y una
+recuperación desigual. Callao presentó TNOH alta en varios años. En el cambio
+2019--2024, Apurímac tuvo la mayor caída y Ucayali la mayor subida. Cusco mostró
+una caída de participación extranjera en 2020--2021 y recuperación posterior.
+
+Las cifras se contrastaron con Python en modo de solo lectura. Los totales de
+las consultas 1 y 5 y las estadísticas de la consulta 6 coincidieron. También
+se confirmaron 1 500 muestras de entrenamiento, 300 de prueba y 150 de
+validación. Sumar todos los niveles cuadruplicaba aproximadamente algunos
+totales; el filtro TT/TT evitó ese doble conteo.
+
 \subsection{Resultados de clasificación}
+La regresión logística fue más equilibrada. En 2024 obtuvo F1 de 0.7931 frente
+a 0.4403 de Naive Bayes. En 2025-I obtuvo 0.6939 frente a 0.4675. Naive Bayes
+tuvo precisión alta, pero recall bajo.
+
 \subsection{Resultados de regresión}
+Ridge mejoró el RMSE de 4.0920 a 4.0726 en 2024 y de 3.9273 a 3.8796 en
+2025-I. También elevó un poco el $R^2$. La mejora fue pequeña.
+
 \subsection{Discusión general}
+Se logró responder las catorce consultas con una entrada y una ejecución
+repetible. Las consultas encadenadas mostraron cómo una salida intermedia
+alimenta otro job. En los modelos se usó una división temporal para entrenar
+con el pasado y evaluar periodos posteriores.
+
+Las limitaciones principales son el dataset pequeño, un solo nodo, algunos
+promedios no ponderados y el semestre incompleto de 2025. Además, los modelos
+se entrenaron en un reducer. Fue suficiente para 1 950 filas TT/TT, pero no
+sería adecuado para un modelo muy grande.
 
 \section{Conclusiones}
+Se obtuvo un CSV canónico de 38 730 registros sin modificar los siete archivos
+originales. El filtro TT/TT evitó doble conteo. Las catorce consultas terminaron
+correctamente y conservaron resultado y JAR.
+
+Se observó una caída de varios indicadores en 2020 y una recuperación diferente
+entre departamentos. Las consultas encadenadas compararon 2019 con 2024 y
+agruparon la participación extranjera por periodos.
+
+La regresión logística obtuvo el mejor equilibrio en clasificación. Ridge
+mejoró ligeramente RMSE y $R^2$. Estos resultados describen este dataset y no
+prueban causas ni garantizan el mismo desempeño en otros periodos.
+
+Finalmente, se logró comprobar HDFS, YARN y JobHistory en un nodo. Las capturas
+muestran trabajos y consumo reales. El entorno sirve para el laboratorio, pero
+no demuestra escalabilidad horizontal.
 
 \appendix
-
 \section{Anexo: Código fuente Java y archivos JAR}
+El código está en \path{queries/common/src} y \path{queries/query01} a
+\path{queries/query14}. Cada consulta conserva su JAR en
+\path{resultados/queryXX/queryXX.jar}.
 \section{Anexo: Inputs y outputs de las consultas}
+La entrada es \path{data/Indicadores_ocupabilidad_2019_2025.csv}. Cada salida
+completa está en \path{queries/queryXX/resultados/queryXX/resultado.txt}.
+\path{queries/execution-summary.tsv} registra las catorce ejecuciones.
 \section{Anexo: Docker Compose y configuración de Hadoop}
+La definición está en \path{hadoop3/compose.yaml}. Los scripts están en
+\path{hadoop3/scripts/}.
 \section{Anexo: Documentación adicional}
+Cada consulta incluye un README. Las evidencias se documentan en
+\path{labs/labca1/images/README.md}.
 
-%\begin{center}
-%{\large \bf Agradecimientos}
-%\end{center}
-%Los autores agradecen a las autoridades de la Facultad de Ciencias de la Universidad Nacional de
-%Ingenier\'{\i}a por su apoyo.
-%%\begin{center}
-%%{\large \bf Apendice: }
-%%\end{center}
-
-\vspace{20pt}
-\hrule
-\vspace{10pt}
-
+\vspace{20pt}\hrule\vspace{10pt}
 \nocite{*}
-%\bibliographystyle{apacite}
 \bibliographystyle{plain}
 \bibliography{Bibliog}
-\addcontentsline{toc}{chapter}{Bibliografía}
-
-%------------------------------------- References --------------------
+\addcontentsline{toc}{section}{Bibliografía}
 \end{document}
