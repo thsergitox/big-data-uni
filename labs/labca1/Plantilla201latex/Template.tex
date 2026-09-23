@@ -7,7 +7,7 @@
 \marginsize{2.5cm}{1.8cm}{1.5cm}{1.7cm}
 \usepackage{amssymb,amsfonts,amsmath,amsthm}
 \usepackage{graphicx,hyperref,caption,subcaption,tocloft}
-\usepackage{booktabs,array,float,xcolor,listings}
+\usepackage{booktabs,array,float,xcolor,listings,longtable}
 \renewcommand{\cftsecleader}{\cftdotfill{\cftdotsep}}
 \renewcommand*\contentsname{Contenido}
 \renewcommand{\thepage}{}
@@ -156,6 +156,94 @@ pernoctaciones y empleo. Los archivos de 2019 a 2023 tenían 23 columnas. Los
 archivos recientes añadían \texttt{FECHA\_CORTE}. La cabecera final usa nombres
 sin espacios y mantiene todos los indicadores en un orden fijo.
 
+\subsection{Diccionario de las 24 columnas}
+Cada fila representa un mes, departamento y nivel de desagregación por clase y
+categoría del hospedaje. Por ello, una fila no representa un hotel individual.
+Los campos de capacidad y actividad son agregados del grupo definido por
+\texttt{ANIO}, \texttt{MES}, \texttt{DEPARTAMENTO}, \texttt{ID\_CLASE} e
+\texttt{ID\_CATEGORIA}. El siguiente cuadro adapta el diccionario oficial de
+MINCETUR \cite{mincetur_ocupabilidad} y aclara cómo se interpretó cada columna
+en este laboratorio.
+
+\small
+\begin{longtable}{>{\ttfamily\raggedright\arraybackslash}p{0.29\textwidth}
+                  >{\raggedright\arraybackslash}p{0.65\textwidth}}
+\caption{Diccionario de columnas del CSV consolidado}\label{tab:diccionario-columnas}\\
+\toprule
+\normalfont\textbf{Columna} & \textbf{Significado e interpretación} \\
+\midrule
+\endfirsthead
+\toprule
+\normalfont\textbf{Columna} & \textbf{Significado e interpretación (continuación)} \\
+\midrule
+\endhead
+\bottomrule
+\endfoot
+FECHA\_CORTE & Fecha hasta la cual fue actualizada o cerrada la información de
+la fuente. Está vacía en los archivos antiguos y no es el mes observado. \\
+ANIO & Año al que corresponde la observación mensual. El valor 2025 solo cubre
+enero--junio. \\
+MES & Mes de referencia, codificado de \texttt{01} a \texttt{12}. Se conserva
+con dos dígitos para ordenar los periodos correctamente. \\
+ID\_CLASE & Código de la clase del hospedaje: por ejemplo, \texttt{01} hotel,
+\texttt{02} apart hotel, \texttt{03} hostal o \texttt{TT} total consolidado. \\
+CLASE & Nombre legible de la clase. Cuando el código es \texttt{TT}, el valor
+es \emph{TODAS CONSOLIDADAS}: reúne todas las clases del departamento. \\
+ID\_CATEGORIA & Código de la categoría: \texttt{01}--\texttt{05} para una a
+cinco estrellas, otros códigos específicos o \texttt{TT} para el total. \\
+CATEGORIA & Nombre legible de la categoría. \emph{NO CATEGORIZADO} no significa
+dato perdido: identifica establecimientos sin categoría de estrellas. \\
+DEPARTAMENTO & Departamento o región del Perú donde se agrega la información.
+El dataset contiene 25 valores, incluyendo Callao. \\
+ID\_UBIGEO & Código geográfico de seis caracteres del INEI. En estas filas
+departamentales termina normalmente en cuatro ceros; debe tratarse como texto
+para no perder ceros iniciales. \\
+NUMERO\_ESTABLECIMIENTOS & Cantidad mensual de establecimientos de hospedaje
+incluidos en el grupo de la fila. \\
+NUMERO\_HABITACIONES & Cantidad de habitaciones ofertadas por esos
+establecimientos; mide capacidad física, no habitaciones ocupadas. \\
+NUMERO\_PLAZAS\_CAMA & Capacidad de alojamiento expresada en camas disponibles;
+una cama doble equivale a dos plazas-cama. \\
+PORCENTAJE\_TNOH & Tasa Neta de Ocupación de Habitaciones: porcentaje mensual
+de la capacidad de habitaciones realmente disponible que fue ocupada. La
+unidad es porcentaje, no número de habitaciones. \\
+PORCENTAJE\_TNOC & Tasa Neta de Ocupación de Plazas-Cama: porcentaje mensual de
+la capacidad de camas realmente disponible que fue ocupada. Puede diferir de
+TNOH porque una habitación ocupada puede alojar una o varias personas. \\
+PROMEDIO\_PERMANENCIA & Promedio general de días o noches que cada huésped
+permanece alojado. Relaciona pernoctaciones con arribos. \\
+PROMEDIO\_PERMANENCIA\_NAC & Permanencia promedio de los huéspedes nacionales,
+expresada en días. \\
+PROMEDIO\_PERMANENCIA\_EXT & Permanencia promedio de los huéspedes extranjeros,
+expresada en días. \\
+TOTAL\_ARRIBOS & Personas registradas al llegar durante el mes. Cada huésped se
+cuenta una vez al inicio de su estadía, aunque permanezca varias noches. \\
+TOTAL\_ARRIBOS\_NAC & Parte de los arribos correspondiente a huéspedes
+nacionales. \\
+TOTAL\_ARRIBOS\_EXT & Parte de los arribos correspondiente a huéspedes
+extranjeros; junto con los nacionales compone el total de arribos. \\
+TOTAL\_PERNOCT & Total de noches ocupadas por todos los huéspedes. No es igual a
+arribos: una persona que permanece tres noches aporta un arribo y tres
+pernoctaciones. \\
+TOTAL\_PERNOCT\_NAC & Pernoctaciones generadas por huéspedes nacionales. \\
+TOTAL\_PERNOCT\_EXT & Pernoctaciones generadas por huéspedes extranjeros. \\
+TOTAL\_EMPLEO & Personas empleadas durante el mes por los establecimientos del
+grupo; no representa horas trabajadas ni calidad del empleo. \\
+\end{longtable}
+\normalsize
+
+\subsection{Qué significa el filtro TT/TT}
+\texttt{TT} no es un valor desconocido: significa \emph{TODAS CONSOLIDADAS}.
+Una fila \texttt{TT/TT} tiene simultáneamente
+\texttt{ID\_CLASE=TT} e \texttt{ID\_CATEGORIA=TT}; por tanto, es el total mensual
+del departamento sin separar clase ni categoría. El CSV también contiene filas
+detalladas y subtotales. Sumarlas junto con TT/TT volvería a contar la misma
+actividad varias veces. Por eso, las consultas de totales, promedios
+departamentales y modelos usan solo TT/TT. La consulta 3 es la excepción
+intencional: conserva el total de categoría de cada clase
+(\texttt{ID\_CATEGORIA=TT}) y excluye la clase global para poder comparar
+hoteles, hostales, resorts y demás clases.
+
 \subsection{Preprocesamiento y carga en HDFS}
 Los archivos no tenían exactamente la misma estructura. Los datos de 2019 a
 2023 usaban 23 columnas, mientras que los archivos más recientes añadían la
@@ -243,6 +331,39 @@ En cada consulta se indican el tipo, la pregunta, los campos, la solución, los
 archivos de código, la entrada, una salida real, una interpretación y una
 limitación. La entrada fue el CSV consolidado en todos los casos.
 
+\subsection{Resumen de consultas y cantidad de etapas}
+El Cuadro~\ref{tab:resumen-consultas} permite distinguir una consulta de un solo
+job de una consulta encadenada. ``2 jobs'' significa que Hadoop ejecuta dos
+pares Mapper--Reducer consecutivos y que la salida del primero se convierte en
+la entrada del segundo. En este proyecto, solo las consultas 9 y 10 tienen dos
+Mappers diferentes.
+
+\begin{table}[H]
+\centering\scriptsize
+\caption{Consultas, tipo de análisis y estructura MapReduce}
+\label{tab:resumen-consultas}
+\begin{tabular}{c p{0.30\textwidth} p{0.31\textwidth} c}
+\toprule
+\textbf{N.} & \textbf{Consulta} & \textbf{Tipo} & \textbf{Estructura} \\
+\midrule
+1 & Arribos nacionales y extranjeros & Suma anual por origen & 1 Mapper + 1 Reducer \\
+2 & TNOH por departamento y año & Promedio agrupado & 1 Mapper + 1 Reducer \\
+3 & TNOH y TNOC por clase & Comparación de grupos & 1 Mapper + 1 Reducer \\
+4 & Empleo por cada 100 habitaciones & Razón de sumas & 1 Mapper + 1 Reducer \\
+5 & Estacionalidad mensual & Suma por mes & 1 Mapper + 1 Reducer \\
+6 & Estadísticas de TNOH & Estadística descriptiva global & 1 Mapper + 1 Reducer \\
+7 & Búsqueda de subtexto & Filtro literal & Solo Mapper \\
+8 & Mínimo y máximo de TNOH & Extremos de promedios & 1 Mapper + 1 Reducer \\
+9 & Cambio 2019--2024 & Comparación temporal encadenada & 2 jobs: 2 Mapper + 2 Reducer \\
+10 & Participación extranjera & Agregación mensual y por periodo & 2 jobs: 2 Mapper + 2 Reducer \\
+11 & Gaussian Naive Bayes & Clasificación supervisada & 1 Mapper + 1 Reducer \\
+12 & Regresión logística & Clasificación supervisada & 1 Mapper + 1 Reducer \\
+13 & Regresión lineal & Regresión supervisada & 1 Mapper + 1 Reducer \\
+14 & Regresión ridge & Regresión regularizada L2 & 1 Mapper + 1 Reducer \\
+\bottomrule
+\end{tabular}
+\end{table}
+
 \subsection{Consultas que emplean dos o más campos}
 Este bloque corresponde al ítem 1 de la práctica. Incluye cinco consultas que
 combinan al menos dos columnas del dataset.
@@ -251,9 +372,14 @@ combinan al menos dos columnas del dataset.
 nacionales y extranjeros? Se usaron \texttt{ANIO},
 \texttt{TOTAL\_ARRIBOS\_NAC} y \texttt{TOTAL\_ARRIBOS\_EXT}.
 
-\textbf{Solución y código.} El Mapper filtró TT/TT y emitió el año con ambos
-totales. El Reducer sumó cada origen. Se usaron las clases
-\texttt{ArrivalsByOriginMapper}, Reducer y Driver.
+\textbf{Solución y código.} \texttt{ArrivalsMapper} omite la cabecera, convierte
+cada línea en \texttt{OccupabilityRecord} y acepta únicamente registros TT/TT.
+Su clave es el año y su valor intermedio contiene
+\texttt{arribos\_nacionales,arribos\_extranjeros}. El shuffle reúne bajo una
+misma clave todas las filas mensuales y departamentales de un año.
+\texttt{ArrivalsReducer} recorre esos pares, mantiene dos acumuladores
+independientes y emite el total anual de cada origen. Es un solo job; no hay un
+segundo Mapper.
 
 \textbf{Input y output.}
 \begin{lstlisting}[style=resultado]
@@ -271,9 +397,12 @@ meses y no se puede comparar directamente con un año completo.
 \textbf{Tipo y pregunta.} Promedio agrupado. ¿Cuál fue la TNOH media de cada
 departamento por año? Se usaron año, departamento y TNOH.
 
-\textbf{Solución y código.} El Mapper emitió la clave año--departamento y el
-Reducer calculó suma entre cantidad. Se usaron las clases
-\texttt{OccupancyByDepartmentMapper}, Reducer y Driver.
+\textbf{Solución y código.} \texttt{OccupancyMapper} descarta la cabecera y las
+filas que no son TT/TT. Emite como clave compuesta
+\texttt{ANIO;DEPARTAMENTO} y como valor \texttt{TNOH,1}; el uno permite contar
+cuántos meses entran al promedio. \texttt{OccupancyReducer} acumula la TNOH y
+el contador de cada grupo y emite \texttt{suma/cantidad}. El resultado es una
+media aritmética mensual, no una tasa recalculada ni ponderada por habitaciones.
 
 \textbf{Input y output.}
 \begin{lstlisting}[style=resultado]
@@ -292,8 +421,13 @@ y no equivale a una media ponderada por habitaciones.
 TNOC según la clase? Se usaron año, clase y ambos porcentajes. Se tomó la
 categoría total y se excluyó la clase total.
 
-\textbf{Solución y código.} El Mapper agrupó año--clase y el Reducer calculó
-las dos medias. Se usaron las clases \texttt{OccupancyByClass}.
+\textbf{Solución y código.} \texttt{OccupancyMapper} selecciona filas cuyo total
+de categoría es TT, pero rechaza el total global TT/TT. Así queda una
+observación por clase, departamento y mes sin mezclar las categorías de
+estrellas. Emite \texttt{ANIO;CLASE} como clave y
+\texttt{TNOH,TNOC,1} como valor. \texttt{OccupancyReducer} mantiene dos sumas y
+un único contador y produce las medias mensuales de ambas tasas para cada año y
+clase.
 \begin{lstlisting}[style=resultado]
 2019;HOTEL   mean_tnoh=31.2412  mean_tnoc=26.3323
 2020;HOTEL   mean_tnoh=21.1950  mean_tnoc=16.1440
@@ -309,9 +443,12 @@ de establecimientos, así que la salida no compara tamaños totales.
 cien habitaciones en cada departamento y año? Se usaron año, departamento,
 empleo y habitaciones.
 
-\textbf{Solución y código.} El Mapper emitió empleo y habitaciones TT/TT. El
-Reducer sumó ambos campos. Después calculó la razón por habitación y la
-multiplicó por 100. Se usaron las clases \texttt{EmploymentCapacity}.
+\textbf{Solución y código.} \texttt{CapacityMapper} filtra TT/TT, forma la clave
+\texttt{ANIO;DEPARTAMENTO} y envía \texttt{TOTAL\_EMPLEO} junto con
+\texttt{NUMERO\_HABITACIONES}. \texttt{CapacityReducer} suma por separado el
+empleo y las habitaciones de todos los meses y recién después calcula
+$100\times empleo/habitaciones$. Esta razón de sumas evita promediar razones
+mensuales con igual peso; si el denominador fuera cero, devuelve 0.
 \begin{lstlisting}[style=resultado]
 2019;LIMA    employment_per_100_rooms=74.3232
 2024;LIMA    employment_per_100_rooms=54.3562
@@ -326,8 +463,12 @@ trabajadas; solo relaciona los totales informados.
 \textbf{Tipo y pregunta.} Suma por mes. ¿Qué meses concentran más arribos y
 pernoctaciones? Se usaron mes, arribos y pernoctaciones TT/TT.
 
-\textbf{Solución y código.} El Mapper agrupó por mes y el Reducer sumó ambos
-indicadores. Se usaron las clases \texttt{Seasonality}.
+\textbf{Solución y código.} \texttt{SeasonalityMapper} conserva TT/TT y usa el
+mes con dos dígitos como clave, sin incluir el año. Su valor contiene
+\texttt{TOTAL\_ARRIBOS,TOTAL\_PERNOCT}. El shuffle junta, por ejemplo, todos los
+eneros de todos los años y departamentos. \texttt{SeasonalityReducer} suma por
+separado personas llegadas y noches ocupadas. Por eso la salida mide volumen
+acumulado por mes calendario, no el promedio de un enero típico.
 \begin{lstlisting}[style=resultado]
 01  arrivals=33585654  overnight_stays=43787718
 02  arrivals=32795352  overnight_stays=42942772
@@ -344,9 +485,12 @@ Esta consulta corresponde al ítem 2 de la práctica.
 \textbf{Tipo y pregunta.} Estadística descriptiva. ¿Cuál es la cantidad, media,
 mediana y desviación estándar poblacional de TNOH?
 
-\textbf{Solución y código.} El Mapper emitió cada TNOH TT/TT bajo una clave
-común. El Reducer ordenó 1 950 valores. Se usaron las clases
-\texttt{OccupancyStatistics}.
+\textbf{Solución y código.} \texttt{StatisticsMapper} filtra TT/TT y envía cada
+TNOH con la clave constante \texttt{TNOH}; esta decisión obliga a que todos los
+valores lleguen al mismo grupo. \texttt{StatisticsReducer} guarda las 1 950
+observaciones, calcula la media y la varianza poblacional en una pasada con el
+algoritmo incremental de Welford, y después ordena la lista para hallar la
+mediana. La desviación usa divisor $N$, no $N-1$.
 \begin{lstlisting}[style=resultado]
 TNOH  count=1950  mean=21.7433  median=21.3400  stddev=7.0678612717
 \end{lstlisting}
@@ -362,9 +506,13 @@ Esta consulta corresponde al ítem 3 de la práctica.
 palabra hotel en clase, categoría o departamento? La búsqueda no distingue
 mayúsculas, pero conserva los acentos.
 
-\textbf{Solución y código.} \texttt{SubstringSearchMapper.java} recibió el
-texto como argumento y revisó los tres campos. No necesitó reducer. Devolvió el
-desplazamiento y la fila canónica completa.
+\textbf{Solución y código.} En \texttt{configure}, \texttt{SearchMapper} recibe
+el término pasado al Driver y lo transforma a minúsculas. Para cada fila omite
+la cabecera, parsea clase, categoría y departamento, y busca el término con
+\texttt{contains} después de convertir cada campo a minúsculas. Si cualquiera
+coincide, emite como clave el desplazamiento en bytes de la línea y como valor
+la fila canónica completa. El Driver fija cero reducers: es una consulta
+\emph{map-only}, porque cada coincidencia puede decidirse de forma independiente.
 \begin{lstlisting}[style=resultado]
 2424268 ;2022;06;01;HOTEL;01;1 ESTRELLA;AMAZONAS;010000;1;20;42;...
 2424367 ;2022;06;01;HOTEL;01;1 ESTRELLA;PIURA;200000;2;40;77;...
@@ -379,9 +527,13 @@ Esta consulta corresponde al ítem 4 de la práctica.
 \textbf{Tipo y pregunta.} ¿Qué departamentos tuvieron la menor y mayor TNOH
 media de cada año? Se usaron año, departamento y TNOH.
 
-\textbf{Solución y código.} El Mapper envió las filas TT/TT por año. El Reducer
-calculó la media departamental y eligió ambos extremos. Se usaron las clases
-\texttt{OccupancyExtremes}.
+\textbf{Solución y código.} \texttt{ExtremesMapper} conserva TT/TT, emite el año
+como clave y \texttt{DEPARTAMENTO,TNOH} como valor. De este modo, un reducer
+recibe todos los departamentos y meses del mismo año. Allí,
+\texttt{ExtremesReducer} usa un acumulador de suma y cantidad por departamento,
+calcula cada media y recorre las medias para elegir mínimo y máximo. Aunque hay
+dos niveles lógicos ---promediar y elegir extremos---, ambos ocurren dentro del
+mismo reducer; NO es una consulta de dos jobs.
 \begin{lstlisting}[style=resultado]
 2019  min=TACNA:20.7342   max=CALLAO:40.9142
 2020  min=TACNA:9.6425    max=CALLAO:25.7092
@@ -399,9 +551,14 @@ MapReduce enlazados.
 \textbf{Tipo y pregunta.} Dos jobs. ¿Cuántos puntos porcentuales cambió la TNOH
 media de cada departamento entre 2019 y 2024?
 
-\textbf{Solución y código.} El primer job calculó la media por año y
-departamento. El segundo unió 2019 con 2024 y restó. El Driver
-\texttt{OccupancyChangeDriver.java} coordinó ambas etapas.
+\textbf{Solución y código.} Es la primera consulta con dos Mappers. En el job 1,
+\texttt{AnnualMapper} conserva únicamente TT/TT de 2019 y 2024, y emite
+\texttt{ANIO;DEPARTAMENTO -> TNOH,1}; \texttt{AnnualReducer} produce la media de
+cada año y departamento. En el job 2, \texttt{ChangeMapper} lee esa salida
+intermedia, cambia la clave a departamento y conserva \texttt{ANIO,media} como
+valor. Así, \texttt{ChangeReducer} recibe juntos los dos años, comprueba que
+ambos existan y emite $media_{2024}-media_{2019}$ en puntos porcentuales. El
+Driver crea la ruta intermedia, ejecuta los jobs en orden y la elimina al final.
 \begin{lstlisting}[style=resultado]
 LA LIBERTAD  2019=30.7350  2024=14.7108  change_pp=-16.0242
 CALLAO       2019=40.9142  2024=41.5950  change_pp=0.6808
@@ -416,9 +573,16 @@ describe una asociación temporal y no prueba la causa.
 \textbf{Tipo y pregunta.} Dos jobs. ¿Qué porcentaje de los arribos fue
 extranjero en cada departamento y periodo?
 
-\textbf{Solución y código.} El primer job calculó el porcentaje mensual. El
-segundo promedió cuatro periodos. \texttt{ForeignShareDriver.java} coordinó las
-etapas.
+\textbf{Solución y código.} También usa dos Mappers. En el job 1,
+\texttt{MonthlyMapper} filtra TT/TT con arribos mayores que cero, asigna el año
+a uno de cuatro periodos y calcula
+$100\times arribos\_extranjeros/arribos\_totales$. Emite una clave que identifica
+departamento, periodo, año y mes. \texttt{MonthlyReducer} consolida posibles
+duplicados mensuales y deja una participación por mes. En el job 2,
+\texttt{PeriodMapper} elimina año y mes de la clave y reagrupa por
+departamento--periodo; \texttt{PeriodReducer} promedia las participaciones
+mensuales. Es una media de porcentajes mensuales, no una participación calculada
+sobre los totales acumulados del periodo.
 \begin{lstlisting}[style=resultado]
 CUSCO;PRE_2019            mean_foreign_share=63.3747
 CUSCO;IMPACT_2020_2021    mean_foreign_share=20.5234
@@ -436,8 +600,14 @@ clasificación con la misma partición temporal.
 \textbf{Pregunta, campos y código.} Se clasificó la TNOH como alta o baja. Se
 usaron mes, establecimientos, habitaciones, camas, arribos por habitación,
 pernoctaciones por cama y empleo por establecimiento. El Mapper preparó filas
-TT/TT y el Reducer entrenó con 2019--2023. Se usaron las clases
-\texttt{NaiveBayesClassification}.
+TT/TT y el Reducer entrenó con 2019--2023. El Driver es
+\texttt{NaiveBayesClassificationDriver}. En detalle, \texttt{ModelMapper} filtra
+TT/TT y codifica cada fila como año, TNOH y siete características numéricas bajo
+la clave constante \texttt{MODEL}. \texttt{ModelReducer} reúne el conjunto,
+calcula la mediana de TNOH solo con 2019--2023, crea la etiqueta alta/baja,
+entrena Gaussian Naive Bayes con esos años y evalúa por separado 2024 y 2025-I.
+El Mapper no entrena: prepara ejemplos; el entrenamiento está centralizado en
+un reducer.
 \begin{lstlisting}[style=resultado]
 TEST_2024 samples=300 accuracy=0.703333 precision=0.945946 recall=0.286885 f1=0.440252 log_loss=0.947039
 VALIDATION_2025_H1 samples=150 accuracy=0.726667 precision=1.000000 recall=0.305085 f1=0.467532 log_loss=0.854541
@@ -449,8 +619,14 @@ condicional es una limitación para indicadores relacionados.
 \subsection{Consulta 12: regresión logística}
 \textbf{Pregunta, campos y código.} Se respondió la misma pregunta con las
 mismas siete variables, estandarizadas solo con entrenamiento. El Reducer
-entrenó 200 iteraciones con tasa 0.1. Se usaron las clases
-\texttt{LogisticClassification}.
+entrenó 200 iteraciones con tasa 0.1. El Driver es
+\texttt{LogisticClassificationDriver}. \texttt{ModelMapper} realiza la misma
+selección TT/TT y la misma codificación que la consulta 11, para que la
+comparación sea justa. \texttt{ModelReducer} calcula la etiqueta con la mediana
+del entrenamiento, estandariza las siete características usando únicamente
+2019--2023, ajusta la regresión logística durante 200 iteraciones y emite la
+matriz de confusión y las métricas de 2024 y 2025-I. Es un solo job con un
+reducer de entrenamiento, no dos etapas MapReduce.
 \begin{lstlisting}[style=resultado]
 TEST_2024 samples=300 accuracy=0.840000 precision=0.836364 recall=0.754098 f1=0.793103 log_loss=0.498765
 VALIDATION_2025_H1 samples=150 accuracy=0.800000 precision=0.871795 recall=0.576271 f1=0.693878 log_loss=0.474774
@@ -484,7 +660,12 @@ regresión con las mismas variables y periodos de evaluación.
 \subsection{Consulta 13: regresión lineal}
 \textbf{Pregunta, campos y código.} Se estimó la TNOH con las mismas siete
 características y la misma separación temporal. El Reducer ajustó una regresión
-sin regularización. Se usaron las clases \texttt{LinearRegression}.
+sin regularización. El Driver es \texttt{LinearRegressionDriver}.
+\texttt{ModelMapper} convierte cada fila TT/TT en año, TNOH objetivo y las siete
+características, siempre bajo la clave \texttt{MODEL}. \texttt{ModelReducer}
+separa temporalmente los ejemplos, ajusta el escalado solo con entrenamiento,
+resuelve la regresión con $\lambda=0$ y aplica el modelo a 2024 y 2025-I para
+acumular MAE, RMSE y $R^2$. El reducer también emite intercepto y coeficientes.
 \begin{lstlisting}[style=resultado]
 TRAINING samples=1500
 TEST_2024 samples=300 mae=3.192221 rmse=4.092002 r_squared=0.643537
@@ -497,7 +678,12 @@ relaciones lineales.
 \subsection{Consulta 14: regresión ridge}
 \textbf{Pregunta, campos y código.} Se estimó la misma variable con
 regularización L2, $\lambda=1$, sin regularizar el intercepto. Se usaron las
-clases \texttt{RidgeRegression}.
+clases internas de \texttt{RidgeRegressionDriver}. El flujo de \texttt{ModelMapper} y
+\texttt{ModelReducer} es deliberadamente igual al de la consulta 13; la única
+diferencia del ajuste es $\lambda=1$. El reducer estandariza con entrenamiento,
+aplica penalización L2 a los coeficientes sin penalizar el intercepto y calcula
+las mismas métricas en los mismos periodos. Mantener idénticos datos y flujo
+permite atribuir la diferencia observada a la regularización y no a otro filtro.
 \begin{lstlisting}[style=resultado]
 TRAINING samples=1500
 TEST_2024 samples=300 mae=3.194316 rmse=4.072566 r_squared=0.646915

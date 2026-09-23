@@ -15,26 +15,57 @@
 \graphicspath{{../images/}}
 
 \title[Indicadores de Ocupabilidad]{Indicadores de Ocupabilidad de MINCETUR}
-\subtitle{14 flujos MapReduce con output real}
+\subtitle{14 flujos MapReduce con output }
 \author[Pezo y Pérez]{Sergio Sebastian Pezo Jimenez \and Arbués Enrique Pérez Villegas}
 \institute[UNI]{Universidad Nacional de Ingeniería\\CC531 Análisis en Macrodatos}
 \date{22 de septiembre de 2026}
 
-\newcommand{\queryslide}[4]{%
+\newcommand{\queryframe}[6]{%
 \begin{frame}{#1}
-\small
-
-\begin{block}{Mapper}
+\footnotesize
+\begin{alertblock}{Pregunta}
 #2
-\end{block}
-
-\begin{block}{Reducer}
-#3
-\end{block}
-
-\begin{alertblock}{Output real}
-{\ttfamily\scriptsize #4}
 \end{alertblock}
+\textbf{Mapper.} #3
+
+\vspace{0.45em}
+\textbf{Reducer.} #4
+
+\vspace{0.45em}
+\textbf{Output real.} {\ttfamily\scriptsize #5}
+
+\vspace{0.45em}
+\textbf{Respuesta.} #6
+\end{frame}
+}
+
+\newcommand{\dualqueryframe}[8]{%
+\begin{frame}{#1}
+\footnotesize
+\begin{alertblock}{Pregunta}
+#2
+\end{alertblock}
+\begin{columns}[T,onlytextwidth]
+\column{0.49\textwidth}
+\centering\textbf{Job 1: agregación}\par
+\raggedright
+\textbf{Mapper.} #3
+
+\vspace{0.35em}
+\textbf{Reducer.} #4
+\column{0.49\textwidth}
+\centering\textbf{Job 2: comparación}\par
+\raggedright
+\textbf{Mapper.} #5
+
+\vspace{0.35em}
+\textbf{Reducer.} #6
+\end{columns}
+\vspace{0.45em}
+\textbf{Output real.} {\ttfamily\scriptsize #7}
+
+\vspace{0.35em}
+\textbf{Respuesta.} #8
 \end{frame}
 }
 
@@ -45,7 +76,7 @@
 % ------------------------------------------------
 \begin{frame}
   \titlepage
-  \note{Ambos: presentar el objetivo y anunciar que cada query mostrará Mapper, Reducer y output real.}
+  \note{Ambos: presentar el objetivo y anunciar que cada query mostrará Mapper, Reducer y output .}
 \end{frame}
 
 % ------------------------------------------------
@@ -60,343 +91,219 @@
 \section{Datos y entorno}
 % ================================================================
 
-\begin{frame}{Datos, entorno y recorrido}
+\begin{frame}{Cómo leer el dataset antes de preguntar}
+\footnotesize
 \begin{columns}[T,onlytextwidth]
-
-\column{0.47\textwidth}
-\textbf{Dataset consolidado}
+\column{0.48\textwidth}
+\begin{block}{Qué representa una fila}
+Un mes, un departamento y un nivel clase--categoría; no representa un hotel individual.
 \begin{itemize}
-  \item Periodo 2019--2025-I.
-  \item 38\,730 registros.
-  \item 24 columnas.
-  \item 25 departamentos.
-  \item El cambio de esquema fue normalizado.
-  \item Se usa TT/TT para evitar doble conteo.
+  \item 2019--2025-I, 38\,730 filas y 24 columnas.
+  \item 25 departamentos; 2025 contiene seis meses.
+  \item \texttt{TT/TT}: total departamental de todas las clases y categorías.
 \end{itemize}
-
-\column{0.49\textwidth}
-\textbf{Entorno Hadoop 3.5.0}
+\end{block}
+\column{0.50\textwidth}
+\begin{block}{Indicadores que originan las preguntas}
 \begin{itemize}
-  \item Docker Compose en un nodo.
-  \item HDFS conserva entrada y salidas.
-  \item YARN ejecuta los JAR.
-  \item La división temporal evita fuga futura.
+  \item \textbf{TNOH}: porcentaje de habitaciones disponibles ocupadas.
+  \item \textbf{TNOC}: porcentaje de plazas-cama disponibles ocupadas.
+  \item \textbf{Arribo}: huésped contado al llegar.
+  \item \textbf{Pernoctación}: cada noche que permanece.
 \end{itemize}
-
+\end{block}
 \end{columns}
-
-\vfill
-\centering
-\includegraphics[height=0.13\textheight]{namenode-overview.png}
-\hspace{1em}
-\includegraphics[height=0.13\textheight]{resourcemanager-applications.png}
-
-\note{Arbués: explicar preparación. Sergio: explicar HDFS, YARN y que un nodo valida el flujo, no escalabilidad.}
+\begin{alertblock}{Regla de análisis}
+Filtramos TT/TT cuando buscamos totales departamentales: sumar esos totales junto con sus desagregaciones contaría la misma actividad varias veces.
+\end{alertblock}
+\textbf{Entorno:} CSV canónico en HDFS; YARN ejecuta los JAR sobre Hadoop 3.5.0 en un nodo. Esto valida el flujo, no el escalamiento horizontal.
+\note{Arbués: explicar la granularidad y TT/TT. Sergio: contrastar TNOH con TNOC y arribos con pernoctaciones.}
 \end{frame}
 
 % ================================================================
-\section{Consultas MapReduce}
+\section{Tipos de consulta: resumen}
 % ================================================================
 
-\begin{frame}{Q01 — arribos por origen}
-\small
-\begin{block}{Mapper}
-Emite año como clave y arribos nacionales/extranjeros como valor; filtra TT/TT.
-\end{block}
-
-\begin{block}{Reducer}
-Suma ambos orígenes para todas las filas del mismo año.
-\end{block}
-
-\begin{alertblock}{Output real}
-{\ttfamily\scriptsize 2019 national=54897127 foreign=8264767}
-\end{alertblock}
-
-\vfill
-\textbf{Decisión:} comparar por año revela la caída de 2020 sin mezclar el semestre 2025.
-
-\note{Explicar primero qué emite Map, luego qué agrupa o calcula Reduce y cerrar leyendo el output.}
-\end{frame}
-
-\begin{frame}{Q02 — TNOH por departamento}
-\small
-\begin{block}{Mapper}
-Emite año-departamento y el par TNOH,1 para cada fila TT/TT.
-\end{block}
-
-\begin{block}{Reducer}
-Acumula suma y conteo; calcula la TNOH media por territorio.
-\end{block}
-
-\begin{alertblock}{Output real}
-{\ttfamily\scriptsize 2024;CALLAO mean\_tnoh=41.5950 | LORETO=12.9917}
-\end{alertblock}
-
-\vfill
-\textbf{Decisión:} la clave territorial permite comparar departamentos con la misma definición.
-
-\note{Explicar Map, Reduce y luego interpretar el resultado.}
-\end{frame}
-
-\begin{frame}{Q03 — TNOH y TNOC por clase}
-\small
-\begin{block}{Mapper}
-Emite año-clase con TNOH, TNOC y contador; usa categoría total y excluye clase TT.
-\end{block}
-
-\begin{block}{Reducer}
-Promedia ambos indicadores para cada clase de hospedaje.
-\end{block}
-
-\begin{alertblock}{Output real}
-{\ttfamily\scriptsize 2024;RESORT mean\_tnoh=46.7742 mean\_tnoc=48.2812}
-\end{alertblock}
-
-\vfill
-\textbf{Decisión:} separar clases muestra patrones que un total nacional ocultaría.
-\end{frame}
-
-\begin{frame}{Q04 — empleo por capacidad}
-\small
-\begin{block}{Mapper}
-Emite año-departamento con empleo y habitaciones en filas TT/TT.
-\end{block}
-
-\begin{block}{Reducer}
-Suma ambos campos y calcula $100 \times empleo / habitaciones$.
-\end{block}
-
-\begin{alertblock}{Output real}
-{\ttfamily\scriptsize 2024;LIMA employment\_per\_100\_rooms=54.3562}
-\end{alertblock}
-
-\vfill
-\textbf{Decisión:} la razón normaliza capacidades distintas y hace comparable cada territorio.
-\end{frame}
-
-\begin{frame}{Q05 — estacionalidad mensual}
-\small
-\begin{block}{Mapper}
-Emite mes como clave y arribos/pernoctaciones como valores.
-\end{block}
-
-\begin{block}{Reducer}
-Suma ambos indicadores para todas las observaciones del mismo mes.
-\end{block}
-
-\begin{alertblock}{Output real}
-{\ttfamily\scriptsize 01 arrivals=33585654 overnight\_stays=43787718}
-\end{alertblock}
-
-\vfill
-\textbf{Decisión:} agrupar por mes muestra estacionalidad; enero--junio tiene un año adicional.
+\begin{frame}{Tipos y preguntas de las 14 consultas}
+\tiny
+\setlength{\tabcolsep}{3pt}
+\renewcommand{\arraystretch}{1.08}
+\begin{tabularx}{\textwidth}{c p{0.29\textwidth} X}
+\toprule
+\textbf{Q} & \textbf{Tipo de pregunta} & \textbf{Pregunta} \\
+\midrule
+01 & Agregación temporal & ¿Cómo evolucionaron los arribos nacionales y extranjeros por año? \\
+02 & Promedio territorial & ¿Cuál fue la TNOH media de cada departamento por año? \\
+03 & Comparación de grupos & ¿Cómo cambian la TNOH y la TNOC según la clase de hospedaje? \\
+04 & Razón de sumas & ¿Cuántos empleos existen por cada cien habitaciones en cada departamento y año? \\
+05 & Agregación estacional & ¿Qué meses concentran más arribos y pernoctaciones? \\
+06 & Estadística descriptiva & ¿Cuál es la cantidad, media, mediana y desviación de la TNOH? \\
+07 & Búsqueda de texto & ¿Qué registros contienen un texto en clase, categoría o departamento? \\
+08 & Extremos agrupados & ¿Qué departamentos tuvieron la menor y mayor TNOH media de cada año? \\
+09 & Comparación encadenada & ¿Cuánto cambió la TNOH entre 2019 y 2024? \\
+10 & Agregación encadenada & ¿Qué porcentaje de arribos fue extranjero en cada periodo? \\
+11 & Clasificación probabilística & ¿La TNOH es alta o baja según los otros indicadores? \\
+12 & Clasificación lineal & ¿La TNOH mensual departamental es alta o baja según los demás indicadores? \\
+13 & Regresión lineal & ¿Qué valor continuo de TNOH estiman los indicadores? \\
+14 & Regresión regularizada & ¿Qué TNOH se estima al controlar los coeficientes con regularización L2? \\
+\bottomrule
+\end{tabularx}
+\note{Sergio: mostrar que no son catorce preguntas del mismo tipo; agrupan, buscan, comparan, clasifican y estiman.}
 \end{frame}
 
 % ================================================================
-\section{Estadística y comparación}
+\section{Agregación descriptiva: Q01--Q05}
 % ================================================================
 
-\begin{frame}{Q06 — estadística de TNOH}
-\small
-\begin{block}{Mapper}
-Emite todos los valores TNOH TT/TT bajo la clave común \texttt{TNOH}.
-\end{block}
+\queryframe{Q01 — Agregación temporal}
+{¿Cómo evolucionaron los arribos nacionales y extranjeros por año?}
+{Filtra TT/TT y emite \texttt{ANIO -> ARRIBOS\_NAC,ARRIBOS\_EXT}.}
+{El shuffle reúne meses y departamentos del mismo año; después suma ambos orígenes por separado.}
+{2019 national=54897127 foreign=8264767}
+{La serie evidencia la caída de 2020 y la recuperación posterior. 2025-I no se compara como un año completo.}
 
-\begin{block}{Reducer}
-Ordena 1\,950 valores y calcula media, mediana y desviación poblacional.
-\end{block}
+\queryframe{Q02 — Promedio territorial}
+{¿Cuál fue la TNOH media de cada departamento por año?}
+{Emite \texttt{ANIO;DEPARTAMENTO -> TNOH,1} para cada fila TT/TT.}
+{Suma las tasas y los contadores de cada clave; divide suma entre cantidad de meses.}
+{2024;CALLAO mean\_tnoh=41.5950 | LORETO=12.9917}
+{En 2024 Callao tuvo una TNOH media muy superior a Loreto. Es una media mensual no ponderada por habitaciones.}
 
-\begin{alertblock}{Output real}
-{\ttfamily\scriptsize count=1950 mean=21.7433 median=21.3400 stddev=7.0679}
-\end{alertblock}
+\queryframe{Q03 — Comparación de grupos}
+{¿Cómo cambian la TNOH y la TNOC según la clase de hospedaje?}
+{Conserva \texttt{ID\_CATEGORIA=TT}, excluye la clase global y emite \texttt{ANIO;CLASE -> TNOH,TNOC,1}.}
+{Acumula las dos tasas y calcula sus medias para cada año y clase.}
+{2024;RESORT mean\_tnoh=46.7742 mean\_tnoc=48.2812}
+{Los resorts muestran ocupación alta de habitaciones y camas. Ambas tasas difieren porque una habitación puede alojar varias personas.}
 
-\vfill
-\textbf{Decisión:} una clave global sirve aquí porque el volumen es pequeño; no escala a cuantiles masivos.
-\end{frame}
+\queryframe{Q04 — Razón de sumas}
+{¿Cuántos empleos existen por cada cien habitaciones en cada departamento y año?}
+{Filtra TT/TT y emite \texttt{ANIO;DEPARTAMENTO -> EMPLEO,HABITACIONES}.}
+{Suma primero ambos campos y calcula $100\times empleo/habitaciones$.}
+{2024;LIMA employment\_per\_100\_rooms=54.3562}
+{Lima registró 54.36 empleos por cien habitaciones en 2024. La razón no mide productividad ni calidad laboral.}
 
-\begin{frame}{Q07 — búsqueda de subtexto}
-\small
-\begin{block}{Mapper}
-Compara ``hotel'' con clase, categoría y departamento; emite offset y fila coincidente.
-\end{block}
-
-\begin{block}{Reducer}
-No se utiliza Reducer: cada coincidencia ya constituye el resultado final.
-\end{block}
-
-\begin{alertblock}{Output real}
-{\ttfamily\scriptsize matches=11525 | 2022;06;HOTEL;1 ESTRELLA;AMAZONAS;...}
-\end{alertblock}
-
-\vfill
-\textbf{Decisión:} un job map-only evita una etapa de agregación que no aporta valor.
-\end{frame}
-
-\begin{frame}{Q08 — extremos de TNOH}
-\small
-\begin{block}{Mapper}
-Emite año y el par departamento,TNOH para filas TT/TT.
-\end{block}
-
-\begin{block}{Reducer}
-Calcula medias departamentales dentro del año y selecciona mínimo y máximo.
-\end{block}
-
-\begin{alertblock}{Output real}
-{\ttfamily\scriptsize 2024 min=LORETO:12.9917 max=CALLAO:41.5950}
-\end{alertblock}
-
-\vfill
-\textbf{Decisión:} resolver medias y extremos juntos evita un segundo job para este dataset.
-\end{frame}
-
-\begin{frame}{Q09 — cambio 2019--2024}
-\small
-\begin{block}{Mapper}
-Job 1 emite año-departamento,TNOH; Job 2 reagrupa promedios por departamento.
-\end{block}
-
-\begin{block}{Reducer}
-Job 1 calcula medias; Job 2 une 2019/2024 y resta puntos porcentuales.
-\end{block}
-
-\begin{alertblock}{Output real}
-{\ttfamily\scriptsize APURIMAC change\_pp=-18.7325 | UCAYALI=5.0442}
-\end{alertblock}
-
-\vfill
-\textbf{Decisión:} dos jobs separan agregación y comparación temporal, haciendo verificable cada etapa.
-\end{frame}
-
-\begin{frame}{Q10 — participación extranjera}
-\small
-\begin{block}{Mapper}
-Job 1 emite departamento-mes con arribos; Job 2 cambia la clave a departamento-periodo.
-\end{block}
-
-\begin{block}{Reducer}
-Calcula porcentaje mensual y después su media por periodo analítico.
-\end{block}
-
-\begin{alertblock}{Output real}
-{\ttfamily\scriptsize CUSCO PRE=63.3747 IMPACT=20.5234 RECOVERY=58.3507}
-\end{alertblock}
-
-\vfill
-\textbf{Decisión:} los periodos distinguen choque y recuperación; la media no pondera por arribos.
-\end{frame}
+\queryframe{Q05 — Agregación estacional}
+{¿Qué meses concentran más arribos y pernoctaciones?}
+{Emite \texttt{MES -> ARRIBOS,PERNOCTACIONES} para cada total TT/TT.}
+{Agrupa el mismo mes de todos los años y departamentos y suma ambos indicadores.}
+{01 arrivals=33585654 overnight\_stays=43787718}
+{Enero concentra el mayor volumen acumulado; enero--junio incluye 2025-I y tiene un periodo adicional.}
 
 % ================================================================
-\section{Modelos}
+\section{Estadística descriptiva: Q06}
 % ================================================================
 
-\begin{frame}{Q11 — Gaussian Naive Bayes}
-\small
-\begin{block}{Mapper}
-Emite cada ejemplo TT/TT codificado bajo la clave común \texttt{MODEL}.
-\end{block}
+\queryframe{Q06 — Estadística descriptiva}
+{¿Cuál es la cantidad, media, mediana y desviación estándar poblacional de la TNOH?}
+{Emite cada TNOH TT/TT bajo una clave constante: \texttt{TNOH -> valor}.}
+{Calcula media y varianza incremental; ordena 1\,950 valores para obtener la mediana.}
+{count=1950 mean=21.7433 median=21.3400 stddev=7.0679}
+{La ocupación mensual típica ronda 21 puntos y su desviación es 7.07. Centralizar los valores solo es viable por el tamaño pequeño.}
 
-\begin{block}{Reducer}
-Separa años, fija la mediana, entrena Gaussian NB y calcula métricas.
-\end{block}
+% ================================================================
+\section{Búsqueda de texto: Q07}
+% ================================================================
 
-\begin{alertblock}{Output real}
-{\ttfamily\scriptsize TEST\_2024 accuracy=0.703333 recall=0.286885 f1=0.440252}
-\end{alertblock}
+\queryframe{Q07 — Búsqueda de subtexto}
+{¿Qué registros contienen un texto en clase, categoría o departamento?}
+{Compara el término en minúsculas con los tres campos y emite \texttt{OFFSET -> FILA} si coincide.}
+{No se utiliza Reducer: cada coincidencia ya constituye una respuesta final.}
+{matches=11525 | 2022;06;HOTEL;1 ESTRELLA;AMAZONAS;...}
+{La búsqueda literal encontró 11\,525 filas con ``hotel''. No reconoce sinónimos ni normaliza acentos.}
 
-\vfill
-\textbf{Decisión:} se eligió como línea base probabilística; su bajo recall revela la limitación de independencia.
-\end{frame}
+% ================================================================
+\section{Extremos agrupados: Q08}
+% ================================================================
 
-\begin{frame}{Q12 — regresión logística}
-\small
-\begin{block}{Mapper}
-Emite las mismas variables y partición temporal bajo la clave \texttt{MODEL}.
-\end{block}
+\queryframe{Q08 — Mínimo y máximo}
+{¿Qué departamentos tuvieron la menor y mayor TNOH media de cada año?}
+{Emite \texttt{ANIO -> DEPARTAMENTO,TNOH} para las filas TT/TT.}
+{Calcula la media de cada departamento dentro del año y selecciona mínimo y máximo.}
+{2024 min=LORETO:12.9917 max=CALLAO:41.5950}
+{Loreto y Callao delimitan los extremos de 2024. Los dos cálculos ocurren dentro de un solo Reducer.}
 
-\begin{block}{Reducer}
-Estandariza con entrenamiento, ajusta 200 iteraciones y evalúa probabilidades.
-\end{block}
+% ================================================================
+\section{MapReduce encadenado: Q09--Q10}
+% ================================================================
 
-\begin{alertblock}{Output real}
-{\ttfamily\scriptsize TEST\_2024 accuracy=0.840000 recall=0.754098 f1=0.793103}
-\end{alertblock}
+\dualqueryframe{Q09 — Comparación temporal con dos jobs}
+{¿Cuántos puntos porcentuales cambió la TNOH media entre 2019 y 2024?}
+{Filtra TT/TT de ambos años y emite \texttt{ANIO;DEP -> TNOH,1}.}
+{Calcula la TNOH media de cada año y departamento.}
+{Lee la salida anterior y emite \texttt{DEP -> ANIO,MEDIA}.}
+{Une las dos medias y calcula $media_{2024}-media_{2019}$.}
+{APURIMAC change\_pp=-18.7325 | UCAYALI=5.0442}
+{Apurímac tuvo la mayor caída y Ucayali el mayor aumento; el cambio no demuestra causalidad.}
 
-\vfill
-\textbf{Decisión:} se eligió por interpretabilidad y mejor equilibrio entre precisión y recall.
-\end{frame}
+\dualqueryframe{Q10 — Participación extranjera con dos jobs}
+{¿Qué porcentaje de los arribos fue extranjero en cada departamento y periodo?}
+{Calcula la cuota mensual y emite departamento, periodo, año y mes.}
+{Consolida una participación extranjera por mes.}
+{Lee esa salida y reagrupa por \texttt{DEPARTAMENTO;PERIODO}.}
+{Promedia las participaciones mensuales de cada periodo.}
+{CUSCO PRE=63.3747 IMPACT=20.5234 RECOVERY=58.3507}
+{Cusco cayó durante 2020--2021 y luego se recuperó. Es una media mensual no ponderada por arribos.}
 
-\begin{frame}{Q13 — regresión lineal}
-\small
-\begin{block}{Mapper}
-Emite año, TNOH objetivo y vector de características bajo \texttt{MODEL}.
-\end{block}
+% ================================================================
+\section{Clasificación supervisada: Q11--Q12}
+% ================================================================
 
-\begin{block}{Reducer}
-Entrena con 2019--2023 y calcula MAE, RMSE y $R^2$ en años posteriores.
-\end{block}
+\queryframe{Q11 — Clasificación probabilística}
+{¿La TNOH mensual departamental es alta o baja según los demás indicadores?}
+{Emite bajo \texttt{MODEL} el año, la TNOH objetivo y siete características; filtra TT/TT.}
+{Con 2019--2023 fija la mediana, entrena Gaussian Naive Bayes y evalúa 2024 y 2025-I.}
+{TEST\_2024 accuracy=0.703333 recall=0.286885 f1=0.440252}
+{El recall bajo indica que el modelo omite muchos casos de ocupación alta; funciona como línea base probabilística.}
 
-\begin{alertblock}{Output real}
-{\ttfamily\scriptsize TEST\_2024 mae=3.192221 rmse=4.092002 r\_squared=0.643537}
-\end{alertblock}
+\queryframe{Q12 — Clasificación lineal}
+{¿La TNOH mensual departamental es alta o baja según los demás indicadores?}
+{Emite exactamente los mismos ejemplos y características que Q11.}
+{Estandariza solo con entrenamiento, ajusta 200 iteraciones y calcula las métricas.}
+{TEST\_2024 accuracy=0.840000 recall=0.754098 f1=0.793103}
+{La regresión logística mejoró claramente recall y F1 frente a Naive Bayes con los mismos datos.}
 
-\vfill
-\textbf{Decisión:} da una referencia interpretable para predecir el valor continuo de TNOH.
-\end{frame}
+% ================================================================
+\section{Regresión supervisada: Q13--Q14}
+% ================================================================
 
-\begin{frame}{Q14 — regresión ridge}
-\small
-\begin{block}{Mapper}
-Emite exactamente los mismos ejemplos que Q13 para una comparación justa.
-\end{block}
+\queryframe{Q13 — Regresión lineal}
+{¿Qué valor continuo de TNOH puede estimarse usando los demás indicadores?}
+{Emite \texttt{MODEL -> ANIO,TNOH,7 características} para cada fila TT/TT.}
+{Estandariza con 2019--2023, ajusta $\lambda=0$ y calcula MAE, RMSE y $R^2$.}
+{TEST\_2024 mae=3.192221 rmse=4.092002 r\_squared=0.643537}
+{El MAE fue 3.19 puntos y el modelo explicó 64.35\% de la variación de 2024.}
 
-\begin{block}{Reducer}
-Ajusta regresión con penalización L2, $\lambda=1$, y calcula las mismas métricas.
-\end{block}
-
-\begin{alertblock}{Output real}
-{\ttfamily\scriptsize VALIDATION\_2025\_H1 mae=3.013257 rmse=3.879584 r\_squared=0.670320}
-\end{alertblock}
-
-\vfill
-\textbf{Decisión:} Ridge controla coeficientes correlacionados; la mejora observada es pequeña.
-\end{frame}
+\queryframe{Q14 — Regresión regularizada}
+{¿Qué TNOH se estima al controlar el tamaño de los coeficientes con regularización L2?}
+{Emite los mismos ejemplos, variables y periodos que Q13.}
+{Ajusta Ridge con penalización L2, $\lambda=1$, sin penalizar el intercepto.}
+{VALIDATION\_2025\_H1 rmse=3.879584 r\_squared=0.670320}
+{Ridge mejoró ligeramente RMSE y $R^2$; solo se evaluó un valor de $\lambda$.}
 
 % ================================================================
 \section{Cierre}
 % ================================================================
 
-\begin{frame}{Conclusiones y límites}
+\begin{frame}{Conclusiones: de preguntas a respuestas}
+\footnotesize
 \begin{columns}[T,onlytextwidth]
-
-\column{0.58\textwidth}
-\textbf{Resultados}
+\column{0.56\textwidth}
+\begin{block}{Qué respondimos}
 \begin{itemize}
-  \item Q01--Q05: consultas con múltiples campos.
-  \item Q06: estadística descriptiva.
-  \item Q07: búsqueda de subtexto.
-  \item Q08: extremos agrupados.
-  \item Q09--Q10: dos MapReduce enlazados.
-  \item Q11--Q12: clasificación.
-  \item Q13--Q14: regresión.
-  \item Logística: F1 0,7931 en 2024.
-  \item Ridge: RMSE 3,8796 en 2025-I.
+  \item Q01--Q05: evolución, territorio, clase, capacidad y estacionalidad.
+  \item Q06--Q08: distribución, búsqueda y extremos.
+  \item Q09--Q10: cambio temporal y participación extranjera con dos jobs.
+  \item Q11--Q12: la logística logró mejor equilibrio; F1=0.7931 en 2024.
+  \item Q13--Q14: Ridge mejoró ligeramente; RMSE=3.8796 en 2025-I.
 \end{itemize}
-
-\column{0.38\textwidth}
-\begin{alertblock}{Límites}
-2025 tiene seis meses.
-
-El clúster usa un nodo.
-
-Algunos promedios no ponderan capacidad.
-
-Los modelos se entrenan en un reducer por el volumen pequeño.
+\end{block}
+\column{0.40\textwidth}
+\begin{alertblock}{Hasta dónde llegan las respuestas}
+No prueban causalidad. 2025 tiene seis meses. Algunos promedios no ponderan capacidad. Un nodo valida el pipeline, no escalabilidad. Los modelos caben en un reducer por el volumen pequeño.
 \end{alertblock}
-
 \end{columns}
-
-\note{Ambos: resumir resultados y límites sin afirmar escalabilidad horizontal ni causalidad.}
+\note{Ambos: conectar cada bloque con la pregunta que respondió y cerrar reconociendo límites.}
 \end{frame}
 
 % ================================================================

@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.29 (TeX Live 2026/Arch Linux) (preloaded format=pdflatex 2026.9.22)  22 SEP 2026 16:56
+This is pdfTeX, Version 3.141592653-2.6-1.40.29 (TeX Live 2026/Arch Linux) (preloaded format=pdflatex 2026.9.22)  22 SEP 2026 19:30
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -429,9 +429,27 @@ Package: listings 2025/11/14 1.11b (Carsten Heinz)
     but found:
         2025/11/14 1.11b (Carsten Heinz)
     so I'm assuming it got fixed.
-(/usr/share/texmf-dist/tex/latex/l3backend/l3backend-pdftex.def
+(/usr/share/texmf-dist/tex/latex/tools/longtable.sty
+Package: longtable 2025-10-13 v4.24 Multi-page Table package (DPC)
+\LTleft=\skip91
+\LTright=\skip92
+\LTpre=\skip93
+\LTpost=\skip94
+\LTchunksize=\count329
+\LTcapwidth=\dimen196
+\LT@head=\box61
+\LT@firsthead=\box62
+\LT@foot=\box63
+\LT@lastfoot=\box64
+\LT@gbox=\box65
+\LT@cols=\count330
+\LT@rows=\count331
+\c@LT@tables=\count332
+\c@LT@chunks=\count333
+\LT@p@ftn=\toks37
+) (/usr/share/texmf-dist/tex/latex/l3backend/l3backend-pdftex.def
 File: l3backend-pdftex.def 2025-10-09 L3 backend support: PDF output (pdfTeX)
-\l__color_backend_stack_int=\count329
+\l__color_backend_stack_int=\count334
 ) (./Template.aux
 LaTeX Info: Redefining \. on input line 11.
 LaTeX Info: Redefining \% on input line 11.
@@ -464,17 +482,17 @@ LaTeX Info: Redefining \. on input line 22.
 LaTeX Info: Redefining \% on input line 22.
  (/usr/share/texmf-dist/tex/context/base/mkii/supp-pdf.mkii
 [Loading MPS to PDF converter (version 2006.09.02).]
-\scratchcounter=\count330
-\scratchdimen=\dimen196
-\scratchbox=\box61
-\nofMPsegments=\count331
-\nofMParguments=\count332
-\everyMPshowfont=\toks37
-\MPscratchCnt=\count333
-\MPscratchDim=\dimen197
-\MPnumerator=\count334
-\makeMPintoPDFobject=\count335
-\everyMPtoPDFconversion=\toks38
+\scratchcounter=\count335
+\scratchdimen=\dimen197
+\scratchbox=\box66
+\nofMPsegments=\count336
+\nofMParguments=\count337
+\everyMPshowfont=\toks38
+\MPscratchCnt=\count338
+\MPscratchDim=\dimen198
+\MPnumerator=\count339
+\makeMPintoPDFobject=\count340
+\everyMPtoPDFconversion=\toks39
 ) (/usr/share/texmf-dist/tex/latex/epstopdf-pkg/epstopdf-base.sty
 Package: epstopdf-base 2020-01-24 v2.11 Base part for package epstopdf
 Package epstopdf-base Info: Redefining graphics rule for `.eps' on input line 485.
@@ -489,8 +507,12 @@ Package hyperref Info: Link coloring OFF on input line 22.
 Package caption Info: Begin \AtBeginDocument code.
 Package caption Info: float package is loaded.
 Package caption Info: listings package is loaded.
+Package caption Info: longtable package is loaded.
+ (/usr/share/texmf-dist/tex/latex/caption/ltcaption.sty
+Package: ltcaption 2021/01/08 v1.4c longtable captions (AR)
+)
 Package caption Info: End \AtBeginDocument code.
-\c@lstlisting=\count336
+\c@lstlisting=\count341
 LaTeX Info: Redefining \. on input line 23.
 LaTeX Info: Redefining \% on input line 23.
 LaTeX Font Info:    Trying to load font information for U+msa on input line 27.
@@ -511,38 +533,59 @@ LaTeX Info: Redefining \. on input line 2.
 LaTeX Info: Redefining \% on input line 2.
  [1
 
-{/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map}{/usr/share/texmf-dist/fonts/enc/dvips/cm-super/cm-super-t1.enc}])
+{/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map}{/usr/share/texmf-dist/fonts/enc/dvips/cm-super/cm-super-t1.enc}] [2])
 \tf@toc=\write4
 \openout4 = `Template.toc'.
 
- [2] [3] [4] [5] [6] [7] [8]
-<../images/namenode-overview.png, id=450, 1269.74374pt x 714.67pt>
+ [3]
+ignored: Infinite glue shrinkage found in box being split [4] [5] [6]
+Overfull \hbox (91.75616pt too wide) in paragraph at lines 375--383
+\T1/cmr/m/n/10 acep-ta úni-ca-men-te re-gis-tros TT/TT. Su cla-ve es el año y su va-lor in-ter-me-dio con-tie-ne \T1/cmtt/m/n/10 arribos_nacionales,arribos_extranjeros\T1/cmr/m/n/10 .
+ []
+
+[7]
+Overfull \hbox (16.83922pt too wide) in paragraph at lines 446--452
+[]\T1/cmr/bx/n/10 Solución y có-di-go. \T1/cmtt/m/n/10 CapacityMapper \T1/cmr/m/n/10 fil-tra TT/TT, for-ma la cla-ve \T1/cmtt/m/n/10 ANIO;DEPARTAMENTO \T1/cmr/m/n/10 y en-vía \T1/cmtt/m/n/10 TOTAL_EMPLEO
+ []
+
+[8]
+Overfull \hbox (11.93005pt too wide) in paragraph at lines 530--537
+\T1/cmr/m/n/10 mo va-lor. De es-te mo-do, un re-du-cer re-ci-be to-dos los de-par-ta-men-tos y me-ses del mis-mo año. Allí, \T1/cmtt/m/n/10 ExtremesReducer
+ []
+
+[9]
+Overfull \hbox (52.168pt too wide) in paragraph at lines 620--630
+\T1/cmr/m/n/10 das so-lo con en-tre-na-mien-to. El Re-du-cer en-tre-nó 200 ite-ra-cio-nes con ta-sa 0.1. El Dri-ver es \T1/cmtt/m/n/10 LogisticClassificationDriver\T1/cmr/m/n/10 .
+ []
+
+[10] [11]
+<../images/namenode-overview.png, id=491, 1269.74374pt x 714.67pt>
 File: ../images/namenode-overview.png Graphic file (type png)
 <use ../images/namenode-overview.png>
-Package pdftex.def Info: ../images/namenode-overview.png  used on input line 536.
+Package pdftex.def Info: ../images/namenode-overview.png  used on input line 722.
 (pdftex.def)             Requested size: 232.83147pt x 131.04504pt.
-<../images/resourcemanager-applications.png, id=451, 1445.4pt x 1003.75pt>
+<../images/resourcemanager-applications.png, id=492, 1445.4pt x 1003.75pt>
 File: ../images/resourcemanager-applications.png Graphic file (type png)
 <use ../images/resourcemanager-applications.png>
-Package pdftex.def Info: ../images/resourcemanager-applications.png  used on input line 540.
+Package pdftex.def Info: ../images/resourcemanager-applications.png  used on input line 726.
 (pdftex.def)             Requested size: 232.83147pt x 161.6754pt.
- [9]
-<../images/nodemanager-resources.png, id=468, 1284.8pt x 722.7pt>
+<../images/nodemanager-resources.png, id=493, 1284.8pt x 722.7pt>
 File: ../images/nodemanager-resources.png Graphic file (type png)
 <use ../images/nodemanager-resources.png>
-Package pdftex.def Info: ../images/nodemanager-resources.png  used on input line 549.
+Package pdftex.def Info: ../images/nodemanager-resources.png  used on input line 735.
 (pdftex.def)             Requested size: 232.83147pt x 130.96259pt.
-<../images/jobhistory-query.png, id=469, 1284.8pt x 722.7pt>
+<../images/jobhistory-query.png, id=494, 1284.8pt x 722.7pt>
 File: ../images/jobhistory-query.png Graphic file (type png)
 <use ../images/jobhistory-query.png>
-Package pdftex.def Info: ../images/jobhistory-query.png  used on input line 553.
+Package pdftex.def Info: ../images/jobhistory-query.png  used on input line 739.
 (pdftex.def)             Requested size: 232.83147pt x 130.96259pt.
-<../images/docker-stats.png, id=470, 1284.8pt x 722.7pt>
+ [12 <../images/namenode-overview.png> <../images/resourcemanager-applications.png>]
+<../images/docker-stats.png, id=508, 1284.8pt x 722.7pt>
 File: ../images/docker-stats.png Graphic file (type png)
 <use ../images/docker-stats.png>
-Package pdftex.def Info: ../images/docker-stats.png  used on input line 571.
+Package pdftex.def Info: ../images/docker-stats.png  used on input line 757.
 (pdftex.def)             Requested size: 451.40144pt x 253.90817pt.
- [10 <../images/namenode-overview.png> <../images/resourcemanager-applications.png> <../images/nodemanager-resources.png> <../images/jobhistory-query.png>] [11 <../images/docker-stats.png>] (./Template.bbl [12]) [13{/usr/share/texmf-dist/fonts/enc/dvips/cm-super/cm-super-ts1.enc}] (./Template.aux
+ [13 <../images/nodemanager-resources.png> <../images/jobhistory-query.png> <../images/docker-stats.png>] [14] (./Template.bbl [15{/usr/share/texmf-dist/fonts/enc/dvips/cm-super/cm-super-ts1.enc}]) [16] (./Template.aux
 LaTeX Info: Redefining \. on input line 11.
 LaTeX Info: Redefining \% on input line 11.
 LaTeX Info: Redefining \. on input line 12.
@@ -553,21 +596,21 @@ LaTeX2e <2025-11-01>
 L3 programming layer <2026-01-19>
  ***********
 Package rerunfilecheck Info: File `Template.out' has not changed.
-(rerunfilecheck)             Checksum: 6E134E5A311700AAD70D25438CBFB60F;14795.
+(rerunfilecheck)             Checksum: 93FDB6BBB0856D51DDB6549B2BC8B747;15514.
  ) 
 Here is how much of TeX's memory you used:
- 15796 strings out of 469453
- 243280 string characters out of 5469037
- 765082 words of memory out of 5000000
- 44098 multiletter control sequences out of 15000+600000
- 644188 words of font info for 85 fonts, out of 8000000 for 9000
+ 15974 strings out of 469453
+ 246122 string characters out of 5469037
+ 757664 words of memory out of 5000000
+ 44258 multiletter control sequences out of 15000+600000
+ 647502 words of font info for 90 fonts, out of 8000000 for 9000
  40 hyphenation exceptions out of 8191
- 75i,9n,79p,620b,1128s stack positions out of 10000i,1000n,20000p,200000b,200000s
-</usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi9.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmr6.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmr7.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/share/texmf-dist/fonts/type1/public/cm-super/sfbx0900.pfb></usr/share/texmf-dist/fonts/type1/public/cm-super/sfbx1000.pfb></usr/share/texmf-dist/fonts/type1/public/cm-super/sfbx1200.pfb></usr/share/texmf-dist/fonts/type1/public/cm-super/sfbx1440.pfb></usr/share/texmf-dist/fonts/type1/public/cm-super/sfrm0900.pfb></usr/share/texmf-dist/fonts/type1/public/cm-super/sfrm1000.pfb></usr/share/texmf-dist/fonts/type1/public/cm-super/sfrm1200.pfb></usr/share/texmf-dist/fonts/type1/public/cm-super/sfrm1728.pfb></usr/share/texmf-dist/fonts/type1/public/cm-super/sfti1000.pfb></usr/share/texmf-dist/fonts/type1/public/cm-super/sftt0800.pfb></usr/share/texmf-dist/fonts/type1/public/cm-super/sftt1000.pfb>
-Output written on Template.pdf (13 pages, 1644809 bytes).
+ 75i,10n,79p,620b,2037s stack positions out of 10000i,1000n,20000p,200000b,200000s
+</usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi9.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmr6.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmr7.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/share/texmf-dist/fonts/type1/public/cm-super/sfbx0700.pfb></usr/share/texmf-dist/fonts/type1/public/cm-super/sfbx0900.pfb></usr/share/texmf-dist/fonts/type1/public/cm-super/sfbx1000.pfb></usr/share/texmf-dist/fonts/type1/public/cm-super/sfbx1200.pfb></usr/share/texmf-dist/fonts/type1/public/cm-super/sfbx1440.pfb></usr/share/texmf-dist/fonts/type1/public/cm-super/sfrm0700.pfb></usr/share/texmf-dist/fonts/type1/public/cm-super/sfrm0900.pfb></usr/share/texmf-dist/fonts/type1/public/cm-super/sfrm1000.pfb></usr/share/texmf-dist/fonts/type1/public/cm-super/sfrm1200.pfb></usr/share/texmf-dist/fonts/type1/public/cm-super/sfrm1728.pfb></usr/share/texmf-dist/fonts/type1/public/cm-super/sfti0900.pfb></usr/share/texmf-dist/fonts/type1/public/cm-super/sfti1000.pfb></usr/share/texmf-dist/fonts/type1/public/cm-super/sftt0800.pfb></usr/share/texmf-dist/fonts/type1/public/cm-super/sftt0900.pfb></usr/share/texmf-dist/fonts/type1/public/cm-super/sftt1000.pfb>
+Output written on Template.pdf (16 pages, 1752574 bytes).
 PDF statistics:
- 604 PDF objects out of 1000 (max. 8388607)
- 543 compressed objects within 6 object streams
- 152 named destinations out of 1000 (max. 500000)
- 546 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 656 PDF objects out of 1000 (max. 8388607)
+ 584 compressed objects within 6 object streams
+ 160 named destinations out of 1000 (max. 500000)
+ 570 words of extra memory for PDF output out of 10000 (max. 10000000)
 
