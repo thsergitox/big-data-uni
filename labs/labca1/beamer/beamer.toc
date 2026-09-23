@@ -1,6 +1,7 @@
 \babel@toc {spanish}{}\relax 
-\beamer@sectionintoc {1}{Datos y antecedentes}{3}{0}{1}
-\beamer@sectionintoc {2}{Consultas MapReduce}{6}{0}{2}
-\beamer@sectionintoc {3}{Estadística y comparación}{11}{0}{3}
-\beamer@sectionintoc {4}{Modelos}{16}{0}{4}
-\beamer@sectionintoc {5}{Referencias}{21}{0}{5}
+\beamer@sectionintoc {1}{Datos y entorno}{3}{0}{1}
+\beamer@sectionintoc {2}{Consultas MapReduce}{4}{0}{2}
+\beamer@sectionintoc {3}{Estadística y comparación}{9}{0}{3}
+\beamer@sectionintoc {4}{Modelos}{14}{0}{4}
+\beamer@sectionintoc {5}{Cierre}{18}{0}{5}
+\beamer@sectionintoc {6}{Referencias}{19}{0}{6}

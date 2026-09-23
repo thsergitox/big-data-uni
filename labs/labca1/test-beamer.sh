@@ -7,8 +7,8 @@ DECK="$ROOT/beamer/beamer.tex"
 test -f "$DECK"
 
 frame_count=$(grep -c '\\begin{frame}' "$DECK")
-test "$frame_count" -eq 12 || {
-  echo "Se esperaban 12 diapositivas y se encontraron $frame_count" >&2
+test "$frame_count" -eq 18 || {
+  echo "Se esperaban 18 diapositivas y se encontraron $frame_count" >&2
   exit 1
 }
 
@@ -25,6 +25,14 @@ for query in $(seq -w 1 14); do
     exit 1
   }
 done
+
+grep -Fq '\begin{tikzpicture' "$DECK" || {
+  echo "Falta el diagrama editable del flujo MapReduce" >&2
+  exit 1
+}
+grep -Fq 'Mapper' "$DECK"
+grep -Fq 'Reducer' "$DECK"
+grep -Fq 'Stealth' "$DECK"
 
 for required in \
   '38 730' \
@@ -44,7 +52,7 @@ done
 
 for output in \
   'national=54897127' \
-  'mean_tnoh=41.5950' \
+  'mean\_tnoh=41.5950' \
   'count=1950' \
   'f1=0.793103' \
   'rmse=3.879584'; do
@@ -54,7 +62,7 @@ for output in \
   }
 done
 
-test "$(grep -c '\\note{' "$DECK")" -eq 12
+test "$(grep -c '\\note{' "$DECK")" -eq 18
 grep -Fq 'Arbués:' "$DECK"
 grep -Fq 'Sergio:' "$DECK"
 
@@ -72,7 +80,15 @@ for mapping in \
   }
 done
 
-test "$(grep -c '\\includegraphics' "$DECK")" -ge 2 || {
+for query in $(seq -w 1 14); do
+  section=$(sed -n "/\\\\begin{frame}{Q$query/,/\\\\end{frame}/p" "$DECK")
+  grep -Fq '\queryflow{' <<<"$section" || {
+    echo "Falta el flujo Mapper/Reducer/output en el frame Q$query" >&2
+    exit 1
+  }
+done
+
+test "$(grep -o '\\includegraphics' "$DECK" | wc -l)" -ge 2 || {
   echo "La presentación debe incluir al menos dos evidencias visuales" >&2
   exit 1
 }

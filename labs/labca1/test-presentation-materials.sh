@@ -20,14 +20,14 @@ for command in \
   }
 done
 
-for slide in $(seq 1 12); do
+for slide in $(seq 1 18); do
   grep -Fq "Diapositiva $slide" "$SCRIPT" || {
     echo "Falta el guion de la diapositiva $slide" >&2
     exit 1
   }
 done
 
-test "$(grep -c '^\*\*Transición' "$SCRIPT")" -eq 11
+test "$(grep -c '^\*\*Transición' "$SCRIPT")" -eq 17
 grep -Fq '**Arbués:**' "$SCRIPT"
 grep -Fq '**Sergio:**' "$SCRIPT"
 grep -Fq '9 min 35 s' "$SCRIPT"

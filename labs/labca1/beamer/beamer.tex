@@ -6,6 +6,7 @@
 \usepackage{booktabs}
 \usepackage{graphicx}
 \usepackage{tabularx}
+\usepackage{amsmath}
 
 \usetheme{Madrid}
 \usecolortheme{default}
@@ -13,307 +14,429 @@
 \setbeameroption{hide notes}
 \graphicspath{{../images/}}
 
-\title[Indicadores de Ocupabilidad]{Análisis de los Indicadores de Ocupabilidad de MINCETUR}
-\subtitle{Hadoop MapReduce, clasificación y regresión}
+\title[Indicadores de Ocupabilidad]{Indicadores de Ocupabilidad de MINCETUR}
+\subtitle{14 flujos MapReduce con output real}
 \author[Pezo y Pérez]{Sergio Sebastian Pezo Jimenez \and Arbués Enrique Pérez Villegas}
 \institute[UNI]{Universidad Nacional de Ingeniería\\CC531 Análisis en Macrodatos}
 \date{22 de septiembre de 2026}
 
+\newcommand{\queryslide}[4]{%
+\begin{frame}{#1}
+\small
+
+\begin{block}{Mapper}
+#2
+\end{block}
+
+\begin{block}{Reducer}
+#3
+\end{block}
+
+\begin{alertblock}{Output real}
+{\ttfamily\scriptsize #4}
+\end{alertblock}
+\end{frame}
+}
+
 \begin{document}
 
-% 1. Ambos presentan el trabajo.
+% ------------------------------------------------
+% Portada
+% ------------------------------------------------
 \begin{frame}
   \titlepage
-  \note{Ambos: 20 s. Presentar el tema y explicar que se mostrará el origen del dato, el procesamiento y los resultados principales.}
+  \note{Ambos: presentar el objetivo y anunciar que cada query mostrará Mapper, Reducer y output real.}
 \end{frame}
 
-% 2. Sergio presenta el recorrido de la exposición.
+% ------------------------------------------------
+% Contenido
+% ------------------------------------------------
 \begin{frame}{Contenido}
   \tableofcontents[hideallsubsections]
-  \note{Sergio: 15 s. Presentar el recorrido: primero los datos y antecedentes, luego Hadoop y las consultas, y al final los modelos y las conclusiones.}
+  \note{Sergio: presentar brevemente el recorrido de la exposición.}
 \end{frame}
 
-\section{Datos y antecedentes}
+% ================================================================
+\section{Datos y entorno}
+% ================================================================
 
-% 2. Arbués explica la fuente y el punto de partida.
-\begin{frame}{Fuente y motivo del análisis}
-  \begin{columns}[T,onlytextwidth]
-    \column{0.58\textwidth}
-      \begin{itemize}
-        \item MINCETUR publica los indicadores en la Plataforma Nacional de Datos Abiertos.
-        \item La encuesta registra capacidad y uso de hospedajes a nivel nacional y regional.
-        \item El MEF usa estos indicadores como referencia para estimar demanda turística.
-      \end{itemize}
-    \column{0.38\textwidth}
-      \begin{block}{Lo encontrado}
-        Los estudios previos se concentran en una región y usan métodos estadísticos clásicos.
-      \end{block}
-  \end{columns}
-  \vfill
-  {\tiny Fuentes: MINCETUR (2021), MEF (2021), Taipe y Laura (2021), Ñahuincopa y Rojas (2022).}
-  \note{Arbués: 55 s. Explicar que el dataset sí se ha usado, pero no se encontró un trabajo con Hadoop o aprendizaje automático aplicado directamente a este CSV.}
-\end{frame}
-
-\begin{frame}{Columnas del dataset}
-\scriptsize
+\begin{frame}{Datos, entorno y recorrido}
 \begin{columns}[T,onlytextwidth]
+
+\column{0.47\textwidth}
+\textbf{Dataset consolidado}
+\begin{itemize}
+  \item Periodo 2019--2025-I.
+  \item 38\,730 registros.
+  \item 24 columnas.
+  \item 25 departamentos.
+  \item El cambio de esquema fue normalizado.
+  \item Se usa TT/TT para evitar doble conteo.
+\end{itemize}
+
 \column{0.49\textwidth}
-\textbf{Identificación y dimensiones}
+\textbf{Entorno Hadoop 3.5.0}
 \begin{itemize}
-  \item \texttt{FECHA_CORTE}: fecha de actualización.
-  \item \texttt{ANIO}, \texttt{MES}: periodo observado.
-  \item \texttt{ID_CLASE}, \texttt{CLASE}: tipo de establecimiento.
-  \item \texttt{ID_CATEGORIA}, \texttt{CATEGORIA}: categoría.
-  \item \texttt{DEPARTAMENTO}, \texttt{ID_UBIGEO}: ubicación.
+  \item Docker Compose en un nodo.
+  \item HDFS conserva entrada y salidas.
+  \item YARN ejecuta los JAR.
+  \item La división temporal evita fuga futura.
 \end{itemize}
-\textbf{Capacidad}
-\begin{itemize}
-  \item \texttt{NUMERO_ESTABLECIMIENTOS}: locales reportados.
-  \item \texttt{NUMERO_HABITACIONES}: habitaciones disponibles.
-  \item \texttt{NUMERO_PLAZAS_CAMA}: camas ofertadas.
-\end{itemize}
-\column{0.49\textwidth}
-\textbf{Indicadores}
-\begin{itemize}
-  \item \texttt{PORCENTAJE_TNOH}: ocupación neta de habitaciones.
-  \item \texttt{PORCENTAJE_TNOC}: ocupación neta de camas.
-  \item \texttt{PROMEDIO_PERMANENCIA}: días promedio de estadía.
-  \item \texttt{PROMEDIO_PERMANENCIA_NAC/EXT}: estadía nacional o extranjera.
-\end{itemize}
-\textbf{Movimientos y empleo}
-\begin{itemize}
-  \item \texttt{TOTAL_ARRIBOS}, \texttt{..._NAC}, \texttt{..._EXT}: llegadas.
-  \item \texttt{TOTAL_PERNOCT}, \texttt{..._NAC}, \texttt{..._EXT}: noches.
-  \item \texttt{TOTAL_EMPLEO}: personas empleadas reportadas.
-\end{itemize}
-\vfill
-\textbf{Siglas:} TNOH es ocupación neta de habitaciones; TNOC, de camas. TT/TT significa total de clase y total de categoría, usado para evitar doble conteo.
+
 \end{columns}
+
+\vfill
+\centering
+\includegraphics[height=0.13\textheight]{namenode-overview.png}
+\hspace{1em}
+\includegraphics[height=0.13\textheight]{resourcemanager-applications.png}
+
+\note{Arbués: explicar preparación. Sergio: explicar HDFS, YARN y que un nodo valida el flujo, no escalabilidad.}
 \end{frame}
 
-% 3. Arbués presenta el contenido y las reglas de limpieza.
-\begin{frame}{Dataset consolidado}
-  \begin{columns}[T,onlytextwidth]
-    \column{0.46\textwidth}
-      \begin{tabular}{@{}lr@{}}
-        \toprule
-        Periodo & 2019--2025-I \\
-        Registros & 38 730 \\
-        Columnas & 24 columnas \\
-        Departamentos & 25 \\
-        Archivos originales & 7 \\
-        \bottomrule
-      \end{tabular}
-    \column{0.50\textwidth}
-      \textbf{Datos principales}
-      \begin{itemize}
-        \item establecimientos, habitaciones y plazas-cama;
-        \item TNOH, TNOC y permanencia;
-        \item arribos, pernoctaciones y empleo.
-      \end{itemize}
-  \end{columns}
-  \vspace{0.4em}
-  Se conservaron intactos los CSV originales. El archivo canónico usa UTF-8, punto decimal y una cabecera común.
-  \note{Arbués: 55 s. Aclarar que 2025 contiene solo enero a junio y que la consolidación permitió usar una sola entrada para las catorce consultas.}
-\end{frame}
-
+% ================================================================
 \section{Consultas MapReduce}
+% ================================================================
 
 \begin{frame}{Q01 — arribos por origen}
 \small
-\textbf{Ítem 1: consulta con dos o más campos.}
-\begin{itemize}
-  \item \textbf{Pregunta:} ¿cómo evolucionaron los arribos nacionales y extranjeros por año?
-  \item \textbf{Campos:} año, arribos nacionales y arribos extranjeros.
-  \item \textbf{Resultado:} nacionales: 54,9 millones en 2019 y 34,6 millones en 2020.
-\end{itemize}
+\begin{block}{Mapper}
+Emite año como clave y arribos nacionales/extranjeros como valor; filtra TT/TT.
+\end{block}
+
+\begin{block}{Reducer}
+Suma ambos orígenes para todas las filas del mismo año.
+\end{block}
+
+\begin{alertblock}{Output real}
+{\ttfamily\scriptsize 2019 national=54897127 foreign=8264767}
+\end{alertblock}
+
+\vfill
+\textbf{Decisión:} comparar por año revela la caída de 2020 sin mezclar el semestre 2025.
+
+\note{Explicar primero qué emite Map, luego qué agrupa o calcula Reduce y cerrar leyendo el output.}
 \end{frame}
 
-\begin{frame}{Q02 — ocupación por departamento}
+\begin{frame}{Q02 — TNOH por departamento}
 \small
-\textbf{Ítem 1: consulta con dos o más campos.}
-\begin{itemize}
-  \item \textbf{Pregunta:} ¿cuál fue la TNOH promedio de cada departamento por año?
-  \item TNOH significa ocupación neta de habitaciones.
-  \item \textbf{Resultado:} Callao llegó a 41,5950 en 2024; Loreto, a 12,9917.
-\end{itemize}
+\begin{block}{Mapper}
+Emite año-departamento y el par TNOH,1 para cada fila TT/TT.
+\end{block}
+
+\begin{block}{Reducer}
+Acumula suma y conteo; calcula la TNOH media por territorio.
+\end{block}
+
+\begin{alertblock}{Output real}
+{\ttfamily\scriptsize 2024;CALLAO mean\_tnoh=41.5950 | LORETO=12.9917}
+\end{alertblock}
+
+\vfill
+\textbf{Decisión:} la clave territorial permite comparar departamentos con la misma definición.
+
+\note{Explicar Map, Reduce y luego interpretar el resultado.}
 \end{frame}
 
-\begin{frame}{Q03 — ocupación por clase}
+\begin{frame}{Q03 — TNOH y TNOC por clase}
 \small
-\textbf{Ítem 1: consulta con dos o más campos.}
-\begin{itemize}
-  \item \textbf{Pregunta:} ¿cómo cambian TNOH y TNOC según la clase?
-  \item TNOC significa ocupación neta de camas.
-  \item \textbf{Resultado:} en 2024, Resort obtuvo TNOH 46,7742 y TNOC 48,2812.
-\end{itemize}
+\begin{block}{Mapper}
+Emite año-clase con TNOH, TNOC y contador; usa categoría total y excluye clase TT.
+\end{block}
+
+\begin{block}{Reducer}
+Promedia ambos indicadores para cada clase de hospedaje.
+\end{block}
+
+\begin{alertblock}{Output real}
+{\ttfamily\scriptsize 2024;RESORT mean\_tnoh=46.7742 mean\_tnoc=48.2812}
+\end{alertblock}
+
+\vfill
+\textbf{Decisión:} separar clases muestra patrones que un total nacional ocultaría.
 \end{frame}
 
 \begin{frame}{Q04 — empleo por capacidad}
 \small
-\textbf{Ítem 1: consulta con dos o más campos.}
-\begin{itemize}
-  \item \textbf{Pregunta:} ¿cuántos empleos se reportan por cada 100 habitaciones?
-  \item \textbf{Campos:} año, departamento, empleo y habitaciones.
-  \item \textbf{Resultado:} Lima obtuvo 54,3562 empleos por cada 100 habitaciones en 2024.
-\end{itemize}
+\begin{block}{Mapper}
+Emite año-departamento con empleo y habitaciones en filas TT/TT.
+\end{block}
+
+\begin{block}{Reducer}
+Suma ambos campos y calcula $100 \times empleo / habitaciones$.
+\end{block}
+
+\begin{alertblock}{Output real}
+{\ttfamily\scriptsize 2024;LIMA employment\_per\_100\_rooms=54.3562}
+\end{alertblock}
+
+\vfill
+\textbf{Decisión:} la razón normaliza capacidades distintas y hace comparable cada territorio.
 \end{frame}
 
 \begin{frame}{Q05 — estacionalidad mensual}
 \small
-\textbf{Ítem 1: consulta con dos o más campos.}
-\begin{itemize}
-  \item \textbf{Pregunta:} ¿qué meses concentran más arribos y pernoctaciones?
-  \item \textbf{Campos:} mes, arribos y pernoctaciones.
-  \item \textbf{Resultado:} enero y febrero tuvieron los mayores acumulados.
-\end{itemize}
+\begin{block}{Mapper}
+Emite mes como clave y arribos/pernoctaciones como valores.
+\end{block}
+
+\begin{block}{Reducer}
+Suma ambos indicadores para todas las observaciones del mismo mes.
+\end{block}
+
+\begin{alertblock}{Output real}
+{\ttfamily\scriptsize 01 arrivals=33585654 overnight\_stays=43787718}
+\end{alertblock}
+
+\vfill
+\textbf{Decisión:} agrupar por mes muestra estacionalidad; enero--junio tiene un año adicional.
 \end{frame}
 
-
+% ================================================================
 \section{Estadística y comparación}
+% ================================================================
 
 \begin{frame}{Q06 — estadística de TNOH}
 \small
-\textbf{Ítem 2: promedio, mediana y desviación.}
-\begin{itemize}
-  \item \textbf{Pregunta:} ¿cuál es el nivel central y la dispersión de la ocupación?
-  \item \textbf{Resultado:} 1\,950 valores; media 21,7433; mediana 21,3400; desviación 7,0679.
-  \item La mediana divide la mitad inferior y superior de los valores.
-\end{itemize}
+\begin{block}{Mapper}
+Emite todos los valores TNOH TT/TT bajo la clave común \texttt{TNOH}.
+\end{block}
+
+\begin{block}{Reducer}
+Ordena 1\,950 valores y calcula media, mediana y desviación poblacional.
+\end{block}
+
+\begin{alertblock}{Output real}
+{\ttfamily\scriptsize count=1950 mean=21.7433 median=21.3400 stddev=7.0679}
+\end{alertblock}
+
+\vfill
+\textbf{Decisión:} una clave global sirve aquí porque el volumen es pequeño; no escala a cuantiles masivos.
 \end{frame}
 
-\begin{frame}{Q07 — búsqueda de texto}
+\begin{frame}{Q07 — búsqueda de subtexto}
 \small
-\textbf{Ítem 3: búsqueda de subtexto.}
-\begin{itemize}
-  \item \textbf{Pregunta:} ¿qué registros contienen la palabra hotel?
-  \item \textbf{Campos:} clase, categoría y departamento.
-  \item \textbf{Resultado:} 11\,525 coincidencias con el registro completo.
-\end{itemize}
+\begin{block}{Mapper}
+Compara ``hotel'' con clase, categoría y departamento; emite offset y fila coincidente.
+\end{block}
+
+\begin{block}{Reducer}
+No se utiliza Reducer: cada coincidencia ya constituye el resultado final.
+\end{block}
+
+\begin{alertblock}{Output real}
+{\ttfamily\scriptsize matches=11525 | 2022;06;HOTEL;1 ESTRELLA;AMAZONAS;...}
+\end{alertblock}
+
+\vfill
+\textbf{Decisión:} un job map-only evita una etapa de agregación que no aporta valor.
 \end{frame}
 
-\begin{frame}{Q08 — valores extremos}
+\begin{frame}{Q08 — extremos de TNOH}
 \small
-\textbf{Ítem 4: mayor y menor valor agrupado.}
-\begin{itemize}
-  \item \textbf{Pregunta:} ¿qué departamento tuvo la menor y mayor TNOH media por año?
-  \item \textbf{Resultado 2024:} Loreto fue el mínimo (12,9917) y Callao el máximo (41,5950).
-\end{itemize}
+\begin{block}{Mapper}
+Emite año y el par departamento,TNOH para filas TT/TT.
+\end{block}
+
+\begin{block}{Reducer}
+Calcula medias departamentales dentro del año y selecciona mínimo y máximo.
+\end{block}
+
+\begin{alertblock}{Output real}
+{\ttfamily\scriptsize 2024 min=LORETO:12.9917 max=CALLAO:41.5950}
+\end{alertblock}
+
+\vfill
+\textbf{Decisión:} resolver medias y extremos juntos evita un segundo job para este dataset.
 \end{frame}
 
-\begin{frame}{Q09 — cambio entre 2019 y 2024}
+\begin{frame}{Q09 — cambio 2019--2024}
 \small
-\textbf{Ítem 5: dos MapReduce enlazados.}
-\begin{itemize}
-  \item Job 1 calcula la TNOH promedio por año y departamento.
-  \item Job 2 une 2019 con 2024 y calcula la diferencia.
-  \item \textbf{Resultado:} Apurímac tuvo la mayor caída: -18,7325 puntos porcentuales.
-\end{itemize}
+\begin{block}{Mapper}
+Job 1 emite año-departamento,TNOH; Job 2 reagrupa promedios por departamento.
+\end{block}
+
+\begin{block}{Reducer}
+Job 1 calcula medias; Job 2 une 2019/2024 y resta puntos porcentuales.
+\end{block}
+
+\begin{alertblock}{Output real}
+{\ttfamily\scriptsize APURIMAC change\_pp=-18.7325 | UCAYALI=5.0442}
+\end{alertblock}
+
+\vfill
+\textbf{Decisión:} dos jobs separan agregación y comparación temporal, haciendo verificable cada etapa.
 \end{frame}
 
-\begin{frame}{Q10 — participación extranjera en Cusco}
+\begin{frame}{Q10 — participación extranjera}
 \small
-\textbf{Ítem 5: dos MapReduce enlazados.}
-\begin{itemize}
-  \item \textbf{Pregunta:} ¿cómo cambió la proporción de arribos extranjeros?
-  \item \textbf{Resultado:} 63,3747\% antes de la pandemia; 20,5234\% durante el impacto; 58,3507\% en recuperación.
-\end{itemize}
+\begin{block}{Mapper}
+Job 1 emite departamento-mes con arribos; Job 2 cambia la clave a departamento-periodo.
+\end{block}
+
+\begin{block}{Reducer}
+Calcula porcentaje mensual y después su media por periodo analítico.
+\end{block}
+
+\begin{alertblock}{Output real}
+{\ttfamily\scriptsize CUSCO PRE=63.3747 IMPACT=20.5234 RECOVERY=58.3507}
+\end{alertblock}
+
+\vfill
+\textbf{Decisión:} los periodos distinguen choque y recuperación; la media no pondera por arribos.
 \end{frame}
 
+% ================================================================
 \section{Modelos}
+% ================================================================
 
 \begin{frame}{Q11 — Gaussian Naive Bayes}
 \small
-\textbf{Ítem 6: modelo de clasificación.}
-\begin{itemize}
-  \item \textbf{Pregunta:} ¿la ocupación mensual es alta o baja?
-  \item Alta significa TNOH mayor o igual a la mediana del entrenamiento.
-  \item \textbf{F1:} 0,4403 en 2024 y 0,4675 en 2025-I.
-\end{itemize}
+\begin{block}{Mapper}
+Emite cada ejemplo TT/TT codificado bajo la clave común \texttt{MODEL}.
+\end{block}
+
+\begin{block}{Reducer}
+Separa años, fija la mediana, entrena Gaussian NB y calcula métricas.
+\end{block}
+
+\begin{alertblock}{Output real}
+{\ttfamily\scriptsize TEST\_2024 accuracy=0.703333 recall=0.286885 f1=0.440252}
+\end{alertblock}
+
+\vfill
+\textbf{Decisión:} se eligió como línea base probabilística; su bajo recall revela la limitación de independencia.
 \end{frame}
 
 \begin{frame}{Q12 — regresión logística}
 \small
-\textbf{Ítem 6: modelo de clasificación.}
-\begin{itemize}
-  \item Se respondió la misma pregunta con las mismas variables.
-  \item \textbf{F1:} 0,7931 en 2024 y 0,6939 en 2025-I.
-  \item Fue el clasificador más equilibrado.
-\end{itemize}
+\begin{block}{Mapper}
+Emite las mismas variables y partición temporal bajo la clave \texttt{MODEL}.
+\end{block}
+
+\begin{block}{Reducer}
+Estandariza con entrenamiento, ajusta 200 iteraciones y evalúa probabilidades.
+\end{block}
+
+\begin{alertblock}{Output real}
+{\ttfamily\scriptsize TEST\_2024 accuracy=0.840000 recall=0.754098 f1=0.793103}
+\end{alertblock}
+
+\vfill
+\textbf{Decisión:} se eligió por interpretabilidad y mejor equilibrio entre precisión y recall.
 \end{frame}
 
 \begin{frame}{Q13 — regresión lineal}
 \small
-\textbf{Ítem 7: modelo de regresión.}
-\begin{itemize}
-  \item \textbf{Pregunta:} ¿qué TNOH se predice usando los demás indicadores?
-  \item Entrenamiento: 2019--2023; evaluación: 2024 y 2025-I.
-  \item \textbf{Resultado 2024:} MAE 3,1922; RMSE 4,0920; R cuadrado 0,6435.
-\end{itemize}
+\begin{block}{Mapper}
+Emite año, TNOH objetivo y vector de características bajo \texttt{MODEL}.
+\end{block}
+
+\begin{block}{Reducer}
+Entrena con 2019--2023 y calcula MAE, RMSE y $R^2$ en años posteriores.
+\end{block}
+
+\begin{alertblock}{Output real}
+{\ttfamily\scriptsize TEST\_2024 mae=3.192221 rmse=4.092002 r\_squared=0.643537}
+\end{alertblock}
+
+\vfill
+\textbf{Decisión:} da una referencia interpretable para predecir el valor continuo de TNOH.
 \end{frame}
 
 \begin{frame}{Q14 — regresión ridge}
 \small
-\textbf{Ítem 7: modelo de regresión.}
-\begin{itemize}
-  \item \textbf{Pregunta:} ¿la regularización mejora la predicción de TNOH?
-  \item \textbf{Resultado 2025-I:} MAE 3,0133; RMSE 3,8796; R cuadrado 0,6703.
-  \item La mejora frente al modelo lineal fue pequeña.
-\end{itemize}
+\begin{block}{Mapper}
+Emite exactamente los mismos ejemplos que Q13 para una comparación justa.
+\end{block}
+
+\begin{block}{Reducer}
+Ajusta regresión con penalización L2, $\lambda=1$, y calcula las mismas métricas.
+\end{block}
+
+\begin{alertblock}{Output real}
+{\ttfamily\scriptsize VALIDATION\_2025\_H1 mae=3.013257 rmse=3.879584 r\_squared=0.670320}
+\end{alertblock}
+
+\vfill
+\textbf{Decisión:} Ridge controla coeficientes correlacionados; la mejora observada es pequeña.
 \end{frame}
 
-% 10. Ambos cierran con lo demostrado y los límites.
+% ================================================================
+\section{Cierre}
+% ================================================================
+
 \begin{frame}{Conclusiones y límites}
-  \begin{itemize}
-    \item Se logró unificar siete CSV sin modificar los originales.
-    \item Las catorce consultas dejaron salida real y un JAR reproducible.
-    \item La investigación previa ayudó a normalizar el esquema, evitar doble conteo y elegir una evaluación temporal.
-    \item La regresión logística obtuvo el mejor F1 y ridge mejoró ligeramente el RMSE.
-  \end{itemize}
-  \begin{alertblock}{Límites}
-    2025 contiene solo seis meses. El clúster tuvo un nodo y el dataset no representa macrodatos por volumen.
-  \end{alertblock}
-  \note{Ambos: 45 s. Arbués resume las decisiones de datos y Sergio cierra con resultados y límites. Dejar el tiempo restante para una pregunta.}
+\begin{columns}[T,onlytextwidth]
+
+\column{0.58\textwidth}
+\textbf{Resultados}
+\begin{itemize}
+  \item Q01--Q05: consultas con múltiples campos.
+  \item Q06: estadística descriptiva.
+  \item Q07: búsqueda de subtexto.
+  \item Q08: extremos agrupados.
+  \item Q09--Q10: dos MapReduce enlazados.
+  \item Q11--Q12: clasificación.
+  \item Q13--Q14: regresión.
+  \item Logística: F1 0,7931 en 2024.
+  \item Ridge: RMSE 3,8796 en 2025-I.
+\end{itemize}
+
+\column{0.38\textwidth}
+\begin{alertblock}{Límites}
+2025 tiene seis meses.
+
+El clúster usa un nodo.
+
+Algunos promedios no ponderan capacidad.
+
+Los modelos se entrenan en un reducer por el volumen pequeño.
+\end{alertblock}
+
+\end{columns}
+
+\note{Ambos: resumir resultados y límites sin afirmar escalabilidad horizontal ni causalidad.}
 \end{frame}
 
+% ================================================================
 \section{Referencias}
+% ================================================================
 
-% 12. Referencias principales en formato IEEE.
 \begin{frame}[allowframebreaks]{Referencias}
-  \footnotesize
-  \begin{thebibliography}{99}
-    \bibitem{mincetur}
-    Ministerio de Comercio Exterior y Turismo, ``Indicadores de Ocupabilidad,''
-    Plataforma Nacional de Datos Abiertos, 2021. [En línea]. Disponible en:
-    \url{https://www.datosabiertos.gob.pe/dataset/indicadores-de-ocupabilidad-ministerio-de-comercio-exterior-y-turismo-mincetur}
+\footnotesize
+\begin{thebibliography}{99}
 
-    \bibitem{mef}
-    Ministerio de Economía y Finanzas, ``Ficha Técnica Simplificada para
-    proyectos de inversión pública en servicios turísticos,'' Lima, Perú, 2021.
+\bibitem{mincetur}
+Ministerio de Comercio Exterior y Turismo,
+``Indicadores de Ocupabilidad,''
+Plataforma Nacional de Datos Abiertos, 2021.
 
-    \bibitem{taipe}
-    H. Taipe Pari y J. G. Laura Huamán, ``Desestacionalización de la serie de
-    tiempo llegada mensual de turistas y la oferta de hospedaje en la región
-    Huancavelica, periodo 2003--2019,'' Universidad Nacional de Huancavelica,
-    2021.
+\bibitem{mef}
+Ministerio de Economía y Finanzas,
+``Ficha Técnica Simplificada para proyectos turísticos,''
+2021.
 
-    \bibitem{dean}
-    J. Dean y S. Ghemawat, ``MapReduce: Simplified Data Processing on Large
-    Clusters,'' \textit{Communications of the ACM}, vol. 51, no. 1, pp. 107--113,
-    2008, doi: 10.1145/1327452.1327492.
+\bibitem{dean}
+J. Dean y S. Ghemawat,
+``MapReduce: Simplified Data Processing on Large Clusters,''
+\textit{Communications of the ACM},
+vol. 51, no. 1, pp. 107--113, 2008.
 
-    \bibitem{viteri}
-    A. P. Viteri Gonzales y J. A. Beltrán García, ``Solución de big data para el
-    análisis de datos abiertos de MINSA y CENARES bajo Apache Hadoop y Microsoft
-    Azure,'' Universidad Privada Antenor Orrego, 2023.
+\bibitem{mariani}
+M. Mariani y R. Baggio,
+``Big data and analytics in hospitality and tourism:
+A systematic literature review,''
+\textit{International Journal of Contemporary Hospitality Management},
+vol. 34, no. 1, pp. 231--278, 2022.
 
-    \bibitem{mariani}
-    M. Mariani y R. Baggio, ``Big data and analytics in hospitality and tourism:
-    A systematic literature review,'' \textit{International Journal of
-    Contemporary Hospitality Management}, vol. 34, no. 1, pp. 231--278, 2022,
-    doi: 10.1108/ijchm-03-2021-0301.
-  \end{thebibliography}
-  \note{Ambos: 10 s. Mostrar que las fuentes principales siguen el formato IEEE. No leerlas una por una; esta diapositiva solo deja trazabilidad de los datos y antecedentes.}
+\end{thebibliography}
+
+\vfill
+\centering
+\Large\textbf{Preguntas y demostración}
+
+\note{Ambos: cerrar y ofrecer ejecutar la query solicitada por el docente.}
 \end{frame}
 
 \end{document}
