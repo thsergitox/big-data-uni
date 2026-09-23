@@ -1,153 +1,169 @@
-# Guion completo de exposición
+# Guion de exposición listo para leer
 
-Duración prevista: **9 min 40 s**. El límite indicado por la práctica es 10 minutos.
+Duración objetivo: **menos de 10 minutos**, con lectura continua y sin detenerse en todos los decimales.
 
-En las diapositivas aparece la **pregunta exacta**. Este guion añade lo que debemos decir oralmente: **de dónde nace la pregunta**, cómo la resolvimos y cómo interpretar el resultado.
+## Distribución
 
-## Diapositiva 1. Portada — 10 s
+- **Sergio:** diapositivas 1 a 10.
+- **Arbués:** diapositivas 11 a 20.
+- Sergio termina completamente su bloque y luego entrega la exposición a Arbués. No se intercalan.
 
-**Sergio:** “Presentaremos catorce preguntas sobre los indicadores de ocupabilidad de MINCETUR. Para cada una mostraremos cómo la estructura del dataset origina la pregunta y cómo Mapper y Reducer construyen la respuesta.”
+---
 
-## Diapositiva 2. Contenido — 10 s
+# BLOQUE DE SERGIO
 
-**Arbués:** “Las consultas no son todas iguales: tenemos agregaciones, estadística descriptiva, búsqueda, comparación encadenada, clasificación y regresión.”
+## Diapositiva 1. Portada
 
-## Diapositiva 3. Cómo leer el dataset — 40 s
+“Buenos días. Analizamos los indicadores mensuales de ocupabilidad de MINCETUR mediante catorce consultas Hadoop. Explicaremos la pregunta, lo que emite el Mapper, cómo se agrupan los datos y la operación del Reducer.”
 
-**Arbués:** “Una fila representa un mes, un departamento y un nivel de clase y categoría; no representa un hotel individual. El archivo consolidado contiene 38 mil 730 filas desde 2019 hasta junio de 2025.”
+## Diapositiva 2. Contenido
 
-**Sergio:** “El valor `TT` sí viene en el dataset: aparece tanto en `ID_CLASE` como en `ID_CATEGORIA`, acompañado por ‘TODAS CONSOLIDADAS’. Nosotros escribimos `TT/TT` como abreviatura para decir que ambos códigos son TT; no es una columna nueva ni un valor inventado. Filtramos ese par para no sumar el total junto con sus desagregaciones.”
+“Primero explicaré el dataset y las consultas hasta Q06. Después, Arbués continuará desde Q07 hasta los modelos y conclusiones.”
 
-**Arbués:** “TNOH mide ocupación de habitaciones; TNOC, ocupación de plazas-cama. Un arribo cuenta al huésped al llegar y una pernoctación cuenta cada noche. Esas diferencias generan varias preguntas.”
+## Diapositiva 3. Cómo leer el dataset y qué significa TT/TT
 
-**Sergio:** “HDFS almacena el CSV y YARN ejecuta los JAR en Hadoop 3.5.0. Un nodo valida el flujo, pero no demuestra escalamiento horizontal.”
+“Una fila no representa un hotel. Resume un mes, un departamento, una clase y una categoría.”
 
-## Diapositiva 4. Tipos y preguntas — 25 s
+“`ID_CLASE` e `ID_CATEGORIA` contienen códigos. Por ejemplo, clase `01` significa HOTEL y categoría `01` significa una estrella.”
 
-**Sergio:** “Este cuadro organiza las catorce preguntas por finalidad. Q01 a Q05 responden los subítems 1a a 1e, que exigen usar dos o más columnas. Q06 responde el ítem 2; Q07, el 3; Q08, el 4; Q09 y Q10, los subítems 5a y 5b; Q11 y Q12, 6a y 6b; y Q13 y Q14, 7a y 7b.”
+“El código `TT` sí viene en el dataset y significa TODAS CONSOLIDADAS. Cuando decimos `TT/TT`, se lee ‘te te, barra, te te’. No es una columna nueva. Es nuestra abreviatura para dos condiciones: `ID_CLASE` igual a `TT` e `ID_CATEGORIA` igual a `TT`.”
 
-**Arbués:** “Esta clasificación explica por qué no todas las consultas necesitan el mismo diseño MapReduce.”
+“HOTEL con una estrella contiene solo hoteles de una estrella. HOTEL con categoría TT reúne todas las categorías de hotel. Finalmente, TT con TT reúne todas las clases y categorías del departamento en ese mes.”
 
-## Diapositiva 5. Q01 / ítem 1a: Arribos por origen — 25 s
+“Usamos TT/TT para obtener un único total departamental. Si además sumáramos hoteles, hostales y sus categorías, contaríamos varias veces la misma actividad.”
 
-**De dónde sale:** el dataset separa `TOTAL_ARRIBOS_NAC` y `TOTAL_ARRIBOS_EXT`, por lo que podemos comparar cómo evolucionaron ambos mercados.
+“TNOH es ocupación de habitaciones y TNOC es ocupación de plazas-cama. Un arribo cuenta al huésped cuando llega; una pernoctación cuenta cada noche.”
 
-**Sergio:** “La pregunta es cómo evolucionaron los arribos nacionales y extranjeros por año. El Mapper filtra TT/TT y emite año como clave con ambos valores. El Reducer recibe todos los meses y departamentos del año y realiza dos sumas independientes.”
+## Diapositiva 4. Tipos y preguntas
 
-**Sergio:** “La salida evidencia la caída de 2020 y la recuperación posterior. No comparamos directamente 2025 porque contiene seis meses.”
+“La práctica define siete grupos. Q01 a Q05 corresponden a 1a hasta 1e. Q06 responde el ítem 2; Q07, el 3; Q08, el 4; Q09 y Q10, 5a y 5b; Q11 y Q12, 6a y 6b; Q13 y Q14, 7a y 7b.”
 
-## Diapositiva 6. Q02 / ítem 1b: TNOH territorial — 25 s
+“El Mapper lee una fila, la filtra y emite una clave y un valor. Hadoop junta todos los valores con la misma clave. El Reducer recibe ese grupo y realiza la operación final.”
 
-**De dónde sale:** un valor nacional oculta diferencias entre departamentos y el CSV contiene TNOH mensual para cada territorio.
+## Diapositiva 5. Q01 / ítem 1a: arribos por origen
 
-**Arbués:** “Preguntamos cuál fue la TNOH media de cada departamento por año. El Mapper emite año-departamento y el par `TNOH,1`. El Reducer suma tasas y contadores y calcula la media mensual.”
+“La pregunta es cómo evolucionaron los arribos nacionales y extranjeros por año.”
 
-**Arbués:** “En 2024 Callao obtuvo 41.60 y Loreto 12.99. Es una media simple y no está ponderada por habitaciones.”
+“El Mapper conserva TT/TT y emite `año` como clave y `arribos nacionales, arribos extranjeros` como valor. Hadoop agrupa todos los meses y departamentos con el mismo año.”
 
-## Diapositiva 7. Q03 / ítem 1c: Ocupación por clase — 30 s
+“El Reducer recorre el grupo con dos acumuladores: uno suma nacionales y otro extranjeros. Así obtiene ambos totales anuales. La salida evidencia la caída de 2020 y la recuperación posterior. El año 2025 solo contiene seis meses.”
 
-**De dónde sale:** el dataset incluye clase de hospedaje y dos tasas distintas de ocupación: habitaciones y plazas-cama.
+## Diapositiva 6. Q02 / ítem 1b: TNOH territorial
 
-**Sergio:** “Preguntamos cómo cambian TNOH y TNOC según la clase. El Mapper conserva el total de categoría de cada clase, excluye el total global y emite año-clase con ambas tasas y un contador. El Reducer calcula las dos medias.”
+“La pregunta es cuál fue la TNOH media de cada departamento por año.”
 
-**Sergio:** “En 2024 los resorts presentaron valores altos. TNOH y TNOC pueden diferir porque una habitación ocupada puede contener más de una plaza-cama ocupada.”
+“El Mapper conserva TT/TT y emite una clave como `2024;CALLAO`. El valor es `TNOH,1`; el uno sirve para contar observaciones. Hadoop agrupa los meses del mismo departamento y año.”
 
-## Diapositiva 8. Q04 / ítem 1d: Empleo por capacidad — 25 s
+“El Reducer suma las tasas, suma los contadores y divide ambas cantidades. Callao obtuvo 41.5950 y Loreto 12.9917. Es una media mensual simple, no ponderada por habitaciones.”
 
-**De dónde sale:** el empleo bruto favorece a los departamentos con mayor capacidad; necesitamos una unidad común para compararlos.
+## Diapositiva 7. Q03 / ítem 1c: ocupación por clase
 
-**Arbués:** “Preguntamos cuántos empleos existen por cada cien habitaciones. El Mapper emite empleo y habitaciones por año-departamento. El Reducer suma ambos campos y después calcula cien por empleo dividido entre habitaciones.”
+“La pregunta es cómo cambian TNOH y TNOC según la clase de hospedaje.”
 
-**Arbués:** “Lima obtuvo 54.36 en 2024. Esta razón no mide productividad ni calidad del empleo.”
+“El Mapper conserva las filas cuya categoría es TT, porque representan el total de categorías de cada clase, pero excluye la clase TT. Emite `año;clase` como clave y `TNOH,TNOC,1` como valor.”
 
-## Diapositiva 9. Q05 / ítem 1e: Estacionalidad — 25 s
+“Hadoop agrupa la misma clase y año. El Reducer suma ambas tasas y divide entre el contador. En 2024, los resorts obtuvieron TNOH de 46.7742 y TNOC de 48.2812. Las tasas difieren porque una habitación puede alojar varias personas.”
 
-**De dónde sale:** la columna mes permite investigar si la demanda se concentra en determinadas épocas.
+## Diapositiva 8. Q04 / ítem 1d: empleo por capacidad
 
-**Sergio:** “Preguntamos qué meses concentran más arribos y pernoctaciones. El Mapper usa el mes como clave y envía ambos indicadores. El Reducer suma el mismo mes de todos los departamentos y años.”
+“La pregunta es cuántos empleos existen por cada cien habitaciones.”
 
-**Sergio:** “Enero tiene el mayor acumulado, pero enero a junio incluyen el semestre adicional de 2025.”
+“El Mapper conserva TT/TT y emite `año;departamento` como clave y `empleo,habitaciones` como valor. Hadoop agrupa todos los meses de ese territorio y año.”
 
-## Diapositiva 10. Q06 / ítem 2: Medidas estadísticas — 25 s
+“El Reducer suma primero todos los empleos y todas las habitaciones. Después calcula cien por empleo dividido entre habitaciones. No promedia razones mensuales. Lima obtuvo 54.3562 en 2024. Esta razón no mide productividad ni calidad laboral.”
 
-**De dónde sale:** además de comparar grupos, necesitamos conocer el valor típico y la dispersión de la TNOH departamental.
+## Diapositiva 9. Q05 / ítem 1e: estacionalidad
 
-**Arbués:** “Preguntamos por cantidad, media, mediana y desviación poblacional. El Mapper envía las 1 950 tasas TT/TT bajo una clave común. El Reducer calcula media y varianza incremental y ordena los valores para hallar la mediana.”
+“La pregunta es qué meses concentran más arribos y pernoctaciones.”
 
-**Arbués:** “La media fue 21.74 y la desviación 7.07. Una clave global funciona por el volumen pequeño.”
+“El Mapper conserva TT/TT, usa el mes como clave y emite arribos y pernoctaciones como valor. Como el año no forma parte de la clave, Hadoop reúne todos los eneros, febreros y demás meses.”
 
-## Diapositiva 11. Q07 / ítem 3: Búsqueda de subtexto — 25 s
+“El Reducer suma por separado personas llegadas y noches ocupadas. Enero presenta el mayor acumulado. Sin embargo, enero a junio incluyen también 2025, mientras julio a diciembre no.”
 
-**De dónde sale:** no todas las consultas son numéricas; también necesitamos localizar registros por clase, categoría o departamento.
+## Diapositiva 10. Q06 / ítem 2: medidas estadísticas
 
-**Sergio:** “Preguntamos qué registros contienen un texto. El Mapper compara el término con tres columnas y emite el offset y la fila coincidente.”
+“La pregunta es cuál es la cantidad, media, mediana y desviación estándar poblacional de TNOH.”
 
-**Sergio:** “No existe Reducer porque cada coincidencia ya es un resultado final. Se encontraron 11 mil 525 filas para ‘hotel’; es una búsqueda literal.”
+“El Mapper conserva TT/TT y emite cada tasa bajo una única clave llamada `TNOH`. Por eso, las mil novecientas cincuenta tasas llegan al mismo Reducer.”
 
-## Diapositiva 12. Q08 / ítem 4: Máximo y mínimo — 25 s
+“El Reducer calcula media y varianza de forma incremental. También ordena los valores para encontrar la mediana y obtiene la desviación como raíz de la varianza poblacional. La media fue 21.7433 y la desviación 7.0679.”
 
-**De dónde sale:** Q02 produce todos los promedios, pero no responde directamente quién ocupa los extremos de cada año.
+“Con esto termino mi bloque. Arbués continuará desde Q07.”
 
-**Arbués:** “Preguntamos qué departamentos tuvieron la menor y mayor TNOH media. El Mapper agrupa por año y envía departamento con TNOH. El Reducer calcula primero cada media territorial y después selecciona mínimo y máximo.”
+---
 
-**Arbués:** “En 2024 Loreto fue el mínimo y Callao el máximo. Son dos operaciones dentro de un solo Reducer, no dos jobs.”
+# BLOQUE DE ARBUÉS
 
-## Diapositiva 13. Q09 / ítem 5a: Dos MapReduce enlazados — 35 s
+## Diapositiva 11. Q07 / ítem 3: búsqueda de subtexto
 
-**De dónde sale:** para hablar de recuperación necesitamos comparar un año previo a la pandemia con un año completo reciente.
+“La pregunta es qué registros contienen un texto en clase, categoría o departamento.”
 
-**Sergio:** “Preguntamos cuánto cambió la TNOH entre 2019 y 2024. A la izquierda está el primer job: Mapper agrupa año-departamento y Reducer calcula cada media. A la derecha, el segundo Mapper reagrupa por departamento y el segundo Reducer resta 2024 menos 2019.”
+“El Mapper recibe `hotel`, convierte el término y los tres campos a minúsculas y comprueba si alguno contiene el texto. Si coincide, emite la posición de la línea como clave y la fila completa como valor.”
 
-**Sergio:** “Apurímac tuvo la mayor caída y Ucayali el mayor aumento. La diferencia cuantifica cambio, pero no demuestra causalidad.”
+“No hay Reducer porque cada coincidencia ya es el resultado. Se encontraron once mil quinientas veinticinco filas. La búsqueda es literal: no reconoce sinónimos ni elimina diferencias de acentuación.”
 
-## Diapositiva 14. Q10 / ítem 5b: Dos MapReduce enlazados — 35 s
+## Diapositiva 12. Q08 / ítem 4: máximo y mínimo
 
-**De dónde sale:** los arribos totales no muestran cuánto depende cada territorio del visitante extranjero ni cómo cambió esa dependencia por periodo.
+“La pregunta es qué departamentos tuvieron la menor y mayor TNOH media de cada año.”
 
-**Arbués:** “Preguntamos qué porcentaje de arribos fue extranjero. En el primer job, Mapper calcula la cuota y Reducer deja un valor por mes. En el segundo, Mapper reagrupa por departamento-periodo y Reducer promedia las cuotas mensuales.”
+“El Mapper conserva TT/TT y emite el año como clave y `departamento,TNOH` como valor. Hadoop agrupa todos los departamentos y meses del mismo año.”
 
-**Arbués:** “Cusco cayó fuertemente en 2020–2021 y luego se recuperó. Es una media mensual no ponderada por arribos.”
+“El Reducer acumula suma y cantidad por departamento, calcula cada media y después selecciona la menor y la mayor. En 2024 fueron Loreto y Callao. Son dos operaciones dentro de un solo Reducer, no dos jobs.”
 
-## Diapositiva 15. Q11 / ítem 6a: Clasificación Naive Bayes — 30 s
+## Diapositiva 13. Q09 / ítem 5a: dos MapReduce enlazados
 
-**De dónde sale:** después del análisis descriptivo queremos saber si la capacidad y la actividad permiten anticipar una ocupación alta o baja.
+“La pregunta es cuánto cambió la TNOH media entre 2019 y 2024.”
 
-**Sergio:** “La pregunta es si la TNOH mensual es alta o baja según otros indicadores. El Mapper codifica cada ejemplo bajo `MODEL`. El Reducer usa 2019–2023 para calcular la mediana, formar las etiquetas y entrenar Gaussian Naive Bayes; después evalúa 2024 y 2025-I.”
+“En el primer job, el Mapper emite `año;departamento` y `TNOH,1`. El primer Reducer calcula cada media anual.”
 
-**Sergio:** “El recall de 0.287 indica que dejó sin detectar muchos casos altos. Lo usamos como línea base probabilística.”
+“La salida intermedia entra al segundo Mapper. Este cambia la clave a departamento y emite `año,media`. Hadoop reúne así los dos años del mismo territorio. El segundo Reducer resta media 2024 menos media 2019. Apurímac tuvo la mayor caída y Ucayali el mayor aumento.”
 
-## Diapositiva 16. Q12 / ítem 6b: Clasificación logística — 30 s
+## Diapositiva 14. Q10 / ítem 5b: dos MapReduce enlazados
 
-**De dónde sale:** Naive Bayes obtuvo precisión alta, pero un recall bajo; necesitamos comprobar si otro clasificador logra un mejor equilibrio.
+“La pregunta es qué porcentaje de arribos fue extranjero en cada departamento y periodo.”
 
-**Arbués:** “Repetimos la pregunta de si la TNOH mensual es alta o baja, ahora usando regresión logística. El Mapper entrega exactamente los mismos ejemplos. El Reducer estandariza usando solo entrenamiento, ajusta doscientas iteraciones y calcula las métricas.”
+“El primer Mapper calcula cien por arribos extranjeros dividido entre arribos totales y emite departamento, periodo, año y mes. El primer Reducer deja una participación por mes.”
 
-**Arbués:** “El F1 aumentó de 0.440 a 0.793 en 2024. Como usamos los mismos datos, la comparación es directa.”
+“El segundo Mapper reagrupa por departamento y periodo. Hadoop junta sus porcentajes mensuales y el segundo Reducer calcula la media. Cusco cayó durante 2020 y 2021 y luego se recuperó. Es una media mensual no ponderada.”
 
-## Diapositiva 17. Q13 / ítem 7a: Regresión lineal — 30 s
+## Diapositiva 15. Q11 / ítem 6a: clasificación Naive Bayes
 
-**De dónde sale:** clasificar TNOH como alta o baja pierde información sobre su magnitud exacta.
+“La pregunta es si la TNOH mensual es alta o baja según otros indicadores.”
 
-**Sergio:** “Preguntamos qué valor continuo de TNOH puede estimarse. El Mapper emite año, TNOH objetivo y siete características. El Reducer estandariza con 2019–2023, ajusta la regresión y evalúa 2024 y 2025-I.”
+“El Mapper convierte cada fila TT/TT en un ejemplo con año, TNOH y siete características de capacidad y actividad. Emite todos los ejemplos bajo la clave `MODEL`.”
 
-**Sergio:** “En 2024 el error absoluto medio fue 3.19 puntos y el modelo explicó 64.35 por ciento de la variación.”
+“El Reducer usa 2019 a 2023 para entrenamiento, calcula la mediana de TNOH y etiqueta cada caso como alto o bajo. Luego entrena Gaussian Naive Bayes y evalúa 2024 y 2025. Su recall bajo indica que dejó sin detectar muchos casos altos.”
 
-## Diapositiva 18. Q14 / ítem 7b: Regresión Ridge — 30 s
+## Diapositiva 16. Q12 / ítem 6b: clasificación logística
 
-**De dónde sale:** establecimientos, habitaciones y camas están relacionados; esa correlación puede volver inestables los coeficientes lineales.
+“La pregunta es la misma, pero usamos regresión logística para comparar modelos.”
 
-**Arbués:** “Preguntamos qué TNOH se estima al controlar los coeficientes con regularización L2. El Mapper usa los mismos ejemplos que Q13. El Reducer aplica Ridge con lambda igual a uno y no penaliza el intercepto.”
+“El Mapper emite exactamente los mismos ejemplos y la clave `MODEL`. El Reducer calcula la estandarización usando solo entrenamiento y ajusta el modelo durante doscientas iteraciones.”
 
-**Arbués:** “Ridge mejoró ligeramente RMSE y R cuadrado en 2025-I. Solo evaluamos un lambda, por lo que no afirmamos que sea óptimo.”
+“Después produce matriz de confusión, accuracy, precision, recall, F1 y log loss. En 2024, el F1 aumentó de 0.4403 con Naive Bayes a 0.7931 con regresión logística.”
 
-## Diapositiva 19. Conclusiones — 35 s
+## Diapositiva 17. Q13 / ítem 7a: regresión lineal
 
-**Sergio:** “Las consultas descriptivas respondieron evolución, territorio, clase, capacidad y estacionalidad. Q09 y Q10 mostraron cómo una salida intermedia alimenta un segundo job.”
+“La pregunta es qué valor continuo de TNOH puede estimarse usando los demás indicadores.”
 
-**Arbués:** “En clasificación, la logística fue más equilibrada. En regresión, Ridge mejoró ligeramente. Los resultados describen asociaciones, no causas.”
+“El Mapper emite año, TNOH objetivo y las siete características bajo la clave `MODEL`. El Reducer entrena con 2019 a 2023, estandariza las variables y ajusta una regresión sin penalización.”
 
-**Sergio:** “El semestre incompleto, los promedios no ponderados y el nodo único limitan el alcance de las conclusiones.”
+“Después predice 2024 y 2025 y compara predicción contra valor real para calcular MAE, RMSE y R cuadrado. En 2024, el MAE fue 3.19 puntos y el R cuadrado 0.6435.”
 
-## Diapositiva 20. Referencias y cierre — 10 s
+## Diapositiva 18. Q14 / ítem 7b: regresión Ridge
 
-**Ambos:** “MINCETUR respalda las definiciones del dataset y la literatura respalda MapReduce. Podemos ampliar la consulta que indique el docente.”
+“La pregunta es qué TNOH se estima al controlar los coeficientes con regularización L2.”
+
+“El Mapper utiliza exactamente los mismos ejemplos que Q13. El Reducer también estandariza y ajusta una regresión, pero agrega una penalización con lambda igual a uno sobre los coeficientes; el intercepto no se penaliza.”
+
+“Ridge mejoró ligeramente RMSE y R cuadrado en 2025. Como solo probamos un valor de lambda, no afirmamos que sea el óptimo.”
+
+## Diapositiva 19. Conclusiones
+
+“Las consultas agregaron datos por año, departamento, clase y mes. También describieron la distribución, buscaron registros, calcularon extremos y enlazaron dos MapReduce.”
+
+“En clasificación, la regresión logística fue más equilibrada. En regresión, Ridge produjo una mejora pequeña. Los resultados muestran asociaciones, no causas. Además, 2025 tiene seis meses y el nodo único valida el pipeline, pero no demuestra escalabilidad.”
+
+## Diapositiva 20. Referencias y cierre
+
+“MINCETUR respalda las definiciones del dataset y las referencias metodológicas respaldan MapReduce. Con esto finalizamos y quedamos disponibles para ejecutar la consulta que seleccione el docente.”
