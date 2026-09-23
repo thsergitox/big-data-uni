@@ -1,12 +1,12 @@
 \babel@toc {spanish}{}\relax 
 \beamer@sectionintoc {1}{Datos y entorno}{3}{0}{1}
 \beamer@sectionintoc {2}{Tipos de consulta: resumen}{4}{0}{2}
-\beamer@sectionintoc {3}{Agregación descriptiva: Q01--Q05}{5}{0}{3}
-\beamer@sectionintoc {4}{Estadística descriptiva: Q06}{10}{0}{4}
-\beamer@sectionintoc {5}{Búsqueda de texto: Q07}{11}{0}{5}
-\beamer@sectionintoc {6}{Extremos agrupados: Q08}{12}{0}{6}
-\beamer@sectionintoc {7}{MapReduce encadenado: Q09--Q10}{13}{0}{7}
-\beamer@sectionintoc {8}{Clasificación supervisada: Q11--Q12}{15}{0}{8}
-\beamer@sectionintoc {9}{Regresión supervisada: Q13--Q14}{17}{0}{9}
+\beamer@sectionintoc {3}{Consultas con dos o más columnas: ítem 1}{5}{0}{3}
+\beamer@sectionintoc {4}{Medidas estadísticas: ítem 2}{10}{0}{4}
+\beamer@sectionintoc {5}{Búsqueda de subtexto: ítem 3}{11}{0}{5}
+\beamer@sectionintoc {6}{Máximo y mínimo agrupados: ítem 4}{12}{0}{6}
+\beamer@sectionintoc {7}{Dos MapReduce enlazados: ítem 5}{13}{0}{7}
+\beamer@sectionintoc {8}{Modelos de clasificación: ítem 6}{15}{0}{8}
+\beamer@sectionintoc {9}{Modelos de regresión: ítem 7}{17}{0}{9}
 \beamer@sectionintoc {10}{Cierre}{19}{0}{10}
 \beamer@sectionintoc {11}{Referencias}{20}{0}{11}

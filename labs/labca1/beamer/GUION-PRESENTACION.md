@@ -1,34 +1,34 @@
 # Guion completo de exposición
 
-Duración prevista: **10 min 55 s**.
+Duración prevista: **9 min 40 s**. El límite indicado por la práctica es 10 minutos.
 
 En las diapositivas aparece la **pregunta exacta**. Este guion añade lo que debemos decir oralmente: **de dónde nace la pregunta**, cómo la resolvimos y cómo interpretar el resultado.
 
-## Diapositiva 1. Portada — 15 s
+## Diapositiva 1. Portada — 10 s
 
 **Sergio:** “Presentaremos catorce preguntas sobre los indicadores de ocupabilidad de MINCETUR. Para cada una mostraremos cómo la estructura del dataset origina la pregunta y cómo Mapper y Reducer construyen la respuesta.”
 
-## Diapositiva 2. Contenido — 15 s
+## Diapositiva 2. Contenido — 10 s
 
 **Arbués:** “Las consultas no son todas iguales: tenemos agregaciones, estadística descriptiva, búsqueda, comparación encadenada, clasificación y regresión.”
 
-## Diapositiva 3. Cómo leer el dataset — 55 s
+## Diapositiva 3. Cómo leer el dataset — 40 s
 
 **Arbués:** “Una fila representa un mes, un departamento y un nivel de clase y categoría; no representa un hotel individual. El archivo consolidado contiene 38 mil 730 filas desde 2019 hasta junio de 2025.”
 
-**Sergio:** “`TT/TT` significa ‘todas consolidadas’: es el total mensual del departamento. Lo usamos para no sumar el total junto con sus desagregaciones y contar dos veces la misma actividad.”
+**Sergio:** “El valor `TT` sí viene en el dataset: aparece tanto en `ID_CLASE` como en `ID_CATEGORIA`, acompañado por ‘TODAS CONSOLIDADAS’. Nosotros escribimos `TT/TT` como abreviatura para decir que ambos códigos son TT; no es una columna nueva ni un valor inventado. Filtramos ese par para no sumar el total junto con sus desagregaciones.”
 
 **Arbués:** “TNOH mide ocupación de habitaciones; TNOC, ocupación de plazas-cama. Un arribo cuenta al huésped al llegar y una pernoctación cuenta cada noche. Esas diferencias generan varias preguntas.”
 
 **Sergio:** “HDFS almacena el CSV y YARN ejecuta los JAR en Hadoop 3.5.0. Un nodo valida el flujo, pero no demuestra escalamiento horizontal.”
 
-## Diapositiva 4. Tipos y preguntas — 35 s
+## Diapositiva 4. Tipos y preguntas — 25 s
 
-**Sergio:** “Este cuadro organiza las catorce preguntas por finalidad. Q01 a Q05 agregan indicadores; Q06 resume una distribución; Q07 busca texto; Q08 obtiene extremos; Q09 y Q10 encadenan dos jobs; Q11 y Q12 clasifican; Q13 y Q14 estiman una variable continua.”
+**Sergio:** “Este cuadro organiza las catorce preguntas por finalidad. Q01 a Q05 responden los subítems 1a a 1e, que exigen usar dos o más columnas. Q06 responde el ítem 2; Q07, el 3; Q08, el 4; Q09 y Q10, los subítems 5a y 5b; Q11 y Q12, 6a y 6b; y Q13 y Q14, 7a y 7b.”
 
 **Arbués:** “Esta clasificación explica por qué no todas las consultas necesitan el mismo diseño MapReduce.”
 
-## Diapositiva 5. Q01: Agregación temporal — 35 s
+## Diapositiva 5. Q01 / ítem 1a: Arribos por origen — 25 s
 
 **De dónde sale:** el dataset separa `TOTAL_ARRIBOS_NAC` y `TOTAL_ARRIBOS_EXT`, por lo que podemos comparar cómo evolucionaron ambos mercados.
 
@@ -36,7 +36,7 @@ En las diapositivas aparece la **pregunta exacta**. Este guion añade lo que deb
 
 **Sergio:** “La salida evidencia la caída de 2020 y la recuperación posterior. No comparamos directamente 2025 porque contiene seis meses.”
 
-## Diapositiva 6. Q02: Promedio territorial — 35 s
+## Diapositiva 6. Q02 / ítem 1b: TNOH territorial — 25 s
 
 **De dónde sale:** un valor nacional oculta diferencias entre departamentos y el CSV contiene TNOH mensual para cada territorio.
 
@@ -44,7 +44,7 @@ En las diapositivas aparece la **pregunta exacta**. Este guion añade lo que deb
 
 **Arbués:** “En 2024 Callao obtuvo 41.60 y Loreto 12.99. Es una media simple y no está ponderada por habitaciones.”
 
-## Diapositiva 7. Q03: Comparación de grupos — 40 s
+## Diapositiva 7. Q03 / ítem 1c: Ocupación por clase — 30 s
 
 **De dónde sale:** el dataset incluye clase de hospedaje y dos tasas distintas de ocupación: habitaciones y plazas-cama.
 
@@ -52,7 +52,7 @@ En las diapositivas aparece la **pregunta exacta**. Este guion añade lo que deb
 
 **Sergio:** “En 2024 los resorts presentaron valores altos. TNOH y TNOC pueden diferir porque una habitación ocupada puede contener más de una plaza-cama ocupada.”
 
-## Diapositiva 8. Q04: Razón de sumas — 35 s
+## Diapositiva 8. Q04 / ítem 1d: Empleo por capacidad — 25 s
 
 **De dónde sale:** el empleo bruto favorece a los departamentos con mayor capacidad; necesitamos una unidad común para compararlos.
 
@@ -60,7 +60,7 @@ En las diapositivas aparece la **pregunta exacta**. Este guion añade lo que deb
 
 **Arbués:** “Lima obtuvo 54.36 en 2024. Esta razón no mide productividad ni calidad del empleo.”
 
-## Diapositiva 9. Q05: Agregación estacional — 35 s
+## Diapositiva 9. Q05 / ítem 1e: Estacionalidad — 25 s
 
 **De dónde sale:** la columna mes permite investigar si la demanda se concentra en determinadas épocas.
 
@@ -68,7 +68,7 @@ En las diapositivas aparece la **pregunta exacta**. Este guion añade lo que deb
 
 **Sergio:** “Enero tiene el mayor acumulado, pero enero a junio incluyen el semestre adicional de 2025.”
 
-## Diapositiva 10. Q06: Estadística descriptiva — 35 s
+## Diapositiva 10. Q06 / ítem 2: Medidas estadísticas — 25 s
 
 **De dónde sale:** además de comparar grupos, necesitamos conocer el valor típico y la dispersión de la TNOH departamental.
 
@@ -76,7 +76,7 @@ En las diapositivas aparece la **pregunta exacta**. Este guion añade lo que deb
 
 **Arbués:** “La media fue 21.74 y la desviación 7.07. Una clave global funciona por el volumen pequeño.”
 
-## Diapositiva 11. Q07: Búsqueda de subtexto — 35 s
+## Diapositiva 11. Q07 / ítem 3: Búsqueda de subtexto — 25 s
 
 **De dónde sale:** no todas las consultas son numéricas; también necesitamos localizar registros por clase, categoría o departamento.
 
@@ -84,7 +84,7 @@ En las diapositivas aparece la **pregunta exacta**. Este guion añade lo que deb
 
 **Sergio:** “No existe Reducer porque cada coincidencia ya es un resultado final. Se encontraron 11 mil 525 filas para ‘hotel’; es una búsqueda literal.”
 
-## Diapositiva 12. Q08: Mínimo y máximo — 35 s
+## Diapositiva 12. Q08 / ítem 4: Máximo y mínimo — 25 s
 
 **De dónde sale:** Q02 produce todos los promedios, pero no responde directamente quién ocupa los extremos de cada año.
 
@@ -92,7 +92,7 @@ En las diapositivas aparece la **pregunta exacta**. Este guion añade lo que deb
 
 **Arbués:** “En 2024 Loreto fue el mínimo y Callao el máximo. Son dos operaciones dentro de un solo Reducer, no dos jobs.”
 
-## Diapositiva 13. Q09: Comparación temporal con dos jobs — 45 s
+## Diapositiva 13. Q09 / ítem 5a: Dos MapReduce enlazados — 35 s
 
 **De dónde sale:** para hablar de recuperación necesitamos comparar un año previo a la pandemia con un año completo reciente.
 
@@ -100,7 +100,7 @@ En las diapositivas aparece la **pregunta exacta**. Este guion añade lo que deb
 
 **Sergio:** “Apurímac tuvo la mayor caída y Ucayali el mayor aumento. La diferencia cuantifica cambio, pero no demuestra causalidad.”
 
-## Diapositiva 14. Q10: Participación extranjera con dos jobs — 45 s
+## Diapositiva 14. Q10 / ítem 5b: Dos MapReduce enlazados — 35 s
 
 **De dónde sale:** los arribos totales no muestran cuánto depende cada territorio del visitante extranjero ni cómo cambió esa dependencia por periodo.
 
@@ -108,7 +108,7 @@ En las diapositivas aparece la **pregunta exacta**. Este guion añade lo que deb
 
 **Arbués:** “Cusco cayó fuertemente en 2020–2021 y luego se recuperó. Es una media mensual no ponderada por arribos.”
 
-## Diapositiva 15. Q11: Clasificación probabilística — 45 s
+## Diapositiva 15. Q11 / ítem 6a: Clasificación Naive Bayes — 30 s
 
 **De dónde sale:** después del análisis descriptivo queremos saber si la capacidad y la actividad permiten anticipar una ocupación alta o baja.
 
@@ -116,7 +116,7 @@ En las diapositivas aparece la **pregunta exacta**. Este guion añade lo que deb
 
 **Sergio:** “El recall de 0.287 indica que dejó sin detectar muchos casos altos. Lo usamos como línea base probabilística.”
 
-## Diapositiva 16. Q12: Clasificación lineal — 40 s
+## Diapositiva 16. Q12 / ítem 6b: Clasificación logística — 30 s
 
 **De dónde sale:** Naive Bayes obtuvo precisión alta, pero un recall bajo; necesitamos comprobar si otro clasificador logra un mejor equilibrio.
 
@@ -124,7 +124,7 @@ En las diapositivas aparece la **pregunta exacta**. Este guion añade lo que deb
 
 **Arbués:** “El F1 aumentó de 0.440 a 0.793 en 2024. Como usamos los mismos datos, la comparación es directa.”
 
-## Diapositiva 17. Q13: Regresión lineal — 40 s
+## Diapositiva 17. Q13 / ítem 7a: Regresión lineal — 30 s
 
 **De dónde sale:** clasificar TNOH como alta o baja pierde información sobre su magnitud exacta.
 
@@ -132,7 +132,7 @@ En las diapositivas aparece la **pregunta exacta**. Este guion añade lo que deb
 
 **Sergio:** “En 2024 el error absoluto medio fue 3.19 puntos y el modelo explicó 64.35 por ciento de la variación.”
 
-## Diapositiva 18. Q14: Regresión regularizada — 40 s
+## Diapositiva 18. Q14 / ítem 7b: Regresión Ridge — 30 s
 
 **De dónde sale:** establecimientos, habitaciones y camas están relacionados; esa correlación puede volver inestables los coeficientes lineales.
 
@@ -140,7 +140,7 @@ En las diapositivas aparece la **pregunta exacta**. Este guion añade lo que deb
 
 **Arbués:** “Ridge mejoró ligeramente RMSE y R cuadrado en 2025-I. Solo evaluamos un lambda, por lo que no afirmamos que sea óptimo.”
 
-## Diapositiva 19. Conclusiones — 45 s
+## Diapositiva 19. Conclusiones — 35 s
 
 **Sergio:** “Las consultas descriptivas respondieron evolución, territorio, clase, capacidad y estacionalidad. Q09 y Q10 mostraron cómo una salida intermedia alimenta un segundo job.”
 
@@ -148,6 +148,6 @@ En las diapositivas aparece la **pregunta exacta**. Este guion añade lo que deb
 
 **Sergio:** “El semestre incompleto, los promedios no ponderados y el nodo único limitan el alcance de las conclusiones.”
 
-## Diapositiva 20. Referencias y cierre — 15 s
+## Diapositiva 20. Referencias y cierre — 10 s
 
 **Ambos:** “MINCETUR respalda las definiciones del dataset y la literatura respalda MapReduce. Podemos ampliar la consulta que indique el docente.”
